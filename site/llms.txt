@@ -1,0 +1,50 @@
+# Sıfırdan Yapay Zeka Mühendisliği
+
+> 20 faz, 435 ders, ~320 saatlik açık kaynak Türkçe yapay zeka mühendisliği müfredatı. Matematiksel temellerden üretim altyapısına. MIT lisanslı.
+
+Bu site, `rohitg00/ai-engineering-from-scratch` upstream curriculum'ının Komünite tarafından Türkçeleştirilmiş ve bağımsız sürdürülen versiyonudur. Her ders kendi makinende çalışan bir çıktı üretir: bir model, bir prompt, bir araç ya da bir agent. Python, TypeScript, Rust, Julia.
+
+## Temel Sayfalar
+
+- [Ana sayfa](https://ai-muhendisligi.komunite.com.tr/): Curriculum'a giriş, müfredat akışı ve faz haritası
+- [Ders kataloğu](https://ai-muhendisligi.komunite.com.tr/catalog.html): 435 dersin filtrelenebilir tam listesi (faz, tür, dil, durum)
+- [Yol haritası](https://ai-muhendisligi.komunite.com.tr/prereqs.html): Etkileşimli faz ön koşul grafiği
+- [Sözlük](https://ai-muhendisligi.komunite.com.tr/glossary.html): Yapay zeka mühendisliğinde 83 terim — Türkçe-İngilizce karşılıkları
+
+## Fazlar
+
+- [Faz 0: Kurulum ve Araçlar](https://ai-muhendisligi.komunite.com.tr/phases/00-setup-and-tooling/): Geri kalan her şey için ortamını hazırla.
+- [Faz 1: Matematik Temelleri](https://ai-muhendisligi.komunite.com.tr/phases/01-math-foundations/): Her yapay zeka algoritmasının arkasındaki sezgi — ders kitaplarından değil, kodla.
+- [Faz 2: ML Temelleri](https://ai-muhendisligi.komunite.com.tr/phases/02-ml-fundamentals/): Klasik makine öğrenmesi — hâlâ üretimdeki yapay zekanın çoğunun omurgası.
+- [Faz 3: Derin Öğrenme Çekirdeği](https://ai-muhendisligi.komunite.com.tr/phases/03-deep-learning-core/): Sinir ağlarını ilk prensiplerden. Önce kendin bir tane kurmadan framework yok.
+- [Faz 4: Bilgisayarlı Görü](https://ai-muhendisligi.komunite.com.tr/phases/04-computer-vision/): Piksellerden anlama — görsel, video ve 3D.
+- [Faz 5: NLP — Temellerden İleri Seviyeye](https://ai-muhendisligi.komunite.com.tr/phases/05-nlp-foundations-to-advanced/): Dil, zekanın arayüzüdür. Her katmanına hâkim ol.
+- [Faz 6: Konuşma ve Ses](https://ai-muhendisligi.komunite.com.tr/phases/06-speech-and-audio/): İnsan iletişiminin diğer yarısı. Duy, anla, konuş.
+- [Faz 7: Transformer'lara Derin Dalış](https://ai-muhendisligi.komunite.com.tr/phases/07-transformers-deep-dive/): Her şeyi değiştiren mimari. Her katmanını anla.
+- [Faz 8: Üretken Yapay Zeka](https://ai-muhendisligi.komunite.com.tr/phases/08-generative-ai/): Görsel, video, ses, 3D ve daha fazlasını üret.
+- [Faz 9: Pekiştirmeli Öğrenme](https://ai-muhendisligi.komunite.com.tr/phases/09-reinforcement-learning/): Yaparak öğrenen agent'lar. RLHF'nin temeli.
+- [Faz 10: Sıfırdan LLM'ler](https://ai-muhendisligi.komunite.com.tr/phases/10-llms-from-scratch/): Büyük dil modellerini kur, eğit ve anla.
+- [Faz 11: LLM Mühendisliği](https://ai-muhendisligi.komunite.com.tr/phases/11-llm-engineering/): LLM'leri üretim uygulamalarında çalıştır.
+- [Faz 12: Multimodal Yapay Zeka](https://ai-muhendisligi.komunite.com.tr/phases/12-multimodal-ai/): Gören, duyan, okuyan ve modaliteler arası akıl yürüten modeller.
+- [Faz 13: Tool'lar ve Protokoller](https://ai-muhendisligi.komunite.com.tr/phases/13-tools-and-protocols/): Yapay zeka ile gerçek dünya arasındaki arayüzler.
+- [Faz 14: Agent Mühendisliği](https://ai-muhendisligi.komunite.com.tr/phases/14-agent-engineering/): Modern yapay zeka mühendisliğinin çekirdeği. Agent'ları ilk prensiplerden kur.
+- [Faz 15: Otonom Sistemler](https://ai-muhendisligi.komunite.com.tr/phases/15-autonomous-systems/): İnsan müdahalesi olmadan çalışan agent'lar — güvenli bir şekilde.
+- [Faz 16: Çoklu-Agent ve Sürüler](https://ai-muhendisligi.komunite.com.tr/phases/16-multi-agent-and-swarms/): Koordinasyon, yükselen davranış ve kolektif zeka.
+- [Faz 17: Altyapı ve Üretim](https://ai-muhendisligi.komunite.com.tr/phases/17-infrastructure-and-production/): Yapay zekayı gerçek dünyaya çıkar. Ölçekle, izle, optimize et.
+- [Faz 18: Etik, Güvenlik ve Alignment](https://ai-muhendisligi.komunite.com.tr/phases/18-ethics-safety-alignment/): İnsanlığa yardım eden yapay zeka kur. Opsiyonel değil.
+- [Faz 19: Capstone Projeleri](https://ai-muhendisligi.komunite.com.tr/phases/19-capstone-projects/): Öğrendiğin her şeyi kanıtla. Portföye yakışır sistemler kur.
+
+## Repo ve Katkı
+
+- [GitHub kaynağı](https://github.com/komunite/ai-engineering): Tüm ders dosyaları, kod örnekleri ve site kaynağı
+- [ROADMAP](https://github.com/komunite/ai-engineering/blob/main/ROADMAP.tr.md): Her faz ve dersin durumu, tahmini süreler
+- [CONTRIBUTING](https://github.com/komunite/ai-engineering/blob/main/CONTRIBUTING.tr.md): Katkı rehberi (Türkçe çeviri, terim, UX)
+- [FORKING](https://github.com/komunite/ai-engineering/blob/main/FORKING.tr.md): Repo'yu kendi takımın/okulun için fork etme rehberi
+- [CHANGELOG](https://github.com/komunite/ai-engineering/blob/main/CHANGELOG.tr.md): Sürüm geçmişi ve önemli değişiklikler
+
+## Optional
+
+- [Upstream (İngilizce)](https://github.com/rohitg00/ai-engineering-from-scratch): Rohit Ghumare'nin orijinal İngilizce müfredatı
+- [Sözlük (İngilizce)](https://ai-muhendisligi.komunite.com.tr/glossary/terms.md): Sözlük terimlerinin İngilizce orijinalleri
+- [Sitemap](https://ai-muhendisligi.komunite.com.tr/sitemap.xml): SEO sitemap.xml (439 URL)
+- [Lisans](https://github.com/komunite/ai-engineering/blob/main/LICENSE): MIT

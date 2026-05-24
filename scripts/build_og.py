@@ -49,7 +49,7 @@ STATIC_PAGES = [
         "slug": "home",
         "eyebrow": "ANA SAYFA",
         "title": "Sıfırdan\nYapay Zeka\nMühendisliği",
-        "tagline": "435 ders. 20 faz. Her algoritma; tek bir framework import edilmeden önce matematiğinden başlanarak kuruluyor.",
+        "tagline": "Backprop, tokenizer, attention, agent loop — her birini önce matematiğinden, sonra sıfırdan koddan inşa ediyorsun. 435 ders sonunda yapay zeka mühendisliğini paper okumakla değil; gönderdiğin koddan biliyorsun.",
         "meta_left": "FIG_000 · MÜFREDAT V1.0 · 2026",
         "meta_right": "AÇIK KAYNAK · MIT",
         "footer_left": "PYTHON · TYPESCRIPT · RUST · JULIA",

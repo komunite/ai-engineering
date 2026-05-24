@@ -1,0 +1,78 @@
+{
+  "lesson": "21-ab-testing-llm-features",
+  "title": "LLM Özelliklerinin A/B Testi — GrowthBook, Statsig ve Vibes Problemi",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Derste eval'lar ve A/B testleri arasındaki kesin ayrım nedir?",
+      "options": [
+        "Eval'lar etiketli bir set üzerinde \"model işi yapabilir mi?\" sorusunu yanıtlar; A/B testleri canlı rastgele trafikle \"kullanıcılar umursuyor mu?\" sorusunu yanıtlar",
+        "Yalnızca A/B testleri gereklidir",
+        "Eval'lar kullanıcı-yönelik, A/B testleri offline",
+        "Birbirinin yerine geçebilirler"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "CUPED bir deney için ne yapar?",
+      "options": [
+        "Çoklu-karşılaştırma düzeltmesini devre dışı bırakır",
+        "Sıralı testlerin tamamen yerine geçer",
+        "Karşılaştırmadan önce post-period'dan pre-period varyansını regrese eder, tipik olarak varyansı %30-70 azaltır ve etkin örnek boyutunu artırır",
+        "Daha fazla kullanıcı işe alarak örnek boyutunu artırır"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Birçok A/B çalıştırırken çoklu-karşılaştırma düzeltmelerine (Bonferroni veya Benjamini-Hochberg) neden ihtiyaç duyarsın?",
+      "options": [
+        "GDPR tarafından zorunludur",
+        "Yalnızca sıralı testler için gereklidir",
+        "20 testi %95 güvenle çalıştırmak rastlantısal olarak bir false positive üretir; düzeltmeler family-wise error ya da false discovery rate'i kontrol eder",
+        "Deneyleri hızlandırırlar"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "SRM (sample ratio mismatch) neyi tespit eder?",
+      "options": [
+        "Yavaş tokenizer performansı",
+        "Hedeflenenden sapan bir teslim oranı üreten bir assignment-hash bug'ı (örneğin 50/50 hedeflenirken 47/53)",
+        "Deney platformunda bellek sızıntıları",
+        "PII sızıntısı"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "LLM non-determinism neden örnek boyutuna buffer eklemeyi gerektirir?",
+      "options": [
+        "IID varsayımlarını ihlal eder; etkin örnek boyutu düşer, dolayısıyla gerekli boyutu güvenlik payı olarak kabaca 1.3-1.5x ile çarp",
+        "Güç hesaplamaları için alakasızdır",
+        "Non-determinism gereken örnekleri azaltır",
+        "Yalnızca offline'da önemlidir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders Statsig ile GrowthBook'u nasıl karşılaştırıyor?",
+      "options": [
+        "Aynı özellik setleri",
+        "Statsig yalnızca warehouse-native",
+        "GrowthBook kapalı kaynak",
+        "Statsig her şey-bir-arada SaaS (Eylül 2025'te OpenAI tarafından $1.1B'a satın alındı); GrowthBook açık kaynak MIT, warehouse-native, Bayesian/Frequentist/Sequential engine'leri ve CUPED/SRM/BH ile"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

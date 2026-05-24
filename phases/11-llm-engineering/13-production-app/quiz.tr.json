@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Bir LLM demo'su ile production LLM uygulaması arasındaki en büyük fark nedir?",
+    "options": ["Model kalitesi", "Altyapı: hata yönetimi, streaming, maliyet takibi, rate limiting, fallback'ler, observability ve yük altında graceful degradation", "Prompt kalitesi", "API sağlayıcısı seçimi"],
+    "correct": 1,
+    "explanation": "Bir demo API'yi çağırır ve yanıtı yazdırır. Production timeout'ları, sağlayıcı kesintilerini, eşzamanlı kullanıcıları, maliyet bütçelerini, streaming teslimatını, logging'i ve graceful degradation'ı ele almalıdır. Model kolay olan kısımdır.",
+    "stage": "pre"
+  },
+  {
+    "question": "Production LLM uygulamalarında streaming token teslimatı neden önemlidir?",
+    "options": ["Maliyeti azaltır", "Kullanıcılar toplam üretim süresi aynı olsa bile ilk token'ın hızla gelmesini daha hızlı algılar -- algılanan gecikmeyi saniyelerden milisaniyelere indirir", "Daha az bellek kullanır", "Model doğruluğunu artırır"],
+    "correct": 1,
+    "explanation": "Streaming olmadan kullanıcılar tam yanıt görünmeden önce 3-10 saniye hiçbir şey görmeden bekler. Streaming ile ilk token ~200ms'de gelir ve metin sürekli akar, deneyim duyarlı hissettirir.",
+    "stage": "pre"
+  },
+  {
+    "question": "LLM API sağlayıcının bir kesinti yaşadığında ne olmalıdır?",
+    "options": ["Kullanıcılara bir hata sayfası göster", "Uygulama otomatik olarak alternatif bir sağlayıcıya geçmeli veya graceful degraded bir yanıt döndürmeli", "Sağlayıcı toparlanana kadar sınırsız retry yap", "Lokal bir modele geç"],
+    "correct": 1,
+    "explanation": "Production sistemleri fallback stratejilerine ihtiyaç duyar: Sağlayıcı A başarısız olursa Sağlayıcı B'yi dene, yaygın sorgular için cache'lenmiş yanıtları sun veya yardımcı bir 'geçici olarak kullanılamıyor' mesajı döndür. Asla sağlayıcı kesintisinin uygulamanı çökertmesine izin verme.",
+    "stage": "post"
+  },
+  {
+    "question": "Bir production LLM uygulaması hangi observability metriklerini takip etmelidir?",
+    "options": ["Yalnızca hata sayıları", "İstek gecikmesi (P50/P95/P99), istek başı maliyet, hata oranları, token kullanımı, cache hit oranları ve otomatik eval'lerden kalite skorları", "Yalnızca model doğruluğu", "Yalnızca aylık maliyet"],
+    "correct": 1,
+    "explanation": "Kapsamlı observability şunları kapsar: gecikme yüzdelikleri (SLA uyumu için), maliyet takibi (bütçe yönetimi için), hata oranları (güvenilirlik için), token kullanımı (optimizasyon için) ve kalite metrikleri (regression tespiti için).",
+    "stage": "post"
+  },
+  {
+    "question": "LLM uygulamanda neden rate limiting uygulamalısın?",
+    "options": ["Uygulamayı seçkin göstermek için", "Bireysel kullanıcıların API bütçeni tüketmesini önlemek, kötüye kullanıma karşı korumak ve yüksek trafikte adil erişim sağlamak için", "Model doğruluğunu azaltmak için", "Rate limiting yalnızca free tier'lar için gereklidir"],
+    "correct": 1,
+    "explanation": "Rate limiting olmadan tek bir kullanıcı (veya bot) günlük API bütçeni dakikalar içinde tüketebilir. Rate limiting maliyetlerini korur, kötüye kullanımı önler ve tepe yükte tüm kullanıcıların makul yanıt süreleri almasını sağlar.",
+    "stage": "post"
+  }
+]

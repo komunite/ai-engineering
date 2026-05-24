@@ -1,0 +1,90 @@
+{
+  "lesson": "26-failure-modes-agentic",
+  "title": "Hata Modları: Agent'lar Neden Kırılır",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "MASFT'in merkezi iddiası nedir?",
+      "options": [
+        "Hatalar rastgele gürültüdür",
+        "Multi-agent hataları temel tasarım kusurlarıdır, daha iyi base modellerle düzeltilebilecek LLM sınırlamaları değildir",
+        "Daha büyük modellerle hatalar kaybolur",
+        "Hatalar network kesintilerine bağlıdır"
+      ],
+      "correct": 1,
+      "explanation": "Berkeley'nin MASFT'i hataları tasarım kusurları olarak kategorize eder; base modeli ölçekleyerek kaybolmazlar."
+    },
+    {
+      "stage": "pre",
+      "question": "Dersin listelediği beş tekrarlanan endüstri hata modundan hangisi DEĞİLDİR?",
+      "options": [
+        "Halüsinasyonlu aksiyonlar",
+        "Scope creep",
+        "Cascading errors",
+        "Embedding versiyonlama"
+      ],
+      "correct": 3,
+      "explanation": "Beşi: halüsinasyonlu aksiyonlar, scope creep, cascading errors, context kaybı, tool yanlış kullanımı."
+    },
+    {
+      "stage": "check",
+      "question": "Bu derste cascading error nedir?",
+      "options": [
+        "Bir LLM rate-limit kademesi",
+        "Bir yanlış çağrı, sistemler arası downstream etkileri tetikler (bir hayalet SKU dört downstream API çağrısı tetikler)",
+        "Bir cron hatası",
+        "Bir YAML parser hatası"
+      ],
+      "correct": 1,
+      "explanation": "Cascade'ler tek bir kötü çağrıyı multi-sistem bir olaya yükseltir; özellikle agent'lar başarıyı taklit ettiğinde şiddetlidir."
+    },
+    {
+      "stage": "check",
+      "question": "LLM Agent Hallucinations Survey hangi iki tezahürü listeler?",
+      "options": [
+        "Hot ve cold token'lar",
+        "Instruction-following Deviation ve Long-range Contextual Misuse",
+        "Greedy ve beam search",
+        "Soft ve hard prompt'lar"
+      ],
+      "correct": 1,
+      "explanation": "Halüsinasyonlar ya system prompt'u görmezden gelme ya da daha önceki turun context'ini unutma/yanlış uygulama olarak ortaya çıkar."
+    },
+    {
+      "stage": "check",
+      "question": "Success hallucination ne anlama gelir?",
+      "options": [
+        "Model benchmark'larda aşırı kendine güvenir",
+        "Agent hedef state değişmemiş olsa bile başarı mesajı döndürür (genelde bir tool'dan 400 alındığında)",
+        "Hiçbir şey olmadığı halde kullanıcı başarı sanar",
+        "Bir unit test geçti"
+      ],
+      "correct": 1,
+      "explanation": "Environment state'i yeniden prob et; agent'lar 'başarısız oldum'u 'imkansız'dan ayıramadığında genelde tamamlanmayı taklit ederler."
+    },
+    {
+      "stage": "post",
+      "question": "Yalnızca çökmeleri etiketlemek neden yetersizdir?",
+      "options": [
+        "Çökmeler yavaştır",
+        "Çoğu agent hatası çökmeyen geçerli görünen çıktı üretir; içerik-seviyesi kontroller gerekir",
+        "Çökmeler PII sızdırır",
+        "Logging ücretlidir"
+      ],
+      "correct": 1,
+      "explanation": "Çökme-bazlı izleme agent hatalarının büyük kısmını kaçırır; bunlar içerik-şeklindedir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders bir akıl yürütme zincirinin her adımında hangi hafifletmeyi öneriyor?",
+      "options": [
+        "sleep() ekle",
+        "Olgusal grounding'i environment state'e karşı kontrol eden otomatik doğrulama kapıları",
+        "Retry'ları devre dışı bırak",
+        "Yalnızca temperature'u düşür"
+      ],
+      "correct": 1,
+      "explanation": "Adım-başına kapılar (safety classifier, argüman doğrulama, CRITIC, state yeniden prob) hataları cascade öncesi yakalar."
+    }
+  ]
+}

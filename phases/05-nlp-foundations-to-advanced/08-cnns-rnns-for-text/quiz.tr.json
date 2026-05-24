@@ -1,0 +1,102 @@
+{
+  "lesson": "08-cnns-rnns-for-text",
+  "title": "Metin için CNN'ler ve RNN'ler",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Word embedding'ler üzerinde genişlik 3 olan bir 1D convolutional filter aslında neyi öğrenir?",
+      "options": [
+        "Öğrenilebilir bir bigram dedektörü",
+        "Bir position embedding",
+        "Öğrenilebilir bir trigram (n-gram) dedektörü",
+        "Bir unigram sayısı"
+      ],
+      "correct": 2,
+      "explanation": "Genişlik 3 filter üç ardışık token'ı kapsar ve öğrenilebilir bir trigram dedektörü gibi davranır."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir LSTM çoğunlukla additive etkileşimli cell state'i neden kullanır?",
+      "options": [
+        "Additive akış, gradient'ların uzun dizilerde vanishing veya exploding olmadan yayılmasına izin verir",
+        "Daha hızlı softmax",
+        "Bellekten tasarruf eder",
+        "Matris tersinden kaçınmak için"
+      ],
+      "correct": 0,
+      "explanation": "Cell state otoyolu yüzlerce adımda gradient'ları kararlı tutar, vanishing gradient sorunlarını çözer."
+    },
+    {
+      "stage": "check",
+      "question": "TextCNN convolutional katmandan sonra neden global max-pooling kullanır?",
+      "options": [
+        "Backpropagation'ı mümkün kılmak için",
+        "Embedding'leri kaldırmak için",
+        "Vocabulary'yi azaltmak için",
+        "Max-pool, filter başına en güçlü aktivasyonu seçerek sabit boyutlu, konuma değişmez bir temsil verir"
+      ],
+      "correct": 3,
+      "explanation": "Global max-pool, girdi uzunluğundan bağımsız sabit boyutlu bir özellik vektörü üretir ve konuma değişmezdir."
+    },
+    {
+      "stage": "check",
+      "question": "Sequence labeling için bidirectional bir RNN'in tek yönlü RNN'e göre temel avantajı nedir?",
+      "options": [
+        "Daha hızlı eğitim",
+        "Her token'ın temsili hem sol hem de sağ bağlamı görür; bu da tagging için kritiktir",
+        "Embedding'lerden kaçınır",
+        "Daha ucuz bellek"
+      ],
+      "correct": 1,
+      "explanation": "Bidirectional ağlar forward + backward hidden state'leri birleştirir, böylece etiketler tam bağlamı kullanabilir."
+    },
+    {
+      "stage": "check",
+      "question": "Sınıflandırma için bir LSTM çıktılarında max-pooling neden son hidden state'i kullanmaktan genelde daha iyidir?",
+      "options": [
+        "Max-pool differentiable'dır; last-state değildir",
+        "Uzun bir dizinin sonundaki bilgi son state'i domine etme eğilimindedir ve önceki kanıtı saklar",
+        "Max-pool capitalization'ı kaldırır",
+        "Last-state pool padding'i görmezden gelir"
+      ],
+      "correct": 1,
+      "explanation": "Max-pool konumlar arasında en güçlü sinyali toplar; last-state önceki kanıtları kaybedebilir."
+    },
+    {
+      "stage": "post",
+      "question": "LSTM/RNN encoder-decoder'ların hangi sınırlaması attention'ı motive etti?",
+      "options": [
+        "Subword tokenizer gerektirmeleri",
+        "Embedding kullanamamaları",
+        "Decoder yalnızca sabit boyutlu bir encoder state'i görür, uzun girdilerde detay kaybeder; recurrence ayrıca eğitimi serileştirir",
+        "Token embed edememeleri"
+      ],
+      "correct": 2,
+      "explanation": "Sabit boyutlu özetleme artı seri eğitim attention'ın kaldırdığı iki sorundu."
+    },
+    {
+      "stage": "post",
+      "question": "Bir TextCNN veya BiLSTM 2026'da hâlâ ne zaman bir transformer'ı yener?",
+      "options": [
+        "Görüntü girdilerinde",
+        "Edge / cihaz üstü, token-token streaming girdiler veya çok küçük veri baseline'larında",
+        "Veri seti çok dilliyse her zaman",
+        "Gecikme gereksinimleri çok gevşekken"
+      ],
+      "correct": 1,
+      "explanation": "Küçük mimariler hâlâ edge inference, streaming girdiler ve hızlı baseline'larda kazanır."
+    },
+    {
+      "stage": "post",
+      "question": "Düz RNN'lerde vanishing gradient problemi nedir?",
+      "options": [
+        "1'den küçük recurrent ağırlıklarla tekrarlanan çarpma, erken adımlara doğru gradient'ları sıfıra doğru küçültür",
+        "Embedding matrisi singüler olur",
+        "Girdiler sıfır olur",
+        "Loss negatif olur"
+      ],
+      "correct": 0,
+      "explanation": "Uzun çarpım gradient'ları gating olmadan vanish (veya explode) eder; LSTM ve GRU bunun için vardır."
+    }
+  ]
+}

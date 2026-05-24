@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Float32'nin temsil edebildiği sayıların yaklaşık aralığı nedir?",
+      "options": [
+        "+/- 65.504",
+        "+/- 3.4e38",
+        "+/- 1.8e308",
+        "+/- 1.0e10"
+      ],
+      "correct": 1,
+      "explanation": "Float32, 8 bit'lik üs alanıyla yaklaşık +/- 3.4e38 aralığına sahiptir. Float16 +/- 65.504 ile sınırlıdır ve float64 +/- 1.8e308'e ulaşır."
+    },
+    {
+      "stage": "pre",
+      "question": "Floating-point aritmetiğinde 0.1 + 0.2 neden 0.3'e eşit değildir?",
+      "options": [
+        "Python tüm ondalıkları tamsayıya yuvarlar",
+        "0.1 ve 0.2 ikili floating point'te tam olarak temsil edilemez",
+        "CPU'nun toplama devresinde bir hata vardır",
+        "0.3 geçerli bir floating-point sayısı değildir"
+      ],
+      "correct": 1,
+      "explanation": "0.1 sayısı ikilide tekrar eden bir kesirdir (ondalıkta 1/3 gibi). Float32 onu kırpar, böylece saklanan değer yaklaşık 0.100000001490116 olur. Birikmiş hata toplamın 0.3'ten farklı olmasına neden olur."
+    },
+    {
+      "stage": "post",
+      "question": "Kararlı softmax uygulamasında, üstel almadan önce neden max(logits) çıkarırsın?",
+      "options": [
+        "Çıkış olasılıklarını daha düzgün yapmak için",
+        "En büyük üssün 0 olmasını sağlayarak exp()'nin taşmasını önlemek için",
+        "Logit'leri float16'dan float32'ye dönüştürmek için",
+        "Logit'leri sıfır ortalamaya sahip olacak şekilde normalize etmek için"
+      ],
+      "correct": 1,
+      "explanation": "max(logits) çıkarıldıktan sonra en büyük değer 0 olur ve exp(0) = 1'dir, taşamaz. Diğer tüm değerler negatiftir, dolayısıyla üstelleri 1'den küçüktür. Olasılıklar naive sürümle matematiksel olarak özdeştir."
+    },
+    {
+      "stage": "post",
+      "question": "Gradient checking için merkezi sonlu farkları kullanırken, adım boyutu h çok küçükse (örneğin 1e-15) ne olur?",
+      "options": [
+        "Yaklaşım daha doğru hale gelir",
+        "f(x+h) ve f(x-h) neredeyse özdeş olduğundan felaket iptali (catastrophic cancellation) sonucu mahveder",
+        "Fonksiyon değerlendirmesi daha hızlı olur",
+        "Gradyan otomatik olarak sıfır olur"
+      ],
+      "correct": 1,
+      "explanation": "h çok küçük olduğunda, f(x+h) ve f(x-h) yalnızca son birkaç anlamlı basamakta farklılaşır. Onları çıkarmak önde gelen basamakları iptal eder ve geride çoğunlukla yuvarlama gürültüsü kalır. Tipik iyi değerler h = 1e-5 ile 1e-7 arasındadır."
+    },
+    {
+      "stage": "post",
+      "question": "Sinir ağı eğitimi için bfloat16 genellikle neden float16'ya tercih edilir?",
+      "options": [
+        "bfloat16 daha fazla mantis biti içerir ve daha iyi hassasiyet sağlar",
+        "bfloat16, float32 ile aynı üs aralığına sahiptir ve büyük aktivasyonlarda loss scaling olmadan taşmayı önler",
+        "bfloat16 float16'dan daha az bellek kullanır",
+        "bfloat16 float16'dan daha fazla GPU mimarisinde desteklenir"
+      ],
+      "correct": 1,
+      "explanation": "bfloat16'nın 8 üs biti vardır (float32 ile aynı, 3.4e38'e kadar aralık), float16'nın ise yalnızca 5 üs biti vardır (maks ~65.504). Eğitim sırasında aktivasyonlar ve gradyanlar 65.504'ü aşabilir ve float16 taşmasına neden olabilir. bfloat16 bunu loss scaling olmadan halleder."
+    }
+  ]
+}

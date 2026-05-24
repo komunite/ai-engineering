@@ -1,0 +1,37 @@
+[
+  {
+    "question": "LoRA (Low-Rank Adaptation) arkasındaki temel içgörü nedir?",
+    "options": ["Çoğu ağırlık önemli değildir", "Fine-tuning sırasındaki ağırlık güncellemeleri düşük intrinsic rank'a sahiptir, bu yüzden tüm ağırlık matrisini güncellemek yerine iki küçük matrisle yaklaştırılabilirler", "Fine-tuning yalnızca son katmana ihtiyaç duyar", "Daha küçük modeller her zaman daha iyidir"],
+    "correct": 1,
+    "explanation": "Aghajanyan ve diğerleri, fine-tuning güncellemelerinin düşük boyutlu bir alt uzayda kaldığını gösterdi. LoRA bunu, güncellemeyi W + BA olarak temsil ederek istismar eder; burada B (d x r) ve A (r x d) küçük rank r'a sahiptir, tipik olarak 8-64.",
+    "stage": "pre"
+  },
+  {
+    "question": "LoRA, 8B'lik bir modelin full fine-tuning'ine kıyasla ne kadar bellek tasarrufu sağlar?",
+    "options": ["Tasarruf yoktur", "Parametrelerin %1'inden azını eğiterek ve baz ağırlıkları dondurarak ~56GB'tan ~6GB'a", "%50 azalma", "Yalnızca disk alanından tasarruf sağlar"],
+    "correct": 1,
+    "explanation": "Full fine-tuning tüm 8B parametre için gradient ve optimizer state'leri gerektirir (~56GB). LoRA baz ağırlıkları dondurur ve yalnızca adapter matrislerini eğitir (rank 16'da ~80M parametre), toplamda ~6GB gerektirir.",
+    "stage": "pre"
+  },
+  {
+    "question": "QLoRA nedir?",
+    "options": ["Quantized LoRA: baz model 4-bit hassasiyetinde yüklenirken LoRA adapter'ları 16-bit'te eğitilir, her iki tekniğin bellek tasarrufunu birleştirir", "LoRA'nın daha hızlı bir versiyonu", "Quantize edilmiş aktivasyonlara uygulanan LoRA", "Farklı bir fine-tuning algoritması"],
+    "correct": 0,
+    "explanation": "QLoRA (Dettmers ve diğerleri) dondurulmuş baz modeli 4-bit'te (NF4 quantization) yüklerken LoRA adapter'larını FP16/BF16'da eğitir. Bu, 6GB VRAM'li tek bir tüketici GPU'sunda 7B'lik bir modelin fine-tuning'ine izin verir.",
+    "stage": "post"
+  },
+  {
+    "question": "LoRA'daki 'rank' parametresi (r) neyi kontrol eder?",
+    "options": ["Eğitim epoch sayısını", "Adapter'ın kapasitesini: daha yüksek rank daha karmaşık adaptasyonları yakalar ama daha fazla parametre ve bellek kullanır", "Learning rate'i", "Fine-tune edilecek katman sayısını"],
+    "correct": 1,
+    "explanation": "Rank r, adapter matrisleri A (r x d) ve B (d x r)'nin boyutunu belirler. Rank 4 çok az parametre eğitir (hızlı, ucuz). Rank 64 daha fazla parametre eğitir (daha ifade gücü). Çoğu görev rank 8-32 ile iyi çalışır.",
+    "stage": "post"
+  },
+  {
+    "question": "LoRA ağırlıklarını tekrar baz modele merge ettiğinde ne olur?",
+    "options": ["Model büyür", "Adapter matrisleri baz ağırlıklara eklenir (W_merged = W_base + B*A), inference overhead'i olmayan standart bir model üretir", "Modelin yeniden eğitilmesi gerekir", "Merging mümkün değildir"],
+    "correct": 1,
+    "explanation": "LoRA W_base + B*A eklediği için, B*A'yı bir kez hesaplayıp W_base'e kalıcı olarak ekleyebilirsin. Merge edilmiş model orijinaliyle aynı mimari ve inference hızına sahiptir, adapter overhead'i yoktur.",
+    "stage": "post"
+  }
+]

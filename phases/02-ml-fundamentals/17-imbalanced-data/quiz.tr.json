@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir dolandırıcılık tespit veri seti %99.9 meşru ve %0.1 dolandırıcılık işlem içeriyor. Bir model her işlem için 'meşru' tahmin ediyor. Doğruluğu nedir?",
+      "options": [
+        "%50",
+        "%0.1",
+        "%99.9",
+        "%100"
+      ],
+      "correct": 2,
+      "explanation": "Doğruluk = 999/1000 = %99.9. Model sıfır dolandırıcılık yakalıyor ama doğruluğa göre harika görünüyor. Dengesiz veri setlerinde doğruluğun neden tehlikeli olduğu tam olarak budur."
+    },
+    {
+      "stage": "pre",
+      "question": "Hangi metrik, her zaman negatif tahmin eden modeli haklı olarak işe yaramaz olarak tanımlar?",
+      "options": [
+        "Doğruluk (%99.9)",
+        "Recall (%0) veya F1 skoru (%0)",
+        "Özgüllük (%100)",
+        "Gerçek negatif oranı (%100)"
+      ],
+      "correct": 1,
+      "explanation": "Recall = TP/(TP+FN) = 0/toplam_pozitifler = %0. F1 = 2*0*0/(0+0) = 0. İkisi de modelin pozitif sınıfta hiçbir şey yakalamadığını doğru şekilde gösterir. Doğruluk bu başarısızlığı gizler."
+    },
+    {
+      "stage": "post",
+      "question": "SMOTE sentetik azınlık örneklerini nasıl üretir?",
+      "options": [
+        "Mevcut azınlık örneklerini aynen kopyalayarak",
+        "Öznitelik uzayında herhangi bir yerde rastgele noktalar üreterek",
+        "Bir azınlık örneği ile K en yakın azınlık komşusu arasında interpolasyon yaparak",
+        "Çoğunluk sınıfı örneklerinin etiketlerini ters çevirerek"
+      ],
+      "correct": 2,
+      "explanation": "SMOTE bir azınlık noktası seçer, K en yakın azınlık komşusundan birini seçer ve aralarındaki doğru parçası üzerinde yeni bir nokta oluşturur: new = x + rand(0,1) * (komşu - x). Bu, makul, kopya olmayan örnekler üretir."
+    },
+    {
+      "stage": "post",
+      "question": "Dengesiz bir veri setinde sınıflandırma eşiğini 0.5'ten 0.3'e düşürüyorsun. Precision ve recall'a ne olur?",
+      "options": [
+        "Hem precision hem recall artar",
+        "Recall artar (daha fazla pozitif yakalanır) ama precision azalır (daha fazla yanlış pozitif)",
+        "Precision artar ama recall azalır",
+        "Hiçbiri değişmez -- eşik yalnızca hızı etkiler"
+      ],
+      "correct": 1,
+      "explanation": "Eşiği düşürmek daha fazla örneğin pozitif tahmin edildiği anlamına gelir. Bu daha fazla gerçek pozitifi yakalar (recall artar) ama daha fazla yanlış pozitif de ekler (precision düşer). Eşik ayarlaması precision'ı recall ile takas eder."
+    },
+    {
+      "stage": "post",
+      "question": "AUPRC (Precision-Recall Eğrisi Altındaki Alan), yüksek dengesiz veri setleri için AUC-ROC'tan neden daha bilgilendiricidir?",
+      "options": [
+        "AUPRC her zaman AUC-ROC'tan daha yüksektir",
+        "Rastgele bir sınıflandırıcı pozitif sınıf oranına eşit AUPRC'ye sahiptir (ör. 0.001) ve iyileşmeleri görünür kılar; AUC-ROC ise dengesizlikten bağımsız olarak 0.5'ten başlar",
+        "AUPRC eşik gerektirmez",
+        "AUC-ROC dengesiz veri için hesaplanamaz"
+      ],
+      "correct": 1,
+      "explanation": "Dengesiz veride AUC-ROC, çok sayıda gerçek negatifin gerçek negatif oranını şişirmesi nedeniyle aldatıcı şekilde iyi görünebilir. AUPRC'nin tabanı pozitif orana eşittir ve azınlık sınıfını tespit etmedeki gerçek iyileşmeleri çok daha belirgin hale getirir."
+    }
+  ]
+}

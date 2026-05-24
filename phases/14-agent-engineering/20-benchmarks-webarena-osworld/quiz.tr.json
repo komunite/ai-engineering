@@ -1,0 +1,90 @@
+{
+  "lesson": "20-benchmarks-webarena-osworld",
+  "title": "Benchmark'lar: WebArena ve OSWorld",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "WebArena dört hedef uygulamasını neden self-host eder?",
+      "options": [
+        "Para tasarrufu için",
+        "Tekrarlanabilir versiyonları sabitlemek için, böylece değerlendirme yürütme-tabanlı olur ve flaky olmaz",
+        "GPU'da çalıştırmak için",
+        "TLS'ten kaçınmak için"
+      ],
+      "correct": 1,
+      "explanation": "Sabitlenmiş self-hosted uygulamalar yürütme-tabanlı değerlendirmeyi zamanla güvenilir ve karşılaştırılabilir yapar."
+    },
+    {
+      "stage": "pre",
+      "question": "OSWorld neden accessibility API'leri yerine gerçek OS ekran görüntüleri kullanır?",
+      "options": [
+        "Accessibility API'ler çok hızlıdır",
+        "Ekran görüntüleri agent'ı 1920x1080'de gerçek GUI grounding'i yapmaya zorlar, prodüksiyon kısıtlamalarıyla eşleşir",
+        "Accessibility API'ler PII sızdırır",
+        "Ekran görüntüleri daha az maliyetlidir"
+      ],
+      "correct": 1,
+      "explanation": "Ekran görüntüsü-güdümlü değerlendirme pixel-to-element grounding'i zorlar, asıl prodüksiyon kısıtlaması budur."
+    },
+    {
+      "stage": "check",
+      "question": "OSWorld hangi iki birincil hata modunu ortaya çıkarır?",
+      "options": [
+        "Latency ve bant genişliği",
+        "GUI grounding ve operasyonel bilgi",
+        "Embedding drift ve token sızıntısı",
+        "Halüsinasyon ve red"
+      ],
+      "correct": 1,
+      "explanation": "Grounding (pixel-to-element) ve operasyonel bilgi (menüler, kısayollar) baş bloker'lardır."
+    },
+    {
+      "stage": "check",
+      "question": "OSWorld-Human base benchmark üzerine neyi ekler?",
+      "options": [
+        "Daha fazla görev",
+        "1.4-2.7x agent adım-verimsizliği farkını ortaya çıkaran manuel olarak küratörlü altın aksiyon trajectory'leri",
+        "Daha büyük bir ekran çözünürlüğü",
+        "Yeni bir OS"
+      ],
+      "correct": 1,
+      "explanation": "Altın trajectory'ler yalnızca başarı oranını değil, trajectory verimliliğini de ölçülebilir yapar."
+    },
+    {
+      "stage": "check",
+      "question": "Ders WebArena için hangi sürüm zamanı sayıyı alıntılıyor?",
+      "options": [
+        "En iyi GPT-4 agent %14.41 başarı vs insan %78.24",
+        "En iyi agent %99'da, insan %100'de",
+        "En iyi agent %50, insan %50'de",
+        "En iyi agent bütün hatta %0"
+      ],
+      "correct": 0,
+      "explanation": "%14.41 vs %78.24 farkı WebArena sürüm zamanı rakamıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Agent DOM veya accessibility API kullandığında ekran görüntüsü-only değerlendirme ile ne yanlış gider?",
+      "options": [
+        "Hiçbir şey değişmez",
+        "OSWorld'ün ölçmek için tasarlandığı grounding zorluğunu kaçırırsın",
+        "Rate limit'i aşarsın",
+        "Testler önemsiz geçer"
+      ],
+      "correct": 1,
+      "explanation": "Bir accessibility-API agent'ını ekran görüntüsü-only benchmark'larda değerlendirmek grounding testini atlar."
+    },
+    {
+      "stage": "post",
+      "question": "Trajectory uzunluğunu görmezden gelmek neden bir benchmark hatasıdır?",
+      "options": [
+        "Tek başına başarı oranının kaçırdığı maliyet ve verimsizliği gizler (OSWorld-Human'ın ortaya çıkardığı 1.4-2.7x fark)",
+        "Trajectory uzunluğu her zaman altınla eşleşir",
+        "Trajectory'ler ölçülebilir değildir",
+        "Uzunluk önemli olan tek metriktir"
+      ],
+      "correct": 0,
+      "explanation": "%60 başarıdaki iki agent adım sayısında 2-3x farklı olabilir; maliyet ve verimlilik yalnızca trajectory uzunluğunu ölçtüğünde ortaya çıkar."
+    }
+  ]
+}

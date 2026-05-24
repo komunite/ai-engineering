@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Komşuluk matrisi A[i][j] = 1 neyi temsil eder?",
+      "options": [
+        "Düğüm i'nin derecesi j'dir",
+        "Düğüm i'den düğüm j'ye bir kenar vardır",
+        "Düğüm i ve düğüm j aynı etikete sahiptir",
+        "i'den j'ye en kısa yolun uzunluğu 1'dir"
+      ],
+      "correct": 1,
+      "explanation": "Komşuluk matrisi bir grafın temel temsilidir. A[i][j] = 1 düğüm i'yi düğüm j'ye bağlayan bir kenar olduğu anlamına gelir. Yönsüz graflar için matris simetriktir (A[i][j] = A[j][i])."
+    },
+    {
+      "stage": "pre",
+      "question": "BFS hangi veri yapısını kullanır ve neyi bulur?",
+      "options": [
+        "Stack; bağlantılı bileşenleri bulur",
+        "Queue; ağırlıksız graflarda en kısa yolları bulur",
+        "Öncelik kuyruğu; minimum kapsayan ağacı bulur",
+        "Hash map; yinelenen düğümleri bulur"
+      ],
+      "correct": 1,
+      "explanation": "BFS, k+1 mesafesine geçmeden önce k mesafesindeki tüm komşuları keşfetmek için bir queue (FIFO) kullanır. Bu, bir düğümün ilk keşfedildiğinde kaynağa olan en kısa yol üzerinden olduğunu garanti eder."
+    },
+    {
+      "stage": "post",
+      "question": "Bağlantılı bir grafın graf Laplacian'ı L = D - A'nın kaç tane sıfır eigenvalue'su vardır?",
+      "options": [
+        "Sıfır",
+        "Tam olarak bir",
+        "Düğüm sayısına eşit",
+        "Kenar sayısına eşit"
+      ],
+      "correct": 1,
+      "explanation": "Laplacian'ın sıfır eigenvalue sayısı bağlantılı bileşen sayısına eşittir. Bağlantılı bir grafın tam olarak bir bağlantılı bileşeni vardır, dolayısıyla tam olarak bir sıfır eigenvalue'su vardır. k bağlantısız parçası olan bir grafın k sıfır eigenvalue'su vardır."
+    },
+    {
+      "stage": "post",
+      "question": "GNN mesaj geçişinde h_v^(k+1) = sigma(W * mean({h_u^(k) : u in neighbors(v)})) neyi hesaplar?",
+      "options": [
+        "v'den diğer tüm düğümlere en kısa yolu",
+        "Komşu özniteliklerini toplayarak, öğrenilmiş ağırlıklarla dönüştürerek ve doğrusal olmayan bir fonksiyon uygulayarak düğüm v için yeni bir öznitelik vektörü",
+        "k+1 katmanındaki v düğümünün derecesini",
+        "v düğümünün PageRank puanını"
+      ],
+      "correct": 1,
+      "explanation": "Her düğüm komşularından öznitelikleri toplar (ortalama toplama), öğrenilmiş bir ağırlık matrisi W ile çarpar ve bir aktivasyon fonksiyonu sigma uygular. k tur sonra, her düğüm k-hop komşuluğundan bilgi sahibi olur."
+    },
+    {
+      "stage": "post",
+      "question": "Spektral kümeleme Fiedler vektörünü (L'nin ikinci en küçük eigenvalue'sunun eigenvector'ı) nasıl kullanır?",
+      "options": [
+        "En büyük Fiedler vektör girişlerine sahip düğümler bir küme oluşturur",
+        "Pozitif Fiedler vektör değerli düğümler bir gruba, negatif değerli düğümler diğerine girer",
+        "Fiedler vektörü kenar ağırlıkları olarak kullanılır",
+        "Fiedler vektörü küme sayısını belirler"
+      ],
+      "correct": 1,
+      "explanation": "Fiedler vektörü graf üzerindeki en düzgün önemsiz olmayan fonksiyonu kodlar. Aynı sıkı bağlantılı kümedeki düğümler benzer değerler alır, bir dar boğazla ayrılmış düğümler ise zıt işaretli değerler alır. İşaret bölünmesi grafı iki kümeye böler."
+    }
+  ]
+}

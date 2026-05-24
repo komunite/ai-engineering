@@ -1,0 +1,102 @@
+{
+  "lesson": "21-nli-textual-entailment",
+  "title": "Natural Language Inference — Textual Entailment",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "NLI bir (premise, hypothesis) çiftine hangi üç etiketi atar?",
+      "options": [
+        "Pozitif / negatif / nötr",
+        "Doğru / yanlış / bilinmiyor",
+        "Entailment / contradiction / neutral",
+        "Sebep / sonuç / ilgisiz"
+      ],
+      "correct": 2,
+      "explanation": "NLI entailment, contradiction ve neutral üzerinde 3-yönlü bir sınıflandırmadır."
+    },
+    {
+      "stage": "pre",
+      "question": "NLI zero-shot bir metin sınıflandırıcı olarak nasıl kullanılır?",
+      "options": [
+        "Her aday etiketi bir hypothesis olarak ifade et (örn. 'Bu metin spor hakkında') ve en yüksek entailment skoruna sahip etiketi seç",
+        "Embedding'leri ortalayarak",
+        "TF-IDF hesaplayarak",
+        "Bir LLM'i prompt ederek"
+      ],
+      "correct": 0,
+      "explanation": "NLI-as-classifier etiketleri hypothesis'lere dönüştürür; model max-entailment etiketi seçer."
+    },
+    {
+      "stage": "check",
+      "question": "NLI neden RAG çıktıları için bir faithfulness kontrolüdür?",
+      "options": [
+        "Tokenizer kullanır",
+        "Geri çağrılan bağlamın her cevap iddiasını entail edip etmediğini kontrol etmek, tam olarak NLI'ın eğitildiği formülasyondur",
+        "Ucuzdur",
+        "Çok dillidir"
+      ],
+      "correct": 1,
+      "explanation": "Hallucination = geri çağrılan bağlam tarafından entail edilmeyen cevap iddiaları; NLI doğrudan entailment'i ölçer."
+    },
+    {
+      "stage": "check",
+      "question": "Hypothesis-only baseline neyi ortaya çıkarır?",
+      "options": [
+        "Çok dilli boşlukları",
+        "Yavaş çıkarımı",
+        "Yalnızca hypothesis'in (premise olmadan) etiketi tahmin edebildiği veri setlerini, etiket leakage'ına sinyal verir",
+        "Tokenizer drift'i"
+      ],
+      "correct": 2,
+      "explanation": "SNLI'da yüksek hypothesis-only skoru annotation artifact'lerini ortaya çıkardı; verini debug etmek için yararlıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi NLI model ailesi 2026 leaderboard'larında standart workhorse olarak öne çıkıyor?",
+      "options": [
+        "fastText",
+        "Düz Word2Vec",
+        "MNLI/FEVER/ANLI üzerinde fine-tune edilmiş DeBERTa-v3 varyantları",
+        "GPT-2"
+      ],
+      "correct": 2,
+      "explanation": "MNLI ve ilgili corpus'larda fine-tune edilmiş DeBERTa-v3, 2026'da açık NLI workhorse'u."
+    },
+    {
+      "stage": "post",
+      "question": "Cümle seviyesi NLI modelleri doküman uzunluğunda premise'lerde neden accuracy düşürür?",
+      "options": [
+        "Kısa premise'ler üzerinde eğitildiler ve çoklu-cümle ile multi-hop inference'da başarısız olurlar; DocNLI ile tune edilmiş modeller daha uzun girdileri ele alır",
+        "Daha büyük girdiler daha yavaş çalışır",
+        "Dokümanlar tokenizer drift'i tetikler",
+        "Cosine similarity bozulur"
+      ],
+      "correct": 0,
+      "explanation": "Eğitim dağılım uyumsuzluğu: tek-cümle NLI modelleri doküman uzunluğunda girdilerde 20+ F1 kaybeder."
+    },
+    {
+      "stage": "post",
+      "question": "Zero-shot accuracy hypothesis template'ine göre neden 10+ puan oynayabilir?",
+      "options": [
+        "Modeller ifade tarzına duyarlıdır; örn. 'This text is about {label}' ile yalnız başına '{label}' entailment olasılıklarını kaydırır",
+        "Template'ler tokenizer davranışını değiştirir",
+        "Template'ler model ağırlıklarını etkiler",
+        "Template'ler etiket setini değiştirir"
+      ],
+      "correct": 0,
+      "explanation": "Template ifadesi entailment skorlarını maddi olarak kaydırır; küçük bir held-out set üzerinde tune et."
+    },
+    {
+      "stage": "post",
+      "question": "Hallucination tespiti için NLI hakkında talep edilebilecek güvenli sınır nedir?",
+      "options": [
+        "Yalnızca İngilizce'de çalışır",
+        "Faithfulness sinyali olarak hallucination'ı azaltır ama ortadan kaldırmaz; retrieval recall ve insan incelemesiyle birleştir",
+        "Hallucination'ı ortadan kaldırır",
+        "LLM gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "NLI yararlı bir sinyaldir ama tam bir çözüm değildir; retrieval metrikleri ve insan spot-check'leriyle eşleştir."
+    }
+  ]
+}

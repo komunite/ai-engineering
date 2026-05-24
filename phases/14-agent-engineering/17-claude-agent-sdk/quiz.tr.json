@@ -1,0 +1,90 @@
+{
+  "lesson": "17-claude-agent-sdk",
+  "title": "Claude Agent SDK: Subagent'lar ve Session Store",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Anthropic Client SDK ile Claude Agent SDK arasındaki fark nedir?",
+      "options": [
+        "Client SDK ham Messages API'dir; Agent SDK yerleşik tool'lar, MCP, hook'lar, subagent'lar ve session store ile Claude Code harness şeklidir",
+        "Client SDK ücretlidir; Agent SDK ücretsizdir",
+        "Client SDK yalnızca Python içindir",
+        "Fark yoktur"
+      ],
+      "correct": 0,
+      "explanation": "Client SDK sana döngüyü verir; Agent SDK önceden inşa edilmiş döngüyü sunar."
+    },
+    {
+      "stage": "pre",
+      "question": "Subagent'ların belgelenmiş iki amacı nedir?",
+      "options": [
+        "Paralelleştirme ve context izolasyonu",
+        "Caching ve rate limiting",
+        "Logging ve metrikler",
+        "Authn ve authz"
+      ],
+      "correct": 0,
+      "explanation": "Subagent'lar bağımsız işleri eş zamanlı çalıştırır ve context izole ederek orchestrator'ın context bütçesini korur."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi metod session store yüzeyinin bir parçası DEĞİLDİR?",
+      "options": [
+        "append",
+        "load",
+        "list_subkeys",
+        "compile_prompt"
+      ],
+      "correct": 3,
+      "explanation": "Session store append, load, list_sessions, delete, list_subkeys sunar; compile_prompt bir session API'si değildir."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi Claude Agent SDK yaşam döngüsü hook'u DEĞİLDİR?",
+      "options": [
+        "PreToolUse",
+        "PostToolUse",
+        "PreCompact",
+        "PreEmbedding"
+      ],
+      "correct": 3,
+      "explanation": "Hook'lar PreToolUse, PostToolUse, SessionStart/End, UserPromptSubmit, PreCompact, Stop, Notification içerir. PreEmbedding bir hook değildir."
+    },
+    {
+      "stage": "check",
+      "question": "Trace context agent ve CLI subprocess'i arasında nasıl yayılır?",
+      "options": [
+        "Dosya sistemi aracılığıyla",
+        "CLI subprocess'ine geçirilen W3C trace context header'ları aracılığıyla",
+        "Yalnızca sağlayıcının dashboard'u aracılığıyla",
+        "Yalnızca environment değişkenleri aracılığıyla"
+      ],
+      "correct": 1,
+      "explanation": "Çağırıcıdaki OTel span'leri W3C trace context aracılığıyla CLI subprocess'ine yayılır, böylece tüm multi-process çalışma tek bir trace olur."
+    },
+    {
+      "stage": "post",
+      "question": "Subagent over-spawn nedir ve ne zaman olur?",
+      "options": [
+        "Overhead'in baskın olduğu 100 küçük görev için 100 subagent spawn etmek; bunun yerine batch yap",
+        "Subagent'ları kapatmayı unutmak",
+        "SessionStart'tan önce spawn etmek",
+        "CPU çekirdeklerinden fazla subagent spawn etmek"
+      ],
+      "correct": 0,
+      "explanation": "Subagent'ların overhead'i vardır; her birine bir tane spawn etmek yerine küçük görevleri batch yap."
+    },
+    {
+      "stage": "post",
+      "question": "Claude Managed Agents self-hosted SDK'ya karşı neyi takas eder?",
+      "options": [
+        "Managed altyapı için kontrolü (uzun-süreli async, yerleşik prompt caching, yerleşik compaction)",
+        "Maliyet için latency'yi",
+        "Bellek için tool'ları",
+        "Streaming için tracing'i"
+      ],
+      "correct": 0,
+      "explanation": "Managed Agents uzun-süreli async iş için hosted alternatiftir; daha az kontrol, daha az ops yüzeyi."
+    }
+  ]
+}

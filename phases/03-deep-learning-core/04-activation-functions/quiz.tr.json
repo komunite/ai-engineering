@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Neden yalnızca doğrusal katmanlar (aktivasyon fonksiyonu olmadan) kullanarak işe yarar bir derin ağ kuramazsın?",
+      "options": [
+        "Doğrusal katmanlar çok yavaştır",
+        "Doğrusal katmanları üst üste yığmak tek bir doğrusal dönüşüme indirgenir; derinlikten hiçbir kazanç sağlamaz",
+        "Doğrusal katmanların bias'ı yoktur",
+        "Doğrusal katmanlar batch'lenmiş veriyi işleyemez"
+      ],
+      "correct": 1,
+      "explanation": "y = W2(W1*x + b1) + b2 ifadesi y = Ax + c'ye sadeleşir. Kaç doğrusal katman üst üste yığarsan yığ, sonuç tek bir doğrusal katmana eşdeğerdir. Aktivasyon fonksiyonları bu birleşebilirliği kırar."
+    },
+    {
+      "stage": "pre",
+      "question": "ReLU aktivasyon fonksiyonunun çıktı aralığı nedir?",
+      "options": [
+        "(-1, 1)",
+        "(0, 1)",
+        "[0, sonsuz)",
+        "(-sonsuz, sonsuz)"
+      ],
+      "correct": 2,
+      "explanation": "ReLU(x) = max(0, x). Tüm negatif girdiler için 0 üretir ve pozitif girdileri değiştirmeden geçirir; bu da [0, sonsuz) aralığını verir."
+    },
+    {
+      "stage": "post",
+      "question": "ReLU ağlarındaki 'dead neuron' problemi nedir?",
+      "options": [
+        "Çok yavaş hesaplayan nöronlar",
+        "Girdisi sürekli negatif olan, sonsuza dek sıfır çıktı ve sıfır gradient üreten nöronlar",
+        "NaN değerleri üreten nöronlar",
+        "Sıfır bias'lı nöronlar"
+      ],
+      "correct": 1,
+      "explanation": "Bir ReLU nöronunun ağırlıklı girdisi her zaman negatifse (kötü başlatma veya büyük negatif bias nedeniyle), 0 çıktı ve 0 gradient üretir. Sıfır gradient sıfır güncelleme anlamına geldiği için asla toparlanamaz."
+    },
+    {
+      "stage": "post",
+      "question": "GPT ve BERT gibi modern transformer'larda gizli katmanlar için varsayılan aktivasyon fonksiyonu hangisidir?",
+      "options": [
+        "Sigmoid",
+        "ReLU",
+        "GELU",
+        "Tanh"
+      ],
+      "correct": 2,
+      "explanation": "GELU (Gaussian Error Linear Unit) transformer'larda varsayılan aktivasyondur. Pürüzsüz gradient akışı sağlar, dead neuron'lardan kaçınır ve dil modellerinde ReLU'dan daha iyi performans gösterdiği kanıtlanmıştır."
+    },
+    {
+      "stage": "post",
+      "question": "Softmax neden yalnızca çıktı katmanında kullanılır ve gizli katmanlarda asla kullanılmaz?",
+      "options": [
+        "Gizli katmanlar için çok yavaştır",
+        "Bir vektörü olasılık dağılımına (değerler toplamı 1) dönüştürür; bu sınıflandırma çıktısı için gerekli, ara temsiller için değil",
+        "Exploding gradient'lere yol açar",
+        "Yalnızca iki sınıfla çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Softmax bir vektörü tüm değerleri (0,1) aralığında ve toplamları 1 olacak şekilde normalize eder; bir olasılık dağılımı oluşturur. Gizli katmanlar bilgiyi koruyup dönüştürmek zorundadır; onu olasılıklara sıkıştırmak zorunda değildir."
+    }
+  ]
+}

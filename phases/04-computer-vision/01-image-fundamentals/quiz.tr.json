@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Disk üzerindeki bir dosya, shape (224, 224, 3) ve dtype uint8 olan bir NumPy dizisine decode ediliyor. Her sayı neyi temsil eder?",
+      "options": [
+        "Bir pikselin o renkte olma olasılığı, 0 ile 1 arasında",
+        "Detektör başına bir foton sayımı, sensörün tam dinamik aralığına normalize edilmiş",
+        "Bir grid pozisyonundaki ışık şiddetinin bir örneği, kanal başına 256 seviyeye quantize edilmiş",
+        "Bir konvolüsyonel ağa beslenmeye hazır floating-point parlaklık değeri"
+      ],
+      "correct": 2,
+      "explanation": "Bir uint8 görsel [0, 255] aralığında 8-bit integer'lar saklar. Her integer, (satır, sütun, kanal) pozisyonunda ışık şiddetinin tek bir quantize edilmiş örneğidir. Ne olasılıktır ne de float; önceden eğitilmiş bir modele beslemeden önce 255'e bölüp standardize etmen gerekir."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir görseli Pillow ile yükleyip shape (480, 640, 3) olan bir dizi alıyorsun. Bunu batched tensor (1, 480, 640, 3) olarak in_channels=3 olan bir PyTorch Conv2d'ye veriyorsun. Ne olur?",
+      "options": [
+        "Hiçbir şey -- PyTorch layout'u otomatik tespit eder",
+        "İlk konv katmanı yüksekliği kanal ekseni olarak ele alır ve anlamsız feature map'ler üretir",
+        "PyTorch RuntimeError atar: Conv2d NCHW bekler, weight 3 kanal beklerken 480 kanal görür ve çalışmayı reddeder",
+        "Accuracy birkaç puan düşer ama çıkarım yine de çalışır"
+      ],
+      "correct": 2,
+      "explanation": "PyTorch Conv2d, weight tensor'a karşı katı kanal sayısı kontrolü uygular. Batched HWC girdi (1, 480, 640, 3), C=480 olan NCHW olarak yorumlanır, weight'in beklediği 3 kanalla eşleşmez ve PyTorch herhangi bir hesaplama öncesi RuntimeError atar. Bu yüksek sesli başarısızlık bir özelliktir -- seni layout'u düzeltmeye zorlar. PyTorch'a beslemeden önce NCHW'ye permute etmelisin (`.permute(0, 3, 1, 2)`)."
+    },
+    {
+      "stage": "post",
+      "question": "ImageNet önceden eğitilmiş modeller neden mean=[0.485, 0.456, 0.406] ve std=[0.229, 0.224, 0.225] ile standardize edilmiş girdi bekler?",
+      "options": [
+        "Bunlar ortalama bir doğal sahnenin RGB değerleridir",
+        "Bunlar [0, 1] uzayında ImageNet eğitim setinin kanal başına ortalama ve standart sapmasıdır, yani onları çıkarmak modelin eğitildiği dağılımı merkezler",
+        "Herhangi bir görsel için girdiyi kesin olarak sıfır-ortalama birim-varyans yaparlar",
+        "ReLU aktivasyon fonksiyonu tarafından gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "Sayılar, pikselleri 255'e böldükten sonra hesaplanan ImageNet eğitim corpus'unun istatistikleridir. Bunları kullanmak, girdi dağılımını ağın eğitim sırasında gördüğüyle hizalar. Farklı bir veri setinde eğitilmiş bir model için istatistikleri o veri setinde yeniden hesaplarsın."
+    },
+    {
+      "stage": "post",
+      "question": "Bir segmentasyon mask'ini (integer class ID 0..20) 500x500'den 224x224'e resize ediyorsun. Hangi interpolasyon yöntemi doğrudur?",
+      "options": [
+        "Bilinear -- sınıf sınırlarını yumuşatır",
+        "Bicubic -- keskinliği korur",
+        "Lanczos -- en yüksek kalite",
+        "Nearest neighbour -- kesirli olanları uydurmak yerine geçerli integer class ID'leri korur"
+      ],
+      "correct": 3,
+      "explanation": "Bilinear, bicubic ve lanczos komşu değerlerin ortalamasını alır. Bir class-ID mask'inde bu, sınıf 4 ile sınıf 5 arasında 4.7 gibi non-integer değerler üretir; bunlar gerçek sınıf değildir. Nearest neighbour en yakın orijinal pikseli seçer ve label uzayını korur. Bu kural, ID'leri veya indeksleri encode eden herhangi bir kanal için de geçerlidir."
+    },
+    {
+      "stage": "post",
+      "question": "RGB grayscale dönüşümü neden 0.333 R + 0.333 G + 0.333 B yerine 0.299 R + 0.587 G + 0.114 B ağırlıklarını kullanır?",
+      "options": [
+        "Her kanaldaki JPEG sıkıştırma artifact'lerini telafi etmek için",
+        "Çünkü yeşil fotonlar kırmızı veya mavi fotonlardan daha fazla enerji taşır",
+        "Çünkü insan görüşü yeşile en duyarlı, maviye en az duyarlıdır; ağırlıklı toplam algılanan luminance ile eşleşir",
+        "Kamera sensörlerindeki Bayer filtresinin davranışıyla eşleşmek için"
+      ],
+      "correct": 2,
+      "explanation": "ITU-R BT.601 ağırlıkları 0.299/0.587/0.114, insan gözünün luminous efficiency'sinden gelir. Eşit ağırlıklı bir ortalama, yeşil tonlu görselleri çok karanlık, kırmızıları ise insan gözlemciye çok parlak gösterirdi. Çoğu klasik bilgisayarlı görü grayscale kodu bu ağırlıkları kullanır; BT.709 (0.2126/0.7152/0.0722) doğrusal-ışık girdiler için modern HDTV varyantıdır."
+    }
+  ]
+}

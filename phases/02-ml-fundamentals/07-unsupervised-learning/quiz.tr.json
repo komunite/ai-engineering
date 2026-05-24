@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Denetimsiz öğrenmeyi denetimli öğrenmeden ayıran nedir?",
+      "options": [
+        "Denetimsiz öğrenme daha fazla veri kullanır",
+        "Denetimsiz öğrenmede etiketli çıktı yoktur -- algoritma kendi başına yapı bulur",
+        "Denetimsiz öğrenme yalnızca metin verisinde çalışır",
+        "Denetimsiz öğrenme her zaman daha iyi sonuçlar üretir"
+      ],
+      "correct": 1,
+      "explanation": "Denetimsiz öğrenmede etiket yoktur. Algoritma, doğru çıktının ne olması gerektiği söylenmeden veride örüntüleri, gruplamaları veya yapıyı keşfeder."
+    },
+    {
+      "stage": "pre",
+      "question": "K-Means eğitimden önce neyi belirtmeni gerektirir?",
+      "options": [
+        "Tam küme merkezlerini",
+        "Küme sayısı K'yı",
+        "Her veri noktası için etiketleri",
+        "Kullanılacak mesafe metriğini"
+      ],
+      "correct": 1,
+      "explanation": "K-Means girdi olarak küme sayısı K'yı gerektirir. Daha sonra noktaları yinelemeli olarak en yakın centroid'e atar ve yakınsayana kadar centroid'leri yeniden hesaplar."
+    },
+    {
+      "stage": "post",
+      "question": "K-Means iç içe geçmiş iki yarım ay şeklinde başarısız olurken DBSCAN başarılı oluyor. Neden?",
+      "options": [
+        "DBSCAN K-Means'ten daha fazla veri kullanır",
+        "DBSCAN kümeleri yoğunluğa göre bulur, dolayısıyla rastgele şekiller keşfedebilir; K-Means ise küresel kümeler varsayar",
+        "DBSCAN her veri setinde her zaman K-Means'ten üstündür",
+        "K-Means 2B veriyi işleyemez"
+      ],
+      "correct": 1,
+      "explanation": "K-Means noktaları en yakın centroid'e atar ve küresel (konveks) kümeler üretir. DBSCAN kümeleri yoğun bölgelerden büyütür; küme yoğunlukla bağlı olduğu sürece her şekli keşfeder."
+    },
+    {
+      "stage": "post",
+      "question": "Silhouette skoru neyi ölçer?",
+      "options": [
+        "Bulunan toplam küme sayısını",
+        "Her noktanın kendi kümesine, en yakın diğer kümeye kıyasla ne kadar benzer olduğunu",
+        "Kümeleme algoritmasının hızını",
+        "Veride aykırı değerlerin yüzdesini"
+      ],
+      "correct": 1,
+      "explanation": "Silhouette skoru = (b - a) / max(a, b), burada a ortalama küme içi mesafe, b ise ortalama en yakın küme mesafesidir. -1 (yanlış küme) ile +1 (iyi kümelenmiş) arasında değer alır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir Gaussian Mixture Model küme atamalarında K-Means'ten nasıl farklıdır?",
+      "options": [
+        "GMM her noktanın tam olarak bir kümeye ait olduğu sert atamalar kullanır",
+        "GMM her noktanın her kümeye ait olma olasılığını veren yumuşak (olasılıksal) atamalar verir",
+        "GMM centroid kullanmaz",
+        "GMM yalnızca tek boyutlu veride çalışır"
+      ],
+      "correct": 1,
+      "explanation": "K-Means her noktayı tam olarak bir kümeye atar (sert). GMM her noktanın her Gaussian bileşene ait olma olasılığını hesaplar (yumuşak) ve eliptik, örtüşen kümeleri modelleyebilir."
+    }
+  ]
+}

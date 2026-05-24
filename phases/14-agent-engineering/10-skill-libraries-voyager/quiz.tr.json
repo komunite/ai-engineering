@@ -1,0 +1,90 @@
+{
+  "lesson": "10-skill-libraries-voyager",
+  "title": "Skill Library'leri ve Yaşam Boyu Öğrenme (Voyager)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Voyager aksiyon uzayı olarak neyi ele alır?",
+      "options": [
+        "Primitif Minecraft komutları",
+        "Saklanan, çağrılan ve birleştirilen çalıştırılabilir kod (JavaScript fonksiyonları)",
+        "Yalnızca metin prompt'ları",
+        "Pekiştirmeli öğrenme Q-değerleri"
+      ],
+      "correct": 1,
+      "explanation": "Voyager'ın katkısı kodu aksiyon haline getirmesidir: skill'ler ham komutlar değil, programlardır."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir Voyager agent'ını tanımlayan üç bileşen nedir?",
+      "options": [
+        "Encoder, decoder, value head",
+        "Automatic curriculum, skill library, iterative prompting",
+        "Planner, executor, judge",
+        "Retriever, generator, ranker"
+      ],
+      "correct": 1,
+      "explanation": "Voyager agent'ı curriculum, skill library ve iterative prompting etrafında yapılandırır."
+    },
+    {
+      "stage": "check",
+      "question": "Bir skill yürütme denemesinden hangi üç sinyal dönebilir?",
+      "options": [
+        "Pass, fail, retry",
+        "Success, error (stack trace ile), self-verification failure",
+        "Yeşil, sarı, kırmızı",
+        "Heartbeat, ack, nack"
+      ],
+      "correct": 1,
+      "explanation": "Voyager'ın iterative prompting mekanizması bu üç sinyalin bir sonraki versiyona katlanmasıyla yürür."
+    },
+    {
+      "stage": "check",
+      "question": "Automatic curriculum bir sonraki görevi nasıl seçer?",
+      "options": [
+        "Aksiyon uzayında rastgele uniform",
+        "Mevcut yetkinliğin biraz üstünde, environment state ve skill envanterine göre (exploration sweet spot)",
+        "Her zaman mevcut en zor görev",
+        "Yalnızca kullanıcı tarafından verilen liste"
+      ],
+      "correct": 1,
+      "explanation": "Proposer mevcut yetkinliğin hemen üstündeki görevleri hedefler, böylece ilerleme istikrarlıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Dersin Voyager skill'iyle en net eşleştiği 2026 ürünü hangisidir?",
+      "options": [
+        "OpenAI fine-tuning",
+        "Claude Agent SDK skill'leri: isimlendirilmiş, çağrılabilir kod artı talep üzerine yüklenen talimatlar",
+        "Pinecone indeksleri",
+        "AWS Lambda layer'ları"
+      ],
+      "correct": 1,
+      "explanation": "Agent SDK skill'leri Voyager'ın isimlendirilmiş-çağrılabilir-birleştirilebilir kod pattern'iyle eşleşir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders skill library'si için yazımda neden dedup öneriyor?",
+      "options": [
+        "Disk pahalı",
+        "Dedup olmadan aynı skill biraz farklı description'larla birçok kez eklenir; retrieval tek bir kanonik versiyon dönmeli",
+        "Sağlayıcılar duplicate'leri reddediyor",
+        "Git duplicate'leri engelliyor"
+      ],
+      "correct": 1,
+      "explanation": "Yakın-duplicate description'lar tek bir kanonik skill'e indirgenir, böylece retrieval temiz kalır."
+    },
+    {
+      "stage": "post",
+      "question": "Composed-skill drift hangi problemi tanımlar?",
+      "options": [
+        "Python yükseltmesinden sonra bir skill'in compile olmayı bırakması",
+        "Parent skill'in hiç test edilmediği refine edilmiş bir child versiyonunu sessizce alması; skill versiyonlarını pin'leyerek düzelt",
+        "Skill'lerin depolamada şifrelenmesi",
+        "Retrieval'in hiçbir şey döndürmemesi"
+      ],
+      "correct": 1,
+      "explanation": "Versiyon pin'leme olmadan, bir child'a yapılan refine parent'ın davranışını sessizce değiştirir."
+    }
+  ]
+}

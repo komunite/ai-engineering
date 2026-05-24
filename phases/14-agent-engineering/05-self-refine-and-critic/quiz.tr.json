@@ -1,0 +1,90 @@
+{
+  "lesson": "05-self-refine-and-critic",
+  "title": "Self-Refine ve CRITIC: Yinelemeli Çıktı İyileştirme",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Self-Refine döngüsünü oluşturan üç prompt hangisidir?",
+      "options": [
+        "Plan, execute, solve",
+        "Generate, feedback, refine",
+        "Actor, evaluator, reflector",
+        "Search, score, synthesize"
+      ],
+      "correct": 1,
+      "explanation": "Self-Refine üç rolde tek bir model kullanır: generate, feedback, refine."
+    },
+    {
+      "stage": "pre",
+      "question": "Self-Refine refine adımında neden history gerektirir?",
+      "options": [
+        "Sağlayıcılar yalnızca history üzerinde cache yapar",
+        "Önceki çıktılar ve eleştiriler olmadan refine adımı eski hataları tekrarlar; ablation kalitenin sert düştüğünü gösterir",
+        "History faturalandırma için gereklidir",
+        "Token üretimini hızlandırır"
+      ],
+      "correct": 1,
+      "explanation": "Refine prompt'u tam history'ye dayanır, böylece model önceki hatalarını tekrarlamaz."
+    },
+    {
+      "stage": "check",
+      "question": "CRITIC, Self-Refine'a göre neyi değiştirir?",
+      "options": [
+        "Refine adımını kaldırır",
+        "Self-feedback adımını harici tool-temelli bir verifier ile değiştirir",
+        "Üretim için daha büyük bir model kullanır",
+        "Feedback adımını paralel çalıştırır"
+      ],
+      "correct": 1,
+      "explanation": "CRITIC, self-critique'i search, code interpreter, hesap makinesi veya alan verifier'larıyla yönlendirilen bir verify adımıyla değiştirir."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi Anthropic workflow pattern'i Claude-dostu dilde Self-Refine ve CRITIC ile eşleşir?",
+      "options": [
+        "Router",
+        "Prompt chain",
+        "Evaluator-Optimizer",
+        "Parallel sampling"
+      ],
+      "correct": 2,
+      "explanation": "Anthropic bu pattern'i Evaluator-Optimizer olarak adlandırır: bir evaluator skorlar, bir optimizer revize eder, yakınsayana kadar döngü."
+    },
+    {
+      "stage": "check",
+      "question": "Rubber-stamp döngüsü nedir ve ders bundan kaçınmayı nasıl önerir?",
+      "options": [
+        "Her zaman geçen bir test; testi kaldır",
+        "Aynı model ve aynı prompt'un kendi çıktısını eleştirip onaylaması; yapısal olarak farklı prompt'lar veya ayrı küçük bir critic kullan",
+        "Her zaman başarısız olan bir retry; bütçeyi yükselt",
+        "Timeout veren bir guardrail; timeout'u genişlet"
+      ],
+      "correct": 1,
+      "explanation": "Aynı tarzdaki self-critique 'bana iyi görünüyor' noktasında yakınsar; evaluator'ı optimizer'dan farklılaştır."
+    },
+    {
+      "stage": "post",
+      "question": "OpenAI Agents SDK'daki hangi SDK özelliği CRITIC-şeklindedir?",
+      "options": [
+        "Handoffs",
+        "Sessions",
+        "Output guardrails (tool çağırabilen)",
+        "Tracing"
+      ],
+      "correct": 2,
+      "explanation": "Output guardrails nihai agent çıktısını doğrular ve tool çağırabilir, CRITIC'in verifier rolüyle eşleşir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders 2026 evaluator-optimizer döngüleri için hangi durdurma koşulunu öneriyor?",
+      "options": [
+        "Yalnızca verifier geçtiğinde dur",
+        "Yalnızca model 'tamam' dediğinde dur",
+        "Birleştir: verifier geçer VEYA (model 'tamam' der VE iterations >= 2) VEYA iterations >= max_iterations",
+        "Asla durma; agent'ın kendini sınırsız iyileştirmesine izin ver"
+      ],
+      "correct": 2,
+      "explanation": "Birleşik bir koşul tek-koşul başarısızlık modlarından kaçınır."
+    }
+  ]
+}

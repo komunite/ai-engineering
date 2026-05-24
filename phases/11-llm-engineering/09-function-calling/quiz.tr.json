@@ -1,0 +1,37 @@
+[
+  {
+    "question": "LLM'ler gerçekten fonksiyon çalıştırabilir veya harici sistemlere erişebilir mi?",
+    "options": ["Evet, LLM'ler API'leri doğrudan çağırabilir", "Hayır -- LLM'ler yalnızca hangi fonksiyonu çağıracaklarını açıklayan metin (tipik olarak JSON) üretir; senin kodunun çalıştırması gerekir", "Yalnızca GPT-4 fonksiyon çalıştırabilir", "LLM'ler fonksiyonları embedding'ler aracılığıyla çalıştırır"],
+    "correct": 1,
+    "explanation": "LLM'ler token üretir. 'Fonksiyon çağırırken' model, fonksiyon adını ve argümanları belirten JSON çıktısı verir. Uygulama kodun bu JSON'ı parse eder, gerçek fonksiyonu çalıştırır ve sonucu modele geri gönderir.",
+    "stage": "pre"
+  },
+  {
+    "question": "Function calling bağlamında tool schema nedir?",
+    "options": ["Modelin mimari diyagramı", "Modele hangi tool'ların mevcut olduğunu söyleyen, bir fonksiyonun adını, parametrelerini, tiplerini ve amacını belirten JSON açıklaması", "Bir veritabanı şeması", "API endpoint URL'i"],
+    "correct": 1,
+    "explanation": "Tool schema'lar modele mevcut fonksiyonları açıklar: fonksiyon adı, parametre adları ve tipleri, her parametrenin ne yaptığının açıklamaları ve fonksiyonun ne döndürdüğü. Model bunları, tool'ları ne zaman ve nasıl çağıracağına karar vermek için kullanır.",
+    "stage": "pre"
+  },
+  {
+    "question": "Çok-turn'lü function calling döngüsü için standart kalıp nedir?",
+    "options": ["Tüm fonksiyonları aynı anda çağır", "Mesaj gönder -> model tool call ister -> fonksiyonu çalıştır -> sonucu geri gönder -> model nihai cevabı üretir (gerekirse tekrarla)", "Model fonksiyonları dahili olarak çalıştırır", "Tüm konuşmayı bir batch olarak parse et"],
+    "correct": 1,
+    "explanation": "Döngü: (1) user mesaj + tool schema'larını gönder, (2) model bir tool call isteğiyle yanıt verir, (3) fonksiyonu çalıştır, (4) sonucu tool response olarak geri gönder, (5) model bir sonraki yanıtı veya başka bir tool call'u üretir.",
+    "stage": "post"
+  },
+  {
+    "question": "Sonsuz tool calling döngülerini nasıl önlersin?",
+    "options": ["Daha hızlı bir model kullan", "Maksimum tool call iterasyon sayısı belirle ve bir timeout uygula; limit aşıldığında döngüyü kır", "Function calling ile sonsuz döngü olamaz", "İlk çağrıdan sonra tüm tool schema'larını kaldır"],
+    "correct": 1,
+    "explanation": "Limit olmadan model tekrar tekrar tool'ları çağırabilir (örn. asla bulamayacağı bilgiyi aramak). Maksimum iterasyon sayısı (örn. 10 round) ve toplam timeout, production'da kaçak döngüleri önler.",
+    "stage": "post"
+  },
+  {
+    "question": "Tool schema'larında net, açıklayıcı parametre adları ve açıklamaları neden önemlidir?",
+    "options": ["Kodu daha okunabilir yapar", "Model hangi tool'u çağıracağına ve parametreleri nasıl dolduracağına karar vermek için açıklamaları kullanır -- belirsiz açıklamalar yanlış tool seçimine ve yanlış argümanlara yol açar", "API tarafından zorunludur", "Yanıt süresini iyileştirir"],
+    "correct": 1,
+    "explanation": "Model neyi çağıracağına ve nasıl yapacağına karar vermek için tool açıklamalarını okur. 'q' olarak tanımlanan bir parametre ile 'search_query: Bilgi tabanında aranacak kullanıcının arama terimleri' olarak tanımlanan bir parametre çok farklı sonuçlar verir.",
+    "stage": "post"
+  }
+]

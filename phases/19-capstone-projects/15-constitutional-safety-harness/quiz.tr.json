@@ -1,0 +1,90 @@
+{
+  "lesson": "15-constitutional-safety-harness",
+  "title": "Capstone 15 — Constitutional Safety Harness + Red-Team Range",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bu capstone'da katmanlı safety ne anlama gelir?",
+      "options": [
+        "Her yanıtın manuel incelenmesi",
+        "Yalnızca girişte tek bir güçlü classifier çalıştırmak",
+        "Çıktılar üzerinde tek bir kural tabanlı regex",
+        "Input sanitize, policy rail'ler, classifier gate, model, output filter ve HITL tier'ı boyunca defense in depth"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Yaklaşık 132 dilde multilingual kapsamı hangi classifier handle eder?",
+      "options": [
+        "Nemotron 3 Content Safety",
+        "ShieldGemma-2",
+        "X-Guard",
+        "Llama Guard 4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Over-refusal neden XSTest gibi benign bir suite'te ölçülür?",
+      "options": [
+        "Red-team skorlamasının yerini almak için",
+        "Token throughput'unu benchmark'lamak için",
+        "Guardrail framework'ünü sertifikalamak için",
+        "False-positive blokları izlemek için, böylece model harmlessness'ı geliştirirken yardımsever kalır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bu capstone'daki constitutional self-critique loop nedir?",
+      "options": [
+        "Aday jailbreak prompt'ları üzerinde bir reranker",
+        "Sıfırdan eğitilmiş bir RLHF reward modeli",
+        "Llama Guard 4 üzerinden tek bir ileri geçiş",
+        "Critic LLM draft'ları yazılı bir anayasaya karşı skorlar, model itiraz edilen çıktıları yeniden yazar ve SFT iyileştirilmiş çiftler üzerinde çalışır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Başarılı jailbreak'ler bulgularda şiddet için nasıl skorlanır?",
+      "options": [
+        "Yanıtı üreten modele göre",
+        "Attack vector, complexity ve impact ile CVSS 4.0 kullanarak, artı bir disclosure timeline",
+        "Prompt'un ham token sayısına göre",
+        "Operatörün seçtiği elle ayarlanmış 1-10 ölçeğinde"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Red-team range hangi altı saldırı ailesini çalıştırır?",
+      "options": [
+        "BLEU, ROUGE, METEOR, BERTScore, CometKiwi ve chrF",
+        "PAIR, TAP, GCG, encoding (ASCII/base64/rot13), multi-turn persona ve multilingual code-switch",
+        "Brute-force, dictionary, replay, MITM, phishing ve CSRF",
+        "PSI, KL, MMD, KS, JS ve Wasserstein"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Range otomasyonu (cron + alarm) neden rubric'in bir parçası?",
+      "options": [
+        "Cron, OPA'yı çağırmanın tek yoludur",
+        "Sürekli zamanlanmış probe'lar saldırı başarı oranındaki drift'i ve zaman içinde over-refusal regression'larını yakalar",
+        "Manuel çalıştırmalar açıkça gereklidir",
+        "Otomasyon, Llama Guard 4'ü devre dışı bırakmak için gereklidir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

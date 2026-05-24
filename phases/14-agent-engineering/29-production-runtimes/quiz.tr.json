@@ -1,0 +1,90 @@
+{
+  "lesson": "29-production-runtimes",
+  "title": "Prodüksiyon Runtime'ları: Queue, Event, Cron",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Dersin listelediği altı runtime şekli nedir?",
+      "options": [
+        "Request-response, streaming, durable execution, queue-based, event-driven, scheduled",
+        "Read, write, exec, fork, exit, wait",
+        "REST, gRPC, GraphQL, WebSocket, SSE, MQTT",
+        "Map, filter, reduce, fold, scan, group"
+      ],
+      "correct": 0,
+      "explanation": "Bunlar altı runtime şeklidir; bir framework seçmeden önce bir şekil seç."
+    },
+    {
+      "stage": "pre",
+      "question": "Request-response ne zaman zayıf bir seçimdir?",
+      "options": [
+        "1 saniyelik bir sınıflandırmada",
+        "Görev yaklaşık 30 saniyeden uzun sürdüğünde ve kullanıcılar telefonu kapatırken worker'lar birikirken",
+        "REST API'lerde",
+        "İç servislerde"
+      ],
+      "correct": 1,
+      "explanation": "Senkron HTTP yalnızca kısa görevler için viable'dır; uzun görevler queue/durable/event şekilleri gerektirir."
+    },
+    {
+      "stage": "check",
+      "question": "Durable execution'ın çekirdek özelliği nedir?",
+      "options": [
+        "Daha hızlı çıkarım",
+        "State her adımdan sonra checkpoint'lenir, böylece runtime hatada son başarılı adımdan resume edebilir",
+        "Daha düşük token maliyeti",
+        "Native voice desteği"
+      ],
+      "correct": 1,
+      "explanation": "Checkpoint-and-resume ayırıcıdır; LangGraph dersin referansıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi Anthropic gözlemi uzun-ufuklu agent'lar için queue-bazlı runtime'ları haklı çıkarır?",
+      "options": [
+        "Görevler her zaman 5 saniyede tamamlanır",
+        "Computer use duyurusu: görev başına düzinelerce-yüzlerce adım normaldir",
+        "Görevler senkron çalışmalıdır",
+        "Cron her şeyi çözer"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic görev başına düzinelerce-yüzlerce adımı normal olarak işaretledi; bu iş yükü queue veya durable runtime gerektirir."
+    },
+    {
+      "stage": "check",
+      "question": "Ders 'observability yük taşıyıcıdır' ile ne demek istiyor?",
+      "options": [
+        "Log'lar güzeldir",
+        "OTel GenAI span'leri ve bir Langfuse/Phoenix/Opik backend olmadan 40. adımda başarısız olan multi-step bir agent'ı hata ayıklayamazsın",
+        "Disk dolar",
+        "Sağlayıcılar faturalandırma için onu gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Observability multi-step agent'lar için opsiyonel değildir; sıfırdan replay ile hata ayıklama arasındaki farktır."
+    },
+    {
+      "stage": "post",
+      "question": "Queue worker'ları neden bir dead-letter queue (DLQ) olmalıdır?",
+      "options": [
+        "DLQ olmadan başarısız işler sessizce kaybolur",
+        "DLQ AWS tarafından gerekli kılınır",
+        "DLQ işleri hızlandırır",
+        "DLQ şifrelidir"
+      ],
+      "correct": 0,
+      "explanation": "DLQ olmadan başarısız işler kaybolur; DLQ başarısız işler için park yeridir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders cron-şekilli agent'ları neyle eşleştirmeyi öneriyor?",
+      "options": [
+        "GPU autoscaler'lar",
+        "Başarısız bir gecelik çalışmanın bir sonraki tick'te resume etmesi için durable execution",
+        "Streaming SSE",
+        "WebRTC"
+      ],
+      "correct": 1,
+      "explanation": "Cron + durable execution başarısız zamanlanmış çalışmalardan temiz şekilde kurtulur."
+    }
+  ]
+}

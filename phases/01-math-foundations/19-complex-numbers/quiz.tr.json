@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sanal birim i nasıl tanımlanır?",
+      "options": [
+        "i = sqrt(2)",
+        "i^2 = -1",
+        "i = -1",
+        "i^2 = 1"
+      ],
+      "correct": 1,
+      "explanation": "Sanal birim i, i^2 = -1 özelliğiyle tanımlanır. Gerçek sayı doğrusunu 2B bir düzleme genişletir. Geometrik olarak, i ile çarpmak 90 derecelik bir döndürmedir — iki çarpma (i^2) 180 derecelik bir döndürme verir, bu da -1'dir."
+    },
+    {
+      "stage": "pre",
+      "question": "Euler formülü e^(i*theta) neye eşittir?",
+      "options": [
+        "theta + i",
+        "cos(theta) + i*sin(theta)",
+        "sin(theta) + cos(theta)",
+        "i^theta"
+      ],
+      "correct": 1,
+      "explanation": "Euler formülü e^(i*theta) = cos(theta) + i*sin(theta) der. Bu, karmaşık üstelleri trigonometriye bağlar ve e^(i*theta)'nın theta değiştikçe birim çemberi çizdiğini gösterir."
+    },
+    {
+      "stage": "post",
+      "question": "(3 + 2i)(1 + 4i)'nin sonucu nedir?",
+      "options": [
+        "3 + 8i",
+        "4 + 6i",
+        "-5 + 14i",
+        "5 + 14i"
+      ],
+      "correct": 2,
+      "explanation": "FOIL kullanarak: (3)(1) + (3)(4i) + (2i)(1) + (2i)(4i) = 3 + 12i + 2i + 8i^2 = 3 + 14i + 8(-1) = 3 + 14i - 8 = -5 + 14i."
+    },
+    {
+      "stage": "post",
+      "question": "Transformer'lar için Rotary Position Embedding (RoPE)'da karmaşık sayılar neden kullanılır?",
+      "options": [
+        "Karmaşık sayılar pozisyon kodlamasını daha az bellek kullanacak şekilde sıkıştırır",
+        "Query/key vektörlerini karmaşık döndürmelerle çarpmak, göreli pozisyonu bir döndürme açısı olarak kodlar",
+        "Karmaşık sayılar attention softmax fonksiyonu tarafından gereklidir",
+        "RoPE negatif pozisyonları işlemek için sanal sayılar kullanır"
+      ],
+      "correct": 1,
+      "explanation": "RoPE, query ve key vektörlerini e^(i*m*theta) karmaşık döndürme matrisleri ile çarpar; burada m pozisyondur. İki token arasındaki göreli pozisyon bir döndürme açısı olur ve attention karmaşık çarpma yoluyla doğal olarak göreli (mutlak değil) pozisyona duyarlı hale gelir."
+    },
+    {
+      "stage": "post",
+      "question": "N-inci birim kökleri birim çember üzerindeki N eşit aralıklı noktadır. Toplamları nedir?",
+      "options": [
+        "N",
+        "1",
+        "0",
+        "N/2"
+      ],
+      "correct": 2,
+      "explanation": "N birim kökü k = 0, ..., N-1 için e^(2*pi*i*k/N)'dir. Birim çember etrafında simetrik olarak dağıtılmıştır, bu yüzden vektör toplamları sıfıra iptal olur. Bu simetri özelliği DFT'yi tersine çevrilebilir yapan şeydir."
+    }
+  ]
+}

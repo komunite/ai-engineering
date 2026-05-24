@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir matrisin eigenvector'ı nedir?",
+      "options": ["Matrisin en büyük satırı", "Matrisle çarpıldığında yalnızca ölçeklenen (asla döndürülmeyen) vektör", "Matrisin tüm sütunlarına dik olan vektör", "Matrisin köşegen elemanlarının vektör olarak ifadesi"],
+      "correct": 1,
+      "explanation": "Bir eigenvector v, Av = lambda*v denklemini sağlar; yani A matrisi v'yi yönünü değiştirmeden yalnızca skaler lambda (eigenvalue) faktörüyle gerer."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir 2B dönüşüm matrisinin determinantı geometrik olarak neyi temsil eder?",
+      "options": ["Matrisin uyguladığı döndürme açısını", "Matrisin alanı ölçekleme faktörünü", "Matrisin sahip olduğu eigenvector sayısını", "Matrisin izini (trace)"],
+      "correct": 1,
+      "explanation": "Determinant, dönüşümün alanı ne kadar ölçeklediğini ölçer. det=1 alanı korur (döndürme), det=2 alanı iki katına çıkarır, det=0 daha düşük boyuta ezer, det=-1 alanı korur ama yönelimi tersine çevirir."
+    },
+    {
+      "stage": "post",
+      "question": "Matris dönüşümlerinin sırası neden önemlidir? (Yani R @ S neden S @ R'den farklıdır?)",
+      "options": ["Matris toplaması değişmeli değildir", "Matris çarpımı değişmeli değildir: önce döndürüp sonra ölçeklemek, önce ölçekleyip sonra döndürmekten farklı sonuç verir", "Determinantlar her sıra için farklıdır", "Bir sıra diğerinden daha büyük bir matris üretir"],
+      "correct": 1,
+      "explanation": "Matris çarpımı değişmeli değildir. (1,0)'ı 90 derece döndürüp sonra (2,0.5) ile ölçeklemek (0,0.5) verir; önce ölçekleyip sonra döndürmek ise (0,2) verir. Geometrik işlemler farklı şekilde bileşir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir tekrarlayan sinir ağında (RNN), ağırlık matrisinin büyüklüğü 1'den büyük eigenvalue'ları olduğunda ne olur?",
+      "options": ["Ağ daha hızlı öğrenir", "Çıkışlar zaman adımları boyunca üstel olarak patlar (exploding gradient problemi)", "Ağ daha kararlı hale gelir", "Eigenvalue'lar eğitim boyunca 1'e yakınsar"],
+      "correct": 1,
+      "explanation": "Bir matrisle tekrar tekrar çarpmak, eigenvalue yönlerini güçlendirir. 1'den büyük eigenvalue'lar üstel büyümeye (exploding gradient) yol açar; 1'den küçük olanlar ise üstel sönmeye (vanishing gradient) neden olur."
+    },
+    {
+      "stage": "post",
+      "question": "A = [[2, 1], [1, 2]] matrisinin eigenvalue'ları 3 ve 1'dir. A = V @ D @ V^(-1) eigendecomposition'ı neyi ortaya koyar?",
+      "options": ["A'nın iki döndürmeye eşdeğer olduğunu", "A'nın [1,1] yönü boyunca uzayı 3 kat gerdiğini ve [1,-1] yönünü değiştirmeden bıraktığını", "A'nın tüm vektörleri 2 katsayısı ile sıkıştırdığını", "A'nın rank'ının 1 olduğunu ve tüm vektörleri bir doğruya eşlediğini"],
+      "correct": 1,
+      "explanation": "[1,1] eigenvector'ına karşılık gelen 3 eigenvalue'su, A'nın köşegen boyunca 3 kat gerdiğini gösterir. [1,-1] eigenvector'ına karşılık gelen 1 eigenvalue'su, A'nın ters-köşegeni değiştirmeden bıraktığını gösterir. D, {3,1} değerlerini; V ise eigenvector'ları tutar."
+    }
+  ]
+}

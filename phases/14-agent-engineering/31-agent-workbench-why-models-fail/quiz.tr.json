@@ -1,0 +1,90 @@
+{
+  "lesson": "31-agent-workbench-why-models-fail",
+  "title": "Agent Workbench Mühendisliği: Yetkin Modeller Neden Hâlâ Başarısız Olur",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders gerçek görevlerdeki agent hatalarının kök nedeni olarak neyi tanımlar?",
+      "options": [
+        "Yetersiz model parametresi",
+        "Workbench hataları: model etrafındaki eksik yüzeyler, LLM sınırlamaları değil",
+        "Yavaş network",
+        "Eski eğitim verisi"
+      ],
+      "correct": 1,
+      "explanation": "Model Python hakkında yanılmıyor; iş hakkında yanılıyor. Modelin etrafındaki yüzeyler eksik."
+    },
+    {
+      "stage": "pre",
+      "question": "Dersin adlandırdığı yedi workbench yüzeyi nedir?",
+      "options": [
+        "Instructions, state, scope, feedback, verification, review, handoff",
+        "Train, eval, deploy, monitor, retrain, scale, retire",
+        "Plan, act, reflect, refine, debate, vote, ship",
+        "Read, write, exec, fork, exit, wait, kill"
+      ],
+      "correct": 0,
+      "explanation": "Yedi yüzey: instructions, state, scope, feedback, verification, review, handoff."
+    },
+    {
+      "stage": "check",
+      "question": "Dersin yüzeyleri haritaladığı sekiz distributed-systems primitifinden hangisi DEĞİLDİR?",
+      "options": [
+        "Function",
+        "Worker",
+        "Trigger",
+        "Backpropagation"
+      ],
+      "correct": 3,
+      "explanation": "Sekiz primitif: function, worker, trigger, runtime, HTTP/RPC, queue, session persistence, authorization policy."
+    },
+    {
+      "stage": "check",
+      "question": "Vercel'in rapor ettiği harness değişikliği başarı oranını neden nereye taşıdı?",
+      "options": [
+        "%20'den %60'a",
+        "%80'den %100'e, agent'ın tool'larının %80'ini silerek",
+        "%0'dan %100'e, modelleri değiştirerek",
+        "%50'den %70'e, RAG ekleyerek"
+      ],
+      "correct": 1,
+      "explanation": "Tool'ların %80'ini silmek Vercel'in agent'ını %80'den %100 başarıya taşıdı."
+    },
+    {
+      "stage": "check",
+      "question": "Terminal Bench 2.0 model vs harness hakkında ne gösteriyor?",
+      "options": [
+        "Yalnızca modeller sıralamayı belirler",
+        "Aynı model yalnızca harness'ı değiştirerek top 30 dışından beşinci sıraya taşındı",
+        "Harness değişiklikleri önemsizdir",
+        "Yalnızca GPU'lar önemlidir"
+      ],
+      "correct": 1,
+      "explanation": "LangChain'in Anatomy of an Agent Harness'i: aynı model, harness değişikliği, 25+ sıra sıçraması."
+    },
+    {
+      "stage": "post",
+      "question": "Ders yeni harness terminolojisi duyduğunda ne yapmayı öneriyor?",
+      "options": [
+        "Terminolojiyi olduğu gibi benimse",
+        "Benimseme öncesi primitiflere geri çevir (function, worker, trigger, runtime, HTTP/RPC, queue, persistence, policy)",
+        "Reddet",
+        "OpenAI'nin standartlaştırmasını bekle"
+      ],
+      "correct": 1,
+      "explanation": "Vendor taksonomilerine değil, primitiflere göre düşün; terminoloji değişir ama mühendislik değişmez."
+    },
+    {
+      "stage": "post",
+      "question": "Chat geçmişi workbench'e göre nereye oturur?",
+      "options": [
+        "Chat resmi kayıt sistemidir",
+        "Chat geçicidir; repo resmi kayıt sistemidir",
+        "İkisi eşdeğerdir",
+        "Hiçbiri önemli değildir"
+      ],
+      "correct": 1,
+      "explanation": "Döngü chat geçmişinde değil, state dosyasında kapanır."
+    }
+  ]
+}

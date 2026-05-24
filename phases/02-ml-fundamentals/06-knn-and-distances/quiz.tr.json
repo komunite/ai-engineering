@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "KNN 'tembel öğrenici' (lazy learner) olarak adlandırılır. Bu ne anlama gelir?",
+      "options": [
+        "Eğitim sırasında yavaş yakınsar",
+        "Eğitim zamanında hiç hesaplama yapmaz ve her şeyi tahmin zamanında hesaplar",
+        "Loss fonksiyonunun basitleştirilmiş bir versiyonunu kullanır",
+        "Yalnızca küçük veri setlerinde çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Tembel öğrenme, KNN'in eğitim verisini saklayıp 'eğitim' sırasında hiçbir iş yapmaması demektir. Tüm hesaplama (mesafe hesaplamaları, oylama) tahmin istendiğinde gerçekleşir."
+    },
+    {
+      "stage": "pre",
+      "question": "KNN için feature scaling neden kritiktir?",
+      "options": [
+        "KNN ölçeklendirme olmadan negatif sayıları işleyemez",
+        "Mesafe hesaplamaları daha geniş aralıklı özniteliklerin etkisinde kalır, dolayısıyla adil karşılaştırma için ölçeklendirme gereklidir",
+        "Feature scaling gereken komşu sayısını azaltır",
+        "KNN, normalize girdi gerektiren gradient descent kullanır"
+      ],
+      "correct": 1,
+      "explanation": "KNN mesafelere dayanır. 0-1000 aralığındaki bir öznitelik, mesafe hesaplamalarında 0-1 aralığındaki bir özniteliği bastırır. Ölçeklendirme tüm öznitelikleri karşılaştırılabilir aralıklara getirir."
+    },
+    {
+      "stage": "post",
+      "question": "100 boyutta, düzgün dağılımlı rastgele noktalarda, maksimum mesafenin minimum mesafeye oranı ne olur?",
+      "options": [
+        "Dramatik bir şekilde artar, komşuları daha belirgin hale getirir",
+        "1'e yaklaşır, tüm noktaları birbirine neredeyse eşit uzaklıkta yapar",
+        "2 boyuttaki gibi kalır",
+        "Sayısal taşma nedeniyle negatif olur"
+      ],
+      "correct": 1,
+      "explanation": "Bu boyutsallığın laneti (curse of dimensionality). Yüksek boyutlarda mesafeler yakınsar: max_dist / min_dist 1'e yaklaşır. Tüm noktalar eşit uzaklıkta olduğunda 'en yakın' anlamsızlaşır."
+    },
+    {
+      "stage": "post",
+      "question": "TF-IDF vektörleri olarak temsil edilen metin belgelerini karşılaştırmak için en uygun mesafe metriği hangisidir?",
+      "options": [
+        "L2 (Euclidean) mesafesi",
+        "L1 (Manhattan) mesafesi",
+        "Cosine mesafesi",
+        "Chebyshev mesafesi"
+      ],
+      "correct": 2,
+      "explanation": "Cosine mesafesi, büyüklüğü göz ardı ederek vektörler arasındaki açıyı ölçer. Metin için belge uzunluğu (büyüklük) gürültüdür -- anlamı yön taşır. Cosine metinde L1/L2'den tutarlı olarak daha iyi performans gösterir."
+    },
+    {
+      "stage": "post",
+      "question": "K, 1'den N'e (tüm veri seti boyutuna) artarken KNN karar sınırına ne olur?",
+      "options": [
+        "Sınır daha karmaşık ve detaylı hale gelir",
+        "K'dan bağımsız olarak sınır aynı kalır",
+        "Sınır yumuşar, sonunda her nokta için çoğunluk sınıfı tahmin eder",
+        "Sınır dairesel olur"
+      ],
+      "correct": 2,
+      "explanation": "K=1 her noktayı izleyen tırtıklı sınırlar üretir (overfitting). K arttıkça sınırlar yumuşar. K=N, her sorgunun tüm noktaları dikkate alıp her zaman çoğunluk sınıfını tahmin ettiği anlamına gelir (maksimum bias)."
+    }
+  ]
+}

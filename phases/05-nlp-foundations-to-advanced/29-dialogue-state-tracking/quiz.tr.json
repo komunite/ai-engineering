@@ -1,0 +1,102 @@
+{
+  "lesson": "29-dialogue-state-tracking",
+  "title": "Dialogue State Tracking",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Dialogue state tracking turlar arasında neyi tutar?",
+      "options": [
+        "Yalnızca serbest metin geçmişi",
+        "Her turdan sonra güncellenen, kullanıcının mevcut amacını temsil eden bir slot-value dictionary",
+        "Konuşmanın bir embedding'i",
+        "POS tag'li bir transkript"
+      ],
+      "correct": 1,
+      "explanation": "DST, backend'in üzerine eyleyebileceği yapılandırılmış bir slot-value map'i tutar."
+    },
+    {
+      "stage": "pre",
+      "question": "Joint Goal Accuracy (JGA) neyi ölçer?",
+      "options": [
+        "Her slot'un tam olarak doğru olduğu turların oranı (hep ya da hiç)",
+        "Ortalama slot accuracy'si",
+        "Tur başına gecikme",
+        "Cosine similarity"
+      ],
+      "correct": 0,
+      "explanation": "JGA tüm slot'lar arasında sıkı tur başına eşleşmedir; slot başına accuracy daha hoşgörülüdür."
+    },
+    {
+      "stage": "check",
+      "question": "Her turda tüm state'i geçmişten yeniden üretmek neden kullanıcı düzeltmelerini doğal olarak ele alır?",
+      "options": [
+        "Daha az token kullanır",
+        "GPU üzerinde çalışır",
+        "Embedding'lerden kaçınır",
+        "Tam geçmişi okumak modelin nihai state'i 'aslında...' düzeltmeleri dahil olmak üzere açık rollback mantığı olmadan yeniden türetmesine izin verir"
+      ],
+      "correct": 3,
+      "explanation": "Tam geçmiş yeniden üretimi nihai state'i tüm konuşmadan yeniden hesaplayarak düzeltmeleri emer."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi 2026 pattern 5 satır kodda garanti-geçerli bir slot dict verir?",
+      "options": [
+        "El yazısı regex",
+        "BM25 retrieval",
+        "LLM + Instructor + Pydantic şema, constrained veya doğrulanmış çıktıyla",
+        "TF-IDF sınıflandırıcı"
+      ],
+      "correct": 2,
+      "explanation": "Pydantic schema + Instructor, LLM'in state çıktısını slot ontolojisine karşı otomatik doğrular."
+    },
+    {
+      "stage": "check",
+      "question": "DST şemanı neden version'lamalısın?",
+      "options": [
+        "Sonradan yeni slot'lar eklemek eski eğitim verisini geçersiz kılar ve boylamsal değerlendirmeyi bozar",
+        "JSON tarafından zorunlu",
+        "Token sayısını azaltmak",
+        "Hız kazançları"
+      ],
+      "correct": 0,
+      "explanation": "Sürümsüz şema değişiklikleri eğitim veri hizalanmasını ve eval karşılaştırılabilirliğini sessizce bozar."
+    },
+    {
+      "stage": "post",
+      "question": "Compliance-duyarlı alanlar için DST neden LLM extraction'ın yanında bir kural tabanlı kontrol içermelidir?",
+      "options": [
+        "Kurallar embedding'lerden kaçınır",
+        "Yalnızca LLM DST destructive parametreleri (miktar, hesap, tarih) yanlış çıkarabilir; bir kural katmanı deterministik kısıtları zorlar",
+        "LLM'ler daha yavaştır",
+        "Kurallar çok dillidir"
+      ],
+      "correct": 1,
+      "explanation": "Compliance alanları deterministik zorlamayı gerektirir; kurallar LLM'in tanıttığı slot hatalarını yakalar."
+    },
+    {
+      "stage": "post",
+      "question": "Her turda LLM ile state'i yeniden üretmenin maliyet endişesi nedir?",
+      "options": [
+        "Tam geçmişi her turda yeniden okumak O(n^2) toplam token kullanımı verir; eski turları sınırla veya özetle",
+        "Daha fazla embedding",
+        "Cosine maliyetleri",
+        "Embedding drift'i"
+      ],
+      "correct": 0,
+      "explanation": "Tam geçmiş yeniden üretimi turlar açısından kuadratiktir; geçmişi sınırla veya rolling özetler kullan."
+    },
+    {
+      "stage": "post",
+      "question": "Destructive backend eylemlerinden önce açık confirmation akışları neden gereklidir?",
+      "options": [
+        "Gecikme",
+        "Confirmation JGA'yı artırır",
+        "Tokenizer'lar tarafından zorunlu",
+        "İyi DST'nin bile sıfır olmayan slot-error oranları vardır; bir deterministik confirmation yanlış hesap veya yanlış miktar eylemlerini önler"
+      ],
+      "correct": 3,
+      "explanation": "Destructive eylemler kullanıcı confirmation'ı gerektirir çünkü DST asla hatasız değildir."
+    }
+  ]
+}

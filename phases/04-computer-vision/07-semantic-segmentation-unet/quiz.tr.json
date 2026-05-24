@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "U-Net neden encoder ile decoder arasında skip connection'lara ihtiyaç duyar?",
+      "options": [
+        "Eğitimi hızlandırmak için",
+        "Encoder bağlam kazanmak için spatial detayı sıkıştırır; decoder encoder'ın yüksek çözünürlüklü feature map'lerine erişimi olmadan keskin sınırları yeniden inşa edemez ve skip'ler tam olarak bunu sağlar",
+        "Çünkü transposed convolution'lar ekstra girdi gerektirir",
+        "PyTorch shape konvansiyonlarıyla eşleşmek için"
+      ],
+      "correct": 1,
+      "explanation": "Skip'ler olmadan, bir U-Net'in decoder'ı çok düşük çözünürlüklü bir bottleneck'ten H x W tahminler üretmektedir, bu da keskin kenarları çözemez. Skip connection'lar, encoder'ın yüksek çözünürlüklü, düşük semantik feature'larını decoder'ın düşük çözünürlüklü, yüksek semantik feature'larına ekler, böylece her çıktı aşamasında hem bağlam hem de detay mevcut olur."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir segmentasyon görevinde %99 arka plan pikseli ve %1 tümör pikseli var. Düz cross-entropy ile eğitiyorsun ve %99 piksel accuracy alıyorsun. Ne oldu?",
+      "options": [
+        "Model yakınsadı",
+        "Model her piksel için arka plan tahmin etmeyi öğrendi; piksel accuracy majority class tarafından domine ediliyor ve aslında önemsediğin sınıfı yok sayıyor",
+        "Loss fonksiyonu yanlış implement edilmiş",
+        "Optimizer başarısız oldu"
+      ],
+      "correct": 1,
+      "explanation": "Dengesiz bir veri setinde piksel accuracy işe yaramaz bir metriktir. Ağ kolay %99'u her zaman arka plan tahmin ederek toplar ve boş tümör mask'leri üretir. Çözüm: cross-entropy'yi Dice loss (overlap tabanlı, scale-free) ile birleştir ve foreground sınıf başına IoU/Dice raporla."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi görev tipi, aynı sınıftaki bireysel arabaları birbirinden ayırır?",
+      "options": [
+        "Semantik segmentasyon",
+        "Instance segmentasyon",
+        "İkisi de aynı çıktıyı üretir",
+        "Hiçbiri -- bu yerine bir tespit modeli gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Semantik segmentasyon her pikseli bir sınıfla etiketler ama aynı sınıfın değen instance'larını tek bir lekede birleştirir. Instance segmentasyon instance ID'lerini korur, böylece her araba, her kişi, her elma ayrı bir tahmin edilmiş mask olur. Panoptic segmentasyon ikisini birleştirir: stuff için semantik label, thing'ler için instance ID."
+    },
+    {
+      "stage": "post",
+      "question": "U-Net'in bilinear upsample + 3x3 konv'unu kernel_size=2, stride=2 olan ConvTranspose2d ile değiştiriyorsun ve çıktıda checkerboard artifact görüyorsun. Neden?",
+      "options": [
+        "Transposed konv PyTorch'ta bozuk",
+        "kernel_size stride'a tam olarak bölünebilir olmadığında, çıktı pikselleri girdi piksellerinden eşit olmayan katkılar alır ve çıktıda checkerboard gibi görünen periyodik bir desen üretir",
+        "Learning rate çok düşüktü",
+        "Transposed konv'dan önce batch norm eklenmelidir"
+      ],
+      "correct": 1,
+      "explanation": "Checkerboard artifact'leri, transposed convolution'ın receptive field'inin çıktı pozisyonlarında eşit olmayan örtüşmesinden gelir. kernel_size = stride * n kullanmak (örn. kernel 4, stride 2) veya transposed konv'u bilinear upsample + konv ile değiştirmek artifact'leri ortadan kaldırır. Bu nedenle modern varsayılan bilinear + konv'tur."
+    },
+    {
+      "stage": "post",
+      "question": "10 sınıflı bir segmentasyon görevinde mIoU = 0.78 raporluyorsun. Neden sınıf başına IoU'yu da yayınlamalısın?",
+      "options": [
+        "Sınıf başına IoU PyTorch tarafından gereklidir",
+        "Mean IoU bireysel sınıf başarısızlıklarını gizler; 0.78'lik bir mIoU, sekiz sınıfın 0.9'da ve iki sınıfın 0.3'te olmasıyla tutarlıdır, bu da tüm sınıfların 0.78 civarında olmasından çok farklı bir deployment hikayesidir",
+        "Sınıf başına IoU her zaman mIoU'dan yüksektir",
+        "Yalnızca medikal görüntüleme için gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "Bir aggregate ortalama, sınıf başına skorların dağılımını sıkıştırır; bu tam olarak okuyucunun modelin yayınlanmaya hazır olup olmadığına karar vermek için ihtiyacı olandır. Genel olarak güçlü bir modeldeki iki zayıf sınıf sistemi amaçlanan görev için kullanılamaz hale getirebilir; düz bir profil ise modelin uniform bir veri yükseltmesine ihtiyacı olduğu anlamına gelir. Her zaman ortalamanın yanında sınıf başına metrikleri yayınla."
+    }
+  ]
+}

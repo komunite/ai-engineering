@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Yapay zeka projeleri neden ayrı bir sanal ortama ihtiyaç duyar?",
+      "options": [
+        "Sanal ortamlar kodun daha hızlı çalışmasını sağlar",
+        "Bağımlılıkları izole ederler ki farklı projeler birbiriyle çakışmasın",
+        "Python paketleri import edebilmek için sanal ortam gerektirir",
+        "Sanal ortamlar GPU erişimi sağlar"
+      ],
+      "correct": 1,
+      "explanation": "Sanal ortamlar paket sürümlerini proje bazında izole eder. Onlar olmadan, bir projede PyTorch'u güncellemek, eski sürüme bağımlı başka bir projeyi bozabilir."
+    },
+    {
+      "stage": "pre",
+      "question": "CUDA, yapay zeka iş yükleri için ne sağlar?",
+      "options": [
+        "ML kütüphaneleri için bir Python paket yöneticisi",
+        "Modelleri deploy etmek için bir web framework'ü",
+        "NVIDIA GPU'larda matris işlemleri için paralel hesaplama",
+        "Model servisi için bir container runtime"
+      ],
+      "correct": 2,
+      "explanation": "CUDA, NVIDIA'nın paralel hesaplama platformudur ve matris işlemlerini binlerce GPU çekirdeğinde aynı anda çalıştırmanı sağlar. PyTorch ve TensorFlow arka planda bunu kullanır."
+    },
+    {
+      "stage": "post",
+      "question": "Dört katmanlı ortam yığınında hangi katman önce kurulmalıdır?",
+      "options": [
+        "Yapay zeka/ML Kütüphaneleri (PyTorch, JAX)",
+        "Paket Yöneticileri (pip, npm, cargo)",
+        "Dil Runtime'ları (Python, Node.js)",
+        "Sistem Temeli (OS, shell, GPU driver'ları)"
+      ],
+      "correct": 3,
+      "explanation": "Aşağıdan yukarıya kurarsın: önce sistem temeli (OS, driver'lar), sonra paket yöneticileri, sonra dil runtime'ları, en son yapay zeka kütüphaneleri. Her katman altındakine bağımlıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir Python yapay zeka projesinde uv'nin amacı nedir?",
+      "options": [
+        "Bir GPU izleme aracı",
+        "Ultra hızlı bir Python paket kurucusu ve çözücüsü",
+        "Bir sinir ağı görselleştirme kütüphanesi",
+        "Özel kernel'lar için bir CUDA derleyicisi"
+      ],
+      "correct": 1,
+      "explanation": "uv, Rust ile yazılmış hızlı bir Python paket kurucusudur. pip'in yerini çok daha hızlı bağımlılık çözümleme ve kurulumla alır, genelde 10-100 kat daha hızlıdır."
+    },
+    {
+      "stage": "post",
+      "question": "PyTorch'un GPU'na erişebildiğini nasıl doğrularsın?",
+      "options": [
+        "import torch; print(torch.__version__)",
+        "nvidia-smi --query",
+        "import torch; print(torch.cuda.is_available())",
+        "python -c 'import gpu'"
+      ],
+      "correct": 2,
+      "explanation": "torch.cuda.is_available() PyTorch CUDA GPU'larına erişebiliyorsa True döner. Apple Silicon'da, Metal Performance Shaders için torch.backends.mps.is_available() kullan."
+    }
+  ]
+}

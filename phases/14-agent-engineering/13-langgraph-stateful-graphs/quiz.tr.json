@@ -1,0 +1,90 @@
+{
+  "lesson": "13-langgraph-stateful-graphs",
+  "title": "LangGraph: Stateful Graph'lar ve Durable Execution",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "LangGraph agent'ın çekirdek birimi olarak neyi ele alır?",
+      "options": [
+        "Serbest formatlı bir LLM çağrısı",
+        "Tipli state, fonksiyon node'ları ve koşullu kenarları olan bir state machine",
+        "Tek bir tool registry",
+        "Bir vector index"
+      ],
+      "correct": 1,
+      "explanation": "LangGraph agent'ı bir state graph olarak modeller: node'lar saf fonksiyonlar, kenarlar geçişler, state tipli ve immutable'dır."
+    },
+    {
+      "stage": "pre",
+      "question": "Durable execution hangi problemi çözer?",
+      "options": [
+        "Çıkarım maliyetini azaltma",
+        "40 adımlık bir çalışmanın 38. adımda başarısız olduğunda baştan başlamak yerine tam state ile 38. adımdan resume edilmesi",
+        "Embedding'leri daha hızlı üretme",
+        "Sağlayıcılar arasında çeviri yapma"
+      ],
+      "correct": 1,
+      "explanation": "Her node'dan sonraki checkpoint'ler runtime'ın son başarılı adımdan resume etmesini sağlar."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi LangGraph'ın desteklediği üç topolojiden biri DEĞİLDİR?",
+      "options": [
+        "Supervisor",
+        "Swarm (peer-to-peer)",
+        "Hierarchical (iç içe subgraph'lar)",
+        "Gradient ring"
+      ],
+      "correct": 3,
+      "explanation": "Topolojiler supervisor, swarm ve hierarchical'dır. Gradient ring bir LangGraph topolojisi değildir."
+    },
+    {
+      "stage": "check",
+      "question": "Resume'un temiz çalışması için node'lar neden deterministik olmalıdır?",
+      "options": [
+        "Sağlayıcılar determinizm gerektiriyor",
+        "Resume aynı girdilerin aynı state güncellemesini ürettiğini varsayar; random seed'ler, wall-clock ve harici API'ler yakalanmalıdır",
+        "Determinizm token maliyetini azaltır",
+        "GIL tarafından gerekli kılınır"
+      ],
+      "correct": 1,
+      "explanation": "Bir node yakalanmamış non-determinizme bağlıysa, resume adım sonrası state'i yeniden kuramaz."
+    },
+    {
+      "stage": "check",
+      "question": "Koşullu kenar nedir?",
+      "options": [
+        "Eğitim kaybıyla ağırlıklandırılmış bir kenar",
+        "State'in bir fonksiyonu tarafından seçilen, graph'ı dallandırmak için kullanılan bir kenar",
+        "Yalnızca GPU'da çalışan bir kenar",
+        "TTL'i olan bir kenar"
+      ],
+      "correct": 1,
+      "explanation": "Koşullu kenarlar state'e göre dallanır; aşırı kullanım graph'ı anlamayı zorlaştırır."
+    },
+    {
+      "stage": "post",
+      "question": "Checkpoint'ler çok küçük olduğunda ne yanlış gider?",
+      "options": [
+        "Tool state ve bellek yazımları kurtarılamaz; tam state serileştirilmelidir",
+        "Disk dolar",
+        "Graph END'e ulaşamaz",
+        "Model daha kısa cevaplar üretir"
+      ],
+      "correct": 0,
+      "explanation": "Yalnızca konuşma turlarını checkpoint'lemek tool state'ini ve bellek yazımlarını resume'un erişiminin dışında bırakır."
+    },
+    {
+      "stage": "post",
+      "question": "Human-in-the-loop LangGraph'ın tasarımına nereye oturur?",
+      "options": [
+        "Runtime'ın fork'unu gerektirir",
+        "Kritik bir node'dan önce duraklat, serileştirilmiş state'i bir insana sun, modifikasyonları kabul et, resume et; checkpointer bunu ucuz yapar",
+        "Yalnızca START ve END'de",
+        "Ayrı bir sağlayıcı API'si aracılığıyla"
+      ],
+      "correct": 1,
+      "explanation": "State zaten node'lar arasında serileştirildiği için insan incelemesi ve düzenleme doğal bir duraklat-ve-resume pattern'idir."
+    }
+  ]
+}

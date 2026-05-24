@@ -1,0 +1,102 @@
+{
+  "lesson": "11-machine-translation",
+  "title": "Makine Çevirisi",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "BLEU neyi ölçer?",
+      "options": [
+        "Dil tanıma accuracy'sini",
+        "Hipotez ile referans arasında N-gram precision'ı (tipik olarak 1-4) ve bir brevity penalty",
+        "Karakter seviyesi F-score",
+        "Embedding cosine similarity"
+      ],
+      "correct": 1,
+      "explanation": "BLEU referanslara karşı 1-4-gram precision'ın geometrik ortalamasıdır artı bir brevity penalty."
+    },
+    {
+      "stage": "pre",
+      "question": "Kendi BLEU'nu yazmak yerine neden sacrebleu kullanmalısın?",
+      "options": [
+        "Daha doğrudur",
+        "GPU üzerinde çalışır",
+        "Tokenization'ı normalize ederek skorların makaleler ve çalıştırmalar arasında karşılaştırılabilir olmasını sağlar",
+        "Streaming destekler"
+      ],
+      "correct": 2,
+      "explanation": "sacrebleu tokenization'ı dondurur ve karşılaştırılamaz BLEU rakamlarının yaygın kaynağını ortadan kaldırır."
+    },
+    {
+      "stage": "check",
+      "question": "Decoding sırasında hedef dili kontrol eden NLLB'ye özgü ayar hangisidir?",
+      "options": [
+        "length_penalty",
+        "forced_bos_token_id, hedef dil kodunun token id'sine ayarlanmış",
+        "num_beams",
+        "src_lang"
+      ],
+      "correct": 1,
+      "explanation": "NLLB ilk decode edilen token'ı forced_bos_token_id ile bir hedef dil koduna zorlar."
+    },
+    {
+      "stage": "check",
+      "question": "Etiketli verinin olduğu production MT kalitesi için 2026 varsayılan metrik ailesi hangisidir?",
+      "options": [
+        "Yalnız başına BLEU",
+        "Token edit distance",
+        "İnsan değerlendirmesi üzerinde eğitilmiş COMET (ve BERTScore/BLEURT) gibi öğrenilmiş metrikler",
+        "Gecikme"
+      ],
+      "correct": 2,
+      "explanation": "COMET gibi öğrenilmiş metrikler tek başına BLEU/chrF'den çok daha güçlü insan değerlendirmesi korelasyonu sağlar."
+    },
+    {
+      "stage": "check",
+      "question": "chrF, BLEU'dan ne zaman daha bilgilendirici olma eğilimindedir?",
+      "options": [
+        "Morfolojik olarak zengin diller için, karakter seviyesi eşleşmeler BLEU'nun kaçırdığı çekim varyantlarını yakalar",
+        "Beam search kullanırken",
+        "Çok kısa cümlelerde",
+        "Bir referans var olduğunda her zaman"
+      ],
+      "correct": 0,
+      "explanation": "Karakter F-score, kelime seviyesi BLEU'nun eksik saydığı kısmi morfolojik eşleşmeleri yakalar."
+    },
+    {
+      "stage": "post",
+      "question": "Çok dilli MT'de off-target generation nedir?",
+      "options": [
+        "Named entity'leri düşüren çıktı",
+        "Noktalamayı kaçıran çıktı",
+        "Modelin yanlış hedef dile decode etmesi (örn. Fransızca istenirken NLLB'nin İspanyolca üretmesi)",
+        "Çok kısa olan çıktı"
+      ],
+      "correct": 2,
+      "explanation": "Off-target generation nadir dil çiftlerinde yaygındır; çeviri sonrası bir language-ID kontrolü bunu yakalar."
+    },
+    {
+      "stage": "post",
+      "question": "Birkaç bin yüksek kaliteli alan çifti üzerinde fine-tuning neden sık sık çok daha büyük gürültülü web verisini yener?",
+      "options": [
+        "Daha büyük veri GPU belleğini taşırır",
+        "Küçük veri setleri daha hızlı eğitilir",
+        "Web verisini kullanmak yasadışıdır",
+        "Kalite ve alan eşleşmesi hacme baskın çıkar; gürültülü paralel veri drift ve hallucination getirir"
+      ],
+      "correct": 3,
+      "explanation": "Temiz alan-hizalı çiftler en büyük production kaldıracıdır; gürültülü veri uyarlanmayı bozar."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da bir LLM (örn. GPT-4) özelleşmiş bir MT modelini ne zaman geçer?",
+      "options": [
+        "En yüksek throughput'lu batch çeviri",
+        "Gecikme kritik tarayıcı çevirisi",
+        "Deyimsel içerik, uzun bağlam, prompting ile stilistik adaptasyon veya ton kontrolü gerektiren içerik",
+        "Milyonlarca paralel cümleli küçük dil çiftleri"
+      ],
+      "correct": 2,
+      "explanation": "LLM'ler deyimsel, uzun bağlamlı veya stil kontrollü çeviride kazanır; özelleşmiş MT throughput ve gecikmede kazanır."
+    }
+  ]
+}

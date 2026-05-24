@@ -1,0 +1,90 @@
+{
+  "lesson": "12-anthropic-workflow-patterns",
+  "title": "Anthropic'in Workflow Pattern'leri: Karmaşıktan Önce Basit",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Anthropic bir workflow'u bir agent'tan nasıl ayırır?",
+      "options": [
+        "Workflow'lar embedding kullanır; agent'lar tool kullanır",
+        "Workflow'lar mühendisin sahip olduğu önceden tanımlanmış graph'lardır; agent'lar modelin sahip olduğu dinamik tool yönlendirmesidir",
+        "Workflow'lar CPU'da çalışır; agent'lar GPU'ya ihtiyaç duyar",
+        "Workflow'lar stateless'tır; agent'lar stateful'dur"
+      ],
+      "correct": 1,
+      "explanation": "Workflow = mühendisin sahip olduğu önceden tanımlı kod yolu; agent = modelin graph'ı sahiplendiği yapı."
+    },
+    {
+      "stage": "pre",
+      "question": "Beş pattern'in altında yatan augmented LLM'in üç yeteneği nedir?",
+      "options": [
+        "Search (retrieval), tool'lar (aksiyon), bellek (kalıcılık)",
+        "Embedding, fine-tuning, RAG",
+        "Vector, KV, graph",
+        "Plan, execute, reflect"
+      ],
+      "correct": 0,
+      "explanation": "Atomik birim, retrieval, tool'lar ve belleğin entegre olduğu bir LLM'dir."
+    },
+    {
+      "stage": "check",
+      "question": "Hangisi beş Anthropic workflow pattern'inden biri DEĞİLDİR?",
+      "options": [
+        "Prompt chaining",
+        "Routing",
+        "Evaluator-optimizer",
+        "Gradient distillation"
+      ],
+      "correct": 3,
+      "explanation": "Beş pattern: prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer. Gradient distillation bir eğitim kavramıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Parallelization hangi iki şekilde gelir?",
+      "options": [
+        "Sync ve async",
+        "Sectioning (farklı parçalar) ve voting (aynı prompt N kez, aggregate et)",
+        "Hot ve cold",
+        "Stateful ve stateless"
+      ],
+      "correct": 1,
+      "explanation": "Parallelization sectioning veya voting'dir; ikisi de N çağrıyı fan out edip aggregate eder."
+    },
+    {
+      "stage": "check",
+      "question": "Self-Refine hangi workflow pattern'inin genelleştirilmiş halidir?",
+      "options": [
+        "Prompt chaining",
+        "Routing",
+        "Orchestrator-workers",
+        "Evaluator-optimizer"
+      ],
+      "correct": 3,
+      "explanation": "Evaluator-optimizer, Self-Refine / CRITIC yinelemeli pattern'inin Anthropic adıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Derse göre workflow'lar agent'ları ne zaman geçer?",
+      "options": [
+        "Her zaman",
+        "Graph'ın sayılabildiği ve denetlenebildiği öngörülebilir, maliyet-sınırlı veya compliance-sınırlı görevlerde",
+        "Yalnızca chat için",
+        "Yalnızca GPU'da"
+      ],
+      "correct": 1,
+      "explanation": "Workflow'lar daha ucuz, hata ayıklaması daha kolay ve denetlenebilirdir; adımlar bilinebilirken bunları seç."
+    },
+    {
+      "stage": "post",
+      "question": "Dersin önerdiği varsayılan başlangıç noktası nedir?",
+      "options": [
+        "Multi-agent framework",
+        "Doğrudan API çağrıları; durable state, actor concurrency veya rol şablonlama maliyetini hak ettiğinde framework ekle",
+        "Modeli fine-tune et",
+        "Özel bir MCTS inşa et"
+      ],
+      "correct": 1,
+      "explanation": "Schluntz ve Zhang: basitten başla; gerekçelendiğinde framework karmaşıklığı ekle."
+    }
+  ]
+}

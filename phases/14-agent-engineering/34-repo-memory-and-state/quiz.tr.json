@@ -1,0 +1,90 @@
+{
+  "lesson": "34-repo-memory-and-state",
+  "title": "Repo Belleği ve Durable State",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir bilgi parçasının repo belleğine ait olup olmadığına karar veren durability testi nedir?",
+      "options": [
+        "JSON olup olmadığı",
+        "Üç ay sonra bir CI rerun'unda yararlı olup olmayacağı; evetse repo, hayırsa telemetri",
+        "Kullanıcının önemli olarak işaretleyip işaretlemediği",
+        "4 kB'a sığıp sığmadığı"
+      ],
+      "correct": 1,
+      "explanation": "Repo belleği durable, üç-ay-sonra-yararlı state içindir; geçici veri telemetridir."
+    },
+    {
+      "stage": "pre",
+      "question": "Hangi şema alanı agent'ın contract versiyonunu taşır?",
+      "options": [
+        "schema_version",
+        "build_hash",
+        "model_id",
+        "session_uuid"
+      ],
+      "correct": 0,
+      "explanation": "schema_version integer contract'tır; manager bilinmeyen bir versiyondan yüklemeyi reddeder."
+    },
+    {
+      "stage": "check",
+      "question": "Atomic write nasıl çalışır?",
+      "options": [
+        "Aynı dizinde tempfile.mkstemp, yaz, fsync, hedef üzerine os.replace (atomic rename)",
+        "Hedefe truncate-then-write",
+        "CRC ile append-only",
+        "Şifrele ve üzerine yaz"
+      ],
+      "correct": 0,
+      "explanation": "POSIX ve Windows'ta atomic rename kısmi-yazım bozulmasını önleyen şeydir."
+    },
+    {
+      "stage": "check",
+      "question": "Non-idempotent tool çağrıları için neden idempotency anahtarları gereklidir?",
+      "options": [
+        "Faturalandırma için",
+        "Agent bir tool çağrısından sonra ama sonucu checkpoint'lemeden çökerse güvenli yeniden dene; çağrı ID'sini yürütmeden önce logla ve retry'da çağrıyı atla",
+        "Log'ları deduplicate etmek için",
+        "Çıktıyı kısaltmak için"
+      ],
+      "correct": 1,
+      "explanation": "pending_calls.jsonl çağrı ID'lerini taşır; kurtarma kontrol eder ve zaten yürütülen işi atlar."
+    },
+    {
+      "stage": "check",
+      "question": "Büyük artifact'ler (CSV'ler, uzun transcript'ler, üretilen dosyalar) state'e göre nerede yaşamalı?",
+      "options": [
+        "agent_state.json'da inline",
+        "Yalnızca yolu state'te tutulan ayrı dosyalar (veya nesne depolama) olarak, böylece checkpoint'ler küçük ve hızlı kalır",
+        "Environment değişkenlerinde",
+        "Tek bir devasa log'a birleştirilmiş"
+      ],
+      "correct": 1,
+      "explanation": "Ayrı artifact'ler state'ten bağımsız büyür; checkpoint'ler okumak ve yazmak için ucuz kalır."
+    },
+    {
+      "stage": "post",
+      "question": "Audit için event sourcing + resume için snapshot'lar sana ne kazandırır?",
+      "options": [
+        "Daha düşük disk kullanımı",
+        "Snapshot'u okuyup ondan sonraki event'leri replay ederek agent kararlarını birebir replay et; Postgres WAL ile aynı şekil",
+        "Daha hızlı çıkarım",
+        "Native voice desteği"
+      ],
+      "correct": 1,
+      "explanation": "Her mutation'da state.events.jsonl'a append et; periyodik olarak state.json'a snapshot al; snapshot timestamp'inden sonraki event'leri replay et."
+    },
+    {
+      "stage": "post",
+      "question": "Ders schema_version uyuşmazlığında ne olduğunu söylüyor?",
+      "options": [
+        "Manager sessizce yükseltir",
+        "Manager tools/migrate_state.py'daki bir migration script'i çalışana kadar yüklemeyi reddeder",
+        "State silinir",
+        "Agent yeniden dener"
+      ],
+      "correct": 1,
+      "explanation": "Şema migrasyonları veya yüklemeyi reddet; asla sessiz yükseltme yapma."
+    }
+  ]
+}

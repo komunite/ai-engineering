@@ -1,0 +1,90 @@
+{
+  "lesson": "04-multimodal-document-qa",
+  "title": "Capstone 04 — Multimodal Document QA (Vision-First PDF, Tables, Charts)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "2026 frontier'ı, finansal PDF'ler ve bilimsel makalelerde OCR-then-text yerine neden vision-first late interaction'ı tercih ediyor?",
+      "options": [
+        "Vision modelleri sayfa başına daha ucuzdur",
+        "OCR pipeline'ları döndürülmüş tabloları, yoğun denklemleri ve chart görüntülerini bozar, sinyalin yarısını kaybeder",
+        "OCR render'lamadan daha yavaştır",
+        "OCR GPU'larda çalışamaz"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "ColPali tarzı retrieval'da late interaction ne demek?",
+      "options": [
+        "Her sorgu token'ı her patch token'ına karşı skorlanır ve token başına maksimumlar MaxSim ile toplanır",
+        "Embedding'ler eval zamanına kadar ertelenir",
+        "Embedding'ler kullanıcı bir sonuca tıkladıktan sonra hesaplanır",
+        "Reranker yalnızca son aday üzerinde çalışır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bir ColQwen embedding sayfa başına kabaca kaç patch vektörü üretir ve bu hangi depolama sorununu yaratır?",
+      "options": [
+        "Sayfa başına yaklaşık 2048 patch vektörü, tek-vektör index'lere kıyasla ham depolamayı şişirir",
+        "Tam olarak 128 vektör, herhangi bir vector DB'ye temiz şekilde sığar",
+        "Sayfa başına 1 vektör, depolama sorunu yok",
+        "16 vektör, ihmal edilebilir depolama yükü"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bu pipeline'da DocPruner ne yapar?",
+      "options": [
+        "Ingestion'dan önce yinelenen PDF sayfalarını kaldırır",
+        "Yüksek sinyalli patch'leri yaklaşık %50 oranında tutarak çok-vektörlü index'i ihmal edilebilir doğruluk kaybıyla sıkıştırır",
+        "Daha kısa vektörler için query embedding'ini yeniden yazar",
+        "Kanıt bölgeleri etrafındaki bounding box'ları kırpar"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bazı sayfalarda OCR metin kanalı neden hâlâ eklenir?",
+      "options": [
+        "PDF render kalitesini iyileştirir",
+        "VLM'ler 180 DPI'da görüntü okuyamaz",
+        "OCR birincil retrieval modalitesidir",
+        "Denklem yoğun ve tablo ağırlıklı sayfalar, görüntünün yanında bir metin fallback'inden yararlanır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bu capstone, vision-first retrieval değerlendirmesi için hangi benchmark'ı hedefler?",
+      "options": [
+        "RewardBench-2",
+        "SWE-bench Pro",
+        "ViDoRe v3",
+        "MMLU-Pro"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Rubric'in evidence-region grounding ile kastettiği nedir?",
+      "options": [
+        "DocPruner ile elde edilen sıkıştırma oranı",
+        "p99 kuyruğundaki re-ranker latency'si",
+        "Sorgu başına retrieve edilen toplam sayfa sayısı",
+        "Cevap span'ini gerçekten içeren atıfta bulunulan bounding box'ların oranı"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "lesson": "14-information-retrieval-search",
+  "title": "Bilgi Erişimi ve Arama",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "BM25 bir dokümanı neye göre skorlar?",
+      "options": [
+        "Sorguya edit distance",
+        "Term frequency, IDF ve sorgu terimlerinin doküman uzunluğu normalize edilmiş varlığı",
+        "Sorguya embedding cosine",
+        "Corpus üzerinde PageRank"
+      ],
+      "correct": 1,
+      "explanation": "BM25, lexical eşleşmeleri skorlamak için TF saturasyonu, IDF ve uzunluk normalizasyonunu ağırlıklandırır."
+    },
+    {
+      "stage": "pre",
+      "question": "BM25'in yakaladığı, yalnızca dense retrieval'ın temel zayıflığı nedir?",
+      "options": [
+        "Çok dilli sorgular",
+        "Gecikme",
+        "Uzun dokümanlar",
+        "Semantik embedding'lerin kaçırabileceği tam anahtar kelime ve identifier eşleşmeleri (ürün kodları, hata string'leri, named entity'ler)"
+      ],
+      "correct": 3,
+      "explanation": "Dense embedding'ler identifier ve tam string'leri bulanıklaştırabilir; BM25 onları tam yakalar."
+    },
+    {
+      "stage": "check",
+      "question": "Reciprocal Rank Fusion (RRF) her retriever'dan gelen ham skorları neden görmezden gelir?",
+      "options": [
+        "RRF olasılık gerektirir",
+        "Ham skorları kullanmak yasadışıdır",
+        "Sıralamayı hızlandırır",
+        "BM25 ve dense skorları farklı ölçeklerde yaşar; yalnızca rank konumlarını kullanmak fusion'u kalibrasyona karşı dayanıklı yapar"
+      ],
+      "correct": 3,
+      "explanation": "RRF 1/(k + rank) kullanır, dolayısıyla iki skorlama sisteminin ölçekleri eşleşmek zorunda değildir."
+    },
+    {
+      "stage": "check",
+      "question": "Yalnızca top-30 birleştirilmiş sonuçlar üzerinde cross-encoder reranker'ı neden çalıştırmalısın?",
+      "options": [
+        "Reranker'lar recall'ı düşürür",
+        "FAISS top-30 gerektirir",
+        "Cross-encoder'lar her adımda zorunludur",
+        "Cross-encoder'lar çift başına yavaştır; onları küçük bir aday havuzunda amortize etmek kabul edilebilir gecikmeyle yüksek accuracy verir"
+      ],
+      "correct": 3,
+      "explanation": "Cross-encoder'lar query+doc'u birlikte skorlar; sadece küçük birleşik aday havuzunda çalıştırmak gecikmeyi yönetilebilir tutar."
+    },
+    {
+      "stage": "check",
+      "question": "RAG retriever'ları için optimize edilmesi en önemli metrik hangisidir?",
+      "options": [
+        "BLEU",
+        "Throughput",
+        "Recall@k, çünkü reader doğru pasaj top-k'de eksikse cevaplayamaz",
+        "Gecikme"
+      ],
+      "correct": 2,
+      "explanation": "Doğru pasaj geri çağrılan top-k içinde değilse reader'ın başarısız olması garantilidir."
+    },
+    {
+      "stage": "post",
+      "question": "2026 sektör deneyimine göre çoğu production RAG hatası nereden kaynaklanıyor?",
+      "options": [
+        "Reranker tuning",
+        "Ingestion ve chunking, model değil; kötü bağlam iyi reader'ları yener",
+        "Prompt uzunluğu",
+        "LLM seçimi"
+      ],
+      "correct": 1,
+      "explanation": "RAG hatalarının yaklaşık %80'i generative modelden değil, chunking ve ingestion kalitesinden gelir."
+    },
+    {
+      "stage": "post",
+      "question": "'Parent-doc' retrieval pattern'ı nedir?",
+      "options": [
+        "En uzun dokümanı seçmek",
+        "Precision için küçük child chunk'ları geri çağırmak, aynı parent'tan birden fazla child geldiğinde parent block'a genişletmek, bağlamı korumak",
+        "Yalnızca parent doküman embed etmek",
+        "Yalnızca parent doc embedding'lerini kullanmak"
+      ],
+      "correct": 1,
+      "explanation": "Child seviyesi retrieval kesin sonuç verir; parent'a genişletmek reader'ın ihtiyaç duyduğu çevre bağlamı korur."
+    },
+    {
+      "stage": "post",
+      "question": "Üç yönlü retrieval (BM25 + dense + SPLADE) ne zaman gönderilmelidir?",
+      "options": [
+        "Yalnızca 1000'den az dokümanda",
+        "Yalnızca yalnızca-İngilizce corpus'larda",
+        "Altyapı learned-sparse indeksleri destekliyorsa ve sorgular özel isimleri semantik niyetle karıştırıyorsa",
+        "Her zaman"
+      ],
+      "correct": 2,
+      "explanation": "Üç yönlü retrieval, SPLADE altyapısı verilen karışık lexical-semantik sorgularda 2026 benchmark'larında iki yönlüyü geçer."
+    }
+  ]
+}

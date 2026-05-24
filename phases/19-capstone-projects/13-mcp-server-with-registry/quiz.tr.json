@@ -1,0 +1,90 @@
+{
+  "lesson": "13-mcp-server-with-registry",
+  "title": "Capstone 13 — MCP Server with Registry and Governance",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "2026 MCP revizyonu üretim sunucuları için neden StreamableHTTP'i tercih ediyor?",
+      "options": [
+        "Kimlik doğrulama ihtiyacını ortadan kaldırır",
+        "Tool çağrılarını destekleyen tek transport'tur",
+        "Payload'ları otomatik olarak şifreler",
+        "Varsayılan olarak stateless'tır, böylece bir load balancer arkasındaki tek endpoint yatay ölçeklenebilir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Bu capstone'da tool çağrılarını hangi authorization modeli gate eder?",
+      "options": [
+        "Tool çağrı zamanında kontrol edilen tool başına scope taşıyan OAuth 2.1 token'ları",
+        "Paylaşılan bir admin şifresi",
+        "IP adresi başına API anahtarları",
+        "Scope olmadan mutual TLS"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": ".well-known/mcp-capabilities dokümanının rolü nedir?",
+      "options": [
+        "Sunucu için audit log'ları saklar",
+        "Outbound IP aralıklarını listeler",
+        "OPA policy bundle'ını tutar",
+        "Tool manifest'ini, transport URL'sini ve auth gereksinimlerini açığa çıkararak registry'nin sunucuyu doğrulayıp index'lemesini sağlar"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bu tasarımda yıkıcı tool'lar neden ayrı bir MCP sunucusunda yaşar?",
+      "options": [
+        "StreamableHTTP üzerinden açığa çıkarılamazlar",
+        "Daha yavaş donanımda çalışırlar",
+        "Kısa bir pencere içinde Slack card aracılığıyla yükseltilmiş bir onay token'ı arkasında gate'lenirler",
+        "Farklı bir programlama dili gerektirirler"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "OPA / Rego her tool çağrısında neye karar verir?",
+      "options": [
+        "Hangi modeli çağıracağına",
+        "Audit log'u nereye yazacağına",
+        "Sunucunun yanıtı nasıl rerank edeceğine",
+        "Çağıranın scope'larının çağrıya izin verip vermediğine, artı PII redaction ve payload cap'leri"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Load testinde StreamableHTTP yatay ölçeklemesini hangi kanıt gösterir?",
+      "options": [
+        "Eşzamanlılığı tek bir istemciye düşürmek",
+        "stdio transport'a geçmek",
+        "Her şeyi tek bir process'te çalıştırmak",
+        "İkinci bir replika eklemek ve load balancer'ın session yapışkanlığı olmadan yeniden dağıtım yaptığını göstermek"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Audit log neden tenant başına kalıcılaştırılmadan önce Presidio ile PII'yi temizler?",
+      "options": [
+        "Log'ları kısaltmak için",
+        "Kurumsal güvenlik gereksinimlerini karşılarken çağrı başına lineage'ı sorgulanabilir tutmak için",
+        "Presidio ClickHouse write amplification'ı azaltır",
+        "PII arama performansını iyileştirir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Makine öğrenmesinde neden ayrı train, validation ve test bölümlerine sahip olmak önemlidir?",
+      "options": ["Veri setini küçültüp eğitimi hızlandırmak için", "Modelin görülmemiş veride performansını değerlendirmek ve overfitting'i önlemek için", "Her bölümün farklı bir dosya formatı kullandığından emin olmak için", "Veriyi birden fazla GPU'ya dağıtmak için"],
+      "correct": 1,
+      "explanation": "Train seti modeli öğretir, validation seti eğitim sırasında hiperparametreleri ayarlar ve test seti modelin hiç görmediği veride son bir tarafsız değerlendirme sağlar."
+    },
+    {
+      "stage": "pre",
+      "question": "Hugging Face Hub yapay zeka/ML iş akışlarında temel olarak ne için kullanılır?",
+      "options": ["Veri setleri, modeller ve ML artifact'leri host etmek ve paylaşmak", "Bulutta GPU eğitim job'ları çalıştırmak", "Python sanal ortamlarını yönetmek", "GitHub gibi kaynak kodu versiyon kontrol etmek"],
+      "correct": 0,
+      "explanation": "Hugging Face Hub, önceden eğitilmiş modelleri, veri setlerini ve ML demolarını host etmek ve paylaşmak için bir platformdur. 'datasets' kütüphanesi ondan veri yüklemek için standart bir yol sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "ML veri setlerini saklamada Parquet formatının CSV'ye göre avantajı nedir?",
+      "options": ["Parquet dosyaları herhangi bir metin editöründe insan tarafından okunabilir", "Parquet daha küçük dosya boyutları ve daha hızlı okuma hızları için kolonsal depolama kullanır", "Parquet CSV'den daha fazla veri tipini destekler", "Parquet dosyaları elektronik tablo uygulamalarında düzenlenebilir"],
+      "correct": 1,
+      "explanation": "Parquet, CSV'den daha iyi sıkıştıran ve hızlı kolon düzeyinde okumalara olanak veren kolonsal bir binary formattır. ML veri setleri için tercih edilen depolama formatıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Hugging Face datasets kütüphanesiyle bir veri seti yüklerken 'streaming=True' ne yapar?",
+      "options": ["Paralel bağlantılar kullanarak veri setini daha hızlı indirir", "Tüm veri setini diske indirmeden satır satır yükler", "Veri setini bir streaming video formatına dönüştürür", "Hub'a yeni veri eklendikçe gerçek zamanlı güncellemeleri etkinleştirir"],
+      "correct": 1,
+      "explanation": "Streaming modu, satırları talep üzerine getiren bir IterableDataset oluşturur. Bellek kullanımı veri seti boyutundan bağımsız olarak sabit kalır, bu da diske sığmayacak kadar büyük veri setleri için şarttır."
+    },
+    {
+      "stage": "post",
+      "question": "Büyük dosyalar için sadece .gitignore yerine DVC (Data Version Control) ne zaman kullanmalısın?",
+      "options": ["Veri setin 1 MB'tan küçük olduğunda", "Versiyonlanmış veriyle makineler arasında kesin deneyleri tekrarlaman gerektiğinde", "Tek başına kişisel bir projede çalışırken", "Sadece projende CSV dosyaların olduğunda"],
+      "correct": 1,
+      "explanation": "DVC, veri sürümlerini git'te küçük pointer dosyalarıyla takip eder, gerçek veriyi ise remote storage'da (S3, GCS) saklar. Herkesin aynı veriyle deneyini tekrarlayabilmesini sağlar."
+    }
+  ]
+}

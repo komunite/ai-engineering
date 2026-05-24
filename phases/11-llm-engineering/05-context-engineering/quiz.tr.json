@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Prompt engineering ile context engineering arasındaki fark nedir?",
+    "options": ["Aynı şeydirler", "Prompt kullanıcının sorgusudur; context ise modelin penceresindeki her şeydir: system prompt, tool'lar, retrieve edilen dokümanlar, geçmiş ve prompt'un kendisi", "Context engineering veritabanı tasarımıyla ilgilidir", "Prompt engineering daha gelişmiştir"],
+    "correct": 1,
+    "explanation": "Prompt engineering kullanıcı talimatını oluşturmaya odaklanır. Context engineering modele giden tüm input'u yönetir: ne girer, ne dışarıda kalır, hangi sırada ve sınırlı context window nasıl tahsis edilir.",
+    "stage": "pre"
+  },
+  {
+    "question": "LLM performansı için context window sırası neden önemlidir?",
+    "options": ["Önemli değil -- LLM'ler tüm token'ları eşit işler", "LLM'lerin recency ve primacy bias'ları vardır; context window'un başına ve sonuna daha çok dikkat ederler", "Alfabetik sıra modelin daha hızlı aramasına yardımcı olur", "Sıra yalnızca kod için önemlidir"],
+    "correct": 1,
+    "explanation": "Araştırmalar LLM'lerin context window'un başına ve sonuna daha çok dikkat ettiğini gösteriyor ('lost in the middle' fenomeni). En önemli bilgiyi context'in başına veya sonuna koymak kullanımı artırır.",
+    "stage": "pre"
+  },
+  {
+    "question": "Bir kod asistanı 128K context window'un 22,700 token'ını kullanıyor. Bütçe yönetimi neden hâlâ önemlidir?",
+    "options": ["128K her use case için yeterli olmalı", "Uzun konuşmalar, büyük kod dosyaları ve retrieve edilen dokümantasyon pencereyi hızla doldurabilir; bütçe yönetimi olmadan kritik bağlam kırpılır", "Token sayımı yanlıştır", "Sadece prompt önemlidir"],
+    "correct": 1,
+    "explanation": "22,700 token başlangıç çizgisidir. 50 turn'lük bir konuşma 30K+ token ekler. Büyük bir codebase'i retrieve etmek 50K+ ekler. Tool call sonuçları daha da ekler. Aktif yönetim olmadan pencere dolar ve en eski bağlam kaybolur.",
+    "stage": "post"
+  },
+  {
+    "question": "Konuşma geçmişi için sliding window stratejisi nedir?",
+    "options": ["Modeli farklı bir sunucuya taşımak", "Yalnızca son N turn'ü context'te tutmak ve daha eski turn'leri (isteğe bağlı olarak önce özetleyerek) düşürmek", "Konuşmayı sabit boyutlu chunk'larda işlemek", "Context window'u dinamik olarak genişletmek"],
+    "correct": 1,
+    "explanation": "Sliding window son K konuşma turn'ünü tam context'te tutar. Daha eski turn'ler ya düşürülür ya da bir özetle değiştirilir. Bu, en alakalı son bağlamı korurken bellek kullanımını sınırlar.",
+    "stage": "post"
+  },
+  {
+    "question": "Bir context assembler bileşenler arasında token'ları nasıl tahsis etmelidir?",
+    "options": ["Her bileşene eşit tahsis", "Sorgu tipine göre dinamik olarak: basit bir soru daha az retrieval bağlamı gerektirir; karmaşık bir soru daha fazlasını gerektirir ve her zaman üretim için bir headroom rezerve edilir", "Her zaman retrieval bağlamını maksimize et", "System prompt token'larını minimize et"],
+    "correct": 1,
+    "explanation": "Basit olgusal bir soru 500 token retrieve edilmiş bağlam gerektirebilir. Karmaşık bir analiz 10,000 gerektirebilir. İyi bir context assembler tahsisi dinamik olarak ayarlar, modelin cevabı için her zaman headroom rezerve eder.",
+    "stage": "post"
+  }
+]

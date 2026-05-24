@@ -1,0 +1,78 @@
+{
+  "lesson": "28-self-hosted-serving-selection",
+  "title": "Self-Hosted Serving Seçimi — llama.cpp, Ollama, TGI, vLLM, SGLang",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders geliştirici dizüstüsünde tek-komut default'u olarak hangi engine'i seçiyor?",
+      "options": [
+        "TGI",
+        "Ollama",
+        "vLLM",
+        "llama.cpp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi 2025 olayı yeni projeler için default'u TGI'den uzaklaştırıyor?",
+      "options": [
+        "TGI Anthropic tarafından satın alındı",
+        "TGI fiyatları artırdı",
+        "TGI CUDA desteğini düşürdü",
+        "TGI 11 Aralık 2025'te bakım moduna girdi — bundan sonra yalnızca bug fix'leri"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi donanım kısıtı llama.cpp'yi zorunlu kılar ve vLLM / TRT-LLM'i hariç tutar?",
+      "options": [
+        "Apple M4",
+        "AMD MI300X",
+        "NVIDIA Hopper",
+        "Yalnızca CPU (hızlandırıcı yok)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders RadixAttention sayesinde agentic multi-turn ve prefix-ağırlıklı iş yükleri için hangi engine'i konumlandırıyor?",
+      "options": [
+        "Ollama",
+        "llama.cpp",
+        "SGLang",
+        "TGI"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Aynı GGUF ya da HF ağırlıkları üzerinde ders hangi dev-to-prod pipeline'ını öneriyor?",
+      "options": [
+        "Baştan sona yalnızca TRT-LLM",
+        "Dev'de Ollama ve prod'da Ollama",
+        "Dev'de Ollama, staging'de llama.cpp, prod'da vLLM (ya da prefix-ağırlıklı için SGLang)",
+        "Her yerde TGI"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ollama paylaşılan üretim için neden tavsiye edilmiyor?",
+      "options": [
+        "Kapalı kaynak",
+        "Yalnızca Windows'ta çalışır",
+        "Go HTTP serileştirmesi yük ekler, concurrency yönetimi vLLM'den daha basittir ve OpenTelemetry desteği geride kalır",
+        "GGUF yükleyemez"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir Docker container ile sanal makine arasındaki temel fark nedir?",
+      "options": ["Container'lar VM'lerden daha yavaş ama daha güvenlidir", "Container'lar host OS kernel'ını paylaşırken VM'ler kendi tam OS'lerini çalıştırır", "Container'lar sadece Linux çalıştırabilirken VM'ler herhangi bir OS'i destekler", "Pratikte fark yok"],
+      "correct": 1,
+      "explanation": "Container'lar host kernel'ını paylaşır ve process düzeyinde izole ederek saniyeler içinde başlar. VM'ler kendi kernel'larıyla komple bir guest OS çalıştırır, bu daha fazla kaynak gerektirir ve daha yavaş başlar."
+    },
+    {
+      "stage": "pre",
+      "question": "Dockerfile nedir?",
+      "options": ["Docker daemon için bir yapılandırma dosyası", "Bir Docker imajını katman katman build etmek için bir talimatlar dizisi", "Container aktivitesini kaydeden bir log dosyası", "Çalışan container'ları listeleyen bir dosya"],
+      "correct": 1,
+      "explanation": "Bir Dockerfile, Docker'ın bir imaj build etmek için çalıştırdığı ardışık talimatlar (FROM, RUN, COPY, vs.) içerir. Her talimat cache'lenen bir katman oluşturur."
+    },
+    {
+      "stage": "post",
+      "question": "Volume mount'lar Docker ile yapay zeka geliştirme için neden kritiktir?",
+      "options": ["Volume'lar host disk hızını kullanarak container'ları daha hızlı çalıştırır", "Volume'lar veriyi (modeller, veri setleri, kod) container yeniden build'leri arasında kalıcı yapar, böylece her seferinde gigabaytlarca veriyi tekrar indirmen gerekmez", "Python paketlerinin doğru kurulması için volume'lar gereklidir", "Volume'lar birden fazla container'ın aynı GPU'yu paylaşmasını sağlar"],
+      "correct": 1,
+      "explanation": "Volume'lar olmadan, container içindeki her şey container durunca kaybolur. Volume mount'lar host dizinlerini container'a eşler, böylece model ağırlıkları (14+ GB) ve veri setleri yeniden build'lerden hayatta kalır."
+    },
+    {
+      "stage": "post",
+      "question": "NVIDIA Container Toolkit ne yapar?",
+      "options": ["Container içine CUDA driver'larını kurar", "Host GPU'larını Docker container'larına --gpus flag'i ile açar", "AMD donanımında NVIDIA GPU container'larını çalıştırır", "Docker build süreci sırasında CUDA kodunu derler"],
+      "correct": 1,
+      "explanation": "NVIDIA Container Toolkit, host GPU'larını container'lara açan bir runtime hook'tur. CUDA toolkit container içinde yaşar, ama GPU driver'ı host'tan paylaşılır."
+    },
+    {
+      "stage": "post",
+      "question": "Yapay zeka için bir Docker Compose dosyasında, 'ai-dev' servisi 'qdrant' vektör veritabanına nasıl ulaşır?",
+      "options": ["Host makinenin IP adresini ve portunu kullanarak", "Hostname olarak 'qdrant' servis adını kullanarak, çünkü Compose paylaşılan bir ağ oluşturur", "İki container arasında paylaşılan bir volume mount ederek", "Container'lar arasında bir VPN yapılandırarak"],
+      "correct": 1,
+      "explanation": "Docker Compose otomatik olarak paylaşılan bir ağ oluşturur ve servisler birbirine isimle ulaşabilir. ai-dev container'ı servis adını hostname olarak kullanarak 'http://qdrant:6333' adresine bağlanır."
+    }
+  ]
+}

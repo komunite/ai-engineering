@@ -1,30 +1,43 @@
 ---
-name: New lesson proposal
-about: Pitch a lesson before writing it
-title: "[lesson] Phase NN · "
+name: Yeni ders önerisi
+about: Yazmadan önce bir ders fikrini öner
+title: "[ders] Faz NN · "
 labels: new-lesson
 ---
 
-## Lesson
+<!--
+İngilizce şablon: https://github.com/rohitg00/ai-engineering-from-scratch/blob/main/.github/ISSUE_TEMPLATE/new_lesson_proposal.md
 
-- Phase: <!-- e.g. Phase 5 (NLP) -->
-- Proposed number: <!-- e.g. 03 (lessons are numbered within a phase) -->
-- Working title:
-- Type: Build | Learn
-- Languages: <!-- Python, TypeScript, Rust, Julia -->
-- Estimated time: <!-- e.g. ~75 min -->
+Önemli: Yeni İngilizce ders önerisi upstream'de daha doğru bir yer bulur:
+https://github.com/rohitg00/ai-engineering-from-scratch/issues/new/choose
 
-## Why it belongs
+Bu issue'yu açın eğer:
+- Türkçeleştirilmiş bir ders eklemek istiyorsanız (sadece çeviri değil, ek Türkçe içerik)
+- Türk topluluğa özgü bir ders / örnek öneriniz varsa
+- Komünite Türkçe sürümünde olması gerektiğini düşündüğünüz bir konu varsa
+-->
 
-<!-- Two or three sentences. What can't a learner do without this lesson? Why here in the sequence? -->
+## Ders
 
-## Prerequisites
+- Faz: <!-- örn. Faz 5 (NLP) -->
+- Önerilen numara: <!-- örn. 03 (dersler faz içinde numaralandırılır) -->
+- Çalışma başlığı:
+- Tür: Yapım | Öğrenim
+- Diller: <!-- Python, TypeScript, Rust, Julia -->
+- Tahmini süre: <!-- örn. ~75 dk -->
+- Hedef dil: <!-- TR / EN / Her ikisi -->
 
-<!-- Which prior lessons does this depend on? -->
+## Neden bu derse ihtiyaç var
 
-## What the learner ships
+<!-- İki üç cümle. Bir öğrenci bu ders olmadan neyi yapamaz? Neden sırada burada? -->
 
-<!-- Every lesson produces a reusable artifact. Which one? -->
+## Önkoşullar
+
+<!-- Hangi önceki derslere bağımlı? -->
+
+## Öğrenenin ürettiği artifact
+
+<!-- Her ders yeniden kullanılabilir bir artifact üretir. Hangisi? -->
 
 - [ ] Prompt
 - [ ] Skill
@@ -32,15 +45,15 @@ labels: new-lesson
 - [ ] MCP server
 - [ ] Tool / script
 
-## Outline
+## Plan
 
-1. **The Problem** — what pain does this solve?
-2. **The Concept** — core mental model, no code yet
-3. **Build It** — from-scratch implementation plan
-4. **Use It** — which framework / library to show after
-5. **Ship It** — the artifact to produce
-6. **Exercises** — 3 proposed
+1. **Sorun** — bu hangi acıyı çözer?
+2. **Kavram** — temel zihinsel model, henüz kod yok
+3. **İnşa Et** — sıfırdan implementasyon planı
+4. **Kullan** — sonra hangi framework / kütüphane gösterilecek
+5. **Yayınla** — üretilecek artifact
+6. **Alıştırmalar** — 3 öneri
 
-## Open questions
+## Açık sorular
 
-<!-- Anything you want input on before starting. -->
+<!-- Başlamadan önce input istediğiniz herhangi bir şey. -->

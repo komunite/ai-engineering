@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir tensor'ın 'şekli' (shape) neyi tanımlar?",
+      "options": [
+        "Her eksen boyunca boyutu listeleyen bir tuple",
+        "Tensor'daki toplam eleman sayısını",
+        "Tensor elemanlarının veri türünü",
+        "Tensor'ın bellek adresini"
+      ],
+      "correct": 0,
+      "explanation": "Şekil, her eksen boyunca boyutu listeleyen bir tuple'dır. Örneğin (2, 3, 4) şeklindeki bir tensor'ın eksen 0 boyunca 2, eksen 1 boyunca 3, eksen 2 boyunca 4 elemanı vardır."
+    },
+    {
+      "stage": "pre",
+      "question": "PyTorch'ta bir görüntü batch tensor'ı varsayılan olarak hangi düzeni kullanır?",
+      "options": [
+        "NHWC (batch, height, width, channels)",
+        "NCHW (batch, channels, height, width)",
+        "CHWN (channels, height, width, batch)",
+        "WHCN (width, height, channels, batch)"
+      ],
+      "correct": 1,
+      "explanation": "PyTorch varsayılan olarak NCHW (channels-first) düzenini kullanır. TensorFlow ise NHWC (channels-last) düzenini kullanır. Uyumsuz düzenler sessiz hatalara veya performans sorunlarına yol açar."
+    },
+    {
+      "stage": "post",
+      "question": "(8, 1, 6, 1) ve (7, 1, 5) şekillerindeki tensor'ları broadcasting yaparken sonuç şekli nedir?",
+      "options": [
+        "(8, 7, 6, 1)",
+        "(8, 1, 6, 5)",
+        "(8, 7, 6, 5)",
+        "Broadcasting başarısız olur — şekiller uyumsuzdur"
+      ],
+      "correct": 2,
+      "explanation": "Şekilleri sağdan hizala: (8,1,6,1) ve (1,7,1,5). Boyutlar eşit olduğunda veya biri 1 olduğunda uyumludur. Sonuç her eksen boyunca maksimumu alır: (8, 7, 6, 5)."
+    },
+    {
+      "stage": "post",
+      "question": "'bhtd,bhsd->bhts' einsum ifadesinde 'd' indeksine ne olur?",
+      "options": [
+        "Çıkışta yeni bir eksen olarak tutulur",
+        "Her iki girişte de görünüp çıkışta görünmediği için üzerinde toplanır (kontrakte edilir)",
+        "Her iki tensor üzerinde broadcasting uygulanır",
+        "İki giriş tensor'u arasında transpozu alınır"
+      ],
+      "correct": 1,
+      "explanation": "Einsum'da girişlerde görünüp çıkışta görünmeyen herhangi bir indeks üzerinde toplanır. 'd' indeksi hem 'bhtd' hem de 'bhsd' içinde görünür ama 'bhts' çıkışında görünmez, bu yüzden kontrakte edilir (çarpılır ve toplanır)."
+    },
+    {
+      "stage": "post",
+      "question": "PyTorch'ta transpozu alınmış bir tensor üzerinde .view() çağrısı neden başarısız olur?",
+      "options": [
+        "Transpoze tensor'ların farklı bir veri türü vardır",
+        "Tensor transpoze sonrası bellekte bitişik (contiguous) değildir ve view bitişik veri gerektirir",
+        "View yalnızca 2B tensor'larda çalışır",
+        "Transpoze toplam eleman sayısını değiştirir"
+      ],
+      "correct": 1,
+      "explanation": "Transpoze, veriyi taşımadan stride'ları değiştirir ve tensor'ı bitişik olmayan hale getirir. .view() işlemi bitişik bellek düzeni gerektirir. .reshape() kullan veya önce .contiguous() çağır."
+    }
+  ]
+}

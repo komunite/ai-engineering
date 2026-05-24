@@ -1,0 +1,78 @@
+{
+  "lesson": "03-gpu-autoscaling-kubernetes",
+  "title": "Kubernetes Üzerinde GPU Autoscaling — Karpenter, KAI Scheduler, Gang Scheduling",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "HPA'nın default olarak ölçeklendiği hangi sinyal, ders tarafından vLLM tarzı serving için bozuk olarak nitelendiriliyor?",
+      "options": [
+        "Queue depth",
+        "P99 TTFT",
+        "KV cache kullanımı",
+        "DCGM_FI_DEV_GPU_UTIL duty cycle"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "KAI Scheduler'daki gang scheduling esas olarak hangi problemi önler?",
+      "options": [
+        "GPU bellek fragmantasyonu",
+        "Tokenizer GIL çekişmesi",
+        "8 GPU'dan 7'sinin sekizinciyi beklerken boşta kaldığı kısmi tahsis tuzağı",
+        "Cold-start latency"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Karpenter'ın default consolidationPolicy WhenEmptyOrUnderutilized neden çıkarım GPU havuzları için tehlikelidir?",
+      "options": [
+        "Burst altında scale up yapmayı reddeder",
+        "Yalnızca spot instance'ları consolidate eder",
+        "Pod'ları taşımak için çalışan GPU node'larını terminate eder; bu çalışan requestleri evict eder ve ağırlıkları yeniden yükletir",
+        "Karpenter'ın yeni node provision etmesini engeller"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Karpenter, Cluster Autoscaler'a kıyasla bir GPU node'unu provision etmede kabaca ne kadar daha hızlıdır?",
+      "options": [
+        "Yaklaşık %40 daha hızlı (~45-60s vs ~90-120s)",
+        "Yaklaşık 10x daha yavaş",
+        "Aynı",
+        "Yaklaşık %5 daha hızlı"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Disaggregated prefill / decode pod'ları için (Phase 17 · 17), ders hangi ölçekleme sinyallerini öneriyor?",
+      "options": [
+        "Yalnızca manuel ölçekleme",
+        "Her iki pod sınıfını kapsayan duty cycle üzerinde tek bir HPA",
+        "Ayrı role-başına HPA'lar olarak: prefill pod'ları için queue depth, decode pod'ları için KV cache baskısı",
+        "İkisi için Cluster Autoscaler"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Çalışan işleri evict etmemek için bir çıkarım GPU havuzu için ders hangi Karpenter disruption ayarını öneriyor?",
+      "options": [
+        "consolidationPolicy: WhenEmptyOrUnderutilized, consolidateAfter: 0s",
+        "consolidationPolicy: WhenEmpty, consolidateAfter: 1h",
+        "Her zaman spot instance ile çalış ve consolidation yapma",
+        "Karpenter'ı tamamen devre dışı bırak"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

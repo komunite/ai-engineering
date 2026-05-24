@@ -1,0 +1,102 @@
+{
+  "lesson": "01-text-processing",
+  "title": "Metin İşleme — Tokenization, Stemming, Lemmatization",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir dil modeli eğitimden önce neden preprocessing'e ihtiyaç duyar?",
+      "options": [
+        "Preprocessing GPU kullanımını iyileştirir",
+        "Modeller ham metni değil, ayrık integer token'ları tüketir",
+        "Modeller string'leri doğrudan okur",
+        "Preprocessing sadece boşluk içermeyen diller için gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "Modeller integer token ID'leri üzerinde çalışır; preprocessing sürekli dili ayrık girdilere köprüler."
+    },
+    {
+      "stage": "pre",
+      "question": "Hangi preprocessing işlemi kural tabanlı suffix kırpmadır?",
+      "options": [
+        "Stemming",
+        "POS tagging",
+        "Lemmatization",
+        "Tokenization"
+      ],
+      "correct": 0,
+      "explanation": "Stemming, suffix'leri kurallarla kırpar; hızlıdır ama hatalı olabilir."
+    },
+    {
+      "stage": "check",
+      "question": "Porter stemmer'in step 1a aşaması 'ponies' kelimesi için ne döndürür?",
+      "options": [
+        "ponies",
+        "ponie",
+        "pony",
+        "poni"
+      ],
+      "correct": 3,
+      "explanation": "'ies' kuralı suffix'i 'i' ile değiştirir ve 'poni' üretir; gerçek Porter'da step 1b bunu temizler."
+    },
+    {
+      "stage": "check",
+      "question": "Lemmatization neden genellikle bir POS tag'e ihtiyaç duyar?",
+      "options": [
+        "Unicode işleme",
+        "Hız",
+        "Gramatik bağlam, 'better' (ADJ) ile 'better' (VERB) gibi formları ayırt eder",
+        "Bellek kullanımını azaltmak için"
+      ],
+      "correct": 2,
+      "explanation": "Lemma'lar gramatik role bağlıdır; tag olmadan lookup belirsizdir."
+    },
+    {
+      "stage": "check",
+      "question": "NLTK Penn Treebank POS tag'lerini WordNet tag'lerine çevirirken, 'V' ile başlayan bir tag neye eşlenir?",
+      "options": [
+        "'n' (isim)",
+        "'v' (fiil)",
+        "'r' (zarf)",
+        "'a' (sıfat)"
+      ],
+      "correct": 1,
+      "explanation": "Fiil önekli Penn Treebank tag'leri WordNet 'v' ye eşlenir."
+    },
+    {
+      "stage": "post",
+      "question": "NLP preprocessing'de 'training/inference mismatch' nedir?",
+      "options": [
+        "Train ve test arasında farklı batch size'lar",
+        "Eğitim ve serving farklı preprocessing uygular, dolayısıyla model çıkarımda alışmadığı bir dağılım görür",
+        "Bir GPU bellek sorunu",
+        "Bir notebook içinde tokenizer kütüphanelerini karıştırmak"
+      ],
+      "correct": 1,
+      "explanation": "Eğitim ile çıkarım arasında farklı preprocessing, production NLP'deki en yaygın hatadır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir transformer pipeline'ında klasik preprocessing yerine hangi aracı tercih edersin?",
+      "options": [
+        "NLTK word_tokenize",
+        "Modelin kendi tokenizer'ı (örn. tokenizers / transformers üzerinden)",
+        "Bir regex tokenizer",
+        "spaCy en_core_web_sm"
+      ],
+      "correct": 1,
+      "explanation": "Transformer modelleri eşleşmiş bir tokenizer ile gelir; klasik preprocessing baypas edilir."
+    },
+    {
+      "stage": "post",
+      "question": "Neden NLTK ve spaCy sürümlerini requirements'ta sabitlemelisin?",
+      "options": [
+        "Lisans uyumluluğu",
+        "Tokenizer ve lemmatizer davranışı minor sürümler arasında değişir, sessizce eğitim dağılımını kaydırır",
+        "Eski sürümler daha fazla dili destekler",
+        "Yeni sürümler daha yavaştır"
+      ],
+      "correct": 1,
+      "explanation": "Kütüphane güncellemeleri tokenization çıktısını değiştirebilir ve eğitim dağılımından sapma yaratabilir."
+    }
+  ]
+}

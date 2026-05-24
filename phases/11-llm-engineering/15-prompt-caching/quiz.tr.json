@@ -1,0 +1,66 @@
+{
+  "lesson": "15-prompt-caching",
+  "title": "Prompt Caching ve Context Caching",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "Anthropic, cache okumalarına baz input oranına kıyasla ne kadar indirim uygular?",
+      "options": [
+        "%25 indirim",
+        "%50 indirim",
+        "%75 indirim",
+        "%90 indirim"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Dinamik timestamp'ler neden cache breakpoint'inin altına konulmalıdır, üstüne değil?",
+      "options": [
+        "Cache yalnızca prefix byte-byte özdeş olduğunda hit eder; değişen bir timestamp sonrasındaki her şey için eşleşmeyi bozar",
+        "Timestamp'ler tokenizer'ı karıştırır",
+        "Statik metinden daha fazla token'a mal olurlar",
+        "Anthropic cache'lenen blok'larda timestamp'leri açıkça reddeder"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "OpenAI'nin prompt caching'i nasıl yapılandırılır?",
+      "options": [
+        "Açık cache_control marker'ları ile",
+        "Oluşturup referans verdiğin bir CachedContent API",
+        "Konfigürasyon olmadan otomatik prefix eşleştirme",
+        "Proje başına toggle edilen sistem seviyesi bir flag"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Anthropic için 1 saatlik extended TTL, 5 dakikalık varsayılana göre ne kadar write premium'a mal olur?",
+      "options": [
+        "Aynı",
+        "2x write premium (baseline'ın %50 üstünde)",
+        "4x write premium",
+        "Write premium yok"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Anthropic'in %25 write premium'unu başa baş noktasına getirmek için kaç yeniden kullanım gerekir?",
+      "options": [
+        "1",
+        "2",
+        "5",
+        "10"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

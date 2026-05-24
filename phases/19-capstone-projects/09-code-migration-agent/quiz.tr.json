@@ -1,0 +1,90 @@
+{
+  "lesson": "09-code-migration-agent",
+  "title": "Capstone 09 — Code Migration Agent (Repo-Level Language / Runtime Upgrade)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Pipeline neden yalnızca birini kullanmak yerine deterministik substrate'i bir agent katmanı ile birleştirir?",
+      "options": [
+        "OpenRewrite veya libcst mekanik yeniden yazımların %70-80'ini güvenli ve ucuz şekilde halleder, belirsiz uzun kuyruğu agent'a bırakır",
+        "Tek başına agent'lar recipe'lerden daha hızlıdır",
+        "Deterministik recipe'ler LLM'lerden daha yavaştır",
+        "Determinizm yalnızca build sistemi için gereklidir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Pipeline başarılı bir migration için ground truth olarak hangi sinyali kullanır?",
+      "options": [
+        "Bir rubric üzerinde agent self-grading'i",
+        "PR'da reviewer onayı",
+        "Sert bir limit altında diff boyutu",
+        "Sandbox'ta küçük bir eşik ötesinde coverage gerilemesi olmadan yeşil CI"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Agent loop repo başına hangi bütçe cap'lerini zorunlu kılar?",
+      "options": [
+        "Sınırsız süre ve maliyet; yalnızca hatada iptal",
+        "Tur limiti yok, 100$ tavan",
+        "1 saat wall-clock ve 100 tur",
+        "30 dakika wall-clock, 8$ maliyet ve 20 agent turu"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Migration sonrasında coverage yaklaşık %2'den fazla düştüğünde hangi gate tetiklenir?",
+      "options": [
+        "Reviewer atlanır",
+        "Repo, temiz bir PR açmak yerine coverage_regression hata sınıfı altına dosyalanır",
+        "Deterministik substrate recipe'lerini yeniden oynatır",
+        "Agent otomatik olarak bir düzeltmeyi force-push eder"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Failure taxonomy neden bir yan artifact yerine deliverable olarak ele alınır?",
+      "options": [
+        "Test suite'in yerini alır",
+        "Başarısız repo'ları sınıflara göre gruplar, böylece gelecekteki recipe yazarları en sık hata modlarını hedefleyebilir",
+        "GitHub branch protection tarafından gereklidir",
+        "Bir uyumluluk kontrol listesini karşılar"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Capstone Java 8'den 17'ye migration için hangi public benchmark'ı hedefler?",
+      "options": [
+        "Amazon'dan MigrationBench",
+        "SWE-bench Pro",
+        "MMLU-Pro",
+        "ViDoRe v3"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Agent integration rubric'i düzeltme dağılımı hakkında neyi ölçer?",
+      "options": [
+        "Kaynak dosyanın tokenizasyon hızı",
+        "Repo başına force-push sayısı",
+        "Pinlenen bağımlılık sayısı",
+        "OpenRewrite tarafından halledilen düzeltmelerin agent katmanı tarafından yazılanlara oranı"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

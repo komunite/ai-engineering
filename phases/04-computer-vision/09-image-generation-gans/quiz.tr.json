@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "GAN eğitimi neden log(1 - D(G(z))) yerine non-saturating generator loss -log(D(G(z))) kullanır?",
+      "options": [
+        "Matematiksel olarak farklılar ve daha iyi denge üretirler",
+        "Eğitimin başında D(G(z)) sıfıra yakındır, bu yüzden log(1 - D(G(z)))'nin gradient'i kaybolur; -log(D(G(z)))'nin orada büyük gradient'i vardır, böylece G yararlı bir sinyal alır",
+        "Discriminator'ı hızlandırır",
+        "PyTorch tarafından gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "İki loss aynı gradient yönünü paylaşır ama D(G(z)) küçük olduğunda çok farklı büyüklüklere sahiptir. log(1 - D(G(z))) orada sıfır gradient'te plato yapar. Non-saturating form, tüm aralık boyunca bilgilendirici kalır. Goodfellow orijinal makalede bu ince ayarı not etti ve her modern GAN bunu kullanır."
+    },
+    {
+      "stage": "pre",
+      "question": "DCGAN'ın kuralları pooling yerine strided convolution kullanmayı söyler. Neden?",
+      "options": [
+        "Pooling GPU'larda daha yavaş",
+        "Pooling öğrenilemez ve generator'ın ihtiyaç duyabileceği bilgiyi atar; strided konv'lar ağın kendi downsampling'ini öğrenmesine izin verir, bu deneysel olarak daha keskin üretilmiş görseller üretir",
+        "Pooling gradient akışını bozar",
+        "Pooling batch norm ile uyumsuz"
+      ],
+      "correct": 1,
+      "explanation": "Max-pool, max dışındaki her şeyi atan elle seçilmiş bir downsampling'dir. Generative bir ortamda model, stride boyunca bilgiyi koruyabilecek öğrenilmiş bir downsampling'den fayda görür. D'de strided convolution'lar ve G'de strided transposed convolution'lar, DCGAN'ları eğitilebilir kılan mimari değişiklikti."
+    },
+    {
+      "stage": "post",
+      "question": "Bir GAN eğitiyorsun ve G'nin girdi gürültüsünden bağımsız olarak neredeyse aynı örnekleri ürettiğini fark ediyorsun. Bu hangi başarısızlık?",
+      "options": [
+        "Kaybolan gradient'ler",
+        "Mode collapse -- G, D'yi tutarlı şekilde aldatan veri dağılımının dar bir bölgesini bulmuş ve keşfetmek için bir teşviki yok; çözümler arasında spectral norm, minibatch discrimination veya daha büyük bir batch var",
+        "Salınım",
+        "Veri seti çok küçük"
+      ],
+      "correct": 1,
+      "explanation": "Mode collapse, örneklerin çeşitlilikten yoksun olduğu karakteristik GAN başarısızlığıdır. Tanı açıktır: gürültü girer, aynı görsel çıkar. Çözümlerin tümü discriminator'ın çeşitlilik eksikliğini cezalandırma yeteneğini hedefler, ya D'yi daha expressive yaparak (spectral norm, minibatch discrimination) ya da G'ye çökme alanı vermeyerek (daha büyük batch, koşullu label'lar)."
+    },
+    {
+      "stage": "post",
+      "question": "DCGAN eğitim script'leri neden varsayılan (0.9, 0.999) yerine Adam'ı betas=(0.5, 0.999) ile kullanır?",
+      "options": [
+        "Varsayılan bozuk",
+        "Daha düşük beta1 momentumu azaltır; adversarial bir oyunda, ağır momentum diğer ağın davranışı değiştiğinde her optimizer'ı yanlış yönde çok uzun süre tutar ve bu instability'ye neden olur",
+        "Adam yalnızca CUDA'da beta1=0.5 ile desteklenir",
+        "Tutorial'lar boyunca yayılmış bir typo'dur"
+      ],
+      "correct": 1,
+      "explanation": "Adam'ın varsayılan beta1=0.9, yaklaşık 10 adım üzerinde gradient'lerin ortalamasını alır. Sabit bir objective'de bu yardımcıdır. Her D ve G güncellemesinde loss landscape'in kaydığı adversarial bir oyunda, bu ortalama optimizer'ın tepkisini geciktirir ve salınıma neden olur. Radford ve diğerleri beta1=0.5'i çok daha stabil buldu ve şimdi GAN varsayılanı."
+    },
+    {
+      "stage": "post",
+      "question": "Bir meslektaş, D loss'u sıfıra yakın ve G loss'u eğitim boyunca artan bir GAN raporluyor. Ne oluyor ve nasıl düzeltirsin?",
+      "options": [
+        "Her iki ağ da doğru şekilde iyileşiyor",
+        "Discriminator çok güçlü hale geldi ve G'nin gradient'ini sıfıra sürüyor; çözümler arasında daha küçük bir D, spectral norm, gerçek label'larda label smoothing (1.0 yerine 0.9) veya WGAN-GP'ye geçmek var",
+        "Generator doğru şekilde overfit ediyor",
+        "Hiçbir şey -- bu denge"
+      ],
+      "correct": 1,
+      "explanation": "D'nin loss'u sıfıra yakın, D'nin hem gerçek hem fake'te mükemmel olduğu anlamına gelir. O noktada G'ye giden BCE gradient'i kaybolur: G çıktısı ne olursa olsun sıfıra yakın bir sinyal görür. Çözüm D'yi zayıflatmak veya doygunluğa uğramayan bir loss kullanmaktır. Spectral norm (D'nin Lipschitz sabitini sınırlar) ve WGAN-GP (BCE yerine Earth-Mover mesafesi kullanır) iki standart kurtarmadır."
+    }
+  ]
+}

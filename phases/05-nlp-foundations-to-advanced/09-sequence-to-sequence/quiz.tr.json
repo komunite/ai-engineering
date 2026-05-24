@@ -1,0 +1,102 @@
+{
+  "lesson": "09-sequence-to-sequence",
+  "title": "Sequence-to-Sequence Modeller",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "2014 tarzı bir seq2seq modelde encoder'ın rolü nedir?",
+      "options": [
+        "Attention ağırlıklarını hesaplar",
+        "Beam search yapar",
+        "Kaynağı okur ve onu özetleyen sabit boyutlu bir context vektörü üretir",
+        "Hedef token'ları üretir"
+      ],
+      "correct": 2,
+      "explanation": "Encoder RNN kaynağı decoder'ın kullandığı son hidden state'e sıkıştırır."
+    },
+    {
+      "stage": "pre",
+      "question": "seq2seq eğitimi sırasında teacher forcing nedir?",
+      "options": [
+        "Çıkarımda bir teacher network eklemek",
+        "Batch size'ı iki katına çıkarmak",
+        "Modelin tahmininin yerine ground-truth önceki token'ı decoder girdisi olarak beslemek",
+        "Her decoder adımını manuel etiketlemek"
+      ],
+      "correct": 2,
+      "explanation": "Teacher forcing gerçek önceki token'ları kullanarak eğitimi kararlı yapar; onsuz erken hatalar birikir."
+    },
+    {
+      "stage": "check",
+      "question": "Sabit context-vector seq2seq accuracy'si girdi uzunluğu arttıkça neden düşer?",
+      "options": [
+        "Padding token'ları birikir",
+        "Cross-entropy ıraksar",
+        "Kaynak hakkındaki tüm bilgi tek bir sabit boyutlu encoder hidden state'e sığmalı, uzun girdilerde detay kaybeder",
+        "Vocabulary çok büyük olur"
+      ],
+      "correct": 2,
+      "explanation": "Sabit context-vector darboğazı uzun girdilerin kayıpsız özetlenemeyeceği anlamına gelir."
+    },
+    {
+      "stage": "check",
+      "question": "Exposure bias nedir?",
+      "options": [
+        "Sınıf dengesizliğinden kaynaklı bias",
+        "Encoder embedding'lerindeki bias",
+        "Annotatör anlaşmazlığı",
+        "Ground-truth token'lar üzerinde eğitim ama çıkarımda modelin kendi tahminlerinden üretim yapmaktan kaynaklanan train/inference farkı"
+      ],
+      "correct": 3,
+      "explanation": "Model eğitim sırasında kendi hatalarından kurtulmayı asla pratiğe dökmedi, dolayısıyla çıkarımda hatalar birikir."
+    },
+    {
+      "stage": "check",
+      "question": "Beam search üretim için greedy decoding'i neden sık sık geçer?",
+      "options": [
+        "Beam search tek bir token'a geri dönülmez şekilde bağlanmak yerine her adımda en iyi k kısmi diziyi canlı tutar",
+        "Beam search exposure bias'tan kaçınır",
+        "Beam search daha hızlıdır",
+        "Beam search loss'u düşürür"
+      ],
+      "correct": 0,
+      "explanation": "Greedy her adımda taahhüt eder; beam search birden çok hipotezi keşfeder, sonra en iyi tamamlanmış olanı seçer."
+    },
+    {
+      "stage": "post",
+      "question": "Genel üretim görevleri için RNN seq2seq'in yerini hangi mimari aile aldı?",
+      "options": [
+        "Transformer encoder-decoder modelleri (BART, T5, mBART, NLLB)",
+        "Graph sinir ağları",
+        "Naive Bayes",
+        "1D CNN'ler"
+      ],
+      "correct": 0,
+      "explanation": "Transformer encoder-decoder'lar recurrence'ı düşürdü ve şimdi üretim görevlerine hakim."
+    },
+    {
+      "stage": "post",
+      "question": "Scheduled sampling ne yapar?",
+      "options": [
+        "Eğitim sırasında teacher-forcing oranını aşağı doğru annealing yaparak modelin kendi tahminlerinden kurtulmayı öğrenmesini sağlar",
+        "Learning-rate decay'i planlar",
+        "Eğitim setini yeniden sıralar",
+        "Embedding'lere rastgele gürültü ekler"
+      ],
+      "correct": 0,
+      "explanation": "Scheduled sampling, train/inference farkını kapatmak için kademeli olarak model tahminlerini karışıma katar."
+    },
+    {
+      "stage": "post",
+      "question": "Kullanıcıya yönelik üretim için yalnız başına greedy decoding neden sık başarısız olur?",
+      "options": [
+        "Embedding kullanamaz",
+        "Her zaman önce <EOS> seçer",
+        "Greedy tekrar edebilir veya döngüye girebilir ve yerel olarak iyi ama genel olarak kötü bir token seçiminden geri dönemez",
+        "Daha fazla bellek gerektirir"
+      ],
+      "correct": 2,
+      "explanation": "Greedy decoding'in her adımdaki geri dönülmez seçimi beam search veya sampling olmadan döngülere ve tekrara neden olur."
+    }
+  ]
+}

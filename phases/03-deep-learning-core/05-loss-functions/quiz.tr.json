@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Loss fonksiyonu sinir ağı eğitiminde neyi temsil eder?",
+      "options": [
+        "Yanlış tahminlerin sayısını",
+        "Modelin tahminlerinin ne kadar yanlış olduğunun türevlenebilir bir ölçüsünü; optimizer bunu minimize eder",
+        "Eğitim veri setinin boyutunu",
+        "Learning rate schedule'ını"
+      ],
+      "correct": 1,
+      "explanation": "Loss fonksiyonu, tahminleri ve hedefleri optimizer'ın gradient descent ile minimize ettiği tek bir skaler değere eşler. Gradient'lerin hesaplanabilmesi için türevlenebilir olmalıdır."
+    },
+    {
+      "stage": "pre",
+      "question": "Sınıflandırma görevlerinde cross-entropy neden MSE'ye tercih edilir?",
+      "options": [
+        "Cross-entropy'nin hesaplanması daha hızlıdır",
+        "Cross-entropy emin yanlış tahminleri -log(p) ile üstel olarak cezalandırır; MSE ise 0 ve 1 yakınında zayıf gradient verir",
+        "MSE yalnızca regression için çalışır",
+        "Cross-entropy etiket gerektirmez"
+      ],
+      "correct": 1,
+      "explanation": "Bir model yanlış sınıfı emin bir şekilde tahmin ettiğinde (gerçek sınıf için p sıfıra yakınken), -log(p) çok büyük bir loss ve güçlü bir gradient üretir. MSE aynı durumda zayıf gradient üretir çünkü sigmoid 0 ve 1 yakınında düzdür."
+    },
+    {
+      "stage": "post",
+      "question": "İkili sınıflandırma için MSE loss kullanırsan ne olur?",
+      "options": [
+        "Eğitim hemen ıraksar",
+        "Model her şey için 0.5 tahmin ederek loss'u minimize edebilir; hiçbir şey öğrenmeden MSE=0.25 elde eder",
+        "Model normal şekilde eğitilir",
+        "Gradient'ler patlar"
+      ],
+      "correct": 1,
+      "explanation": "Dengeli bir ikili veri setinde MSE ile her girdi için 0.5 tahmin etmek MSE=0.25 verir -- ayrım yapmadan ulaşılabilecek minimum. Model, herhangi bir yararlı örüntü öğrenmeden loss'u sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Label smoothing ne yapar ve neden yararlıdır?",
+      "options": [
+        "Veri setinden gürültülü etiketleri kaldırır",
+        "Sert 0/1 hedeflerini 0.1/0.9 gibi yumuşak değerlerle değiştirir; aşırı güvenli tahminleri önler ve genelleştirmeyi iyileştirir",
+        "Loss'a hareketli ortalama uygular",
+        "Learning rate schedule'ını yumuşatır"
+      ],
+      "correct": 1,
+      "explanation": "Label smoothing hedefleri [0,0,1,0]'dan [0.025,0.025,0.925,0.025]'e değiştirir (alpha=0.1 ile). Bu, modelin sert hedeflere ulaşmak için logit'leri sonsuza itmesini engeller ve aşırı güveni azaltır."
+    },
+    {
+      "stage": "post",
+      "question": "Contrastive loss'ta (InfoNCE), temperature parametresi hangi rolü oynar?",
+      "options": [
+        "Learning rate'i kontrol eder",
+        "Benzerlik dağılımının ne kadar keskin olduğunu kontrol eder -- düşük temperature, pozitif ve negatifler arasında daha sert ayrım anlamına gelir",
+        "Negatif örnek sayısını belirler",
+        "Embedding boyutunu belirler"
+      ],
+      "correct": 1,
+      "explanation": "Temperature, softmax'tan önce benzerlik skorlarını böler. Düşük temperature (örn. 0.07), modelin pozitifleri negatiflerden net bir şekilde ayırmasını gerektiren daha keskin bir dağılım oluşturur. Yüksek temperature daha hoşgörülüdür."
+    }
+  ]
+}

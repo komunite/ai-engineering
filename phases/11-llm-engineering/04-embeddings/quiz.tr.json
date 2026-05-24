@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Embedding'ler, keyword aramasının çözemediği hangi problemi çözer?",
+    "options": ["Embedding'ler daha hızlıdır", "Embedding'ler semantik anlamı yakalar ve hiçbir kelime paylaşmasalar bile 'ödeme geçmedi' ile 'tahsilat reddedildi' ifadelerini eşleştirir", "Embedding'ler daha az depolama kullanır", "Embedding'ler offline çalışır"],
+    "correct": 1,
+    "explanation": "Keyword araması kelimeleri bağımsız semboller olarak ele alır. Embedding'ler metni yüksek boyutlu vektörlere haritalar; burada semantik benzerlik = geometrik yakınlık. Aynı anlama sahip metinler, kelime seçiminden bağımsız olarak birlikte kümelenir.",
+    "stage": "pre"
+  },
+  {
+    "question": "Cosine similarity iki embedding vektörü arasında neyi ölçer?",
+    "options": ["Öklid uzaklığını", "Vektörler arasındaki açıyı; büyüklükten bağımsız olarak yönlerinin ne kadar benzer olduğunu gösterir", "Bileşenlerinin toplamını", "Eşleşen boyutların sayısını"],
+    "correct": 1,
+    "explanation": "Cosine similarity = dot(A,B) / (|A|*|B|). -1 (zıt) ile 1 (özdeş yön) arasında değişir. Aynı anlama sahip iki metnin vektörleri neredeyse aynı yöne işaret eder ve cosine similarity 1'e yakın olur.",
+    "stage": "pre"
+  },
+  {
+    "question": "Modern text embedding modellerinin tipik boyutluluğu nedir?",
+    "options": ["2-10 boyut", "50-100 boyut", "768-3072 boyut", "100,000+ boyut"],
+    "correct": 2,
+    "explanation": "Modern embedding modelleri (OpenAI text-embedding-3, BGE, E5) 768 ile 3072 boyut arasında vektörler üretir. Daha yüksek boyutlar daha fazla nüans yakalar ama depolanması ve aranması daha maliyetlidir.",
+    "stage": "post"
+  },
+  {
+    "question": "Sadece benzerlik skorlarını incelemek yerine, embedding kalitesini retrieval benchmark'larıyla neden değerlendirmelisin?",
+    "options": ["Benzerlik skorları her zaman yanlıştır", "Mutlak benzerlik değerleri modele göre değişir; önemli olan ilgili dokümanların ilgisiz olanlardan daha yüksek sırada gelip gelmediğidir (precision@k, recall)", "Retrieval benchmark'ları daha hızlıdır", "Benzerlik skorları cosine uzaklığı kullanmaz"],
+    "correct": 1,
+    "explanation": "0.85 cosine similarity bir model için 'çok benzer' anlamına gelebilirken diğeri için 'biraz benzer' anlamına gelebilir. Retrieval metrikleri (precision@k, recall) gerçekten önemli olanı ölçer: doğru doküman geri geliyor mu?",
+    "stage": "post"
+  },
+  {
+    "question": "API tabanlı bir embedding modeli yerine lokal/açık kaynak bir embedding modelini ne zaman kullanırsın?",
+    "options": ["Lokal modeller her zaman daha iyidir", "Veri gizliliği, offline çalışma, ölçekte daha düşük maliyet veya domain'e özgü fine-tuning gerektiğinde", "Lokal modeller daha kaliteli embedding'ler üretir", "API modelleri batching'i desteklemez"],
+    "correct": 1,
+    "explanation": "API embedding'leri (OpenAI, Cohere) kolaydır ama verini dışarıya gönderir. Lokal modeller (BGE, E5, Nomic) veriyi gizli tutar, ölçekte çağrı başı maliyetleri ortadan kaldırır ve domain'e özgü veri üzerinde fine-tune edilebilir.",
+    "stage": "post"
+  }
+]

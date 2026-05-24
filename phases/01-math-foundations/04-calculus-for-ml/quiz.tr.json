@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir fonksiyonun bir noktadaki türevi sana neyi söyler?",
+      "options": ["Fonksiyonun o noktadaki değerini", "Fonksiyonun o noktadaki değişim oranını (eğimini)", "O noktaya kadar fonksiyonun altındaki alanı", "Fonksiyonun ulaşabileceği maksimum değeri"],
+      "correct": 1,
+      "explanation": "f'(x) türevi, girişteki birim değişim başına çıkışın ne kadar değiştiğini ölçer. Geometrik olarak, o noktadaki teğet doğrunun eğimidir."
+    },
+    {
+      "stage": "pre",
+      "question": "Makine öğrenmesi bağlamında gradyan nedir?",
+      "options": ["Model doğruluğunun bir ölçüsü", "En dik yükseliş yönüne işaret eden, tüm kısmi türevlerin vektörü", "Eğitim sırasında kullanılan learning rate", "Tahmin edilen ve gerçek değerler arasındaki fark"],
+      "correct": 1,
+      "explanation": "Gradyan her kısmi türevi tek bir vektörde toplar. Fonksiyonu en hızlı artıran yönü gösterir. Loss'u küçültmek için gradyanın tersi yönde hareket edersin."
+    },
+    {
+      "stage": "post",
+      "question": "Gradient descent'te 'w = w - lr * dL/dw' güncelleme kuralı neyi başarır?",
+      "options": ["Model dayanıklılığını test etmek için loss'u artırır", "Her ağırlığı, learning rate ile ölçeklenmiş şekilde loss'u azaltan yönde ayarlar", "Ağırlığı başlangıç değerinden gradyanı çıkararak sıfırlar", "Ağırlığı büyüklüğü 1 olacak şekilde normalize eder"],
+      "correct": 1,
+      "explanation": "dL/dw sana hangi yönün loss'u artırdığını söyler. Onu (learning rate ile çarpılmış halde) çıkarmak, ağırlığı loss'u azaltan yöne taşır. Bu, modeldeki her ağırlık için tekrarlanır."
+    },
+    {
+      "stage": "post",
+      "question": "Newton metodu (Hessian matrisini kullanır) neden milyonlarca parametreye sahip sinir ağlarına doğrudan uygulanamaz?",
+      "options": ["Newton metodu yalnızca konveks fonksiyonlarda çalışır", "Hessian bir N x N matrisidir; adım başına O(N^2) depolama ve O(N^3) hesaplama gerektirir, bu da milyonlarca parametre için işlenemezdir", "Newton metodu analitik türevler gerektirir, sinir ağları için hesaplanamaz", "Newton metodu derin ağlar için çok yavaş yakınsar"],
+      "correct": 1,
+      "explanation": "N=1 milyon parametre için Hessian 1 trilyon eleman içerir. Onu hesaplamak ve tersini almak imkansızdır. Bu nedenle ikinci dereceden bilgiyi ucuza yaklaştıran birinci dereceden yöntemleri (SGD, Adam) kullanırız."
+    },
+    {
+      "stage": "post",
+      "question": "f'(x) için sayısal (merkezi fark) yaklaşımı nedir?",
+      "options": ["f(x+h) / h", "(f(x+h) - f(x)) / h", "(f(x+h) - f(x-h)) / (2*h)", "f(x) * h"],
+      "correct": 2,
+      "explanation": "Merkezi fark (f(x+h) - f(x-h)) / (2h), ileri farktan daha doğrudur çünkü x'in her iki tarafındaki eğimin ortalamasını alır ve önde gelen hata terimini iptal eder."
+    }
+  ]
+}

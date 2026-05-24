@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "FP16'da 7B parametreli bir model yalnızca ağırlıklar için ne kadar VRAM'e ihtiyaç duyar?",
+      "options": [
+        "7 GB",
+        "14 GB",
+        "28 GB",
+        "56 GB"
+      ],
+      "correct": 1,
+      "explanation": "FP16'da her parametre 2 byte'tır. 7 milyar * 2 byte = 14 GB. Adam optimizer state'leri (2 kopya) ve gradyanlarla birlikte, aktivasyonları hesaba katmadan önce toplam eğitim belleği yaklaşık 56 GB'tır."
+    },
+    {
+      "stage": "pre",
+      "question": "Dağıtık eğitimde kullanılan üç paralelizm türü nedir?",
+      "options": [
+        "CPU, GPU ve TPU paralelizmi",
+        "Data parallelism, tensor parallelism ve pipeline parallelism",
+        "Batch, sequence ve token paralelizmi",
+        "Forward, backward ve optimizer paralelizmi"
+      ],
+      "correct": 1,
+      "explanation": "Data parallelism modeli her GPU'da replike eder ve veriyi böler. Tensor parallelism tek tek katmanları GPU'lar arasında böler. Pipeline parallelism modelin katmanlarını GPU'lar arasında aşamalara böler."
+    },
+    {
+      "stage": "post",
+      "question": "FSDP (Fully Sharded Data Parallel) standart DDP'nin yapmadığı neyi yapar?",
+      "options": [
+        "Farklı bir optimizer kullanır",
+        "Tam modeli her GPU'da replike etmek yerine model parametrelerini, gradyanları ve optimizer state'lerini GPU'lar arasında shard'lar",
+        "Veriyi daha hızlı işler",
+        "Daha fazla GPU destekler"
+      ],
+      "correct": 1,
+      "explanation": "Standart DDP tüm modeli her GPU'da replike eder (israflı). FSDP parametreleri GPU'lar arasında shard'lar, böylece her biri yalnızca bir kısmı tutar. Parametreler hesaplama için ihtiyaç anında toplanır ve sonra serbest bırakılır."
+    },
+    {
+      "stage": "post",
+      "question": "DeepSpeed ZeRO Stage 3 nedir?",
+      "options": [
+        "Bir quantization yöntemi",
+        "Optimizer state'lerini, gradyanları VE model parametrelerini GPU'lar arasında partition'lar, maksimum bellek verimliliği sağlar",
+        "Bir learning rate schedule",
+        "Bir veri ön işleme pipeline'ı"
+      ],
+      "correct": 1,
+      "explanation": "ZeRO Stage 1 optimizer state'lerini shard'lar, Stage 2 gradyan shard'lamayı ekler, Stage 3 parametre shard'lamayı ekler. Stage 3 maksimum bellek tasarrufu sağlar ve tek-GPU belleğini aşan modellerin eğitilmesine olanak verir."
+    },
+    {
+      "stage": "post",
+      "question": "Data-parallel eğitimde gradyan senkronizasyonu neden gereklidir?",
+      "options": [
+        "Overfitting'i önlemek için",
+        "Her GPU farklı veri üzerinde gradyan hesaplar; gradyanları GPU'lar arasında ortalamak tüm replikaların aynı şekilde güncellenmesini sağlar",
+        "Bellek kullanımını azaltmak için",
+        "Forward pass'i hızlandırmak için"
+      ],
+      "correct": 1,
+      "explanation": "Data parallelism'de her GPU farklı bir batch işler ve farklı gradyanlar hesaplar. AllReduce bu gradyanları tüm GPU'lar arasında ortalar, böylece her replika aynı güncellemeyi uygular ve senkronize kalır."
+    }
+  ]
+}

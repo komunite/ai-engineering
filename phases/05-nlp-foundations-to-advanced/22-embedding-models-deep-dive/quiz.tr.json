@@ -1,0 +1,102 @@
+{
+  "lesson": "22-embedding-models-deep-dive",
+  "title": "Embedding Modelleri — 2026 Derinlemesine İnceleme",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir dense embedding nedir?",
+      "options": [
+        "Dokümanlar üzerinde bir graf",
+        "Vocab token başına seyrek bir ağırlık",
+        "Bir token seviyesi hizalama matrisi",
+        "Metin başına bir sabit boyutlu vektör; cosine similarity pasajları semantik yakınlığa göre sıralar"
+      ],
+      "correct": 3,
+      "explanation": "Dense embedding'ler metin başına bir vektör verir (tipik 384-3072 boyut); cosine benzerliği sıralar."
+    },
+    {
+      "stage": "pre",
+      "question": "Matryoshka Representation Learning neyi mümkün kılar?",
+      "options": [
+        "Çok dilli eğitim",
+        "Daha hızlı softmax",
+        "Eğitilmiş bir embedding'i ilk N boyutuna truncate edip hâlâ yararlı, daha küçük bir embedding elde etmek",
+        "Cross-encoder rescoring"
+      ],
+      "correct": 2,
+      "explanation": "Matryoshka eğitimi vektörün ilk N boyutunu tek başına yararlı yapar, ucuz truncation'ı mümkün kılar."
+    },
+    {
+      "stage": "check",
+      "question": "Multi-vector (ColBERT) embedding'leri query-doc çiftlerini nasıl skorlar?",
+      "options": [
+        "Mean-pool token vektörlerinin cosine'i",
+        "Cross-entropy",
+        "Earth-mover's distance",
+        "MaxSim: her query token'ı için en benzer doküman token'ını bul, sonra maksimumları topla"
+      ],
+      "correct": 3,
+      "explanation": "ColBERT tarzı late interaction, token başına vektörler üzerinde MaxSim kullanır."
+    },
+    {
+      "stage": "check",
+      "question": "BGE-M3 aynı anda neyi çıktılar?",
+      "options": [
+        "Yalnızca bir sparse vektör",
+        "Yalnızca bir dense vektör",
+        "Bir modelden tek bir çıkarımda dense, sparse ve multi-vector (colbert) temsilleri",
+        "Yalnızca bir colbert vektörü"
+      ],
+      "correct": 2,
+      "explanation": "BGE-M3 bir modelden üç retrieval modu emit eder, fused hybrid skorlama için yararlıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Matryoshka-truncate edilmiş bir vektörü cosine similarity'den önce neden yeniden normalize etmelisin?",
+      "options": [
+        "Truncation eğitimi bozar",
+        "Truncation vektör normunu değiştirir; yeniden normalize etmeden dot product artık cosine'e eşit değildir",
+        "Cosine normalizasyonu görmezden gelir",
+        "Yalnızca FAISS tarafından zorunlu"
+      ],
+      "correct": 1,
+      "explanation": "Truncation'dan sonra yeniden normalize etmek birim normu geri yükler, böylece dot product yine cosine'e eşit olur."
+    },
+    {
+      "stage": "post",
+      "question": "BGE modelleri neden sık sık query tarafında bir prefix string'e ihtiyaç duyar?",
+      "options": [
+        "Query'leri sıkıştırmak için",
+        "FAISS tarafından zorunlu",
+        "BGE açık bir query prompt'u ile eğitildi; atlamak 3-5 puan recall kaybettirir",
+        "Prefix'ler tokenizer davranışını değiştirir"
+      ],
+      "correct": 2,
+      "explanation": "BGE modelleri query'lerde 'Represent this sentence for searching...' prefix'ini bekler."
+    },
+    {
+      "stage": "post",
+      "question": "Bir embedding modeli seçmek için MTEB neden gerekli ama yeterli değildir?",
+      "options": [
+        "MTEB yalnızca İngilizce'yi kapsar",
+        "MTEB gecikmeyi görmezden gelir",
+        "Leaderboard sıralamaları birçok görev üzerindeki ortalamadır; senin spesifik alanın farklı olabilir, bu yüzden her zaman kendi verinde benchmark et",
+        "MTEB daha büyük modelleri ödüllendirir"
+      ],
+      "correct": 2,
+      "explanation": "MTEB görevler arasında ortalama alır; alan-spesifik eval sıralamayı tersine çevirebilir."
+    },
+    {
+      "stage": "post",
+      "question": "SPLADE sparse retrieval'ı dense embedding'lerin yanına ne zaman eklemelisin?",
+      "options": [
+        "Encoder çok dilli olduğunda her zaman",
+        "Matryoshka kullanıldığında her zaman",
+        "Query'ler anahtar kelime ağırlıklı veya dense embedding'lerin bulanıklaştırdığı identifier/kod içerdiğinde",
+        "Yalnızca küçük corpus'larda"
+      ],
+      "correct": 2,
+      "explanation": "SPLADE dense modellerin kaçırabileceği lexical/anahtar kelime eşleşmelerini yakalar; RRF ile dense'le birleştir."
+    }
+  ]
+}

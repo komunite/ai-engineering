@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Zaman serisi verisi için rastgele eğitim/test ayrımı neden geçersizdir?",
+      "options": [
+        "Rastgele ayrımlar veri setini çok küçük yapar",
+        "Rastgele ayrımlar gelecek bilgisini eğitim setine sızdırır ve modelin hile yapmasına izin verir",
+        "Zaman serisi verisi hiç ayrılamaz",
+        "Rastgele ayrımlar yalnızca sınıflandırma problemleri için çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Rastgele bir ayrımda, gelecek veri noktaları eğitim setine düşerken geçmiş noktalar test setinde olabilir. Model sonra geçmişi tahmin etmek için gelecek bilgisini kullanır ve yanlış iyimser sonuçlar verir."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir zaman serisinin durağan (stationary) olması ne anlama gelir?",
+      "options": [
+        "Değerler zamanla hiç değişmez",
+        "İstatistiksel özellikleri (ortalama, varyans, otokorelasyon) zamanla değişmez",
+        "Mevsimsel örüntüsü yoktur",
+        "Her zaman yukarı yönlü bir trend gösterir"
+      ],
+      "correct": 1,
+      "explanation": "Durağan bir seri zaman içinde sabit ortalama, varyans ve otokorelasyon yapısına sahiptir. Çoğu tahmin yöntemi durağanlığı varsayar. Durağan olmayan serilerin önce differencing veya detrend edilmesi gerekir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir zaman serisinde differencing'in amacı nedir?",
+      "options": [
+        "Veri noktası sayısını artırmak",
+        "Trend'i kaldırmak ve ardışık değerler arasındaki değişimleri modelleyerek seriyi durağan yapmak",
+        "Regresyonu sınıflandırmaya dönüştürmek",
+        "Değerleri 0 ile 1 arasında normalize etmek"
+      ],
+      "correct": 1,
+      "explanation": "Differencing her değeri bir önceki değerden farkıyla değiştirir: diff[t] = value[t] - value[t-1]. Bu trend'i kaldırarak seriyi durağanlığa yaklaştırır."
+    },
+    {
+      "stage": "post",
+      "question": "Lag öznitelikleri bir zaman serisini denetimli öğrenme problemine dönüştürür. y[t]'yi tahmin etmek için lag-3 özniteliği nedir?",
+      "options": [
+        "Sonraki 3 değerin ortalaması: (y[t+1] + y[t+2] + y[t+3]) / 3",
+        "3 zaman adımı önceki değer: y[t-3]",
+        "Serinin 3. türevi",
+        "Mevcut değer ile 3 adım sonraki değer arasındaki fark"
+      ],
+      "correct": 1,
+      "explanation": "Lag-3 özniteliği y[t-3]'tür: 3 zaman adımı önceki değer. Geçmiş değerleri girdi öznitelikleri olarak kullanmak, standart ML modellerinin (regresyon, ağaçlar) özelleşmiş algoritmalar olmadan zaman serisi tahmini yapmasını sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Walk-forward validation, zaman verisini genişleyen veya kayan pencerelere böler. Bu zaman serisi için K-fold CV'den neden daha iyidir?",
+      "options": [
+        "Walk-forward hesaplamak için daha hızlıdır",
+        "Walk-forward zamansal sırayı korur, yalnızca geçmiş veride eğitir ve gelecek veride test eder; bu da lookahead bias'ı önler",
+        "K-fold CV sayısal veri üzerinde kullanılamaz",
+        "Walk-forward eğitim için daha fazla veri kullanır"
+      ],
+      "correct": 1,
+      "explanation": "Walk-forward validation her zaman geçmiş veride eğitir ve gelecek veride test eder; gerçek dünya dağıtımını taklit eder. K-fold CV veriyi karıştırır ve potansiyel olarak geleceği eğitip geçmişi tahmin eder (zamansal leakage)."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "question": "RAG'de temel top-k semantik aramanın sınırı nedir?",
+    "options": ["Çok yavaştır", "Sorguya semantik olarak benzer ama özellikle muğlak veya çok-adımlı sorularda gerçek cevabı içermeyebilen chunk'ları retrieve eder", "Büyük dokümanları işleyemez", "GPU gerektirir"],
+    "correct": 1,
+    "explanation": "Temel semantik arama yüzey seviyesi anlamı eşleştirir. 'Geçen çeyrek geliri neydi?' sorgusu, '$47.2M Q3 2025' yazan chunk yerine 'gelir stratejisi' ile ilgili chunk'ları retrieve eder (semantik olarak benzer çünkü 'earnings' kullanılmıştır).",
+    "stage": "pre"
+  },
+  {
+    "question": "RAG bağlamında hybrid search nedir?",
+    "options": ["İki farklı LLM kullanmak", "Hem kesin terimleri hem de anlama dayalı ilgiyi yakalamak için BM25 keyword eşleştirmesini semantik vektör aramasıyla birleştirmek", "Birden fazla veritabanında arama yapmak", "Arama için hem CPU hem GPU kullanmak"],
+    "correct": 1,
+    "explanation": "BM25 kesin keyword eşleşmelerini yakalar (örn. '$47.2M' veya 'Q3'). Semantik arama anlam eşleşmelerini yakalar. Bunları bir reranker ile birleştirmek her iki dünyanın en iyisini verir: spesifik terimlerde precision artı semantik varyantlarda recall.",
+    "stage": "pre"
+  },
+  {
+    "question": "Gelişmiş bir RAG pipeline'ında cross-encoder reranker ne yapar?",
+    "options": ["Nihai cevabı üretir", "(query, document) çiftlerini alır ve ilgiyi embedding benzerliğinden daha yüksek doğrulukla skorlar, başlangıç retrieval sonuçlarını yeniden sıralar", "Dokümanları vektörlere encode eder", "Dokümanları chunk'lara böler"],
+    "correct": 1,
+    "explanation": "Bi-encoder benzerliği (başlangıç retrieval'ı için kullanılır) hızlıdır ama yaklaşıktır. Cross-encoder tam query-document çiftini cross-attention ile birlikte işler ve top adayları reranking için çok daha doğru ilgi skorları verir.",
+    "stage": "post"
+  },
+  {
+    "question": "HyDE (Hypothetical Document Embedding) sorgu dönüşüm tekniği nedir?",
+    "options": ["Sorguyu modelden gizlemek", "LLM'i hipotetik bir cevap üretmek için kullanmak, sonra bu cevabı orijinal soru yerine arama sorgusu olarak embed etmek", "Gizlilik için sorguyu şifrelemek", "Sorgudaki kısaltmaları genişletmek"],
+    "correct": 1,
+    "explanation": "Orijinal sorgu 'Q3 geliri neydi?' cevap chunk'ına yakın embed olmayabilir. HyDE LLM'den hipotetik bir cevap ('Q3 geliri yaklaşık olarak...') üretmesini ister, sonra bunu arama sorgusu olarak kullanır; bu, gerçek cevabı içeren chunk'lara daha yakın embed olur.",
+    "stage": "post"
+  },
+  {
+    "question": "Parent-child chunking, flat chunking'e göre RAG'i neden iyileştirir?",
+    "options": ["Indekslenmesi daha hızlıdır", "Küçük child chunk'lar kesin retrieval için kullanılır ama bağlam için daha büyük parent chunk döndürülür, 'kayıp bağlam' problemini önler", "Chunk sayısını azaltır", "Embedding ihtiyacını ortadan kaldırır"],
+    "correct": 1,
+    "explanation": "Küçük chunk'lar (200 token) kesin embed olur ama bağlam eksiktir. Büyük chunk'lar (2000 token) bağlama sahiptir ama imprecise embed olur. Parent-child arama doğruluğu için küçük chunk'ları kullanır ama generation bağlamı için parent chunk'ı döndürür.",
+    "stage": "post"
+  }
+]

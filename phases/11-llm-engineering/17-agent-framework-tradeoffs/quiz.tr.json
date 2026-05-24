@@ -1,0 +1,65 @@
+{
+  "lesson": "phase-11/17-agent-framework-tradeoffs",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "Bir çökmenin ardından devam edebilmesi, çalışma ortasında insan onayı kabul etmesi ve üç retriever'a paralel fan out yapması gereken bir workflow için ilk doğru framework seçimi hangisidir?",
+      "options": [
+        "CrewAI",
+        "AutoGen",
+        "LangGraph",
+        "Agno"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "LLM-selected routing neden açık routing'e göre turn başına daha fazla token'a mal olur?",
+      "options": [
+        "Latency hedge etmek için bir sonraki node'u paralel olarak pre-fetch eder.",
+        "Bir planner LLM çağrısı her turn'de bir sonraki adımı seçer ve her karar için prompt ve completion token'ları ekler.",
+        "Crew'deki her agent için tool listesini çoğaltır.",
+        "Tüm konuşma geçmişini bir verifier model'a gönderir."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Code review'da proposer-critic diyaloğu doğal olarak hangi framework'ün temel soyutlamasına eşlenir?",
+      "options": [
+        "CrewAI'nin sequential Crew'u",
+        "LangGraph'ın StateGraph'ı",
+        "AutoGen'in GroupChat / ConversableAgent çifti",
+        "Agno'nun tool'lu tek Agent'ı"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Session ve memory persistence için Agent primitive'ine doğrudan bağlı built-in storage driver'ları (SQLite, Postgres, Redis, Mongo, DynamoDB) hangi framework'te vardır?",
+      "options": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "Agno"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "İki çağrılı bir summarizer'ın var: metni getir, özetle. Doğru framework seçeneği hangisidir?",
+      "options": [
+        "LangGraph StateGraph — güvenilirlik için her zaman bir framework kullan.",
+        "CrewAI ile researcher + summarizer rolleri — roller daha net yapar.",
+        "Provider SDK ile düz Python — küçük pipeline'lar için framework olmaması en hızlı framework'tür.",
+        "AutoGen GroupChat — iki agent en iyi özet hakkında tartışabilir."
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

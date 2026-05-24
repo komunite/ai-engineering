@@ -1,0 +1,102 @@
+{
+  "lesson": "05-sentiment-analysis",
+  "title": "Duygu Analizi",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'The food was not great' naif BoW sınıflandırıcıları için neden zor bir vakadır?",
+      "options": [
+        "Noktalama yok",
+        "İngilizce ve Fransızca karışıyor",
+        "Olumsuzluk anlamı çevirir, ama bag of words 'not' ile 'great' arasındaki bağı atar",
+        "Çok az token içeriyor"
+      ],
+      "correct": 2,
+      "explanation": "BoW 'not' kelimesini olumsuzladığı kelimeye bağlayamaz, dolayısıyla sınıflandırıcı kutup değişikliğini kaçırır."
+    },
+    {
+      "stage": "pre",
+      "question": "Klasik duygu analizini hangi iki adım oluşturur?",
+      "options": [
+        "Çevir, sonra sınıflandır",
+        "Embed et, sonra kümele",
+        "Temsil et (metni vektörize et) ve sınıflandır (vektör üzerinde doğrusal model)",
+        "Ara, sonra sırala"
+      ],
+      "correct": 2,
+      "explanation": "Klasik duygu analizi, özellik çıkarımı ardından doğrusal sınıflandırıcıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Naive Bayes 'naif' bağımsızlık varsayımına rağmen neden çalışır?",
+      "options": [
+        "Seyrek metin özellikleri ve orta düzey veriyle, sınıflandırıcı çoğunlukla her kelimenin hangi tarafa eğildiğini önemser, tam ortak olasılıkları değil",
+        "Naive Bayes gizliden etkileşimleri öğrenir",
+        "Varsayım aslında metin için doğrudur",
+        "Laplace smoothing bağımlılığı düzeltir"
+      ],
+      "correct": 0,
+      "explanation": "Yanlış bağımsızlıkla bile, kelime başına eğilim yönü bilgisi iyi sınıflandırmak için yeterlidir."
+    },
+    {
+      "stage": "check",
+      "question": "Preprocessing sırasında neden 'NOT_' önekli token'lar dahil edilir?",
+      "options": [
+        "Case'i normalize etmek için",
+        "Kelimeleri stem'lemek için",
+        "'good' ile 'NOT_good' kelimelerini sınıflandırıcının zıt ağırlıklandırabileceği ayrı özelliklere dönüştürmek için",
+        "Vocabulary'yi küçültmek için"
+      ],
+      "correct": 2,
+      "explanation": "Olumsuzluk scoping'i, olumsuzlanmış formları ayrı özelliklere ayırır, böylece BoW sınıflandırıcı tersine çevrilmeyi modelleyebilir."
+    },
+    {
+      "stage": "check",
+      "question": "Duygu analizi için stopword'leri kaldırmak neden risklidir?",
+      "options": [
+        "Olumsuzluk kelimeleri ('not', 'no', 'never') genellikle stopword olarak işlenir ama duygu sinyali taşır",
+        "Stopword listeleri çok uzundur",
+        "Sparsity'yi artırır",
+        "Stopword kaldırma tokenization'ı bozar"
+      ],
+      "correct": 0,
+      "explanation": "Varsayılan stopword listeleri olumsuzlukları ve benzer duygu taşıyıcılarını atar."
+    },
+    {
+      "stage": "post",
+      "question": "Duygu sınıfları dengesiz olduğunda hangi metriği raporlamalısın?",
+      "options": [
+        "Macro-F1 (sınıf başına F1'lerin ortalaması, eşit ağırlıklı)",
+        "Yalnızca accuracy",
+        "Mean squared error",
+        "Yalnızca Micro-F1"
+      ],
+      "correct": 0,
+      "explanation": "Macro-F1 azınlık sınıfının da sayılmasını zorlar; accuracy veya micro-F1 onu saklar."
+    },
+    {
+      "stage": "post",
+      "question": "Klasik modelleri ne zaman atlayıp duygu analizi için transformer'a yönelmelisin?",
+      "options": [
+        "100'den az örneğin olduğunda",
+        "Gecikme kritikken",
+        "Açıklanabilirliğe ihtiyaç duyduğunda",
+        "Sarcasm tespiti, uzun ve değişen dokümanlar, aspect-based sentiment veya düşük kaynaklı diller"
+      ],
+      "correct": 3,
+      "explanation": "Sarcasm, aspect-based ve diller arası duygu klasik BoW modellerinin sınırlarını aşar."
+    },
+    {
+      "stage": "post",
+      "question": "Metin üzerinde logistic regression için L2 regularization neden önemlidir?",
+      "options": [
+        "Gradient hesaplamak için gerekli",
+        "ReLU dead unit'leri önler",
+        "Matris tersini hızlandırır",
+        "Seyrek yüksek boyutlu metin özellikleri aksi takdirde modelin eğitim örneklerini ezberlemesine izin verir"
+      ],
+      "correct": 3,
+      "explanation": "L2, metnin seyrek-özellik, yüksek-boyutlu rejiminde overfitting'i önler."
+    }
+  ]
+}

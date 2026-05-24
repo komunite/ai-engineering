@@ -1,0 +1,90 @@
+{
+  "lesson": "14-autogen-actor-model",
+  "title": "AutoGen v0.4: Actor Model ve Agent Framework",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "AutoGen v0.4'te actor'ların etkileşimde bulunabileceği tek yasal yol nedir?",
+      "options": [
+        "Paylaşılan bir dict'e doğrudan erişim",
+        "Inbox'lar aracılığıyla değiştirilen asenkron mesajlar; paylaşılan bellek yok",
+        "Paylaşılan SQL transaction'ları",
+        "Birbirinin prompt'larını mutate etmek"
+      ],
+      "correct": 1,
+      "explanation": "Actor'ların private state'i ve bir inbox'ı vardır; mesajlar tek etkileşim aracıdır."
+    },
+    {
+      "stage": "pre",
+      "question": "AutoGen v0.4'ün üç API katmanı nedir?",
+      "options": [
+        "Core, AgentChat, Extensions",
+        "Frontend, Backend, Database",
+        "Tools, Models, Memory",
+        "Plan, Act, Reflect"
+      ],
+      "correct": 0,
+      "explanation": "Core düşük seviye actor framework'üdür, AgentChat görev-güdümlü yüksek seviye API'dir, Extensions entegrasyonlardır."
+    },
+    {
+      "stage": "check",
+      "question": "Delivery'yi handling'den ayırmak neden fault isolation sağlar?",
+      "options": [
+        "Runtime, B'deki handler hatalarını A'yı çökertmeden yakalar; A'nın send() çağrısı hemen döndü ve hiç bloklanmadı",
+        "Her actor ayrı bir makinede çalışır",
+        "Runtime hata anında OS'i yeniden başlatır",
+        "Handler'lar saf fonksiyonlardır"
+      ],
+      "correct": 0,
+      "explanation": "send() mesajı alıcının inbox'ına koyar ve döner; handler çökmesi o actor'a lokaldir."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi AgentChat topolojisi agent'ları sabit sırada döndürür?",
+      "options": [
+        "SelectorGroupChat",
+        "RoundRobinGroupChat",
+        "Magentic-One",
+        "Supervisor"
+      ],
+      "correct": 1,
+      "explanation": "RoundRobinGroupChat sabit rotasyondur; SelectorGroupChat bir sonrakini seçmek için bir selector kullanır."
+    },
+    {
+      "stage": "check",
+      "question": "Bu derste Magentic-One nedir?",
+      "options": [
+        "Yeni bir LLM modeli",
+        "Web tarama, kod yürütme ve dosya işleme için AgentChat üzerine kurulu bir referans multi-agent ekip",
+        "Bir serileştirme formatı",
+        "Bir OTel exporter"
+      ],
+      "correct": 1,
+      "explanation": "Magentic-One, Microsoft'un AgentChat API'sini gösteren referans ekibidir."
+    },
+    {
+      "stage": "post",
+      "question": "Dersin 2026 başında AutoGen v0.4 için belirttiği durum nedir?",
+      "options": [
+        "Kullanımdan kaldırıldı ve silindi",
+        "Stabil ama bakım modunda; Microsoft Agent Framework ilerideki yoldur",
+        "Yeni duyuruldu",
+        "LangGraph tarafından değiştirildi"
+      ],
+      "correct": 1,
+      "explanation": "AutoGen v0.7.x araştırma için stabildir; aktif geliştirme Microsoft Agent Framework'e kaydı."
+    },
+    {
+      "stage": "post",
+      "question": "AutoGen v0.4 varsayılan olarak hangi observability standardını yayar?",
+      "options": [
+        "Yalnızca Prometheus metrikleri",
+        "OTel GenAI semantic convention'larına göre gen_ai.* özellikleriyle OpenTelemetry span'leri",
+        "StatsD",
+        "Datadog APM"
+      ],
+      "correct": 1,
+      "explanation": "Her mesaj bir span yayar; tool çağrıları OTel GenAI convention'larına göre gen_ai.* özellikleri taşır."
+    }
+  ]
+}

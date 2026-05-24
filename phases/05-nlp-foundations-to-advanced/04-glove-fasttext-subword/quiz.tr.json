@@ -1,0 +1,102 @@
+{
+  "lesson": "04-glove-fasttext-subword",
+  "title": "GloVe, FastText ve Subword Embedding'ler",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "GloVe Word2Vec'in üstüne ne katkı sağladı?",
+      "options": [
+        "Word-word co-occurrence matrisinin ağırlıklı kayıpla doğrudan faktörizasyonu",
+        "Byte-level tokenization",
+        "Daha derin bir sinir ağı",
+        "Subword n-gram embedding'leri"
+      ],
+      "correct": 0,
+      "explanation": "GloVe global co-occurrence matrisini özenle ağırlıklandırılmış bir log-loss ile faktörize eder."
+    },
+    {
+      "stage": "pre",
+      "question": "FastText, Word2Vec ve GloVe'un çözemediği hangi problemi çözer?",
+      "options": [
+        "Eğitim maliyetini azaltma",
+        "Çok dilli transfer",
+        "Görülmemiş kelimeler için karakter n-gram'larını bileştirerek vektör üretme",
+        "Polysemy disambiguation"
+      ],
+      "correct": 2,
+      "explanation": "FastText bir word vektörünü subword n-gram'larından oluşturur, dolayısıyla OOV kelimeler bile makul bir vektör alır."
+    },
+    {
+      "stage": "check",
+      "question": "GloVe'da f(x) = (x/x_max)^alpha ağırlıklandırma fonksiyonu hangi rolü oynar?",
+      "options": [
+        "Aşırı sık çiftleri aşağı ağırlıklandırarak kaybı domine etmelerini önler",
+        "Negatif örnekleri seçer",
+        "Ağırlıkları rastgele başlatır",
+        "Vektörleri birim uzunluğa normalize eder"
+      ],
+      "correct": 0,
+      "explanation": "Ağırlıklandırma (the, and) gibi her yerde geçen co-occurrence'ların eğitimi domine etmesini önler."
+    },
+    {
+      "stage": "check",
+      "question": "BPE merge adımı bir sonraki birleştirilecek çifti nasıl seçer?",
+      "options": [
+        "Rastgele bir çift",
+        "Sözlükbilimsel olarak ilk çift",
+        "Corpus boyunca en sık görülen bitişik token çifti",
+        "En yüksek IDF'li çift"
+      ],
+      "correct": 2,
+      "explanation": "BPE iteratif olarak en sık bitişik çifti birleştirir."
+    },
+    {
+      "stage": "check",
+      "question": "GPT-2 neden byte-level BPE kullanır?",
+      "options": [
+        "Byte BPE merge eğitimini atlar",
+        "256 byte'lık temel vocabulary herhangi bir girdiyi kapsar ve out-of-vocabulary'yi tamamen ortadan kaldırır",
+        "Byte'lar karakterlerden hızlı eğitilir",
+        "Byte'lar büyük/küçük harfi örtük olarak korur"
+      ],
+      "correct": 1,
+      "explanation": "256 byte'tan başlamak her UTF-8 string'in tokenize olduğunu garanti eder; hiçbir şey OOV değildir."
+    },
+    {
+      "stage": "post",
+      "question": "Önceden eğitilmiş bir transformer'ı fine-tune ederken hangi tokenizer'ı kullanmalısın?",
+      "options": [
+        "Her zaman SentencePiece",
+        "Modelin geldiği tam tokenizer'ı; uyumsuzluk embedding'leri bozar",
+        "Hangisi en büyük vocabulary'ye sahipse",
+        "Her zaman byte-level BPE"
+      ],
+      "correct": 1,
+      "explanation": "Tokenizer-model uyumsuzluğu girdileri sessizce bozar; her zaman gelen tokenizer'ı modeli ile eşleştir."
+    },
+    {
+      "stage": "post",
+      "question": "Önceden eğitilmiş word vektörleri için ne zaman GloVe yerine FastText'i tercih edersin?",
+      "options": [
+        "50d bir modele ihtiyacın olduğunda",
+        "Morfolojik olarak zengin diller veya sık neologizm ve yazım hatası olan alanlar için",
+        "Gecikme en kısıtlıyken",
+        "Corpus çok küçükken"
+      ],
+      "correct": 1,
+      "explanation": "FastText'in subword bileşimi, GloVe'un yapamayacağı çekim, neologizm ve yazım hatalarını ele alır."
+    },
+    {
+      "stage": "post",
+      "question": "WordPiece, BPE ve SentencePiece vocabulary'lerinin temelini hangi birim oluşturur?",
+      "options": [
+        "Cümleler",
+        "Tüm kelimeler",
+        "Paragraflar",
+        "Subword parçaları (karakterler, n-gram'lar veya öğrenilmiş merge'ler) kelime seviyesinin altında"
+      ],
+      "correct": 3,
+      "explanation": "Üçü de subword tokenizer'dır; merge veya parçaların nasıl öğrenildiği konusunda farklılaşırlar, subword olmakta değil."
+    }
+  ]
+}

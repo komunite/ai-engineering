@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Stable Diffusion neden DDPM'i doğrudan 3x512x512 piksel görseller üzerinde değil de 4x64x64 latent uzayında çalıştırır?",
+      "options": [
+        "Latent'ler görselleştirmesi daha kolay",
+        "786,432 piksel yerine 16,384 latent değer üzerinde eğitim ve sampling kabaca 48 kat daha ucuzdur; önceden eğitilmiş bir VAE, görsel <-> latent dönüşümünü halleder ve diffusion modelinin yalnızca yapılandırılmış latent manifoldu modellemesi gerekir",
+        "Latent'ler GPU'ların doğal çıktısıdır",
+        "Çıkarımı deterministik yapmak için"
+      ],
+      "correct": 1,
+      "explanation": "Latent diffusion, consumer-GPU text-to-image'i pratik yapan tek yeniliktir. VAE 48 kat spatial ve kanal bilgisini sıkıştırır. Diffusion modeli tüm parametre ve compute bütçesini, kullanıcının decode sonrası gördüğü latent manifoldu modellemeye harcayabilir."
+    },
+    {
+      "stage": "pre",
+      "question": "Classifier-free guidance (CFG) çıkarımda ne yapar?",
+      "options": [
+        "İki ayrı model çalıştırır ve ortalamalarını alır",
+        "Hem koşullu eps_cond hem de koşulsuz eps_uncond gürültü tahmin etmek için eğitilmiş tek bir model kullanır, sonra bunları eps = eps_uncond + w*(eps_cond - eps_uncond) olarak birleştirerek prompt'a uyumu güçlendirir",
+        "Test zamanında modele bir classifier head ekler",
+        "Daha büyük bir scheduler kullanır"
+      ],
+      "correct": 1,
+      "explanation": "CFG, conditioning'in %10 zamanın düşürüldüğü tek bir model eğitir, böylece aynı ağırlıklar hem cond hem uncond tahmin üretir. Çıkarımda yukarıdaki formül koşullu yönü güçlendirir. Guidance ölçeği w, prompt'a uyum ile çeşitlilik arasında standart bir ayar kolu; SD varsayılan olarak 7.5 kullanır."
+    },
+    {
+      "stage": "post",
+      "question": "SD'nin varsayılan scheduler'ını DPM-Solver++ 2M Karras ile değiştiriyor ve num_inference_steps'i 50'den 20'ye düşürüyorsun. Beklenen sonuç nedir?",
+      "options": [
+        "Daha kötü kalite ve daha uzun runtime",
+        "Aşağı yukarı yarı zamanda karşılaştırılabilir kalite; DPM-Solver++ aynı örnek kalitesi için DDIM'den daha az adımda yakınsayan ikinci dereceden bir ODE integrator'ıdır",
+        "Sayısal instability",
+        "Modeli ayrıca yeniden eğitmen gerekir"
+      ],
+      "correct": 1,
+      "explanation": "Scheduler'lar model ağırlıklarından ayrıştırılmıştır. DPM-Solver++, DDIM-50 kalitesini yaklaşık 20 adımda elde eden daha yüksek dereceli bir solver'dır. Sıfır yeniden eğitim gerekir ve 2026'da production varsayılanıdır. 8 adımın altına inmek tipik olarak LCM veya Turbo gibi distilled/consistency-model varyantları gerektirir."
+    },
+    {
+      "stage": "post",
+      "question": "Stable Diffusion için neden tam fine-tuning yerine LoRA fine-tuning popüler?",
+      "options": [
+        "LoRA varsayılan olarak daha iyi görseller üretir",
+        "LoRA, 860M base U-Net'i frozen tutar ve attention katmanlarına minik rank-decomposition matrisleri ekler, böylece bir fine-tune consumer hardware'de dakikalar içinde eğitilir, 10-50 MB adapter'lar üretir ve çıkarımda değiştirilebilir veya karıştırılabilir",
+        "LoRA diffusers tarafından gereklidir",
+        "LoRA overfitting'i tamamen önler"
+      ],
+      "correct": 1,
+      "explanation": "LoRA'nın değeri eğitim maliyeti ve dağıtımdır. Tam SD fine-tuning 860M+ parametreyi günceller ve 20+ GB VRAM gerektirir. LoRA ~1-10M parametreyi günceller ve 6-8 GB'ye sığar. Base model değişmez, bu yüzden aynı LoRA herhangi bir uyumlu checkpoint'e yüklenir ve birden çok LoRA birleştirilebilir. CivitAI ekosistemi tamamen LoRA'lardır."
+    },
+    {
+      "stage": "post",
+      "question": "Aynı prompt'u guidance_scale=15 ile üretiyorsun ve oversaturated renkler ile yanmış artifact görüyorsun. Ne oluyor?",
+      "options": [
+        "Model bozuk",
+        "CFG koşullu yönü güçlendirir; yaklaşık 9-12 civarındaki bir eşiğin ötesinde, güçlendirme tahminleri VAE'nin temiz decode edebileceği manifoldun dışına iter ve görsel artifact üretir. Dengeli sonuçlar için guidance'ı 7-9'a düşür",
+        "VAE yeniden eğitilmeli",
+        "Seed yanlış"
+      ],
+      "correct": 1,
+      "explanation": "CFG'nin formülü sınırsızdır: daha yüksek w, tahmini (eps_cond - eps_uncond) boyunca daha ileri hareket ettirir. Bir noktanın ötesinde eğitilmiş dağılımı terk edersin ve VAE decoder oversaturated, posterized görseller üretir. Production varsayılanı 7-8'dir. Bazı yeni scheduler'lar bunu önlemek için CFG scheduling'i destekler (son timestep'lerde daha düşük w)."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "lesson": "18-agno-and-mastra-runtimes",
+  "title": "Agno ve Mastra: Prodüksiyon Runtime'ları",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders her runtime için hangi dil eşleştirmesini öneriyor?",
+      "options": [
+        "Agno TypeScript için, Mastra Python için",
+        "Agno Python için, Mastra TypeScript için",
+        "İkisi de Rust-önceliklidir",
+        "İkisi de Go-önceliklidir"
+      ],
+      "correct": 1,
+      "explanation": "Agno Python'dur (FastAPI-şekilli); Mastra TypeScript'tir (Vercel AI SDK-şekilli)."
+    },
+    {
+      "stage": "pre",
+      "question": "Agno'nun önerilen prodüksiyon dağıtım şekli nedir?",
+      "options": [
+        "Uzun-ömürlü stateful bir daemon",
+        "Stateless session-kapsamlı bir FastAPI backend'i; her istek taze bir agent başlatır ve session state bir DB'de yaşar",
+        "Yalnızca serverless cron worker",
+        "Yalnızca WebSocket sunucusu"
+      ],
+      "correct": 1,
+      "explanation": "Her istek başına stateless FastAPI; session state bir DB'ye dışsallaştırılır."
+    },
+    {
+      "stage": "check",
+      "question": "Mastra'nın üç primitifi nedir?",
+      "options": [
+        "Agents, Tools, Workflows",
+        "Actor, Message, Inbox",
+        "Plan, Worker, Solver",
+        "Node, Edge, State"
+      ],
+      "correct": 0,
+      "explanation": "Agents (LLM + rol), Tools (Zod-tipli) ve Workflows Mastra'nın üç primitifidir."
+    },
+    {
+      "stage": "check",
+      "question": "Agno doküman'larına göre kabaca hangi agent-instantiation maliyetini hedefler?",
+      "options": [
+        "Yaklaşık 2 mikrosaniye ve agent başına yaklaşık 3.75 KiB",
+        "Yaklaşık 200 milisaniye ve agent başına 100 MiB",
+        "Yaklaşık 1 saniye ve agent başına 1 GiB",
+        "Yaklaşık 10 dakika ve agent başına 4 GiB"
+      ],
+      "correct": 0,
+      "explanation": "Agno'nun doküman'ları yaklaşık 2 mikrosaniye ve agent başına yaklaşık 3.75 KiB belirtir."
+    },
+    {
+      "stage": "check",
+      "question": "Mastra'nın Unified Model Router'ı ne sağlar?",
+      "options": [
+        "Birçok sağlayıcı arasında binlerce model için tek bir client yüzeyi",
+        "Tool çağrıları için bir queue",
+        "Bir vector DB katmanı",
+        "Bir graph checkpointer"
+      ],
+      "correct": 0,
+      "explanation": "Mastra'nın Unified Model Router'ı 94 sağlayıcı arasında 3,300+ modelden bahseder."
+    },
+    {
+      "stage": "post",
+      "question": "Agno'yu perf-için-perf nedeniyle seçmek ne zaman yanlıştır?",
+      "options": [
+        "İş yükü istek başına yavaş bir agent çağrısıysa ve overhead darboğaz değilse",
+        "Python 3.13 kullanırken",
+        "AWS'e deploy ederken",
+        "Langfuse kullanırken"
+      ],
+      "correct": 0,
+      "explanation": "2 mikrosaniye chat fan-in ölçeğinde önemlidir, istek başına tek yavaş çağrıda değil."
+    },
+    {
+      "stage": "post",
+      "question": "Mastra'yı fork etmeden önce dikkatli okumalı olduğun lisanslama yüzeyi nedir?",
+      "options": [
+        "Lisans dosyası yoktur",
+        "ee/ klasörleri Apache 2.0 yerine source-available'dır ve ticari kullanımı kısıtlar",
+        "Mastra'nın tamamı GPL'dir",
+        "Mastra CLA gerektirir ama lisans incelemesi yoktur"
+      ],
+      "correct": 1,
+      "explanation": "Mastra ee/ dışında Apache 2.0'dır; ee/ source-available'dır; fork etmeden önce kısıtlamaları kontrol et."
+    }
+  ]
+}

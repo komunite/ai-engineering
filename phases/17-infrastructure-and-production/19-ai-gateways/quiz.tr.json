@@ -1,0 +1,78 @@
+{
+  "lesson": "19-ai-gateways",
+  "title": "AI Gateway'ler — LiteLLM, Portkey, Kong AI Gateway, Bifrost",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Derste bir AI gateway'in temel rolü nedir?",
+      "options": [
+        "Bir model fine-tuning servisi",
+        "Retrieval için bir vector database",
+        "Yalnızca logging yapan bir sidecar",
+        "Uygulamalar ile model sağlayıcılar arasında oturan, routing, fallback, retry, rate limiting, secret referansları, observability ve guardrail'ları tek API arkasında konsolide eden bir süreç"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Kong'un benchmark'ı LiteLLM için hangi ölçek tavanını rapor ediyor?",
+      "options": [
+        "50 RPS'de tıkanıyor",
+        "Sürekli yük altında 8 GB bellek ve kademeli arızalarla ~2000 RPS civarında çöküyor",
+        "10k RPS üzerinde lineer ölçekleniyor",
+        "LiteLLM benchmark edilemez"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Eşdeğer CPU'da Kong benchmark'ına göre Kong AI Gateway Portkey ve LiteLLM'den ne kadar daha hızlı?",
+      "options": [
+        "Portkey'den %228 daha hızlı, LiteLLM'den %859 daha hızlı",
+        "Yaklaşık %10 ve %20 daha hızlı",
+        "Aynı",
+        "İkisinden de daha yavaş"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders hangi gateway'i 20-40 ms latency yükü ve guardrail / PII redaction / jailbreak detection odağı ile konumlandırıyor?",
+      "options": [
+        "Kong AI Gateway",
+        "LiteLLM",
+        "Cloudflare AI Gateway",
+        "Portkey"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders self-hosted vs managed gateway kararlarının zorlayıcı işlevi olarak neyi söylüyor?",
+      "options": [
+        "Gateway'in açık kaynak olup olmadığı",
+        "Desteklenen sağlayıcı sayısı",
+        "Request başına maliyet",
+        "Data residency gereksinimleri"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "SLA TTFT P99 < 100 ms olduğunda bütçe içinde hangi gateway'ler kalır?",
+      "options": [
+        "Herhangi bir gateway",
+        "Yalnızca Portkey",
+        "Yalnızca LiteLLM",
+        "Kong (~3-8 ms) ya da Cloudflare/Vercel edge gateway'leri (~1-3 ms); Portkey 20-40 ms ile çok ağır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

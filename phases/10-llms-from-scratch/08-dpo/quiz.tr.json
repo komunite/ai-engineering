@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "DPO'nun RLHF'ye göre temel avantajı nedir?",
+      "options": [
+        "DPO daha iyi modeller üretir",
+        "DPO ayrı bir reward model ve PPO ihtiyacını ortadan kaldırır, tercih çiftleri üzerinde doğrudan tek bir döngüde eğitir",
+        "DPO daha az eğitim verisi kullanır",
+        "DPO herhangi bir tercih verisi olmadan çalışır"
+      ],
+      "correct": 1,
+      "explanation": "RLHF önce ayrı bir reward model eğitmeyi, sonra PPO optimizasyonu çalıştırmayı gerektirir. DPO her iki adımı, doğrudan tercih çiftleri üzerinde dil modelini optimize eden tek bir eğitim hedefinde katlar."
+    },
+    {
+      "stage": "pre",
+      "question": "DPO'da reference model'in rolü nedir?",
+      "options": [
+        "Eğitim verisi üretir",
+        "Eğitilen modelin çok uzaklaşmasını önleyen bir çapa görevi görür, RLHF'deki KL cezasına benzer",
+        "Model kalitesini değerlendirir",
+        "Tokenization'ı yönetir"
+      ],
+      "correct": 1,
+      "explanation": "DPO loss eğitilen policy ve reference (genelde SFT) model altındaki log olasılıkları karşılaştırır. Reference model policy'nin ne kadar sapabileceğini sınırlar, açık KL ayarı olmadan reward hacking'i önler."
+    },
+    {
+      "stage": "post",
+      "question": "DPO'daki beta parametresi neyi kontrol eder?",
+      "options": [
+        "Learning rate'i",
+        "Policy'nin reference model'e ne kadar yakın kalmaya kısıtlandığını -- daha yüksek beta daha tutucu güncellemeler demektir",
+        "Batch boyutunu",
+        "Eğitim epoch sayısını"
+      ],
+      "correct": 1,
+      "explanation": "Beta örtük KL divergence cezasını ölçekler. Beta=0.1 modelin reference'tan önemli ölçüde sapmasına izin verir (potansiyel olarak daha iyi ama daha riskli). Beta=0.5 yakın tutar (daha güvenli ama daha az öğrenme)."
+    },
+    {
+      "stage": "post",
+      "question": "DPO bir reward model'i nasıl örtük olarak temsil eder?",
+      "options": [
+        "Etmez -- DPO'nun reward kavramı yoktur",
+        "DPO loss fonksiyonu, bir reward fonksiyonu altındaki optimal policy'nin doğrudan policy log olasılıkları üzerinden ifade edilebileceği gösterilerek türetilebilir",
+        "Dil modelinin içinde gizli bir reward model eğitir",
+        "DPO loss fonksiyonunu reward olarak kullanır"
+      ],
+      "correct": 1,
+      "explanation": "Rafailov ve diğerleri, RLHF hedefinin kapalı-form çözümünün reward'ı policy'nin log-olasılıklarının reference'a göre bir fonksiyonu olarak ifade ettiğini gösterdi. DPO bunu doğrudan optimize eder ve reward'ı örtük olarak öğrenir."
+    },
+    {
+      "stage": "post",
+      "question": "RLHF DPO'ya ne zaman hala tercih edilebilir?",
+      "options": [
+        "Her zaman -- RLHF kesinlikle daha iyi",
+        "Birden çok policy'yi değerlendirmek için yeniden kullanılabilir bir reward model'e ihtiyacın olduğunda veya online veri toplamanın faydalı olduğu durumlarda",
+        "Daha az tercih verisi olduğunda",
+        "Daha küçük modeller eğitirken"
+      ],
+      "correct": 1,
+      "explanation": "DPO offline'dır (sabit tercih verisi). RLHF, reward model'in yeni üretimleri skorladığı online veri toplama olanağı verir ve reward-hacking pattern'larını keşfeder. Bağımsız bir reward model değerlendirme ve diğer policy'ler için de yararlıdır."
+    }
+  ]
+}

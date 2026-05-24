@@ -1,0 +1,90 @@
+{
+  "lesson": "11-llm-observability-dashboard",
+  "title": "Capstone 11 — LLM Observability & Eval Dashboard",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Langfuse, Phoenix ve OpenLLMetry hangi ingest şemasında birleşir?",
+      "options": [
+        "Sağlayıcı başına özel JSON",
+        "Prometheus exposition formatı",
+        "OTLP HTTP üzerinden OpenTelemetry GenAI semantic conventions",
+        "Düz CSV log dosyaları"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Storage tier'da ClickHouse ve Postgres neden ayrılır?",
+      "options": [
+        "Birbiriyle değiştirilebilirdir ve biri rastgele seçilir",
+        "Postgres span ingest için daha hızlıdır",
+        "ClickHouse string saklayamaz",
+        "ClickHouse span'ler üzerinde sütun bazlı analitiği handle ederken Postgres kullanıcıları, session'ları ve app metadata'sını tutar"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "OpenTelemetry Collector'daki tail-sampling processor ne yapar?",
+      "options": [
+        "Tamamlandıktan sonra bir trace'i tutup tutmamaya karar verir, hataları tut artı başarıları örnekle gibi kurallar kullanır",
+        "Eski trace'leri Postgres'e tekrar oynatır",
+        "Her byte'ı koşulsuz stream'ler",
+        "100ms altındaki span'leri kırpar"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Dashboard haftalar arasında drift'i nasıl tespit eder?",
+      "options": [
+        "Toplanan prompt embedding'leri üzerinde PSI veya KL divergence hesaplar ve eval-skor trendlerini izler",
+        "Dashboard'a manuel göz gezdirme",
+        "En son deploy zaman damgasını okur",
+        "Benzersiz trace ID'lerini sayar"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Enjekte edilen bir PII-leak regression'ında deliverable'ın MTTR hedefi nedir?",
+      "options": [
+        "1 saatten az",
+        "24 saat içinde",
+        "Bir sonraki on-call vardiyası içinde",
+        "Bug deploy'undan Slack alarmına 5 dakikadan az"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Trace-coverage rubric'ini karşılamak için hangi SDK aileleri kanonik GenAI span'leri üretmelidir?",
+      "options": [
+        "Yalnızca vLLM",
+        "En az altı: OpenAI, Anthropic, Google GenAI, LangChain, LlamaIndex ve vLLM",
+        "Tek bir SDK yeterli",
+        "Yalnızca OpenAI ve Anthropic"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Değerlendirme sonuçları orijinal LLM çağrısına nasıl bağlanır?",
+      "options": [
+        "Gecelik e-mail ile gönderilen CSV olarak",
+        "Yalnızca Slack mesajları olarak",
+        "Trace ID'siz ayrı bir Postgres tablosu olarak",
+        "ClickHouse'da parent trace'in çocukları olarak yazılan eval span'leri olarak"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

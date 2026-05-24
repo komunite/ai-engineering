@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Yapay zeka startup'ları neden genellikle model kalitesi yerine maliyet sorunlarından batar?",
+    "options": ["Modeller her zaman yeterince iyidir", "Çağrı başı maliyetler hızla birikir: günde 10 çağrı yapan 10K kullanıcı, tek bir dolar tahsil etmeden önce günde $250 token maliyeti yaratır", "Maliyet optimizasyonu kolaydır", "API sağlayıcıları sınırsız free tier sunar"],
+    "correct": 1,
+    "explanation": "LLM API maliyetleri kullanımla doğrusal ölçeklenir. Çağrı başına $0.003'e mal olan bir özellik günde 100K kez çağrılana kadar ucuz görünür ($300/gün, $9K/ay). Maliyet optimizasyonu olmadan birçok yapay zeka ürünü ölçekte kârlı değildir.",
+    "stage": "pre"
+  },
+  {
+    "question": "LLM uygulamaları için semantik caching nedir?",
+    "options": ["Model ağırlıklarını cache'lemek", "Önceki sorgular için yanıtları saklamak ve yeni bir sorgu semantik olarak benzer olduğunda (sadece tam eşleşmediğinde) cache'lenmiş yanıtları sunmak", "Yalnızca embedding'leri cache'lemek", "Tüm olası yanıtları önceden üretmek"],
+    "correct": 1,
+    "explanation": "Tam eşleşme caching'i yalnızca özdeş sorgularda yardımcı olur. Semantik caching sorguları embed eder ve cosine similarity bir eşiği aştığında cache'lenmiş yanıt sunar. 'NYC'de hava nasıl?' ile 'NYC bugün hava?' eşleşir.",
+    "stage": "pre"
+  },
+  {
+    "question": "Bir maliyet optimizasyon stratejisi olarak model routing nedir?",
+    "options": ["Sunucular arası yük dengeleme", "Sorgu sınıflandırmasına göre basit sorguları ucuz/hızlı modellere, karmaşık sorguları pahalı/güçlü modellere göndermek", "Farklı API sağlayıcıları arasında yönlendirme", "Birden fazla modelden gelen yanıtları cache'lemek"],
+    "correct": 1,
+    "explanation": "Her sorgu GPT-4 gerektirmez. Bir sınıflandırıcı basit soruları (SSS, selamlama) ucuz bir modele (GPT-3.5, Haiku) ve karmaşık soruları (akıl yürütme, analiz) pahalı bir modele yönlendirir. Bu maliyetleri %50-80 azaltabilir.",
+    "stage": "post"
+  },
+  {
+    "question": "Prompt compression nedir ve maliyetleri nasıl azaltır?",
+    "options": ["Kelimeleri kaldırarak prompt'ları kısaltmak", "Temel bilgiyi koruyarak input token sayısını azaltmak için gereksiz token'ları kaldırmak, uzun bağlamları özetlemek ve boilerplate'i elemek", "Prompt'ları gzip ile sıkıştırmak", "Daha kısa değişken adları kullanmak"],
+    "correct": 1,
+    "explanation": "Input token'lar RAG uygulamalarında maliyete (büyük retrieve edilmiş bağlamlar) hakimdir. Prompt compression dolgu kelimelerini kaldırır, uzun pasajları özetler ve anahtar bilgiyi kaybetmeden token sayısını azaltmak için düşük ilgili chunk'ları kırpar.",
+    "stage": "post"
+  },
+  {
+    "question": "Prefix caching nedir ve hangi sağlayıcı özelliği bunu etkinleştirir?",
+    "options": ["Her yanıtın ilk kelimesini cache'lemek", "Tekrarlayan kalıplar için gecikmeyi ve maliyeti azaltarak paylaşılan prompt prefix'leri (system prompt + tool tanımları) için KV-cache hesaplamasını yeniden kullanmak", "DNS aramalarını cache'lemek", "API yanıtlarının tarayıcı caching'i"],
+    "correct": 1,
+    "explanation": "System prompt + tool tanımların 5000 token ise ve istekler arasında özdeşse, prefix caching KV-cache'i bir kez hesaplar ve yeniden kullanır. Anthropic'in prompt caching'i ve OpenAI'nin cached token'ları bunu destekler.",
+    "stage": "post"
+  }
+]

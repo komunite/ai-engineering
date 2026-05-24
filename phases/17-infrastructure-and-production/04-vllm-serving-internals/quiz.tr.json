@@ -1,0 +1,78 @@
+{
+  "lesson": "04-vllm-serving-internals",
+  "title": "vLLM Serving İç Mekanikleri: PagedAttention, Continuous Batching, Chunked Prefill",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Klasik static batching'in karışık uzunluktaki requestlerle yaşadığı ana problem nedir?",
+      "options": [
+        "Yalnızca FP4 ile çalışır",
+        "Her GPU arasında NVLink gerektirir",
+        "GPU'ları hiç kullanamaz",
+        "En uzun prompt'a ve en uzun çıktıya padding yapmak bellek israfı yaratır ve tüm batch'i en yavaş sequence üzerinde bekletir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "PagedAttention KV cache fragmantasyonunu %60-80'den %4'ün altına nasıl indirir?",
+      "options": [
+        "KV cache'i tamamen devre dışı bırakarak",
+        "Ağırlıkları INT4'e quantize ederek",
+        "KV cache'i sabit boyutlu block'lar halinde (default 16 token) tahsis edip sequence-başına bir block table üzerinden referans alarak",
+        "Tam prompt'u CPU RAM'inde tutarak"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "vLLM'in V1 scheduler'ında continuous batching'i hangi invariant tanımlar?",
+      "options": [
+        "Scheduler request başına bir kez çalışır ve batch hiç değişmez",
+        "Her request kendi dedicated GPU stream'ini alır",
+        "Scheduler batch'i doldurmak için 10 ms pencereler bekler",
+        "Scheduler decode iterasyonu başına bir kez çalışır; biten sequence'leri çıkarır, bekleyenleri içeri alır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Karışık yük altında chunked prefill esas olarak hangi latency metriğini korur?",
+      "options": [
+        "Ortalama throughput",
+        "Cold-start süresi",
+        "Network RTT",
+        "P99 inter-token latency (ITL)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "vLLM v0.18.0'da hangi speculative decoding varyantı --enable-chunked-prefill ile uyumlu kalır?",
+      "options": [
+        "Yalnızca EAGLE-1",
+        "V1 scheduler'da N-gram GPU speculative decoding",
+        "Hiçbir speculative decoding uyumlu değil",
+        "Draft-model speculative decoding"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Chunked prefill neden tek başına ortalama throughput'u artırmaz?",
+      "options": [
+        "Decode'dan farklı bir GPU'da çalışır",
+        "Arka planda speculative decoding kullanır",
+        "Ağırlıkları daha agresif sıkıştırır",
+        "Yalnızca decode-zamanı jitter'ı azaltır; pratikteki throughput kazancı uzun prefill'ler sırasında decode sequence'lerini canlı tutmaktan gelir, yapılan işi değiştirmekten değil"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

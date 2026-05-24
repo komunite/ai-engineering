@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Naive Bayes'teki 'naive' (saf) varsayım nedir?",
+      "options": [
+        "Her sınıfın önsel (prior) olasılığı eşittir",
+        "Tüm öznitelikler, sınıf etiketi verildiğinde koşullu olarak bağımsızdır",
+        "Veri normal dağılımlıdır",
+        "Modelin öğrenecek hiç parametresi yoktur"
+      ],
+      "correct": 1,
+      "explanation": "Naive Bayes, sınıfa koşullu olarak her özniteliğin diğer her öznitelikten bağımsız olduğunu varsayar. Bu matematiksel olarak yanlıştır (ör. 'machine' ve 'learning' birlikte geçer) ama pratikte iyi çalışır."
+    },
+    {
+      "stage": "pre",
+      "question": "Laplace smoothing, Naive Bayes'te neyi önler?",
+      "options": [
+        "Büyük veri setlerinde overfitting",
+        "Eğitim sırasında bir sınıfta hiç görülmemiş kelimeler için sıfır olasılığı",
+        "Yüksek boyutlu veride yavaş eğitim",
+        "Veri setinde sınıf dengesizliği"
+      ],
+      "correct": 1,
+      "explanation": "Smoothing olmadan, 'spam' eğitim e-postalarında hiç görünmemiş bir kelime P(kelime|spam) = 0 alır; bu, diğer güçlü kanıtlardan bağımsız olarak tüm çarpımı sıfır yapar. Laplace smoothing her sayıma 1 ekler."
+    },
+    {
+      "stage": "post",
+      "question": "Naive bağımsızlık varsayımı metin için açıkça yanlıştır. Naive Bayes neden hâlâ iyi sınıflandırır?",
+      "options": [
+        "Yalnızca bağımsızlığın geçerli olduğu çok küçük kelime dağarcıklarında çalışır",
+        "Sınıflandırma yalnızca doğru sınıf sıralamalarını gerektirir, doğru olasılık tahminlerini değil; ve varsayım tüm sınıfları benzer şekilde etkileyen kararlı hatalar üretir",
+        "Modern uygulamalar bağımsızlık varsayımını gizlice kaldırır",
+        "Yalnızca öznitelikler gerçekten bağımsız olduğunda çalışır"
+      ],
+      "correct": 1,
+      "explanation": "NB sınıfları doğru sıralamak zorundadır, tam olasılıkları tahmin etmek değil. Bağımsızlık varsayımı yüksek bias ama düşük varyans sağlar; sınırlı veriyle kararlı olmasını sağlar. Korelasyonlu öznitelikler kanıtı doğru sınıf için de iki kez sayar."
+    },
+    {
+      "stage": "post",
+      "question": "Multinomial NB'yi ne zaman, Gaussian NB'yi ne zaman kullanmalısın?",
+      "options": [
+        "Multinomial regresyon için, Gaussian sınıflandırma için",
+        "Multinomial kelime sayısı/sıklık öznitelikleri için, Gaussian sürekli gerçek değerli öznitelikler için",
+        "Multinomial ikili veri için, Gaussian çok sınıflı problemler için",
+        "Birbirinin yerine geçer -- her zaman hangisi hızlıysa onu kullan"
+      ],
+      "correct": 1,
+      "explanation": "Multinomial NB öznitelik sayılarını (metinde kelime sıklıkları) modellemek için kullanılır. Gaussian NB özniteliklerin normal dağılım izlediğini varsayar; ölçümler veya sensör okumaları gibi sürekli öznitelikler için uygundur."
+    },
+    {
+      "stage": "post",
+      "question": "Bir e-posta 'free' kelimesini iki kez, 'money' kelimesini bir kez içeriyor. Log olasılıklarla Multinomial NB'de spam skoru nasıl hesaplanır?",
+      "options": [
+        "log P(spam) + log P(free|spam) + log P(money|spam)",
+        "log P(spam) + 2 * log P(free|spam) + 1 * log P(money|spam)",
+        "P(spam) * P(free|spam) * P(money|spam)",
+        "log P(spam) * 2 * log P(free|spam)"
+      ],
+      "correct": 1,
+      "explanation": "Multinomial NB, kelime olasılıklarını sayılarının üssüne yükselterek çarpar. Log uzayında: log P(spam) + 2*log P(free|spam) + 1*log P(money|spam). Kelime sayısı üs olarak görev yapar."
+    }
+  ]
+}

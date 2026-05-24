@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir shell komutunda pipe operatörü '|' ne yapar?",
+      "options": ["İki komutu paralel çalıştırır", "Bir komutun standart çıktısını bir sonrakine standart giriş olarak gönderir", "Bir komutun çıktısını bir dosyaya kaydeder", "İki dosyayı birleştirir"],
+      "correct": 1,
+      "explanation": "Pipe operatörü komutları bir pipeline'da birbirine bağlar. Örneğin, 'cat log.txt | grep error' log.txt'nin içeriğini grep'e giriş olarak gönderir, o da 'error' içeren satırları filtreler."
+    },
+    {
+      "stage": "pre",
+      "question": "Çalışan bir process'i başlatan terminali kapattığında ona ne olur?",
+      "options": ["Process arka planda çalışmaya devam eder", "Process bir hangup sinyali (SIGHUP) alır ve genelde sonlanır", "Yeni bir terminal açana kadar process duraklar", "Process otomatik olarak bir sistem servisine taşınır"],
+      "correct": 1,
+      "explanation": "Terminali kapatmak child process'lere SIGHUP gönderir, bu da onların varsayılan olarak sonlanmasına neden olur. tmux, nohup ya da screen gibi araçlar bunu engeller."
+    },
+    {
+      "stage": "post",
+      "question": "Uzun süre çalışan eğitim job'ları için tmux'un 'nohup command &' kullanmaya göre temel avantajı nedir?",
+      "options": ["tmux nohup'tan daha az CPU kullanır", "tmux detach etmeni, tekrar attach olmanı ve birden fazla pane'de canlı çıktı görmeni sağlar", "tmux başarısız process'leri otomatik yeniden başlatır", "tmux disk alanından tasarruf için process çıktısını sıkıştırır"],
+      "correct": 1,
+      "explanation": "tmux, detach edip daha sonra tekrar attach olabileceğin kalıcı session'lar oluşturur, birden fazla pane'de canlı çıktı görünür. nohup sadece bir dosyaya log atar, etkileşim ya da yeniden attach olma şansı yoktur."
+    },
+    {
+      "stage": "post",
+      "question": "'python train.py > output.log 2>&1' ne yapar?",
+      "options": ["train.py'yi çalıştırır ve sadece hataları output.log'a kaydeder", "train.py'yi çalıştırır ve hem standart çıktıyı hem standart hatayı output.log'a yönlendirir", "train.py'yi iki kez çalıştırır ve ikinci çalışmayı loglar", "train.py'yi iki kat bellek tahsisiyle çalıştırır"],
+      "correct": 1,
+      "explanation": "'> output.log' stdout'u dosyaya yönlendirir. '2>&1' stderr'i stdout ile aynı yere gönderir. Sonuç olarak hem normal çıktı hem hatalar tek bir dosyaya yakalanır."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi komut, bir GPU makinesinin 8888 portunda çalışan uzak bir Jupyter notebook'una lokal tarayıcından erişmeni sağlar?",
+      "options": ["scp -P 8888 user@gpu-box:~/notebook.ipynb", "ssh -L 8888:localhost:8888 user@gpu-box", "rsync -avz user@gpu-box:8888 localhost:8888", "ssh user@gpu-box --forward-port 8888"],
+      "correct": 1,
+      "explanation": "SSH local port forwarding (-L) uzak bir portu lokal makinene eşler. Bu komuttan sonra, tarayıcıda localhost:8888 açmak uzak Jupyter sunucusuna erişir."
+    }
+  ]
+}

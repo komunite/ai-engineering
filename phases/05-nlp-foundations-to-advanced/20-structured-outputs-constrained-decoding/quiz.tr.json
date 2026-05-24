@@ -1,0 +1,102 @@
+{
+  "lesson": "20-structured-outputs-constrained-decoding",
+  "title": "Yapılandırılmış Çıktılar ve Constrained Decoding",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Yalnızca prompt-bazlı 'JSON döndür' neden production için yeterli değildir?",
+      "options": [
+        "JSON çok ayrıntılıdır",
+        "Prompt'lar çok uzundur",
+        "Frontier modeller çoğu zaman uyar ama her zaman değil; bozuk çıktıların küçük yüzdesi aşağı akış parser'larını bozar",
+        "Prompting şema tanımlayamaz"
+      ],
+      "correct": 2,
+      "explanation": "Prompt-bazlı yapı frontier modellerde ~%80 oranında çalışır; production daha sıkı garantiler gerektirir."
+    },
+    {
+      "stage": "pre",
+      "question": "Constrained decoding her üretim adımında neyi değiştirir?",
+      "options": [
+        "KV cache'i",
+        "Tokenizer'ı",
+        "Eğitim loss'unu",
+        "Logit vektörünü, hedef grammar'ı geçersiz kılacak token'ları maskeleyerek yalnızca geçerli devamların sample edilebilmesini sağlar"
+      ],
+      "correct": 3,
+      "explanation": "Bir logit processor geçersiz token'ları -inf'e ayarlar, böylece softmax onları sample edemez."
+    },
+    {
+      "stage": "check",
+      "question": "Constrained decoding neden serbest üretimden daha hızlı olabilir?",
+      "options": [
+        "Model daha küçüktür",
+        "Zorunlu iskelet token'lar (örn. '{\"name\": \"') sample edilmeden doğrudan emit edilebilir ve geçerli token arama uzayı küçülür",
+        "Softmax'i tamamen atlar",
+        "Backprop'u atlar"
+      ],
+      "correct": 1,
+      "explanation": "Belirlenmiş token'lar sample'lamayı atlar ve azalan geçerli token setleri decode maliyetini düşürür."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi şema tasarım seçimi model tarafından erken taahhüdü önler?",
+      "options": [
+        "'answer'ı başa koy",
+        "Daha kısa anahtarlar kullan",
+        "Reasoning alanlarını cevap/karar alanından önce yerleştir, böylece model taahhüt etmeden önce düşünür",
+        "snake_case kullan"
+      ],
+      "correct": 2,
+      "explanation": "Alan sırası mantıktır: reasoning'i öne koymak modelin bir cevaba kilitlenmeden önce düşünmesini sağlar."
+    },
+    {
+      "stage": "check",
+      "question": "Outlines gibi FSM tabanlı constrained decoding araçlarının sınırlaması nedir?",
+      "options": [
+        "Deterministik değiller",
+        "Seni OpenAI'a kilitlerler",
+        "Recursive şemalar düzleştirilmelidir; gerçek recursive yapılar XGrammar gibi CFG tabanlı engine'lere ihtiyaç duyar",
+        "Yalnızca enum'ları desteklerler"
+      ],
+      "correct": 2,
+      "explanation": "FSM'ler sınırsız recursion'ı temsil edemez; CFG engine'ler bunu işler."
+    },
+    {
+      "stage": "post",
+      "question": "Instructor neden logit'leri değiştirmediği söylenir?",
+      "options": [
+        "Instructor şemayı prompt'a biçimlendirir ve çıktıyı parse/retry eder; logit masking server-side veya hiç gerçekleşmez",
+        "Gradient güncellemeleri kullanır",
+        "Anthropic tarafından zorunlu",
+        "Prompt'u düzenler"
+      ],
+      "correct": 0,
+      "explanation": "Instructor provider-side yapılandırılmış çıktı artı client-side doğrulama ve retry kullanır, logit masking değil."
+    },
+    {
+      "stage": "post",
+      "question": "date='YYYY-MM-DD' gibi sıkı bir regex hangi sorunu yaratabilir?",
+      "options": [
+        "CFG desteği gerektirir",
+        "Bilinmeyen değerler için herhangi bir kaçış kapısı kalmaz, dolayısıyla model null/sentinel döndürmek yerine tarih uydurur",
+        "JSON parsing'i bozar",
+        "Regex yavaştır"
+      ],
+      "correct": 1,
+      "explanation": "Aşırı sıkı grammar'lar modeli değer uydurmaya zorlar; bilinmeyenler için her zaman null/sentinel'a izin ver."
+    },
+    {
+      "stage": "post",
+      "question": "vLLM guided decoding'i bir vendor structured-output API yerine ne zaman tercih etmelisin?",
+      "options": [
+        "Her zaman vendor",
+        "Yalnızca küçük şemalar için",
+        "Yalnızca byte-level BPE ile",
+        "Self-hosted çıkarımda, modeli kontrol ediyorsan ve retry'sız logit seviyesi garantiler istiyorsan"
+      ],
+      "correct": 3,
+      "explanation": "vLLM guided decoding logit seviyesi kısıtlarla self-hosted serving'e uyar; vendor API'leri seni onların stack'ine kilitler."
+    }
+  ]
+}

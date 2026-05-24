@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir Ax = b sisteminin tam çözümü olmadığında geometrik olarak ne anlama gelir?",
+      "options": [
+        "A matrisinin tüm elemanları sıfırdır",
+        "b vektörü A'nın sütun uzayında yer almıyor",
+        "Sistemin bilinmeyenleri denklemlerden daha fazla",
+        "A matrisi simetriktir"
+      ],
+      "correct": 1,
+      "explanation": "Sütun resminde, Ax = b şunu sorar: A'nın sütunlarının hangi doğrusal kombinasyonu b'yi üretir? b sütun uzayında (A'nın sütunlarının gerdiği) değilse, tam çözüm yoktur. Bu, sistem aşırı belirlendiğinde (denklem sayısı bilinmeyenden fazla olduğunda) olur."
+    },
+    {
+      "stage": "pre",
+      "question": "Gauss eliminasyonunda kısmi pivotlama neden kullanılır?",
+      "options": [
+        "Zaman karmaşıklığını O(n^3)'ten O(n^2)'ye düşürür",
+        "Küçük sayılarla bölmekten kaynaklanan hata büyütmesini minimize etmek için mevcut en büyük pivotu seçer",
+        "Sonucun her zaman bir tamsayı olmasını sağlar",
+        "Geri yerine koymaya olan ihtiyacı ortadan kaldırır"
+      ],
+      "correct": 1,
+      "explanation": "Pivotlama olmadan, küçük bir pivota bölmek yuvarlama hatalarını büyütür. Kısmi pivotlama, en büyük mutlak değeri pivot konumuna yerleştirmek için satırları takas eder; çarpanları küçük ve hesaplamayı sayısal olarak kararlı tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Ridge regression'da (X^T X + lambda I) w = X^T y çözmek için Cholesky decomposition neden LU'ya tercih edilir?",
+      "options": [
+        "Cholesky herhangi bir matriste çalışır, LU kare matrisler gerektirir",
+        "X^T X + lambda I matrisi simetrik pozitif tanımlıdır, dolayısıyla Cholesky LU'dan iki kat daha hızlıdır ve yarı kadar depolama gerektirir",
+        "Cholesky LU'dan daha doğru bir cevap verir",
+        "LU decomposition regularization terimlerini işleyemez"
+      ],
+      "correct": 1,
+      "explanation": "lambda > 0 olduğunda, X^T X + lambda I her zaman simetrik pozitif tanımlıdır. Cholesky, A = LL^T'yi O(n^3/3) işlemde faktörize eder — LU'nun O(2n^3/3)'ünün kabaca yarısı — ve yalnızca alt üçgene ihtiyaç duyar. LU'nun yapamadığı simetriden yararlanır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir matrisin koşul sayısı kappa = 10^8. Float64 (~15 hassasiyet basamağı) kullanıyorsun. Çözümün kaç basamağına güvenebilirsin?",
+      "options": [
+        "Yaklaşık 15 basamak",
+        "Yaklaşık 7 basamak (15 - log10(10^8) = 15 - 8)",
+        "Yaklaşık 8 basamak",
+        "Sıfır basamak — çözüm anlamsızdır"
+      ],
+      "correct": 1,
+      "explanation": "Yaklaşık log10(kappa) basamak hassasiyet kaybedersin. kappa = 10^8 ile float64'ün ~15 basamağından yaklaşık 8 basamak kaybedersin ve yaklaşık 7 güvenilir basamak kalır. Eğer kappa 10^16'ya yaklaşırsa, çözüm float64'te anlamsız hale gelir."
+    },
+    {
+      "stage": "post",
+      "question": "Birçok farklı b vektörü için Ax = b çözmen gerektiğinde LU decomposition'ın Gauss eliminasyonuna göre temel avantajı nedir?",
+      "options": [
+        "LU decomposition sayısal olarak daha kararlıdır",
+        "O(n^3) faktorizasyon bir kez yapılır; sonraki her yeni b ile çözümün maliyeti yalnızca O(n^2)'dir",
+        "LU decomposition dikdörtgen matrislerde çalışır",
+        "LU her zaman benzersiz bir çözüm üretir"
+      ],
+      "correct": 1,
+      "explanation": "LU, A = LU'yu bir kez O(n^3)'te faktörize eder. Sonra her yeni b için Ly = b (ileri yerine koyma) ve Ux = y (geri yerine koyma) çözülür, her biri O(n^2). Gauss eliminasyonu her yeni b için tam O(n^3)'ü yeniden yapar."
+    }
+  ]
+}

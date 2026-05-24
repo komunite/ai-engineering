@@ -1,0 +1,90 @@
+{
+  "lesson": "17-personal-ai-tutor",
+  "title": "Capstone 17 — Personal AI Tutor (Adaptive, Multimodal, with Memory)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir öğrenci doğrudan cevabı istediğinde Sokratik tutor politikası ne yapar?",
+      "options": [
+        "Öğrenciyi cevaba doğru iskele kuran yönlendirici bir soru sorar",
+        "İsteği log'lar ve sessizleşir",
+        "Cevabı hemen verir ve devam eder",
+        "Farklı bir kavram düğümüne geçer"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Müfredat graph'ı hangi yapıyı kodlar?",
+      "options": [
+        "Ön koşul kenarları olan kavramların yönlü bir graph'ı, OER içeriğine bağlı",
+        "Konuların rastgele karıştırılması",
+        "İlişkisiz kavramların düz bir listesi",
+        "Yalnızca en son çalışılan düğüm"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Learner modeli her etkileşimden sonra neyi günceller?",
+      "options": [
+        "Base LLM'in ağırlıklarını",
+        "COPPA tutma politikasını",
+        "Müfredat graph şemasını",
+        "Bayesian knowledge tracing veya benzeri bir varyantla kavram başına ustalık olasılığını"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bellek episodic ve semantic store'lar arasında nasıl bölünür?",
+      "options": [
+        "Episodic her etkileşimi tutar; semantic, episodic'ten terfi ettirilen sıkıştırılmış hataları ve tercihleri tutar",
+        "Aynı verinin kopyalarıdır",
+        "Episodic veli için; semantic öğrenci için",
+        "Episodic embedding'leri tutar; semantic ham sesi tutar"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "K-12 öğrenciler için bellek tutmayı hangi kısıtlama şekillendirir?",
+      "options": [
+        "Model context uzunluğuna dayalı tutma",
+        "Silme olmadan kalıcı tutma",
+        "Yalnızca GDPR",
+        "Tanımlı bir pencere sonrasında otomatik silme ve veli erişimi ile COPPA-aware tutma"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Deliverable'ı gate eden efficacy çalışmasının yapısı nedir?",
+      "options": [
+        "Anonim internet anketi",
+        "30 saniyelik bir AB testi",
+        "10 öğrenci ile iki hafta boyunca pre-test ve post-test, non-adaptive baseline cohort'una karşı karşılaştırma",
+        "Bir öğrenci ile tek bir saatlik session"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tutor öğrenciye hangi multimodal giriş yollarını sunar?",
+      "options": [
+        "Yalnızca metin",
+        "Yalnızca özel bir OCR modeli üzerinden fotoğraf",
+        "Metin veya fotoğraf olmadan yalnızca ses",
+        "Yazılan metin, LiveKit + Whisper üzerinden ses ve dots.ocr veya PaliGemma 2 ile fotoğraf matematiği"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

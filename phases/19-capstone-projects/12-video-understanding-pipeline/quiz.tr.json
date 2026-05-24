@@ -1,0 +1,90 @@
+{
+  "lesson": "12-video-understanding-pipeline",
+  "title": "Capstone 12 — Video Understanding Pipeline (Scene, QA, Search)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Uzun context'li bir VLM 2 saatlik bir videoyu doğal olarak okuyabildiğinde bile scene-level index neden hâlâ gereklidir?",
+      "options": [
+        "Uzun context'li VLM'ler çıktı stream'leyemez",
+        "Vector index'ler video dosyalarını desteklemez",
+        "100 saatlik videoyu sorgulanabilir bir corpus'a ingest etmek scene-level retrieval gerektirir, tek tek videolar bütün halinde okunabilse bile",
+        "Bir VLM'in anladığı tek şey scene cut'larıdır"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Çok-vektörlü index'te her scene hangi üç vektör tipini alır?",
+      "options": [
+        "Caption embedding, keyframe embedding ve transcript embedding",
+        "Audio waveform, mel-spectrogram ve MFCC'ler",
+        "Hash, gzip ve CRC",
+        "Pose, depth ve optical flow"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Üç retrieval stream'inin sonuçları sorgu zamanında nasıl birleştirilir?",
+      "options": [
+        "Yalnızca caption hit'ini seçerek",
+        "Cosine similarity'leri ortalayarak",
+        "Üç sıralı liste üzerinde reciprocal rank fusion ile",
+        "Skorlama olmadan union alarak"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Temporal grounding adımı top scene içinde neyi rafine eder?",
+      "options": [
+        "Whisper'dan transcript kelime zaman damgalarını",
+        "Qdrant'ta saklanan vektör sayısını",
+        "Cevabı içeren (start, end) zaman damgası penceresini",
+        "Keyframe embedding boyutluluğunu"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi soru sınıfı bilinen bir hallucination hotspot olduğu için ayrı raporlanır?",
+      "options": [
+        "Manzara hakkında betimleyici sorular",
+        "Konuşmacı tanımlama soruları",
+        "Çeviri soruları",
+        "VLM'lerin yanlış saydığı veya olayları yanlış sıraladığı sayma ve action-type soruları"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Rubric held-out bir set üzerinde hangi grounding metriğini ölçer?",
+      "options": [
+        "Temporal-grounding intersection-over-union (IoU)",
+        "Acceptance rate",
+        "Perplexity",
+        "MRR@10"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Pipeline neden cevaplarda atıfta bulunulan zaman damgalarını gerektirir?",
+      "options": [
+        "Embedding boyutunu azaltırlar",
+        "Zaman damgaları Whisper çıktısı tarafından gerekli kılınır",
+        "Zaman damgaları Qdrant payload'ları tarafından gerekli kılınır",
+        "İzleyicinin tam olarak (video_id, start, end)'e atlamasına izin verirler, böylece kullanıcılar iddiayı doğrulayabilir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

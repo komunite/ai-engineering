@@ -1,0 +1,102 @@
+{
+  "lesson": "18-multilingual-nlp",
+  "title": "Çok Dilli NLP",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Zero-shot diller arası transfer ne demektir?",
+      "options": [
+        "Çok dilli bir modeli bir kaynak dilde fine-tune et ve hedef dilde target etiketi olmadan farklı bir dilde değerlendir",
+        "Çeviri modeli olmadan çeviri yapmak",
+        "Sıfır merge ile tokenize etmek",
+        "Sıfır örnekle eğitmek"
+      ],
+      "correct": 0,
+      "explanation": "Zero-shot transfer: kaynak dilde eğit, hedef dilde target supervision olmadan çalıştır."
+    },
+    {
+      "stage": "pre",
+      "question": "Standart 100-dilli diller arası baseline olarak hangi model ailesi gelir?",
+      "options": [
+        "GloVe",
+        "GPT-2",
+        "XLM-R (örn. XLM-RoBERTa-base, 270M)",
+        "DistilBERT"
+      ],
+      "correct": 2,
+      "explanation": "XLM-R, diller arası sınıflandırma için kanonik 100-dilli önceden eğitilmiş baseline'dır."
+    },
+    {
+      "stage": "check",
+      "question": "İngilizce-kaynak neden her zaman İngilizce olmayan bir hedef için en iyi transfer'i vermez?",
+      "options": [
+        "İngilizcenin verisi çok az",
+        "Dil benzerliği (tipoloji, script, morfoloji) transfer kalitesini tahmin eder; daha yakın yüksek kaynaklı bir kaynak İngilizceyi geçebilir",
+        "İngilizce BPE kullanır",
+        "İngilizce çok kısadır"
+      ],
+      "correct": 1,
+      "explanation": "Tipolojik olarak akraba kaynaklar (örn. Indic hedefler için Hintçe) sık sık İngilizceyi fine-tune kaynağı olarak geçer."
+    },
+    {
+      "stage": "check",
+      "question": "Düşük kaynaklı diller için 'fertility tax' nedir?",
+      "options": [
+        "BPE eğitimi reddeder",
+        "Düşük kaynaklı metin kelime başına İngilizceden daha fazla subword'e tokenize olur, context window, gecikme ve kapasite tüketir",
+        "Daha küçük modeller daha yavaş eğitilir",
+        "Tokenizer'lar Unicode'u işleyemez"
+      ],
+      "correct": 1,
+      "explanation": "Uzun kuyruk dilleri çok daha yüksek fertility'de tokenize olur, context ve eğitim verimliliğini yer."
+    },
+    {
+      "stage": "check",
+      "question": "Neden toplu accuracy yerine dil başına değerlendirme gerekir?",
+      "options": [
+        "Toplamlar tokenization'ı görmezden gelir",
+        "Toplu rakamlar uzun kuyruk dillerini saklar; çok dilli bir model ortalamasının önerdiğinden çok daha kötü olabilir",
+        "Toplamlar yalnızca sınıflandırmada çalışır",
+        "Toplamlar daha hızlı çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Toplu accuracy düşük kaynaklı diller üzerinde zayıf performansı maskeler; dil başına skorlar bunu ortaya çıkarır."
+    },
+    {
+      "stage": "post",
+      "question": "Çok dilli bir modeli few-shot veri ile adapte ederken fine-tuning learning rate neden kritiktir?",
+      "options": [
+        "Daha düşük LR GPU israfıdır",
+        "Tokenizer'lar tarafından zorunludur",
+        "Vocabulary'yi değiştirir",
+        "Yüksek LR çok dilli hizalanmayı çökertebilir ve modeli etkili olarak yalnızca İngilizce'ye indirebilir"
+      ],
+      "correct": 3,
+      "explanation": "Aşırı LR paylaşılan temsili kaydırır; muhafazakar LR (~2e-5) diller arası yapıyı korur."
+    },
+    {
+      "stage": "post",
+      "question": "Uzun kuyruk script'leri için tokenizer fertility'sini doğrudan ele alan mitigation hangisidir?",
+      "options": [
+        "Stopword'leri atlamak",
+        "Daha düşük batch size",
+        "Byte-fallback (SentencePiece byte_fallback=True) veya daha geniş script kapsamlı bir tokenizer (örn. XLM-V) kullanmak",
+        "Daha fazla eğitim epoch'u"
+      ],
+      "correct": 2,
+      "explanation": "Byte fallback ve daha geniş vocab tokenizer'lar düşük kaynaklı script'ler için fertility ve OOV'yi azaltır."
+    },
+    {
+      "stage": "post",
+      "question": "Çok dilli yerine sıfırdan monolingual bir model denemek ne zaman değerlidir?",
+      "options": [
+        "Her zaman İngilizce için",
+        "Hedef dilde çok dilli baseline'ı geçen bir monolingual model eğitmeye yetecek veri olduğunda; varsaymadan önce test et",
+        "Yalnızca çeviri için",
+        "Tokenizer BPE olduğunda her zaman"
+      ],
+      "correct": 1,
+      "explanation": "Bazen monolingual eğitim yüksek kaynaklı hedefler için çok dilliyi geçer; empirical karşılaştırma karar verir."
+    }
+  ]
+}

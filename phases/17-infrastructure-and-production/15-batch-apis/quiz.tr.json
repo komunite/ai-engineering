@@ -1,0 +1,78 @@
+{
+  "lesson": "15-batch-apis",
+  "title": "Batch API'ler — Endüstri Standardı Olarak %50 İndirim",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "2026'da OpenAI, Anthropic ve Google'ın ortak batch-API teklifi nedir?",
+      "options": [
+        "1 saat geri dönüşle %10 indirim",
+        "7 gün geri dönüşle %90 indirim",
+        "1k token altında ücretsiz",
+        "24 saat geri dönüşle %50 indirim"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Dersin çerçevesinde \"24 saat geri dönüş\" aslında neyi garanti eder?",
+      "options": [
+        "24h cache TTL'idir",
+        "Batch her zaman 24 saat sürer",
+        "Sağlayıcı 24 saat içinde geri dönmeyi söz verir; tipik P50 yaklaşık 2-6 saat",
+        "Yalnızca 1k request altındaki batch'ler uygundur"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Paylaşılan system prompt'a sahip bir iş yükünde batch'i cached input ile istiflemek senkron cache'siz'e kıyasla faturayı nasıl değiştirir?",
+      "options": [
+        "Caching otomatik olduğu için hiçbir etkisi yok",
+        "Yalnızca model Vertex'teyse yardım eder",
+        "Senkron-cache'siz baseline'ın kabaca %10'una düşürebilir",
+        "Maliyeti %50 artırır"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "2026'da içerik pipeline'ları ve offline etiketleme için default olarak gitmenin yanlış olduğu iş yükü-triajlama yolu hangisidir?",
+      "options": [
+        "Interactive, çünkü acil gibi geliyor",
+        "Batch, çünkü kullanıcı 24h gecikmeyi görmez",
+        "Hybrid batch-and-cache",
+        "Async queue ile semi-interactive"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Sağlayıcılar arasındaki çıktı-şema tuzağı nedir?",
+      "options": [
+        "JSONL Anthropic tarafından desteklenmiyor",
+        "Tüm sağlayıcılar aynı OpenAI JSONL formatını kullanır",
+        "Vertex yalnızca Parquet gerektirir",
+        "Batch dosya formatları sağlayıcı başına farklıdır (OpenAI JSONL, Anthropic JSONL, Vertex BigQuery/GCS); taşınabilir bir istemci sağlayıcı başına adaptörlere ihtiyaç duyar"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Derse göre bir iş yükünü batch'e triajlamak için en basit karar kuralı nedir?",
+      "options": [
+        "Prompt 1k token altındaysa batch yap",
+        "Tool kullanıyorsa batch yap",
+        "Yalnızca gateway gerektirdiğinde batch yap",
+        "Kullanıcı 24 saatlik teslimi fark etmeyecekse her zaman batch yap (ve caching'i istifle)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

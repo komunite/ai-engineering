@@ -1,0 +1,90 @@
+{
+  "lesson": "07-end-to-end-fine-tuning-pipeline",
+  "title": "Capstone 07 — End-to-End Fine-Tuning Pipeline (Data to SFT to DPO to Serve)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Veri hazırlığı sırasında contamination check neye karşı koruma sağlar?",
+      "options": [
+        "SFT ve DPO aşamaları arasında tokenizer drift'i",
+        "Eğitim ve serving arasında GPU driver uyumsuzlukları",
+        "llama.cpp build'leri arasında GGUF sürüm farkı",
+        "MMLU-Pro ve MT-Bench-v2 gibi public benchmark'lardan eğitim verisine test-set sızıntısı"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Pipeline neden yalnızca DPO yerine SFT sonrası DPO (veya GRPO) sıralamasını kullanır?",
+      "options": [
+        "Axolotl DPO'yu uygulamaz",
+        "SFT etiketlenmiş tamamlamalar üzerinde domain davranışını kurar, DPO veya GRPO ise modeli tercih çiftlerine veya doğrulanabilir ödüllere karşı hizalar",
+        "DPO ayrı bir base model mimarisi gerektirir",
+        "DPO quantize edilmiş ağırlıklar üzerinde çalışamaz"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "EAGLE-3 vLLM serving aşamasına ne katar?",
+      "options": [
+        "Yeni bir prompt-caching katmanı",
+        "Tool çağrıları için bir OPA policy'si",
+        "Otomatik bir veri dedup adımı",
+        "N token ileriyi tahmin eden draft head'ler; target tek geçişte 2-3x throughput için doğrular"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi metrik bir speculative-decoding draft'ının target model ile ne kadar iyi hizalandığını raporlar?",
+      "options": [
+        "Acceptance rate",
+        "Coverage delta",
+        "PSI",
+        "Perplexity"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Pipeline deployment esnekliği için hangi üçlü quant'ı sunar?",
+      "options": [
+        "ONNX, CoreML, TFLite",
+        "GPTQ-INT4-Marlin, AWQ-INT4 ve GGUF-Q4_K_M",
+        "Üç runtime'da yalnızca INT8",
+        "FP32, FP16, BF16"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "2026 model card'ı bu capstone'da hangi framework yapısını takip eder?",
+      "options": [
+        "Datasheets for Datasets",
+        "Veri, eğitim, eval, safety, lisans ve tekrar üretilebilirliği kapsayan Model Openness Framework (MOF) 2026 şablonu",
+        "Yalnızca HuggingFace YAML front-matter",
+        "OpenAI'ın model card formatı"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Serving replica'larını autoscale etmek için hangi HPA metriği kullanılır?",
+      "options": [
+        "Queue-wait süresi",
+        "CPU kullanımı",
+        "GPU sıcaklığı",
+        "Ağ egress byte'ları"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

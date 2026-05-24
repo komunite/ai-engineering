@@ -1,0 +1,90 @@
+{
+  "lesson": "08-production-rag-chatbot",
+  "title": "Capstone 08 — Production RAG Chatbot for a Regulated Vertical",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Regülasyona tabi domain'deki bir RAG chatbot'unda prompt caching neden bu kadar önemli?",
+      "options": [
+        "Vector database ihtiyacını ortadan kaldırır",
+        "%60-80 hit rate'te stabil prefix token'larını indirimlendirerek sorgu başı maliyeti 3-5x düşürür",
+        "Halüsinasyonları ortadan kaldırır",
+        "Rerank aşamasında recall'u iyileştirir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Her isteğin cache header'ına vs cache'lenmemiş suffix'ine ne girer?",
+      "options": [
+        "Cache boyutunu yakalamak için rastgele metin dolgusu",
+        "Yalnızca retrieve edilen dokümanlar",
+        "Kullanıcı sorusu önce, system prompt sonra",
+        "Cache header'da system prompt ve statik politikalar, cache uzantısı olarak rerank edilmiş context, cache'lenmemiş suffix olarak kullanıcı sorusu"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Retrieval katmanı GDPR veya HIPAA gibi jurisdiction tag'lerine nasıl saygı gösterir?",
+      "options": [
+        "Her ülke için ayrı bir index çalıştırır",
+        "Yanıtı yalnızca generation sonrası bloklar",
+        "Kullanıcı sorusunu bölgeye göre yeniden yazar",
+        "Hybrid search birleşmesinden önce role ve jurisdiction filtreleri uygulanır, böylece kullanıcının kapsamı dışındaki chunk'lar hiç rerank edilmez"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Synthesis aşaması çıktıyı hangi katmanlı guardrail kombinasyonundan geçirir?",
+      "options": [
+        "Yalnızca girişte Llama Guard 4",
+        "Llama Guard 4, NeMo Guardrails policy rail'leri ve Presidio PII scrub'ı, artı citation enforcement",
+        "Yalnızca bir output PII regex'i",
+        "Tek bir LLM-judge faithfulness kontrolü"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Drift dashboard ne üzerinde alarm verir?",
+      "options": [
+        "Alttaki LLM sağlayıcısındaki değişiklik",
+        "200ms üzerindeki latency",
+        "Retrieval-quality düşüşü, örneğin nDCG veya citation skorunda haftalık %5 düşüş",
+        "Index'e eklenen herhangi yeni doküman"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Deliverable'ın correctness rubric'ini gate eden golden set ne kadar büyük?",
+      "options": [
+        "5 demo sorgusu",
+        "Atıflarla birlikte uzman etiketli 200 soru/cevap çifti",
+        "20 soru",
+        "2000 sentetik soru"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Her tur başına online olarak hangi RAGAS skorları izlenir?",
+      "options": [
+        "Throughput, GPU kullanımı ve kuyruk derinliği",
+        "BLEU, ROUGE ve METEOR",
+        "Faithfulness, answer relevance ve context precision",
+        "Token sayısı ve dolar maliyeti"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

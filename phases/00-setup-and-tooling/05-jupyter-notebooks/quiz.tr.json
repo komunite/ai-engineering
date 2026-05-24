@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Jupyter notebook nedir?",
+      "options": ["Python script'leri yazmak için bir metin editörü", "Çalıştırılabilir kod hücrelerini markdown metni ve satır içi çıktılarla harmanlayan interaktif bir belge", "Veri bilimi projeleri için bir versiyon kontrol sistemi", "Python kütüphaneleri için bir paket yöneticisi"],
+      "correct": 1,
+      "explanation": "Bir Jupyter notebook (.ipynb), hücrelerde kod yazıp çalıştırabileceğin, çıktıları satır içinde görebildiğin ve kodu biçimlendirilmiş metin açıklamalarıyla harmanlayabildiğin interaktif bir ortamdır."
+    },
+    {
+      "stage": "pre",
+      "question": "Jupyter kernel ne yapar?",
+      "options": ["Markdown hücrelerini HTML'e dönüştürür", "Hücrelerdeki kodu çalıştırır ve değişkenleri çalıştırmalar arasında bellekte tutar", "Notebook için dosya depolamasını yönetir", "Notebook'u versiyon kontrolü için GitHub'a bağlar"],
+      "correct": 1,
+      "explanation": "Kernel, hücre kodunu çalıştıran ve state'i (değişkenler, import'lar) bellekte tutan ayrı bir Python process'idir. Bir notebook'taki tüm hücreler aynı kernel'ı paylaşır."
+    },
+    {
+      "stage": "post",
+      "question": "%timeit ve %%time magic komutları arasındaki fark nedir?",
+      "options": ["%timeit duvar saati zamanını, %%time CPU zamanını ölçer", "%timeit kodu defalarca çalıştırıp ortalama alır, %%time bir kez çalıştırır", "%timeit tek satırlarda çalışır, %%time tüm notebook'ta çalışır", "Hiçbir fark yok, ikisi alias"],
+      "correct": 1,
+      "explanation": "%timeit ifadeyi istatistiksel bir ortalama için defalarca çalıştırır (mikrobenchmark'lar için iyi). %%time hücreyi bir kez çalıştırır ve duvar saati zamanını raporlar (eğitim koşuları için iyi)."
+    },
+    {
+      "stage": "post",
+      "question": "Bir notebook'un senin makinende çalışıp başkası baştan sona çalıştırınca patlamasının en yaygın nedeni nedir?",
+      "options": ["Farklı bir Python sürümü kullanmak", "Hücrelerin sıralı çalıştırılmaması, çalıştırma sırasına gizli bağımlılıklar yaratır", "%matplotlib inline magic komutunu unutmak", "Çok fazla markdown hücresi kullanmak"],
+      "correct": 1,
+      "explanation": "Hücreleri sıra dışı çalıştırmak gizli state bağımlılıkları yaratır. Bir değişken sadece 2. hücreden önce 5. hücreyi çalıştırdığın için var olabilir. Kernel > Restart & Run All doğrusal çalıştırmayı doğrular."
+    },
+    {
+      "stage": "post",
+      "question": "Kodu notebook'tan ne zaman .py script'ine taşımalısın?",
+      "options": ["10 satırdan fazla kod yazar yazmaz", "Kod tekrar kullanılabilir bir yardımcı, eğitim pipeline'ı ya da production kodu olduğunda", "Asla -- notebook'lar yapay zeka işi için her zaman daha iyidir", "Sadece GPU'da çalıştırman gerektiğinde"],
+      "correct": 1,
+      "explanation": "Kural şu: 'notebook'larda keşfet, script'lerde sevk et.' Tekrar kullanılabilir yardımcılar, eğitim pipeline'ları ve production'da çalışan her şey .py dosyaları olmalı. Notebook'lar keşif ve prototipleme içindir."
+    }
+  ]
+}

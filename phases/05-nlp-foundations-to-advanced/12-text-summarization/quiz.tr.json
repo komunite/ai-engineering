@@ -1,0 +1,102 @@
+{
+  "lesson": "12-text-summarization",
+  "title": "Metin Özetleme",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Extractive ve abstractive özetleme arasındaki temel davranışsal fark nedir?",
+      "options": [
+        "Extractive TF-IDF kullanır; abstractive Word2Vec",
+        "Extractive cümleleri kaynaktan birebir döndürür; abstractive yeni metin üretir ve hallucinate edebilir",
+        "Extractive yalnızca çok dillidir",
+        "Extractive abstractive'den yavaştır"
+      ],
+      "correct": 1,
+      "explanation": "Extractive cümleleri birebir alır; abstractive yeniden yazar ve hallucination riskini taşır."
+    },
+    {
+      "stage": "pre",
+      "question": "ROUGE neyi ölçer?",
+      "options": [
+        "Embedding benzerliğini",
+        "Sistem ve referans özetleri arasında N-gram ve en uzun ortak alt dizi örtüşmesini",
+        "Okuma süresini",
+        "Token seviyesi perplexity'yi"
+      ],
+      "correct": 1,
+      "explanation": "ROUGE-1/2/L unigram, bigram ve LCS örtüşmesini referanslarla ölçer."
+    },
+    {
+      "stage": "check",
+      "question": "TextRank extractive özetlemede cümleleri nasıl skorlar?",
+      "options": [
+        "Ham kelime sayısıyla",
+        "Bir referans özetle karşılaştırarak",
+        "Kenarların cümle-benzerlik ağırlıkları olduğu bir graf üzerinde PageRank tarzı iterasyon çalıştırarak",
+        "Soruya embedding cosine'i ile"
+      ],
+      "correct": 2,
+      "explanation": "TextRank cümle-benzerlik grafı üzerinde PageRank kullanır; yüksek bağlantılı cümleler en yüksek skoru alır."
+    },
+    {
+      "stage": "check",
+      "question": "ROUGE hesaplarken neden stemming'i etkinleştirmelisin?",
+      "options": [
+        "Stemming olmadan 'running' ve 'run' farklı token sayılır ve ROUGE gerçek örtüşmeyi az sayar",
+        "ROUGE'u hızlandırmak için",
+        "Stemming case'i normalize eder",
+        "Stemming rouge-score paketi tarafından zorunludur"
+      ],
+      "correct": 0,
+      "explanation": "Stemming morfolojik varyantları birleştirir, böylece ROUGE semantik olarak eşdeğer formlara kredi verir."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi 2026 metriği NLI entailment ile özet hallucination'larını tespit etmek üzere tasarlanmıştır?",
+      "options": [
+        "BLEU",
+        "ROUGE-L",
+        "Kaynak ve özet iddiaları arasında NLI kullanan faithfulness kontrolleri (örn. FactCC veya RAGAS faithfulness)",
+        "chrF"
+      ],
+      "correct": 2,
+      "explanation": "NLI tabanlı faithfulness skorlaması, kaynak tarafından entail edilmeyen özet iddialarını işaretler."
+    },
+    {
+      "stage": "post",
+      "question": "Compliance'a yakın içerik için neden extractive özetleme tercih edilir?",
+      "options": [
+        "Çıktılar kaynaktan birebir alınır, abstractive hallucination sınıfını ortadan kaldırır",
+        "Daha hızlıdır",
+        "Extractive daha uzun çıktıları destekler",
+        "ROUGE skorları daha yüksektir"
+      ],
+      "correct": 0,
+      "explanation": "Birebir extraction içerik üretemez, bu da factuality'nin düzenlenmiş olduğu yerlerde önemlidir."
+    },
+    {
+      "stage": "post",
+      "question": "Bunlardan hangisi izlemen gereken bir abstractive hallucination türüdür?",
+      "options": [
+        "Noktalama drift'i",
+        "Stopword kaldırma",
+        "Uzun cümleler",
+        "Entity swap (örn. 'John Smith' yerine 'John Brown'), sayı drift'i, polarite çevirisi veya fact icadı"
+      ],
+      "correct": 3,
+      "explanation": "Entity swap'ler, sayı drift'i, polarite çevirileri ve icat edilmiş factlar abstractive'in kanonik hata modlarıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Ne zaman BART-large-CNN yerine Pegasus checkpoint'ine yönelirsin?",
+      "options": [
+        "BLEU değerlendirirken",
+        "Girdi kısayken",
+        "Extractive çıktıya ihtiyacın varken",
+        "Bilimsel özetler gibi alanlarda; Pegasus'un gap-sentence pretraining objective'i daha yakın uyum sağlar"
+      ],
+      "correct": 3,
+      "explanation": "Pegasus'un gap-sentence objective'i uzun-form alan özetlemede (örn. pubmed) öne çıkar."
+    }
+  ]
+}

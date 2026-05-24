@@ -1,0 +1,90 @@
+{
+  "lesson": "16-openai-agents-sdk",
+  "title": "OpenAI Agents SDK: Handoffs, Guardrails, Tracing",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "OpenAI Agents SDK'nın beş primitifi nedir?",
+      "options": [
+        "Agent, Handoff, Guardrail, Session, Tracing",
+        "Node, Edge, Reducer, Checkpointer, Subgraph",
+        "Plan, Worker, Solver, Evaluator, Reflector",
+        "Tool, Prompt, Model, Memory, Trace"
+      ],
+      "correct": 0,
+      "explanation": "SDK bu beş primitifi sunar."
+    },
+    {
+      "stage": "pre",
+      "question": "Model bir handoff'u nasıl görür?",
+      "options": [
+        "Özel bir HTTP endpoint olarak",
+        "transfer_to_<agent_name> adlı bir tool olarak",
+        "Bir system mesajı olarak",
+        "Özel bir token olarak"
+      ],
+      "correct": 1,
+      "explanation": "Handoff'lar transfer_to_<agent> isim şeklinde tool olarak ifşa edilir."
+    },
+    {
+      "stage": "check",
+      "question": "SDK hangi üç guardrail tipini sunar?",
+      "options": [
+        "Input, output ve tool guardrails",
+        "Pre, post ve inline guardrails",
+        "Hard, soft ve best-effort guardrails",
+        "Static, dynamic ve federated guardrails"
+      ],
+      "correct": 0,
+      "explanation": "Input (ilk agent), output (son agent) ve tool (her function tool için) guardrails."
+    },
+    {
+      "stage": "check",
+      "question": "Parallel ve blocking guardrails arasındaki fark nedir?",
+      "options": [
+        "Parallel ana LLM ile birlikte çalışır (daha düşük latency, tetiklendiğinde token boşa gider); blocking önce çalışır (tetiklendiğinde boşa token yok)",
+        "Blocking asenkrondur; parallel senkrondur",
+        "Parallel her zaman daha pahalıdır",
+        "Blocking yalnızca output'ta çalışır"
+      ],
+      "correct": 0,
+      "explanation": "Parallel tetiklendiğinde boşa giden token'lar pahasına latency'yi optimize eder; blocking token kazandırır ama latency ekler."
+    },
+    {
+      "stage": "check",
+      "question": "SDK'da tracing nasıl etkinleştirilir?",
+      "options": [
+        "Varsayılan kapalı; agent başına etkinleştir",
+        "Varsayılan açık; OPENAI_AGENTS_DISABLE_TRACING=1 ile devre dışı bırak",
+        "Yalnızca OpenTelemetry collector aracılığıyla",
+        "Yalnızca hosted dashboard'da"
+      ],
+      "correct": 1,
+      "explanation": "LLM, tool, handoff ve guardrail için span'ler varsayılan olarak yayınlanır; bir env var bunu devre dışı bırakır."
+    },
+    {
+      "stage": "post",
+      "question": "Handoff drift nedir ve ders nasıl hafifletmeyi öneriyor?",
+      "options": [
+        "Tracing geride kalır; span hacmini azalt",
+        "Agent A, B'ye handoff yapar, B de A'ya geri yapar bir döngüde; hop sayacı ekle",
+        "Session'lar taşar; eskileri arşivle",
+        "Guardrail'ler senkronu kaybeder; yeniden eğit"
+      ],
+      "correct": 1,
+      "explanation": "Bir hop sayacı transfer zincirlerini sonsuza dek dönmeden sınırlar."
+    },
+    {
+      "stage": "post",
+      "question": "Yerleşik tool'lar neden bir guardrail boşluğudur?",
+      "options": [
+        "Function tool'lardan daha yavaştırlar",
+        "Tool guardrails yalnızca function tool'larda tetiklenir; yerleşik tool'lar (file reader, web fetch) ayrı policy gerektirir",
+        "Tracing yapılamazlar",
+        "Handoff'u desteklemezler"
+      ],
+      "correct": 1,
+      "explanation": "Tool başına guardrail'ler function tool'ları kapsar; yerleşik tool'lar ayrı bir policy katmanı gerektirir."
+    }
+  ]
+}

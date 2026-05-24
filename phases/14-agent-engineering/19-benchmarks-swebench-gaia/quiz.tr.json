@@ -1,0 +1,90 @@
+{
+  "lesson": "19-benchmarks-swebench-gaia",
+  "title": "Benchmark'lar: SWE-bench, GAIA, AgentBench",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "SWE-bench'in evaluator'ı aday bir patch üzerinde ne kontrol eder?",
+      "options": [
+        "Referans düzeltmeye karşı BLEU skoru",
+        "Önceden başarısız olan testlerin şimdi geçmesi (FAIL_TO_PASS) ve önceden geçen testlerin hâlâ geçmesi (PASS_TO_PASS)",
+        "Patch uzunluğunun 200 satırın altında olması",
+        "Patch'in ayrı bir LLM judge'dan geçmesi"
+      ],
+      "correct": 1,
+      "explanation": "Harness test geçişlerine göre karar verir: bug ortaya çıkaran testler dönmeli, regresyon testleri yeşil kalmalı."
+    },
+    {
+      "stage": "pre",
+      "question": "SWE-bench Verified neden var?",
+      "options": [
+        "Daha hızlı çalışır",
+        "OpenAI'nin 500 görevlik insan-küratörlü alt kümesi belirsiz issue'ları ve güvenilmez testleri kaldırır",
+        "Daha fazla dil içerir",
+        "Farklı bir patch formatı kullanır"
+      ],
+      "correct": 1,
+      "explanation": "Verified, güvenilir raporlama için daha temiz alt kümedir."
+    },
+    {
+      "stage": "check",
+      "question": "SWE-bench+ başarılı patch'ler hakkında ne buldu?",
+      "options": [
+        "%32.67'si issue'da çözüm metni sızdırıyor ve %31.08'i şüpheli derecede zayıf test kapsamına sahip",
+        "Tüm patch'ler ezberlenmişti",
+        "Hiç contamination yok",
+        "Patch'ler her zaman 1000 satırı aşıyordu"
+      ],
+      "correct": 0,
+      "explanation": "SWE-bench+ başarılı patch'lerin büyük bir kısmında çözüm sızıntısı ve zayıf kapsam tespit etti."
+    },
+    {
+      "stage": "check",
+      "question": "GAIA'nın tasarım felsefesi nedir?",
+      "options": [
+        "İnsanlar için zor, AI için kolay",
+        "İnsanlar için kavramsal olarak basit (yaklaşık %92) ama AI için zor (eklentilerle erken GPT-4: yaklaşık %15)",
+        "Saf vector retrieval benchmark'ı",
+        "Yalnızca single-turn sorular"
+      ],
+      "correct": 1,
+      "explanation": "GAIA bilinçli olarak insanlar-için-kolay, AI-için-zor; akıl yürütme + tool'lar + modaliteyi test eder."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi AgentBench'in environment kategorilerinden biri DEĞİLDİR?",
+      "options": [
+        "Code (Bash, DB, KG)",
+        "Games (Alfworld, LTP)",
+        "Web (WebShop, Mind2Web)",
+        "Gradient (RL, IRL)"
+      ],
+      "correct": 3,
+      "explanation": "AgentBench code, games, web ve open-ended generation'ı kapsar. Gradient kategorisi yok."
+    },
+    {
+      "stage": "post",
+      "question": "Ders SWE-bench sayılarını raporlamanın yanlış yolu olarak neyi tanımlar?",
+      "options": [
+        "Repo başına dağılımları raporlamak",
+        "Verified veya SWE-bench+ context'inden bahsetmeden tek bir aggregate sayı raporlamak",
+        "Adım sayılarını raporlamak",
+        "Wall-clock raporlamak"
+      ],
+      "correct": 1,
+      "explanation": "Tek-sayı sabitlemesi contamination ve maliyeti gizler; her zaman Verified ve dağılım başına context raporla."
+    },
+    {
+      "stage": "post",
+      "question": "Bu benchmark'lar hangi boyutu ölçmez?",
+      "options": [
+        "Gerçek dünya operasyonel maliyeti (token, wall-clock), düşmanca safety ve kendi alanın",
+        "Test geçişleri",
+        "Görev başına başarı",
+        "Adım sayıları"
+      ],
+      "correct": 0,
+      "explanation": "Benchmark'lar aggregate ölçer; maliyeti, düşmanca dayanıklılığı veya senin alanını yakalamaz."
+    }
+  ]
+}

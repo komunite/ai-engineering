@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir karar ağacı düğümünde Gini impurity neyi ölçer?",
+      "options": [
+        "Düğümün ağaçtaki derinliğini",
+        "O düğümdeki sınıf dağılımına göre, rastgele seçilmiş bir örneği yanlış sınıflandırma olasılığını",
+        "Düğümdeki toplam örnek sayısını",
+        "Öznitelikler arasındaki korelasyonu"
+      ],
+      "correct": 1,
+      "explanation": "Gini impurity = 1 - sum(p_k^2). Rastgele seçilmiş bir örnek, o düğümdeki sınıf dağılımına göre etiketlenirse ne sıklıkta yanlış sınıflandırılacağını ölçer. Saf düğüm = 0."
+    },
+    {
+      "stage": "pre",
+      "question": "Tablo verisinde ağaç tabanlı modellerin sinir ağlarına göre temel avantajı nedir?",
+      "options": [
+        "Ağaçlar görüntü ve metni doğal olarak işleyebilir",
+        "Ağaçlar her zaman sinir ağlarından daha düşük bias'a sahiptir",
+        "Ağaçlar karışık öznitelik türlerini işler, daha az ön işleme gerektirir ve daha yorumlanabilirdir",
+        "Ağaçlar GPU donanımında daha hızlı eğitilir"
+      ],
+      "correct": 2,
+      "explanation": "Ağaçlar sayısal ve kategorik öznitelikleri kodlama gerektirmeden doğal olarak işler, minimum ön işleme gerektirir ve yorumlanabilir kurallar üretir. Sinir ağları düz tablolarda değil, uzamsal/sıralı verilerde öne çıkar."
+    },
+    {
+      "stage": "post",
+      "question": "Bir random forest neden hem bootstrap örnekleme HEM DE her split'te rastgele öznitelik alt kümeleri kullanır?",
+      "options": [
+        "Veri seti boyutunu azaltarak eğitimi hızlandırmak için",
+        "Çeşitli, korelasyonsuz ağaçlar yaratıp ortalama almanın bias'ı artırmadan varyansı azaltması için",
+        "Her ağacın her veri noktasını en az bir kez görmesini sağlamak için",
+        "Tek tek ağaçların derinliğini azaltmak için"
+      ],
+      "correct": 1,
+      "explanation": "Her iki rastgelelik kaynağı da ağaçları çeşitlendirir. Öznitelik rastgeleleştirmesi olmadan tüm ağaçlar aynı baskın öznitelik üzerinde split yapardı. Ortalama almanın varyansı azaltmada etkili olmasını sağlayan şey bu çeşitliliktir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir düğümde 8 köpek ve 2 kedi var. Gini impurity'si nedir?",
+      "options": [
+        "0.0",
+        "0.20",
+        "0.32",
+        "0.50"
+      ],
+      "correct": 2,
+      "explanation": "Gini = 1 - (0.8^2 + 0.2^2) = 1 - (0.64 + 0.04) = 0.32. Düğüm çoğunlukla köpek ama saf değil, dolayısıyla Gini 0 (saf) ile 0.5 (ikili için maksimum) arasında."
+    },
+    {
+      "stage": "post",
+      "question": "MDI (Mean Decrease in Impurity) öznitelik önemi hangi tip özniteliklere yanlı eğilim gösterir?",
+      "options": [
+        "Yalnızca iki değeri olan ikili öznitelikler",
+        "Düşük varyanslı öznitelikler",
+        "Çok sayıda olası split noktası olan, yüksek kardinaliteli öznitelikler",
+        "Hedefle yüksek korelasyona sahip öznitelikler"
+      ],
+      "correct": 2,
+      "explanation": "MDI, yüksek kardinaliteli özniteliklere yanlıdır çünkü bunlar daha fazla olası split noktası sunar ve şans eseri impurity'yi azaltma şansları artar. Permutation importance daha güvenilirdir."
+    }
+  ]
+}

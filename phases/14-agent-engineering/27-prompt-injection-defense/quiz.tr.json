@@ -1,0 +1,90 @@
+{
+  "lesson": "27-prompt-injection-defense",
+  "title": "Prompt Injection ve PVE Savunması",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Dolaylı prompt injection nedir?",
+      "options": [
+        "Kullanıcının doğrudan 'tüm kuralları görmezden gel' yazması",
+        "Agent'ın çektiği veriye (bir sayfa, PDF, e-posta, bellek notu) gömülü ve geliştirici prompt'unu girişte geçersiz kılan talimatlar",
+        "Bir model yanlış tıklaması",
+        "System prompt'ta bir yazım hatası"
+      ],
+      "correct": 1,
+      "explanation": "Greshake ve diğerleri dolaylı prompt injection terimini ortaya attı: saldırgan-kontrollü çekilen içerik talimatlar taşır."
+    },
+    {
+      "stage": "pre",
+      "question": "Ders çekilen prompt'ları işlemeyi neye eşdeğer sayıyor?",
+      "options": [
+        "İfade özgürlüğüne",
+        "Agent'ın tool-use yüzeyinde keyfi kod yürütmesine",
+        "Statik analiz pass'ine",
+        "Saf bir fonksiyon çağrısına"
+      ],
+      "correct": 1,
+      "explanation": "Greshake'in çerçevelemesi: çekilen talimatlar agent'ın erişimi olan herhangi bir tool'a vurabilir."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi gösterilen beş exploit sınıfından biri DEĞİLDİR?",
+      "options": [
+        "Veri hırsızlığı",
+        "Worming",
+        "Kalıcı bellek poisoning'i",
+        "Cache invalidation"
+      ],
+      "correct": 3,
+      "explanation": "Beşi: veri hırsızlığı, worming, kalıcı bellek poisoning'i, ekosistem contamination'ı, keyfi tool kullanımı."
+    },
+    {
+      "stage": "check",
+      "question": "PVE neyin kısaltmasıdır?",
+      "options": [
+        "Prompt-Validator-Executor: pahalı ana model commit etmeden önce her tool çağrısında ucuz hızlı bir validator çalışır",
+        "Provider-Verifier-Encoder",
+        "Plan-Verify-Execute, bir HTN lehçesi",
+        "Pre-Vectorize-Embed"
+      ],
+      "correct": 0,
+      "explanation": "PVE her tool invocation'ı ana model commit'inden önce ucuz bir validator ile sarar."
+    },
+    {
+      "stage": "check",
+      "question": "'system prompt güvenilmez talimatları görmezden gel diyor' neden yetersizdir?",
+      "options": [
+        "Çok kısadır",
+        "Bu instruction-following'tir, zorlama değil; model yeterince ikna edici inject edilmiş içerikle hâlâ override edilebilir",
+        "Sağlayıcılar onu temizler",
+        "Şifrelidir"
+      ],
+      "correct": 1,
+      "explanation": "Gerçek savunma source tagging, allowlist'ler, adım-başına safety ve PVE-tarzı doğrulama gerektirir; yalnızca prompting değil."
+    },
+    {
+      "stage": "post",
+      "question": "Çekilen belleğin overtrust'ı nedir?",
+      "options": [
+        "Çok agresif caching",
+        "Dünkü agent zehirli bir bellek notu yazdı; bugünkü agent onu okur ve injection'ı yeniden yürütür",
+        "Yanlış modeli yüklemek",
+        "Indexi vacuum etmeyi unutmak"
+      ],
+      "correct": 1,
+      "explanation": "Kalıcı bellek poisoning'i, bellek güvenilir kabul edilirse injection'ların oturumlar arası hayatta kaldığı anlamına gelir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders her içerik parçasına hangi metadata'yı eklemeyi öneriyor?",
+      "options": [
+        "Bir şifreleme anahtarı",
+        "Source tag: user_message vs tool_output vs retrieved; validator çekilen içerikteki direktifleri reddeder",
+        "Yalnızca timestamp",
+        "Token sayısı"
+      ],
+      "correct": 1,
+      "explanation": "Provenance tagging validator'a içeriği güven seviyesine göre ele alma olanağı verir."
+    }
+  ]
+}

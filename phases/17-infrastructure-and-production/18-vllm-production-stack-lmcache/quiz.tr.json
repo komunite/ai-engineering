@@ -1,0 +1,78 @@
+{
+  "lesson": "18-vllm-production-stack-lmcache",
+  "title": "LMCache KV Offload ile vLLM Production Stack",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "LMCache bir vLLM deployment'ında esas olarak hangi problemi ele alır?",
+      "options": [
+        "Aynı prefix'lerin preemption ve yeniden prefill edilmesine neden olan HBM'deki KV cache baskısı",
+        "Tokenizer GIL çekişmesi",
+        "Network egress filtreleme",
+        "Cold-start imaj pull"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Pluggable KV cache backend'lerini hangi vLLM API'si tanıttı?",
+      "options": [
+        "Prefix-caching flag'i",
+        "PagedAttention v2",
+        "vLLM v0.9.0'daki Connector API",
+        "ChunkedPrefill API"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "vLLM 0.11.0 (Ocak 2026) sürümü KV offload yoluna ne ekler?",
+      "options": [
+        "Asenkron bir offload yolu, böylece engine yaygın durumda offload'da bloklanmaz",
+        "Yalnızca senkron offload",
+        "Zorunlu FP8 KV cache",
+        "LMCache desteğinin kaldırılması"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "LMCache'i native CPU offload yerine ne zaman seçmelisin?",
+      "options": [
+        "Birden fazla engine tenant'lar arası prefix paylaştığında, LoRA varyantlarında ya da tekrarlanan RAG context'inde — engine'ler arası yeniden kullanım karşılığını verdiğinde",
+        "KV caching'i tamamen devre dışı bırakmak istediğinde",
+        "Tek bir engine HBM baskısı yaşadığında ve prefix paylaşımı olmadığında",
+        "Yalnızca CPU üzerinde çalışıyorken"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "KV ayak izi HBM'nin çok altında kaldığında LMCache yararına ne olur?",
+      "options": [
+        "LMCache otomatik olarak devre dışı kalır",
+        "Yine de throughput'u ikiye katlar",
+        "Konfigürasyonlar yaklaşık %3-5 yük ile baseline'a uyar ve gerçek bir yarar sağlamaz",
+        "Engine çöker"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "LMCache disaggregated serving (Phase 17 · 17) ile neden bir araya gelir?",
+      "options": [
+        "Çünkü LMCache NIXL'in yerini alır",
+        "Prefill'den decode'a transfer edilen KV LMCache'e iner; sonraki sorgular LMCache'ten çekebilir ve prefill'i atlayabilir, böylece cache-aware router yerel ya da LMCache-paylaşımlı cache'i eşleşen bir engine seçebilir",
+        "Çünkü LMCache engine ile aynı GPU'da çalışır",
+        "Çalışmazlar — karşılıklı olarak münhasırdırlar"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "05-eagle3-speculative-decoding",
+  "title": "Üretimde EAGLE-3 Speculative Decoding",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Speculative decoding düz decode'da bulunan hangi boşluğu sömürür?",
+      "options": [
+        "Decode compute-bound'dur; daha fazla compute eklemek bedavadır",
+        "Decode batching'den faydalanmaz",
+        "Decode prefill'den daha fazla network bant genişliği gerektirir",
+        "Decode memory-bound'dur; GPU çoğunlukla ağırlıkların HBM okumalarını beklerken boştadır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Acceptance rate alpha neyi ölçer?",
+      "options": [
+        "Decode sırasında kullanılan GPU belleği oranı",
+        "Target model tarafından kabul edilen draft-önerisi token'ların oranı",
+        "Draft modelinin latency yükü",
+        "KV cache'in cache hit oranı"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "EAGLE-3'te EAGLE-2'ye kıyasla neyin değişmesi, alpha'yı genel sohbette kabaca 0.6-0.8'e taşır?",
+      "options": [
+        "Aynı aileden tam boy bir draft modeli kullanır",
+        "GPU yerine CPU'da çalışır",
+        "Verify adımını tamamen kaldırır",
+        "Draft head, yalnızca son katman yerine birden fazla target katmanı üzerinde eğitilir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders, 2026 donanımlarının çoğunda yüksek concurrency'de speculative decoding'in net negatif olduğu kabaca hangi alpha değerinin altıdır diyor?",
+      "options": [
+        "0.95",
+        "0.05",
+        "0.55",
+        "0.85"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "EAGLE-3'ü açtıktan sonra, ortalama ITL düşse bile en yakından izlenmesi gereken metrik nedir?",
+      "options": [
+        "Cold-start süresi",
+        "GPU bellek kullanımı",
+        "P99 ITL, çünkü reddedilen draft iki-geçişleri tam batch altında seri hale gelebilir",
+        "Ortalama E2E latency"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Derse göre vLLM 2026'da speculative decoding neden opt-in (default değil)?",
+      "options": [
+        "Acceptance rate iş yüküne bağlıdır; alpha'yı ölçmeden açmak üretim anti-pattern'idir",
+        "Yalnızca Blackwell GPU'larda çalışır",
+        "PagedAttention ile uyumsuzdur",
+        "Ayrı lisans gerektirir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

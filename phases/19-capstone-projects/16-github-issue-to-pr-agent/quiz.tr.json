@@ -1,0 +1,90 @@
+{
+  "lesson": "16-github-issue-to-pr-agent",
+  "title": "Capstone 16 — GitHub Issue-to-PR Autonomous Agent",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Async cloud coding agent üretimde nasıl tetiklenir?",
+      "options": [
+        "Bir VM'e uzun ömürlü SSH session'ı",
+        "Bir issue label veya PR yorumuyla tetiklenen ve bir sandbox worker'a dağıtılan GitHub webhook",
+        "Repo'ya isabet eden zamanlanmış bir cron job",
+        "Manuel dosya yükleme"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Agent neden personal access token yerine kısa ömürlü bir GitHub App installation token'ı ile çalışmalıdır?",
+      "options": [
+        "App'ler GitHub rate limit'lerinden tamamen kaçınır",
+        "App token'ları görev başına worker'lara uygun fine-grained, scope'lu, kısa ömürlü kimlik bilgileri verir",
+        "Personal access token'lar PR açamaz",
+        "App'ler PAT'lerden daha az kod gerektirir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Agent'ın main'i ezmesini hangi iki koruma engeller?",
+      "options": [
+        "Her push başına captcha gerektirmek",
+        "Main'e doğrudan push veya force-push olmadığını zorunlu kılan branch protection, app bypass listesinde değil",
+        "Klonlamadan önce repo'yu şifrelemek",
+        "Worker'da git'i devre dışı bırakmak"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": ".github/workflows için path-scoped koruma neden bir GitHub App izni olarak değil worker'da zorunlu kılınır?",
+      "options": [
+        "Workflow'lar repo dışında saklanır",
+        "Path scoping herhangi bir biçimde imkansızdır",
+        "GitHub App izinleri path-scoped değildir, bu yüzden worker'ın önerilen diff üzerindeki allow-list kontrolü bunu zorunlu kılmak için doğru yerdir",
+        ".github/workflows sanal bir path'tir"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Agent loop sonuçlandıktan sonra, PR açmadan önce hangi gating gerçekleşir?",
+      "options": [
+        "Reviewer modeli diff'i yeniden yazar",
+        "Sandbox'ta tam CI çalışır; coverage delta hesaplanır; eşik ötesinde gerileme içeren PR'lar needs-review olarak etiketlenir",
+        "PR herhangi bir kontrol olmadan hemen açılır",
+        "Repo main'e force-push edilir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Dispatcher repo başına gün başına hangi bütçe ayarlarını zorunlu kılar?",
+      "options": [
+        "Yalnızca wall-clock cap",
+        "Sınırsız PR ve sınırsız maliyet",
+        "PR başına dolar tavanı artı repo başına gün başına maksimum PR sayısı",
+        "Yalnızca tur cap'i"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Agent'ın gönderdiği PR gövdesine ne girer?",
+      "options": [
+        "Yalnızca diff",
+        "Gerekçe, diff özeti, trace URL'si, maliyet ve tur sayısı, böylece reviewer'lar denetleyip takip edebilir",
+        "Yalnızca üretilmiş bir changelog",
+        "Hiçbir şey; PR'ın boş bir gövdesi var"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

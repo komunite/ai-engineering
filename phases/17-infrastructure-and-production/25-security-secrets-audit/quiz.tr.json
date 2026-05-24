@@ -1,0 +1,78 @@
+{
+  "lesson": "25-security-secrets-audit",
+  "title": "Güvenlik — Secret'lar, API Key Rotation, Audit Log'lar, Guardrail'lar",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "LLM servis kimlik bilgileri için 2026 standart pattern'i nedir?",
+      "options": [
+        "Anahtarları bir Slack kanalında sakla",
+        "Bir AI gateway tarafından IAM rolüyle runtime'da çekilen merkezi vault; vault'ta rotate edersin ve tüm uygulamalar dakikalar içinde alır",
+        "Anahtarı her mühendise e-mail at",
+        "Hız için API anahtarlarını config dosyalarına hardcode et"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders API anahtarları, vault root token'ları ve CI/CD kimlik bilgileri için hangi rotation kadansını öneriyor?",
+      "options": [
+        "90 gün içinde, mümkün olduğunda otomatik, manuel olduğunda log'lanıp izlenir",
+        "Her 5 yılda bir",
+        "Yalnızca sızdırıldığında",
+        "Asla"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "PII temizleme için tutarlı tokenization (Mesh yaklaşımı) neden kullanılır?",
+      "options": [
+        "Regex'ten daha az bellek kullanır",
+        "Prompt'u modele şifreler",
+        "ISO 27001 tarafından zorunludur",
+        "Aynı kaynak değer aynı placeholder'a eşlenir; böylece LLM prompt boyunca kod ve ilişki semantiğini korur"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders LLM servis subnet'leri için hangi egress duruşunu öneriyor?",
+      "options": [
+        "Küçük bir domain seti (api.openai.com, api.anthropic.com, vector DB, vault) whitelist'le ve geri kalan her şeyi düşür, allowlist-only DNS resolver ile",
+        "Sağlayıcılar dahil tüm egress'i blokla",
+        "DNS'e izin ver ama HTTP'yi blokla",
+        "Tüm giden trafiğe izin ver"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "2026 Vercel tedarik zinciri olayı CI/CD kimlik bilgileri hakkında ne öğretti?",
+      "options": [
+        "CI/CD kimlik bilgileri prod-eşdeğeridir — vault'ta sakla, dar scope'la, agresif rotate et",
+        "CI/CD secret'ları çalınamaz",
+        "CI/CD kimlik bilgileri düşük risklidir ve env dosyalarında kalabilir",
+        "Vercel etkilenmedi"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders her LLM çağrısı için hangi audit log alanlarını korumayı öneriyor?",
+      "options": [
+        "Yalnızca ham prompt",
+        "Yalnızca yanıt",
+        "Timestamp, user/tenant, prompt hash (ham değil), model + version, token sayıları, maliyet, response hash, guardrail tetiklenmeleri",
+        "Yalnızca maliyet"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

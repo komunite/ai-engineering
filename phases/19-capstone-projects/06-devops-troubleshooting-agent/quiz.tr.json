@@ -1,0 +1,90 @@
+{
+  "lesson": "06-devops-troubleshooting-agent",
+  "title": "Capstone 06 — DevOps Troubleshooting Agent for Kubernetes",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Troubleshooting agent'ının RBAC yüzeyi için varsayılan izin duruşu nedir?",
+      "options": [
+        "Varsayılan olarak read-only, yıkıcı verb'ler ayrı bir sunucu ve insan onayı arkasında gate'lenir",
+        "Yalnızca etkilenen namespace'te namespace-admin",
+        "On-call mühendisle eşdeğer",
+        "Cluster-admin, böylece kendini iyileştirebilir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Agent root cause analizi sırasında hangi knowledge graph üzerinde yürür?",
+      "options": [
+        "Düğümler K8s nesneleri ve telemetri kaynaklarıdır; kenarlar sahiplik, scheduling ve gözlemi kodlar",
+        "Son zamanlarda yeniden başlatılmış pod'ların düz bir listesi",
+        "Takıma göre düzenlenmiş Prometheus metrik adları",
+        "GitHub commit'leri ve PR incelemelerinin bir graph'ı"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Root-cause hipotezleri Slack brief için nasıl sıralanır?",
+      "options": [
+        "Yakınlık, özgüllük, graph yol uzunluğu ve atıf sayısını birleştiren bir evidence skoruna göre",
+        "Yalnızca model log olasılığına göre",
+        "Alfabetik alarm adına göre",
+        "Üretildikleri sıraya göre"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Audit log neden agent'ın değerlendirdiği komutları da çalıştırılanları da kaydeder?",
+      "options": [
+        "İnceleyiciler, agent'ın az kalsın yıkıcı bir komut çalıştıracağı kıl payı durumları yakalayabilir",
+        "ArgoCD yalnızca değerlendirilen komutları kabul eder",
+        "Slack API teslimat için ikisini de gerektirir",
+        "Replay saldırıları her iki listeyi de gerektirir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Agent'ın kötü bir deploy'da tek taraflı geri almasını hangi mekanizma önler?",
+      "options": [
+        "Yıkıcı tool'lar, Slack card'dan gelen bir onay token'ı arkasında ayrı bir MCP sunucusunda yaşar",
+        "İkinci bir LLM-judge rollback üzerinde oy verir",
+        "GitOps repo'sunda branch protection",
+        "PagerDuty deployment'ı otomatik olarak duraklatır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Rubric'in ölçtüğü p50 time-to-hypothesis hedefi nedir?",
+      "options": [
+        "Bir sonraki on-call vardiyası altında",
+        "1 saatten az",
+        "Alarmdan Slack brief'e kadar 5 dakikadan az",
+        "30 saniyeden az"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "RCA doğruluğunu skorlamak için kullanılan sentetik incident suite ne kadar büyük?",
+      "options": [
+        "1 scriptli demo incident",
+        "5 senaryo",
+        "Rastgele örneklenmiş 100 production alarmı",
+        "OOMKill, DNS flap, HPA thrash, PVC fill ve daha fazlasını kapsayan 20 senaryo"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

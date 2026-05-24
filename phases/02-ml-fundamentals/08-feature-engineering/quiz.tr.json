@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Feature engineering neden çoğu zaman daha gelişmiş bir algoritma seçmekten daha etkilidir?",
+      "options": [
+        "Feature engineering kodu daha hızlı çalıştırır",
+        "İyi öznitelikler, ham verinin sakladığı örüntüleri modele açar; bu sayede basit modeller bile etkili olur",
+        "Feature engineering test setine olan ihtiyacı ortadan kaldırır",
+        "Gelişmiş algoritmalar ham veriyi işleyemez"
+      ],
+      "correct": 1,
+      "explanation": "Verinin temsil biçimi algoritmadan daha önemlidir. BMI (ağırlık/boy^2) gibi iyi tasarlanmış bir öznitelik ilgili örüntüyü doğrudan açığa çıkarır ve lojistik regresyonu bile karmaşık ensemble'larla rekabet edebilir hale getirir."
+    },
+    {
+      "stage": "pre",
+      "question": "One-hot encoding nedir?",
+      "options": [
+        "Her kategoriyi veri setindeki sıklığıyla değiştirme",
+        "Her kategori için ikili bir sütun oluşturmak; her satırda tam olarak bir sütun 1'e ayarlanır",
+        "Tüm öznitelikleri 0 ile 1 arasındaki değerlere dönüştürme",
+        "Hedef değişkeni olasılık olarak kodlama"
+      ],
+      "correct": 1,
+      "explanation": "One-hot encoding her benzersiz kategori için ikili bir sütun oluşturur. Kırmızı/mavi/yeşil değerleri olan bir renk özniteliği için üç sütun üretir: is_red, is_blue, is_green."
+    },
+    {
+      "stage": "post",
+      "question": "Target encoding ile ilgili data leakage riski nedir?",
+      "options": [
+        "Modeli eğitmek için çok yavaş hale getirir",
+        "Kategorileri ortalama hedef değerle değiştirir; yalnızca eğitim verisi üzerinde hesaplanmazsa test setinden bilgi sızdırabilir",
+        "Çok fazla öznitelik oluşturur",
+        "Yalnızca ikili hedeflerle çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Target encoding her kategoriyi o kategorinin ortalama hedef değeriyle değiştirir. Tüm veri seti (test verisi dahil) üzerinde hesaplanırsa test etiketleri eğitim özniteliklerine sızar ve performans tahminlerini şişirir."
+    },
+    {
+      "stage": "post",
+      "question": "TF-IDF bir kelimeyi inverse document frequency'sine göre ağırlıklandırır. Etkisi nedir?",
+      "options": [
+        "'the' gibi yaygın kelimeler sık geçtikleri için yüksek ağırlık alır",
+        "Nadir, ayırt edici kelimeler yüksek ağırlık alırken yaygın kelimeler düşük ağırlık alır",
+        "Tüm kelimeler sıklığa bakılmaksızın eşit ağırlık alır",
+        "Yalnızca her belgedeki en sık geçen kelime tutulur"
+      ],
+      "correct": 1,
+      "explanation": "IDF = log(toplam belge sayısı / kelimeyi içeren belge sayısı). Yaygın kelimeler (birçok belgede görünenler) düşük IDF alır. Nadir, ayırt edici kelimeler yüksek IDF alır ve temsil üzerinde daha etkili olur."
+    },
+    {
+      "stage": "post",
+      "question": "Korelasyonu 0.98 olan iki özniteliğin var. Neden birini kaldırırsın?",
+      "options": [
+        "Yüksek korelasyonlu öznitelikler her zaman modelin çökmesine neden olur",
+        "Gereksizler -- ikisi de neredeyse aynı bilgiyi taşır ve ikisini birden tutmak sinyal eklemeden overfitting riskini artırır",
+        "Korelasyonlu öznitelikler veriyi durağan olmayan hale getirir",
+        "0.5'in üzerindeki korelasyon, özniteliklerin farklı şeyler ölçtüğü anlamına gelir"
+      ],
+      "correct": 1,
+      "explanation": "r=0.98 olan öznitelikler neredeyse gereksizdir. İkisini birden tutmak, hedef hakkında yeni bilgi sağlamadan boyutsallığı, overfitting riskini ve çok eşdoğrusallığı (multicollinearity) artıran gürültülü bir kopya ekler."
+    }
+  ]
+}

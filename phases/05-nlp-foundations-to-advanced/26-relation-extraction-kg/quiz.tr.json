@@ -1,0 +1,102 @@
+{
+  "lesson": "26-relation-extraction-kg",
+  "title": "Relation Extraction ve Knowledge Graph Oluşturma",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir knowledge graph'in atomik birimi nedir?",
+      "options": [
+        "Bir POS tag",
+        "Bir (subject, relation, object) triple",
+        "Bir token",
+        "Bir cümle"
+      ],
+      "correct": 1,
+      "explanation": "KG'ler bilgiyi (s, r, o) triple'lar olarak depolar; toplu triple'lar grafi oluşturur."
+    },
+    {
+      "stage": "pre",
+      "question": "2026 relation extraction'da AEVS ne anlama gelir?",
+      "options": [
+        "Anchor-Extraction-Verification-Supplement: span'leri anchor et, triple'ları çıkar, kaynağa karşı doğrula, kapsamayı tamamla",
+        "Auto-Encoder Vector Search",
+        "Async Entity Validation Service",
+        "Aggregated Entity-Value Schema"
+      ],
+      "correct": 0,
+      "explanation": "AEVS, grounded RE için 2026 hallucination-mitigation framework'üdür."
+    },
+    {
+      "stage": "check",
+      "question": "Her triple neden kaynak provenance (doc id + span) taşımalı?",
+      "options": [
+        "Provenance triple'ları denetlemene ve kaynak metinle eşleşmeyen span'leri olan hallucination'ları reddetmene izin verir",
+        "Çıkarımı hızlandırır",
+        "Provenance ontolojiyi değiştirir",
+        "Provenance SPARQL tarafından zorunludur"
+      ],
+      "correct": 0,
+      "explanation": "Provenance denetimi mümkün kılar ve AEVS tarzı hallucination tespitinin çekirdeğidir."
+    },
+    {
+      "stage": "check",
+      "question": "İlişkilerin canonicalization'ı ne yapar?",
+      "options": [
+        "Yüzey fiil öbeklerini (örn. 'was born in', 'is a native of') sabit bir property id'sine eşler, böylece graf sorgulanabilir olur",
+        "Triple'ları kaldırır",
+        "Embedding ekler",
+        "Dokümanı çevirir"
+      ],
+      "correct": 0,
+      "explanation": "Canonicalization paraphrase'ları kanonik KG property id'lerine çöker."
+    },
+    {
+      "stage": "check",
+      "question": "Relation extraction neden genellikle önce coreference resolution gerektirir?",
+      "options": [
+        "'O Apple'ı kurdu' gibi zamirler triple extraction'dan önce bir named entity'ye çözülmelidir",
+        "Coref embedding ekler",
+        "Coref konumları sağlar",
+        "Coref case'i normalize eder"
+      ],
+      "correct": 0,
+      "explanation": "Coref olmadan RE ilişkileri altta yatan named entity yerine zamirlere ekler."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi seçim graf sorgulanabilirliği için open IE recall'ından feragat eder?",
+      "options": [
+        "NER'i atlamak",
+        "Triple'ların rastgele örneklemesi",
+        "Yalnızca embedding'li graflar",
+        "KG'ye birleştirmeden önce open-IE ilişkilerini kapalı bir ontolojiye (örn. Wikidata property'leri) eşlemek"
+      ],
+      "correct": 3,
+      "explanation": "Kapalı ontolojiler grafi sorgulanabilir yapar; canonicalization adımı aşağı akışta kendini öder."
+    },
+    {
+      "stage": "post",
+      "question": "Birçok production KG neden zamansal qualifier'ları (başlangıç/bitiş zamanı) kullanır?",
+      "options": [
+        "Daha hızlı SPARQL",
+        "RDF tarafından zorunlu",
+        "Birçok ilişki zaman sınırlıdır (employer, spouse, rol); qualifier'lar bayatlayan 'forever true' iddialarını önler",
+        "NIL entity'leri kaldırmak için"
+      ],
+      "correct": 2,
+      "explanation": "Zaman sınırlı ilişkiler qualifier (örn. Wikidata P580/P582) gerektirir veya factlar sessizce bayatlar."
+    },
+    {
+      "stage": "post",
+      "question": "REBEL nedir?",
+      "options": [
+        "Bir vektör veritabanı",
+        "Wikidata property id'lerinde zaten triple'lar çıkaran bir seq2seq relation extractor",
+        "Bir tokenizer",
+        "Bir coreference modeli"
+      ],
+      "correct": 1,
+      "explanation": "REBEL (Babelscape) uzaktan denetlenmiş Wikidata triple'larında eğitilmiş bir seq2seq RE modelidir."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Matris çarpımı (m x n) @ (n x p) için boyutlar hakkında ne doğru olmalıdır?",
+      "options": ["m, p'ye eşit olmalıdır", "İç boyutlar n eşleşmelidir", "Tüm boyutlar eşit olmalıdır", "m, p'den büyük olmalıdır"],
+      "correct": 1,
+      "explanation": "Matris çarpımı, birinci matrisin sütun sayısının (n) ikinci matrisin satır sayısına (n) eşit olmasını gerektirir. Sonuç (m x p) şeklindedir."
+    },
+    {
+      "stage": "pre",
+      "question": "Birim matris (identity matrix) nedir?",
+      "options": ["Tüm elemanları bir olan matris", "Köşegeninde birler, diğer yerlerde sıfırlar olan, çarpımsal birim eleman olarak davranan kare matris", "Her elemanı benzersiz olan matris", "Verilen herhangi bir matrisin transpozu"],
+      "correct": 1,
+      "explanation": "Birim matris I, köşegeninde birler, başka her yerde sıfırlar içerir. Herhangi bir matrisi I ile çarpmak, bir sayıyı 1 ile çarpmak gibi orijinal matrisi değişmeden döndürür."
+    },
+    {
+      "stage": "post",
+      "question": "Eleman-bazlı çarpım ile matris çarpımı arasındaki temel fark nedir?",
+      "options": ["Eleman-bazlı daha hızlıdır, matris çarpımı daha doğrudur", "Eleman-bazlı, eşleşen konumları çarpar (aynı şekil gerekir); matris çarpımı, satır ve sütunların dot product'larını alır (iç boyutlar uyuşmalıdır)", "Aynı sonucu üretirler ama farklı notasyon kullanırlar", "Eleman-bazlı yalnızca vektörlerde çalışır, matris çarpımı matrislerde"],
+      "correct": 1,
+      "explanation": "Eleman-bazlı (Hadamard) çarpım karşılık gelen elemanları çarpar ve aynı şekiller gerektirir. Matris çarpımı (m,n)@(n,p)=(m,p) kuralıyla satır ve sütunlar arasındaki dot product'ları hesaplar."
+    },
+    {
+      "stage": "post",
+      "question": "'output = relu(W @ x + b)' ifadesinde broadcasting'in rolü nedir?",
+      "options": ["Hesaplamayı birden çok GPU'ya yayar", "b bias vektörünü W @ x şekline uyacak şekilde otomatik olarak genişletir, böylece toplanabilirler", "W ve x'in veri türlerini uyacak şekilde dönüştürür", "relu aktivasyonunu tüm elemanlarda tekrarlar"],
+      "correct": 1,
+      "explanation": "W @ x bir sütun vektörü üretir, b de bir vektördür. Broadcasting, gerekirse b'yi batch boyutu boyunca genişleterek açık şekil eşleşmesi olmadan eleman-bazlı toplama yapılmasına izin verir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir matrisin determinantının sıfır olması neyi gösterir?",
+      "options": ["Matrisin tüm elemanlarının sıfır olduğunu", "Matrisin tekil (singular) olduğunu: en az bir boyutu ezdiğini, tersinin alınamayacağını ve benzersiz bir çözümü olmadığını", "Matrisin birim matris olduğunu", "Matrisin bir döndürme yaptığını"],
+      "correct": 1,
+      "explanation": "Sıfır determinant, dönüşümün uzayı en az bir boyutta çökerttiği anlamına gelir (örneğin 2B'yi bir doğruya eşler). Matrisin tersi yoktur ve onu kullanan doğrusal sistemlerin ya çözümü yoktur ya da sonsuz sayıda çözümü vardır."
+    }
+  ]
+}

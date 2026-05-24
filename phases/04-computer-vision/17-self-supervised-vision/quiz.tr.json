@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Supervised ImageNet eğitimi batch 256 ile çalışırken SimCLR neden 512-8192 batch size'a ihtiyaç duyar?",
+      "options": [
+        "SimCLR daha yavaş",
+        "Her örnek yararlı bir contrastive sinyal üretmek için birçok negatif örneğe ihtiyaç duyar; batch'in kendisi negatif havuzudur. Küçük batch'ler InfoNCE loss'unu negatiflerden mahrum eder ve eğitim çöker veya durur",
+        "Batch norm gerektirir",
+        "Contrastive loss batch size'a böler"
+      ],
+      "correct": 1,
+      "explanation": "InfoNCE loss, pozitif çifti batch'teki diğer tüm örneklere karşı sıralar. 32 batch, pozitif başına 30 negatif verir; 1024 ise 2046 verir. Daha fazla negatif = daha keskin contrastive sinyal. MoCo, geçmiş feature'ların bir momentum queue'sunu tanıttı, böylece effective negative'ler batch size'ın ötesine ölçeklenir; bu, GPU belleği batch size'ı sınırladığında standart trick'tir."
+    },
+    {
+      "stage": "pre",
+      "question": "DINO'nun sabit bir çıktıya çökmesini ne engeller?",
+      "options": [
+        "Tek başına güçlü augmentation",
+        "Centering (teacher çıktısından boyut başına EMA mean'i çıkar) ve sharpening (düşük teacher temperature) kombinasyonu; centering bir boyutun domine etmesini durdurur, sharpening çıktının uniform'a çökmesini durdurur",
+        "Büyük batch size",
+        "Momentum schedule"
+      ],
+      "correct": 1,
+      "explanation": "DINO açık negatif kullanmaz. Centering olmadan, bir çıktı boyutu domine edebilir ve student her zaman onu tahmin etmeyi öğrenir. Sharpening olmadan (düşük teacher temperature), teacher'ın çıktısı neredeyse uniform olur ve student uniform'la eşleşmeyi öğrenir, bu da çökmedir. İkisi birlikte çıktıyı boyutlar arasında çeşitli ve örnek başına tepe noktasında tutar."
+    },
+    {
+      "stage": "post",
+      "question": "MAE patch'lerin %75'ini maskeler. BERT token'ların %15'ini maskeler. Neden bu fark?",
+      "options": [
+        "%75 keyfidir",
+        "Görsel patch'lerinin düşük entropisi vardır -- komşular yüksek korelasyondadır -- bu yüzden yalnızca %15'i maskelemek yerel ekstrapolasyon ile trivial şekilde çözülebilir. %75'i maskelemek, encoder'ı eksik patch'leri yeniden inşa etmek için global semantik feature'ları öğrenmeye zorlar",
+        "BERT tasarım gereği %15 gerektirir",
+        "Metin token'ları görsel patch'lerinden daha büyük"
+      ],
+      "correct": 1,
+      "explanation": "Mask oranı modalitenin bilgi yoğunluğuna uymalıdır. Metin: her token'ın birçok makul tamamlaması olduğu için %15 yeterlidir. Görseller: komşu pikseller birbirini neredeyse belirler, bu yüzden düşük mask oranları gerçek temsil öğrenme olmadan çözülebilir. MAE'nin %75'i semantik anlayışı zorlamak için kalibre edilmiştir."
+    },
+    {
+      "stage": "post",
+      "question": "Self-supervised pretraining'den sonra 'linear probe' değerlendirmesi yalnızca neyi eğitir?",
+      "options": [
+        "Tüm encoder'ı",
+        "Frozen encoder feature'larının üzerinde tek bir linear sınıflandırıcı; bu feature kalitesini fine-tuning dinamiklerinden izole eder",
+        "Tam bir MLP sınıflandırıcı head'i",
+        "Positional embedding'i"
+      ],
+      "correct": 1,
+      "explanation": "Linear probe encoder'ı freeze eder ve etiketli bir downstream veri setinde Linear(features -> num_classes) fit eder. Accuracy, feature uzayının lineer separability'sinin doğrudan bir ölçüsüdür -- feature kalitesi için bir proxy. Tüm backbone'u fine-tune etmek nonlinear kapasite ekler ve genellikle accuracy'yi birkaç puan yükseltir, ama optimizasyon etkilerini karıştırır. SSL makalelerinde her iki sayı raporlanır."
+    },
+    {
+      "stage": "post",
+      "question": "MAE neden asimetrik bir encoder-decoder tasarımı kullanır (%25 görünür patch'te büyük encoder, tüm token'larda küçük decoder)?",
+      "options": [
+        "Bellek kısıtlamaları",
+        "Encoder mask token'ları asla işlemez; küçük bir decoder yalnızca reconstruction'ı halleder. Bu, encoder FLOPs'unu görünür patch'lere (tam girdinin 1/4'ü) orantılı yapar ve pretraining'in tüm token'ları tam encoder üzerinden işleyen naive tasarımlardan 3 kat daha hızlı çalışmasına izin verir",
+        "Mask token'lar self-attention'ı kafa karıştırır",
+        "Decoder kendi backbone'una ihtiyaç duyar"
+      ],
+      "correct": 1,
+      "explanation": "MAE'deki temel verimlilik kazancı: pahalı encoder yalnızca görünür patch'leri görür, bu da girdinin %25'idir. Mask token'lar yalnızca sığ decoder'da görünür. Bu, pretraining'i BEiT'den (tüm token'ları encoder üzerinden işler) eşit veya daha iyi downstream accuracy ile kabaca 3 kat daha hızlı yapar."
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "lesson": "28-long-context-evaluation",
+  "title": "Long-Context Değerlendirmesi — NIAH, RULER, LongBench, MRCR",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Orijinal NIAH benchmark'ı neyi ölçer?",
+      "options": [
+        "Tokenizer fertility'sini",
+        "Modelin uzun bir bağlam boyunca kontrollü derinliklerde yerleştirilmiş bir factı geri çağırıp çağıramayacağını",
+        "Embedding cosine drift'ini",
+        "Yalnızca multi-hop reasoning'i"
+      ],
+      "correct": 1,
+      "explanation": "NIAH = needle in a haystack: bir fact yerleştir, modelden onu geri çağırmasını iste, derinliği ve uzunluğu süpür."
+    },
+    {
+      "stage": "pre",
+      "question": "İlan edilen context window neden sık sık kullanılabilir bağlamdan çok farklıdır?",
+      "options": [
+        "Attention uzunluk ve görevle bozulur; spec-sheet maksimumları multi-hop veya reasoning yükleri altında nadiren tutar",
+        "Tokenizer'lar truncate eder",
+        "Embedding'ler overflow eder",
+        "Beam search yavaşlar"
+      ],
+      "correct": 0,
+      "explanation": "Reasoning için etkili bağlam genelde ilan edilen max'ın %25-50'sidir."
+    },
+    {
+      "stage": "check",
+      "question": "RULER NIAH'in üstüne ne ekler?",
+      "options": [
+        "Çeviri görevleri",
+        "Daha hızlı çıkarım",
+        "Token başına logprob'lar",
+        "Birden çok context uzunluğunda retrieval, multi-hop tracing, aggregation ve QA üzerinde on üç görev tipi"
+      ],
+      "correct": 3,
+      "explanation": "RULER NIAH'i çok-görev long-context benchmark'ına genişletir, NIAH'i saturate edip başka yerde başarısız olan modelleri yakalar."
+    },
+    {
+      "stage": "check",
+      "question": "'Lost in the middle' etkisi nedir?",
+      "options": [
+        "Modeller uzun girdilerin ortasına yerleştirilen içeriğe yetersiz attention verir; depth=0.5 sık sık depth=0 veya 1'den daha kötü performans gösterir",
+        "Modeller token'ları yeniden sıralar",
+        "Modeller ilk token'ı unutur",
+        "Modeller noktalamayı kaybeder"
+      ],
+      "correct": 0,
+      "explanation": "Bağlamın ortasındaki içerik en az attention alır; derinliği süpürmek U-şekilli accuracy eğrisini ortaya çıkarır."
+    },
+    {
+      "stage": "check",
+      "question": "Neden yalnızca NIAH değerlendirmesi multi-hop testlerle desteklenmelidir?",
+      "options": [
+        "Multi-hop daha hızlıdır",
+        "NIAH'in ground truth'u eksik",
+        "NIAH uzun bağlamda çalışamaz",
+        "Frontier modeller tek-needle retrieval'ı geçebilir ama hâlâ multi-hop değişken-tracing veya aggregation görevlerinde başarısız olabilir"
+      ],
+      "correct": 3,
+      "explanation": "Retrieval geçişi reasoning geçişi anlamına gelmez; multi-hop benchmark'lar gerçek tavanı ortaya çıkarır."
+    },
+    {
+      "stage": "post",
+      "question": "NoLiMa neyi vurgular?",
+      "options": [
+        "Streaming çıktı",
+        "Gecikme",
+        "Tokenization",
+        "Sorguyla literal token paylaşmayan needle'lar, dolayısıyla retrieval semantik bir reasoning adımı gerektirir"
+      ],
+      "correct": 3,
+      "explanation": "NoLiMa lexical örtüşmeyi kaldırır, böylece model anahtar kelime eşlemek yerine reasoning yapmak zorunda kalır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir long-context spec sheet hangi iki sayıyı raporlamalı?",
+      "options": [
+        "Etkili retrieval uzunluğu (örn. %90 NIAH geçişi) ve etkili reasoning uzunluğu (örn. %70 multi-hop geçişi)",
+        "Yalnızca GPU bellek ve gecikme",
+        "Yalnızca ilan edilen max",
+        "Yalnızca saniyede token"
+      ],
+      "correct": 0,
+      "explanation": "Retrieval-etkili ve reasoning-etkili uzunluğu ayırt etmek gerçek dünya iddiaları için esastır."
+    },
+    {
+      "stage": "post",
+      "question": "Uzun bağlam uzunluklarında time-to-first-token neden ölçülmelidir?",
+      "options": [
+        "1M-token prefill'ler onlarca saniye sürebilir; yalnızca accuracy ürün etkili gecikmeyi saklar",
+        "Tokenization yavaştır",
+        "RAG tarafından zorunlu",
+        "Beam search ona bağlıdır"
+      ],
+      "correct": 0,
+      "explanation": "Uzun prompt'ların büyük prefill maliyetleri var; gecikme accuracy ile birlikte izlenmelidir."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir derin öğrenme framework'ünde Module soyutlamasının hangi üç sorumluluğu vardır?",
+      "options": [
+        "Veri yükleme, veri ön işleme, veri augmentation",
+        "Hesaplama için forward(), gradient'ler için backward(), eğitilebilir ağırlıklar için parameters()",
+        "Compile, optimize, deploy",
+        "Tokenize, embed, decode"
+      ],
+      "correct": 1,
+      "explanation": "Her Module çıktı hesaplamak için forward()'ı, gradient'leri yaymak için backward()'ı ve eğitilebilir ağırlıkları açığa çıkarmak için parameters()'ı uygular. Bu üniform arayüz, herhangi bir modülün herhangi bir başkasıyla birleştirilebilmesini sağlar."
+    },
+    {
+      "stage": "pre",
+      "question": "Sequential, backward pass sırasında modülleri neden ters sırada işler?",
+      "options": [
+        "Keyfidir -- her iki yön de çalışır",
+        "Gradient'ler loss'tan geriye doğru ağ boyunca akar, dolayısıyla son katman gradient'leri ilk önce hesaplar",
+        "Ters sıra daha az bellek kullanır",
+        "Gradient patlamasını önler"
+      ],
+      "correct": 1,
+      "explanation": "Backward pass loss'tan başlar ve gradient'leri girdiye doğru yayar. Son katman loss gradient'ini ilk alır, yerel gradient'lerini hesaplar ve önceki katmana iletir."
+    },
+    {
+      "stage": "post",
+      "question": "optimizer.zero_grad() otomatik yapılmak yerine neden ayrı bir çağrıdır?",
+      "options": [
+        "PyTorch tasarım hatasıdır",
+        "Tek bir optimizer step'i atılmadan önce birden fazla batch boyunca gradient birikimine izin verir",
+        "Bellek tasarrufu sağlar",
+        "Hata ayıklamayı kolaylaştırır"
+      ],
+      "correct": 1,
+      "explanation": "zero_grad'i step'ten ayırmak gradient accumulation'ı mümkün kılar: backward()'ı birden fazla kez çalıştırabilir (mini-batch'ler boyunca) ve step() çağırmadan önce gradient'leri toplayabilirsin. Bu daha büyük batch size'ları simüle eder."
+    },
+    {
+      "stage": "post",
+      "question": "Bir eğitim döngüsünde işlemlerin doğru sırası nedir?",
+      "options": [
+        "backward, forward, zero_grad, step",
+        "forward, loss, zero_grad, backward, step",
+        "zero_grad, forward, loss, backward, step",
+        "forward, zero_grad, backward, loss, step"
+      ],
+      "correct": 2,
+      "explanation": "Standart örüntü: zero_grad (eski gradient'leri temizle), forward (tahminleri hesapla), loss (skaler loss'u hesapla), backward (gradient'leri hesapla), step (parametreleri güncelle). Bu sırayı yanlış yapmak ince hatalara yol açar."
+    },
+    {
+      "stage": "post",
+      "question": "Framework'te DataLoader'ın rolü nedir?",
+      "options": [
+        "Modeli eğitir",
+        "Veriyi batch'lere böler ve mini-batch gradient descent için epoch'lar arasında isteğe bağlı olarak karıştırır",
+        "Loss fonksiyonunu hesaplar",
+        "Ağırlıkları başlatır"
+      ],
+      "correct": 1,
+      "explanation": "DataLoader iki pratik konuyu yönetir: batch'leme (tüm veriyi belleğe sığdıramazsın) ve karıştırma (rastgele sıra, modelin veri sırasını ezberlemesini engeller)."
+    }
+  ]
+}

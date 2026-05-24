@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tüm pre-training verisini neden basitçe belleğe yükleyemezsin?",
+      "options": [
+        "Python büyük dizileri desteklemez",
+        "Pre-training korpusları terabyte boyutundadır, mevcut RAM'i çok aşar ve streaming pipeline'lar gerektirir",
+        "Veriyi belleğe yüklemek daha yavaştır",
+        "Bellek yalnızca model ağırlıkları için gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "LLM pretraining verisi tipik olarak 1-15 TB metindir. 256GB RAM'le bile tam veri setini tutamazsın. Streaming pipeline'lar veriyi anlık olarak işler ve yalnızca mevcut batch için gerekli olanı yükler."
+    },
+    {
+      "stage": "pre",
+      "question": "Pre-training için data deduplication neden önemlidir?",
+      "options": [
+        "Disk alanı tasarrufu sağlar",
+        "Yinelenen dokümanlar modelin belirli metni kelimesi kelimesine ezberlemesine ve tekrarlayan içerik üzerinde eğitim hesaplamasının israfına neden olur",
+        "Tokenization'ı hızlandırır",
+        "Vocabulary boyutunu azaltır"
+      ],
+      "correct": 1,
+      "explanation": "Yakın yinelenen içerik (boilerplate, scrape edilmiş yinelemeler) modelin genelleme yapmak yerine ezberlemesine neden olur. Deduplication eğitim hesaplama israfını azaltır ve çeşitli bir eğitim sinyali sağlayarak model kalitesini iyileştirir."
+    },
+    {
+      "stage": "post",
+      "question": "Değişken uzunluklu dokümanlardan sabit uzunluklu eğitim dizileri oluşturmanın amacı nedir?",
+      "options": [
+        "Metni okumayı kolaylaştırır",
+        "GPU eğitimi tek tip tensor şekilleri gerektirir, bu yüzden dokümanlar sabit uzunluklu dizilere paketlenmeli veya padlenmelidir",
+        "Sabit uzunluklu diziler daha doğrudur",
+        "Toplam token sayısını azaltır"
+      ],
+      "correct": 1,
+      "explanation": "GPU'lar aynı şekle sahip tensor batch'lerini işler. Değişken uzunluklu dokümanlar, doküman sınırlarında uygun attention mask'leriyle birlikte sabit uzunluklu dizilere (örn. 2048 veya 4096 token) parçalanmalıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Data pipeline GPU eğitim hızından yavaşsa ne olur?",
+      "options": [
+        "Eğitim otomatik olarak eşleşmek için yavaşlar",
+        "GPU batch'leri beklerken boş kalır ve pahalı hesaplama zamanını israf eder",
+        "Model aynı batch üzerinde tekrar tekrar eğitilir",
+        "Hiçbir şey -- pipeline asenkron çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Dataloader yeterince hızlı batch sağlayamazsa GPU adımlar arasında durur. Saatte 30 dolardan fazlaya mal olan A100 cluster'larda pipeline darboğazları doğrudan para israfıdır. Pipeline throughput profili çıkarmak şarttır."
+    },
+    {
+      "stage": "post",
+      "question": "Veri kalite filtrelemesi (dil tespiti, içerik filtreleme) neden tokenization'dan önce uygulanır?",
+      "options": [
+        "Tokenizer'lar düşük kaliteli metni işleyemez",
+        "Düşük kaliteli veri (spam, boilerplate, toksik içerik) model yeteneklerini eğitim verisindeki payı oranında bozar",
+        "Tokenization sonrası filtreleme imkansızdır",
+        "Tokenization süresini azaltır"
+      ],
+      "correct": 1,
+      "explanation": "Model gördüğü veriden öğrenir. Eğitim verisinin %10'u spam veya düşük kaliteli içerikse, model kapasitesinin %10'unu bu pattern'ları yeniden üretmeye ayırır. Erken filtreleme yalnızca yüksek kaliteli sinyalin modele ulaşmasını sağlar."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "2D+pool video modeli Something-Something V2 veri setinde neden başarısız olur?",
+      "options": [
+        "Görseller çok küçük",
+        "Model mimarisi uyumsuz",
+        "Veri setinin label'ları hareket yönüyle tanımlanır ('bir şeyi soldan sağa itme'), görünüş değil; frame başına feature'lar üzerinde order-invariant average pooling, hareket yönünü ayırt edemez",
+        "Çok fazla sınıf var"
+      ],
+      "correct": 2,
+      "explanation": "Something-Something label'ları kelimenin tam anlamıyla 'X soldan sağa hareket etti' vs 'X sağdan sola hareket etti'. İkisi herhangi bir tek frame'de aynı görünür ve frame embedding'lerinin ortalamasını almak order-invariant olduğundan pool(f1, f2, ..., fT) == pool(fT, ..., f2, f1). Hareketle tanımlanan label'lar zamansal sıraya dikkat eden bir model gerektirir."
+    },
+    {
+      "stage": "pre",
+      "question": "I3D'nin inflation trick'i nedir?",
+      "options": [
+        "Daha fazla görsel üzerinde önceden eğitmenin bir yolu",
+        "Bir 2D CNN'in önceden eğitilmiş kernel'larını al, her birini yeni bir zaman ekseni boyunca kopyala (aktivasyon ölçeğini korumak için kernel_T'ye bölerek) ve bir 3D CNN'i başlatmak için kullan -- 3D pretraining olmadan 3D modele güçlü ağırlıklar verir",
+        "Learning rate için bir scheduler",
+        "Videoları sıkıştırmak için bir yöntem"
+      ],
+      "correct": 1,
+      "explanation": "Inflation, 3D video modellerini güçlü 2D ImageNet ağırlıklarından bootstrap eder. Bir 3x3 2D kernel, 1/kernel_T yeniden ölçeklemesiyle T boyunca replikasyon yapılarak bir 3x3x3 3D kernel olur. ImageNet'te öğrenilen nesne ve texture feature'larını doğrudan video modeline transfer eder, bu yüzden I3D, 2D+pool baseline'larını ciddi şekilde geçen ilk 3D modeldi."
+    },
+    {
+      "stage": "post",
+      "question": "Bir (2+1)D faktorize edilmiş convolution, bir 3D konv'u hangi iki işleme böler?",
+      "options": [
+        "Bir temporal konv ve ardından bir depthwise konv",
+        "Bir grouped konv ve bir 1x1 konv",
+        "Farklı stride'lı iki 3D konv",
+        "Bir spatial 1x3x3 konv ve ardından bir temporal 3x1x1 konv, aralarında tam 3D konv'ların sahip olmadığı bir non-linearity eklemek için BN+ReLU ile"
+      ],
+      "correct": 3,
+      "explanation": "(2+1)D, 3x3x3 kernel'ı (1x3x3) ve ardından (3x1x1) olarak faktorize eder. İki konv arasında bir non-linearity (BN+ReLU) vardır, bu da parametre başına expressive power'ı artırır. Kinetics'te R(2+1)D-34, eşdeğer R3D-34'ü daha az parametreyle geçer -- ekstra non-linearity gerçek iş yapıyor."
+    },
+    {
+      "stage": "post",
+      "question": "Bir video transformer'da 'divided attention' ne demektir?",
+      "options": [
+        "Token'ların yarısı üzerinde attention",
+        "Her transformer block'ta iki attention modülü vardır: biri zaman boyunca aynı spatial pozisyondaki token'lar üzerinde (temporal attention), sonra biri uzay boyunca aynı timestep'teki token'lar üzerinde (spatial attention) -- O((T*H*W)^2) tam attention'ı O(T^2) + O((H*W)^2)'ye böler",
+        "Yalnızca eğitim sırasında uygulanan attention",
+        "Bazı katmanları atlayan attention"
+      ],
+      "correct": 1,
+      "explanation": "Tam joint spatio-temporal attention O((T*H*W)^2)'dir, uzun videolar için uygun değildir. Divided attention (TimeSformer) her block içinde temporal ve spatial attention'ı değiştirir, maliyeti O(T^2 + (H*W)^2)'ye getirir. Expressivity'de teorik bir kaybı tractable eğitim için trade off eder; pratikte divided attention çoğu benchmark'ta joint ile eşleşir veya onu geçer."
+    },
+    {
+      "stage": "post",
+      "question": "Kinetics-400 modelin %76 clip accuracy ve %82 video accuracy raporluyor. Fark sana ne söylüyor?",
+      "options": [
+        "Clip başına tahminler gürültülüdür; video başına birden çok örneklenmiş clip'in tahminlerinin ortalamasını almak (test-time augmentation) sonucu stabilize eder. Büyük bir fark, modelin feature'larının hangi 8 frame'lik pencerenin örneklendiğine duyarlı olduğunu gösterir ve eğitim sırasında daha uzun clip'ler veya daha güçlü spatial augmentation farkı küçültür",
+        "Model bozuk",
+        "Test seti çok küçük",
+        "Clip accuracy tanım gereği her zaman video accuracy'sinden düşüktür"
+      ],
+      "correct": 0,
+      "explanation": "Clip accuracy modeli tek bir örneklenmiş pencerede değerlendirir; video accuracy birden çok pencere üzerindeki tahminlerin ortalamasını alır. 6 puanlık fark, modelin hangi pencereyi örneklediğine duyarlı olduğu anlamına gelir. Farkı kapatmak, modelin her videonun zamansal dağılımı boyunca daha iyi genelleştirdiği anlamına gelir -- bu deployment'ta istediğin şeydir. Her zaman her iki sayıyı raporla."
+    }
+  ]
+}

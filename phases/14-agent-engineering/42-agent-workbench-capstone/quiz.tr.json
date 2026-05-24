@@ -1,0 +1,90 @@
+{
+  "lesson": "42-agent-workbench-capstone",
+  "title": "Capstone: Yeniden Kullanılabilir Bir Agent Workbench Pack Gönder",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Capstone neyi üretir?",
+      "options": [
+        "Bir araştırma paper'ı",
+        "Yedi yüzeyi ve idempotent şekilde indiren bir bin/install.sh içeren versiyonlu drop-in bir dizin (agent-workbench-pack/)",
+        "Yeni bir LLM",
+        "Bir izleme dashboard'u"
+      ],
+      "correct": 1,
+      "explanation": "Pack tariftir; her kurulum bir servistir."
+    },
+    {
+      "stage": "pre",
+      "question": "Bunlardan hangisi pack layout'unun parçası DEĞİLDİR?",
+      "options": [
+        "AGENTS.md + docs/",
+        "schemas/",
+        "scripts/",
+        "vendor_proprietary_weights/"
+      ],
+      "correct": 3,
+      "explanation": "Pack layout'u: AGENTS.md, docs/, schemas/, scripts/, bin/, README.md. Pack framework- ve vendor-agnostic'tir."
+    },
+    {
+      "stage": "check",
+      "question": "Pack neden bir VERSION dosyası taşır?",
+      "options": [
+        "SEO için",
+        "Migrasyon gerektiren şema/script değişiklikleri için major artırma; eklemeler için minor; yalnızca-doküman için patch; hedef repo hangi versiyona göre kurulduğunu kaydeder",
+        "Agent IQ'sunu izlemek için",
+        "Hacker News'de reklam vermek için"
+      ],
+      "correct": 1,
+      "explanation": "npm, Cargo, pyproject.toml ile aynı şekil; VERSION contract'tır, pazarlama değil."
+    },
+    {
+      "stage": "check",
+      "question": "Bu pack'te cross-tool dağıtım neye benzer?",
+      "options": [
+        "Her tool'un yolunu hard-code et",
+        "Symlink'lerle tek bir kaynak dosya (ln -s AGENTS.md CLAUDE.md, .cursor/rules/, .github/copilot-instructions.md), böylece aynı kaynak her coding agent'a yayılır",
+        "Her tool için manuel kopyalama",
+        "Her tool için vendor lock'u"
+      ],
+      "correct": 1,
+      "explanation": "Nx'in nx ai-setup'ı referanstır; pack'in installer'ı aynısını symlink'lerle yapar."
+    },
+    {
+      "stage": "check",
+      "question": "Ders uninstaller'ın nasıl davranmasını öneriyor?",
+      "options": [
+        "State dahil her şeyi sil",
+        "Trivial olmayan state'te reddet; user agent_state.json, task_board.json veya outputs/'u asla silme; yalnızca schemas, scripts, docs ve AGENTS.md'yi kaldır (opt-out ile)",
+        "Yalnızca dokümanları sil",
+        "Git'i devre dışı bırak"
+      ],
+      "correct": 1,
+      "explanation": "State kullanıcıya aittir; pack onu sahiplenmez."
+    },
+    {
+      "stage": "post",
+      "question": "Pack'in DIŞINDA ne kalır?",
+      "options": [
+        "Schemas",
+        "Projeye özgü görevler, vendor SDK çağrıları, ekip onboarding düzyazısı — pack framework-agnostic'tir ve onboarding'in içinde değil yanında yaşar",
+        "Scripts",
+        "Installer"
+      ],
+      "correct": 1,
+      "explanation": "Görevler pack'e değil, hedef repo'nun board'una aittir; vendor SDK çağrıları pack'i tek bir framework'e kilitler."
+    },
+    {
+      "stage": "post",
+      "question": "Pack birçok coding agent'a tek seferde hangi kanaldan gönderilir?",
+      "options": [
+        "Elle kopyalama",
+        "SkillKit-tarzı dağıtım (skillkit install agent-workbench-pack) onu tek bir kaynaktan 32 AI agent'a yayar",
+        "E-posta eki",
+        "Yalnızca GitHub release notları"
+      ],
+      "correct": 1,
+      "explanation": "Pack repo'su gerçeğin kaynağıdır; SkillKit dağıtım kanalıdır; vendor lock-in çöker."
+    }
+  ]
+}

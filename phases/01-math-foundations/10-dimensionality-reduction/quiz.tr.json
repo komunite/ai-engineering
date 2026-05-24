@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'Boyutluluk laneti' (curse of dimensionality) nedir?",
+      "options": ["Yüksek boyutlu verinin indirilmesi çok uzun sürer", "Boyutlar arttıkça mesafeler anlamsızlaşır, hacim köşelerde toplanır ve üstel olarak daha fazla veriye ihtiyacın olur", "Sinir ağları 100'den fazla özniteliğe sahip veriyi işleyemez", "Yüksek boyutlu veri her zaman gürültü içerir"],
+      "correct": 1,
+      "explanation": "Yüksek boyutlarda tüm ikili mesafeler benzer değerlere yakınsar, veri noktaları köşelere dağılır ve örnek yoğunluğunu korumak üstel olarak daha fazla veri gerektirir. Boyut indirgeme bu etkilere karşı koyar."
+    },
+    {
+      "stage": "pre",
+      "question": "PCA neyi bulur?",
+      "options": ["İsimlerine göre en önemli öznitelikleri", "Verideki maksimum varyansın dik yönlerini", "Benzer veri noktası kümelerini", "Tutulacak en uygun öznitelik sayısını"],
+      "correct": 1,
+      "explanation": "PCA, kovaryans matrisinin eigenvector'larını hesaplar; bunlar veri varyansını ne kadar yakaladıklarına göre sıralanmış dik yönlerdir. Birinci ana bileşen, maksimum yayılma yönüne işaret eder."
+    },
+    {
+      "stage": "post",
+      "question": "784 boyutlu MNIST verisinde k=50 bileşenle PCA çalıştırdıktan sonra varyansın %95'inin yakalandığını görüyorsun. Bu sana neyi söyler?",
+      "options": ["Her görüntüde yalnızca 50 pikselin önemli olduğunu", "Verinin etkili olarak ~50 boyutlu bir alt uzayda yaşadığını; kalan 734 boyutun çoğunlukla gürültü veya gereksizlik olduğunu", "Görüntülerin %95'inin aynı sınıfa ait olduğunu", "Modelin %95 doğruluğa ulaşacağını"],
+      "correct": 1,
+      "explanation": "50 bileşenle %95 açıklanan varyans, 784 boyutlu verinin temel yapısının yalnızca 50 yönle yakalandığı anlamına gelir. Kalanı yalnızca %5 varyasyon taşır -- çoğunlukla gürültü."
+    },
+    {
+      "stage": "post",
+      "question": "Bir sınıflandırıcıyı eğitmeden önce t-SNE'yi NEDEN ön işleme olarak kullanmamalısın?",
+      "options": ["t-SNE büyük veri setleri için çok yavaştır", "t-SNE yalnızca görselleştirme için tasarlanmıştır: global mesafeleri bozar, stokastiktir ve çıktı koordinatlarının çalıştırmalar arasında tutarlı bir anlamı yoktur", "t-SNE veriyi tam olarak 2 boyuta indirir, bu da çok azdır", "t-SNE etiketlerin önceden bilinmesini gerektirir"],
+      "correct": 1,
+      "explanation": "t-SNE yerel komşulukları korur ama global yapıyı bozar. Kümeler arasındaki mesafeler anlamsızdır ve farklı çalıştırmalar farklı düzenler üretir. Ön işleme için PCA kullan; t-SNE/UMAP'i yalnızca görselleştirme için kullan."
+    },
+    {
+      "stage": "post",
+      "question": "Standart PCA yerine kernel PCA'yı ne zaman seçersin?",
+      "options": ["Özelliklerden fazla örneğin olduğunda", "Veri standart PCA'nın ayıramayacağı doğrusal olmayan bir manifold üzerinde olduğunda; örneğin eşmerkezli daireler", "Mümkün olan en hızlı hesaplamaya ihtiyacın olduğunda", "Yorumlanabilir ana bileşenler istediğinde"],
+      "correct": 1,
+      "explanation": "Standart PCA doğrusal alt uzayları bulur. Veri doğrusal olmayan yapıya sahipse (örneğin iki eşmerkezli halka), PCA her ikisini aynı çizgiye projekte eder. Kernel PCA veriyi yapının doğrusal hale geldiği daha yüksek boyutlu bir uzaya eşler."
+    }
+  ]
+}

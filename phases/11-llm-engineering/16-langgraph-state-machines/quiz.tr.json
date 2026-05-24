@@ -1,0 +1,65 @@
+{
+  "lesson": "phase-11/16-langgraph-state-machines",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "Bir LangGraph State TypedDict'teki `messages` alanı neden `Annotated[list, add_messages]` gerektirir?",
+      "options": [
+        "Modelden token delta'larının streaming'ini etkinleştirir.",
+        "Reducer olmadan, node güncellemeleri append yerine listeyi üzerine yazar, böylece her turn önceki geçmişi kaybeder.",
+        "Checkpoint'ler diske yazıldığında mesaj listesini sıkıştırır.",
+        "Düz dict'leri çalışma zamanında LangChain mesaj objelerine dönüştürür."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "`interrupt_before=['tools']` ile `interrupt_after=['tools']` arasındaki fark nedir?",
+      "options": [
+        "Fark yok; alias'tırlar.",
+        "`interrupt_before` model tool_calls yaydıktan sonra ama tool'lar çalışmadan önce duraklatır; `interrupt_after` tool'lar çalıştıktan sonra duraklatır.",
+        "`interrupt_before` tool'u önce bir sandbox'ta çalıştırır; `interrupt_after` production'da çalıştırır.",
+        "`interrupt_before` unit test'ler içindir; `interrupt_after` production içindir."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bir thread'in checkpoint geçmişi verildiğinde, önceki bir state'e nasıl time-travel yapar ve farklı bir branch keşfedersin?",
+      "options": [
+        "`graph.reset(thread_id)` çağır sonra `graph.invoke(new_input, config)` çağır.",
+        "Checkpoint dizinini sil ve aynı thread_id ile yeniden invoke et.",
+        "Graph'ı config'te istenen önceki `checkpoint_id` ile invoke et; input olarak `None` geçirmek o checkpoint'ten replay yapar, yeni bir değer geçirmek devam etmeden önce ona append eder.",
+        "`graph.rewind = True` ayarla ve yeniden invoke et."
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Dört node'lu bir ReAct graph'ında (agent, tools, conditional edge, agent'a geri statik edge), conditional edge nerededir?",
+      "options": [
+        "`tools`'tan `agent`'a, tool çıktısının boş olup olmadığına göre yönlendirme.",
+        "`agent`'tan, son mesajın tool_calls'u varsa `tools`'a, yoksa `END`'e yönlendirme.",
+        "`START`'tan, input uzunluğuna göre `agent` veya `END`'e yönlendirme.",
+        "Conditional edge yok; ikisi de statik."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "`Send(node_name, state)` ne zaman düz bir edge yerine kullanılmalıdır?",
+      "options": [
+        "Bir başarısızlık sonrası bir node'u retry etmek için.",
+        "Bir node'u bir timer dolana kadar ertelemek için.",
+        "Çıktıları state reducer üzerinden geri merge olan bir hedef node'un N paralel yürütmesini dispatch etmek için.",
+        "İzolasyon için bir node'u farklı bir process'te invoke etmek için."
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

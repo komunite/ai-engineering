@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Linux dosya yolunda '~' sembolü neyi temsil eder?",
+      "options": ["Dosya sisteminin root dizinini", "Mevcut kullanıcının home dizinini", "Geçici dosyalar dizinini", "Sistem programlarının kurulu olduğu dizini"],
+      "correct": 1,
+      "explanation": "Tilde (~), mevcut kullanıcının home dizini için bir kısayoldur, Linux'ta genelde /home/username. 'cd ~' her yerden seni home'a götürür."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir komutun başındaki 'sudo' nedir?",
+      "options": ["Komut çalışmasını hızlandırır", "Komutu root (yönetici) ayrıcalıklarıyla çalıştırır", "Komutu sandbox'lı bir ortamda çalıştırır", "Komut çıktısını bir sistem dosyasına loglar"],
+      "correct": 1,
+      "explanation": "sudo (superuser do), ayrıcalıklarını tek bir komut için root seviyesine geçici olarak yükseltir. apt ile paket kurmak gibi sistem düzeyinde işlemler için gereklidir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir shell script'i çalıştırmaya çalıştığında 'Permission denied' alıyorsun. Hangi komut bunu düzeltir?",
+      "options": ["sudo rm script.sh", "chmod +x script.sh", "chown root script.sh", "mv script.sh /usr/bin/"],
+      "correct": 1,
+      "explanation": "chmod +x dosyaya çalıştırma izni ekler. Çalıştırma bit'i set edilmeden, sahibi sen olsan bile shell script'i çalıştırmayı reddeder."
+    },
+    {
+      "stage": "post",
+      "question": "Uzak bir GPU makinesinde, eğitim verin diski dolduruyor. Hangi komut en çok yer tüketen dizinleri gösterir?",
+      "options": ["ls -la /", "du -h --max-depth=1 / | sort -hr | head -20", "cat /proc/meminfo", "free -h"],
+      "correct": 1,
+      "explanation": "du -h dizin başına disk kullanımını gösterir, --max-depth=1 üst düzey dizinlerle sınırlar ve sort -hr boyuta göre azalan sıralar. Bu, hangi dizinlerin en çok yer tükettiğini ortaya çıkarır."
+    },
+    {
+      "stage": "post",
+      "question": "macOS ve Linux versiyonlarında 'sed -i' arasındaki temel fark nedir?",
+      "options": ["Linux sed macOS sed'den daha hızlıdır", "macOS sed -i'den sonra boş bir string argümanı ('sed -i \"\"') gerektirir, Linux ise gerektirmez", "Linux sed regular expression'ları desteklemez", "macOS sed dosyaları yerinde değiştiremez"],
+      "correct": 1,
+      "explanation": "macOS BSD sed kullanır ve 'sed -i \"\" pattern file' gerektirir, Linux ise GNU sed kullanır ve 'sed -i pattern file' kabul eder. Script'leri sistemler arasında taşırken yaygın bir tuzaktır."
+    }
+  ]
+}

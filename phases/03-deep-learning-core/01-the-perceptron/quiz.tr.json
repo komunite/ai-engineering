@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir perceptron, aktivasyon fonksiyonunu uygulamadan önce girdileri üzerinde hangi matematiksel işlemi yapar?",
+      "options": [
+        "Matris tersi alma",
+        "Ağırlıklı toplam artı bias",
+        "Fourier dönüşümü",
+        "Özdeğer ayrıştırması"
+      ],
+      "correct": 1,
+      "explanation": "Bir perceptron girdiler ile ağırlıkların dot product'ını hesaplar, bias terimini ekler ve sonucu bir step fonksiyonundan geçirir. Bu ağırlıklı toplam artı bias, temel hesaplamadır."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir sınıflandırma problemi için 'doğrusal olarak ayrılabilir' ne demektir?",
+      "options": [
+        "Veri sırayla dizilebilir",
+        "Tek bir düz çizgi (veya hiper düzlem) sınıfları mükemmel şekilde ayırabilir",
+        "Özellikler ile etiket arasında doğrusal bir ilişki vardır",
+        "Verinin yalnızca iki boyutu vardır"
+      ],
+      "correct": 1,
+      "explanation": "Bir veri seti, girdi uzayını doğru sınıflara mükemmel şekilde bölen tek bir hiper düzlem çizebildiğinde doğrusal olarak ayrılabilirdir. AND ve OR doğrusal olarak ayrılabilir; XOR ayrılamaz."
+    },
+    {
+      "stage": "post",
+      "question": "Tek bir perceptron neden XOR fonksiyonunu öğrenemez?",
+      "options": [
+        "Learning rate çok düşük",
+        "XOR'un çok fazla girdisi var",
+        "XOR doğrusal olarak ayrılabilir değil -- hiçbir tek çizgi sınıfları ayıramaz",
+        "Step fonksiyonu gradient akışını engeller"
+      ],
+      "correct": 2,
+      "explanation": "XOR, [0,1] ve [1,0]'ı bir tarafa, [0,0] ve [1,1]'i diğer tarafa yerleştirir. Hiçbir tek düz çizgi bu grupları ayıramaz, dolayısıyla yalnızca tek bir doğrusal sınır çizebilen tek bir perceptron XOR'u çözemez."
+    },
+    {
+      "stage": "post",
+      "question": "Perceptron öğrenme kuralında, tahmin hedef ile eşleştiğinde ne olur?",
+      "options": [
+        "Ağırlıklar ikiye katlanır",
+        "Ağırlıklar sıfıra ayarlanır",
+        "Hiçbir şey değişmez -- hata sıfır olduğu için güncelleme sıfırdır",
+        "Learning rate yarıya iner"
+      ],
+      "correct": 2,
+      "explanation": "Güncelleme kuralı w_i = w_i + lr * error * x_i'dir. Tahmin hedefe eşit olduğunda error = 0, dolayısıyla tüm ağırlık güncellemeleri sıfırdır. Perceptron yalnızca hata yaptığında ayarlanır."
+    },
+    {
+      "stage": "post",
+      "question": "XOR birden fazla perceptron kullanılarak nasıl çözülür?",
+      "options": [
+        "Tek bir perceptron üzerinde daha büyük bir learning rate kullanarak",
+        "OR, NAND ve AND perceptron'larını iki katmanda birleştirerek",
+        "Tek bir perceptron'a daha fazla girdi ekleyerek",
+        "Bias terimini kaldırarak"
+      ],
+      "correct": 1,
+      "explanation": "XOR = (x1 OR x2) AND NOT(x1 AND x2). Bir OR nöronu ve bir NAND nöronu içeren gizli katman, çıktı AND nöronuna besler ve doğrusal bileşenlerden doğrusal olmayan bir karar sınırı oluşturur."
+    }
+  ]
+}

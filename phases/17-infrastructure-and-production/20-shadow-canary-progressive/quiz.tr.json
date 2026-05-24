@@ -1,0 +1,78 @@
+{
+  "lesson": "20-shadow-canary-progressive",
+  "title": "LLM'ler için Shadow Trafiği, Canary Rollout ve Progressive Deployment",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir LLM rollout'u için shadow, canary ve A/B testini doğru sırayla nasıl düzenlersin?",
+      "options": [
+        "Shadow (sıfır-etkili karşılaştırma), sonra canary (gate'lerle progressive canlı trafik), kararlılık doğrulandığında alternatifler için A/B",
+        "Shadow'u tamamen atla",
+        "Önce canary, sonra shadow, sonra A/B",
+        "Önce A/B, sonra shadow, sonra canary"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders canary ilerlemelerini hangi beş metrik setiyle gate'liyor?",
+      "options": [
+        "GPU sıcaklığı, fan hızı, queue depth, maliyet, latency",
+        "Yalnızca offline eval'da doğruluk",
+        "Latency yüzdelikleri, request başı maliyet, hata/reddetme oranı, çıktı uzunluk dağılımı, kullanıcı geri bildirim oranı",
+        "Yalnızca throughput"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders LLM'lerde aynı girdiler için kabaca ne kadar çalıştırma-arası doğruluk varyansı belirtiyor?",
+      "options": [
+        "%0.1 altında",
+        "Çalıştırmalar arası özdeş çıktılar",
+        "Her zaman %50",
+        "GPU FP non-associativity artı batch boyutu varyansı nedeniyle yaklaşık %15'e kadar"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Dersin çerçevesinde shadow mode ne için kullanılır?",
+      "options": [
+        "Rollback'in yerine geçer",
+        "Eval'ların yerine geçen tam bir kalite testi",
+        "Son üretim rollout adımı",
+        "Maliyet patlamalarını, uzunluk regresyonlarını, reddetme değişikliklerini ve sert hataları yakalayan bir smoke test — kalite garantisi değil"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Derse göre doğru rollback tasarımı nedir?",
+      "options": [
+        "Bir sonraki sürüm penceresini bekle",
+        "Yeni model digest'iyle yeniden deploy et, saatler sürer",
+        "Bir policy flag'ini çevir ve sabitlenmiş model digest'ini saniyeler içinde geri al — yeniden deploy yok",
+        "Her pod'a manuel SSH"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Maliyet neden latency ve kalite ile birlikte bir gate olarak listeleniyor?",
+      "options": [
+        "%20 daha iyi bir model çağrı başına 3x daha pahalı olabilir; bunu maliyet gate'i olmadan ship etmek birim ekonomisini bozar",
+        "Maliyet her sağlayıcı tarafından otomatik olarak sınırlanır",
+        "Maliyet vanity metriktir",
+        "Maliyet sağlayıcılar arasında aynıdır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

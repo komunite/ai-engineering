@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "CLIP'in contrastive loss'u simetriktir (image-to-text + text-to-image). Neden her iki yön?",
+      "options": [
+        "Sayısal stabilite",
+        "Her iki query'nin de çıkarımda çalışmasını istersin: text-to-image retrieval ve image-to-text retrieval. Yalnızca bir yönde eğitim, diğer yönün accuracy'sini önemli ölçüde düşürür",
+        "Çünkü loss sıfıra toplanmalı",
+        "Simetri PyTorch tarafından gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "Downstream görevler her iki yönde de query yaptığı için embedding uzayının modaliteler arasında simetrik olması gerekir. Zero-shot sınıflandırma text-to-image'dir (metin prompt'ları verilen görseli sınıflandır). Retrieval her iki yöne de gidebilir. Yalnızca i2t veya yalnızca t2i ile eğitmek diğer yönü zayıf bırakır."
+    },
+    {
+      "stage": "pre",
+      "question": "CLIP ile zero-shot sınıflandırma nasıl çalışır?",
+      "options": [
+        "ImageNet'te eğitilmiş bir classifier head çalıştırarak",
+        "Her aday sınıf için 'a photo of a dog' gibi prompt'ları encode ederek, test görselini encode ederek ve görsel embedding ile tüm sınıf metin embedding'leri arasında cosine similarity'lerin argmax'ını alarak",
+        "Sınıf üzerinde image encoder'ı fine-tune ederek",
+        "Etiketli örnek veritabanını arayarak"
+      ],
+      "correct": 1,
+      "explanation": "Zero-shot, göreve özgü eğitim olmadığı anlamına gelir: modelin temsilleri zaten görselleri keyfi metin açıklamalarıyla karşılaştırmana izin verir. Sınıf başına bir prompt yaz, tüm prompt'ları ve test görselini encode et, cosine similarity, argmax. Tek 'trick' prompt engineering'dir -- sınıf başına birden çok template kullanmak ve embedding'lerinin ortalamasını almak ImageNet'te 1-3 top-1 kazandırır."
+    },
+    {
+      "stage": "post",
+      "question": "SigLIP, CLIP'in softmax'ını çift başına sigmoid loss ile değiştirir. Bu hangi faydayı verir?",
+      "options": [
+        "Daha hızlı GPU kernel'ları",
+        "Sigmoid loss çift başınadır, bu yüzden batch'e normalizasyon paydası olarak bağımlı değildir. SigLIP, CLIP'in softmax loss'unun negatif için açlık çektiği daha küçük batch size'larda iyi eğitilir",
+        "Daha düşük bellek kullanımı",
+        "Yalnızca COCO'da daha iyi accuracy"
+      ],
+      "correct": 1,
+      "explanation": "CLIP'in simetrik cross-entropy'si tüm batch üzerinde bir softmax'tır, bu yüzden effective negative = batch_size - 1. Küçük batch'ler bunu aç bırakır. SigLIP çift başınadır: her (görsel, caption) çifti ikili bir karar alır (eşleşme veya değil). Batch seviyesi normalizasyon yok, bu yüzden SigLIP batch 128'de çalışırken CLIP 8192'ye ihtiyaç duyar. Eşit ölçekte SigLIP, CLIP ile eşleşir veya onu geçer."
+    },
+    {
+      "stage": "post",
+      "question": "Bir uygulayıcı, CLIP ViT-B/32 ile CIFAR-10'da %88 zero-shot top-1 ve aynı modeli sınıf başına 80 prompt template kullanarak %90 raporluyor. Template ortalaması neden yardım eder?",
+      "options": [
+        "Veri setini ikiye katlar",
+        "Farklı template'ler text encoder'ın öğrenilmiş dağılımının farklı yönlerini aktive eder; ortalama sınıf embedding'ini sınıfın makul doğal dil açıklamalarının manifoldu üzerinde yumuşatır, daha sağlam bir centroid üretir",
+        "logit_scale'deki varyansı azaltır",
+        "80 CLIP için sihirli sayıdır"
+      ],
+      "correct": 1,
+      "explanation": "Her template farklı bir doğal dil ipucudur. 'a photo of a dog' bir yönü vurgular; 'a blurry photo of a dog' başka bir yönü; 'a sketch of a dog' bir başkasını. Metin embedding'lerinin ortalamasını almak, 'dog' kavramının bireysel prompt kaprislerine daha az duyarlı, daha düzgün bir temsilini verir. OpenAI CLIP makalesi ImageNet zero-shot'u ~2 puan kaldıran 80 template yayınladı."
+    },
+    {
+      "stage": "post",
+      "question": "Modern VLM'ler (LLaVA, Qwen-VL, InternVL) neden supervised ImageNet ResNet yerine CLIP ailesi bir vision encoder kullanır?",
+      "options": [
+        "CLIP encoder'ları daha hızlı",
+        "CLIP feature'ları doğal dille hizalanmıştır, bu yüzden LLM bunlar hakkında daha az adaptasyonla akıl yürütebilir; supervised ImageNet feature'ları hiçbir zaman caption'lara karşı eğitilmedi ve metne köprü kurmak için ağır projection katmanlarına ihtiyaç duyar",
+        "ResNet'ler renk göremez",
+        "Lisanslama gereksinimidir"
+      ],
+      "correct": 1,
+      "explanation": "Bir VLM, bir vision encoder'ı bir dil modeline cıvatalar ve küçük bir projection eğitir. CLIP-tarzı encoder'lar metne karşı eğitildi, bu yüzden çıktıları zaten LLM'in birkaç linear adaptasyon katmanıyla tüketebileceği bir uzayda yaşar. Supervised ImageNet encoder'larının doğal dil yapısı kavramı yoktur ve bir LLM ile çalışmak için çok daha büyük köprü MLP'lerine ihtiyaç duyar. Bu yüzden her SOTA VLM bir CLIP ailesi vision tower kullanır."
+    }
+  ]
+}

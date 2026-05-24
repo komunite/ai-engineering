@@ -1,0 +1,90 @@
+{
+  "lesson": "38-verification-gates",
+  "title": "Verification Gate'leri",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Verification gate hangi tek soruyu cevaplar?",
+      "options": [
+        "Model hızlı mı?",
+        "Bu görev gerçekten tamamlandı mı? (scope, kural, feedback ve diff artifact'lerini okuyarak)",
+        "Prompt optimal mı?",
+        "Token bütçesi sağlıklı mı?"
+      ],
+      "correct": 1,
+      "explanation": "Gate workbench artifact'leri üzerinde pass/fail verdict üreten deterministik bir fonksiyondur."
+    },
+    {
+      "stage": "pre",
+      "question": "Gate neden deterministik olmalı?",
+      "options": [
+        "Determinizm ücretsizdir",
+        "Aynı artifact seti her zaman aynı verdict'i üretmeli; LLM judge'lar reviewer'da (kalitatif), gate'te (status) değil",
+        "Sağlayıcılar bunu gerektirir",
+        "Para tasarrufu sağlar"
+      ],
+      "correct": 1,
+      "explanation": "Model yargısını gate'e karıştırmak deterministik/kalitatif ayrımını çökertir."
+    },
+    {
+      "stage": "check",
+      "question": "Gate'in override disiplini nedir?",
+      "options": [
+        "Herkes sessizce override edebilir",
+        "Block-severity bulguları yalnızca signed audit log'da kaydedilmiş override_reason ve overridden_by user id ile bir insan tarafından override edilebilir",
+        "Override bir manager e-postası gerektirir",
+        "Override yasaktır"
+      ],
+      "correct": 1,
+      "explanation": "İmzalı override'lar outputs/verification/overrides.jsonl'a iner; agent kendini override edemez."
+    },
+    {
+      "stage": "check",
+      "question": "Dersin alıntıladığı Hybrid Norm eşleştirmesi nedir?",
+      "options": [
+        "Hot/cold prompt'lar",
+        "Doğrulanabilir ödüller (testler, şemalar, exit kodları) 'problemi çözdü mü?' sorusunu cevaplar; LLM rubric'leri 'okunabilir, güvenli, tarz uyumlu mu?' sorusunu cevaplar",
+        "GPU ve CPU bölünmesi",
+        "Cache vs no-cache"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic 2026 rehberliği: gate ilk sınıfı çalıştırır; reviewer (Ders 39) ikinciyi çalıştırır."
+    },
+    {
+      "stage": "check",
+      "question": "Defense-in-depth gate'leri nasıl katmanlar?",
+      "options": [
+        "Merge zamanında tek bir gate",
+        "Pre-commit hook -> CI status check -> pre-tool authz hook -> pre-merge gate; her katman deterministik, böylece birinde hata sonraki tarafından yakalanır",
+        "Yalnızca IDE uyarıları",
+        "Yalnızca bir chat hatırlatması"
+      ],
+      "correct": 1,
+      "explanation": "Birden çok atlanamaz katman, tek katmanın kaçıracağı şeyi yakalar."
+    },
+    {
+      "stage": "post",
+      "question": "coverage_floor kontrolü neye karşı koruma sağlar?",
+      "options": [
+        "Hot-path latency'sine",
+        "Agent'ların başarısız olan testleri sessizce silmesine; gate ölçülen coverage zemin veya son merge'den 1 puandan fazla düşerse başarısız olur",
+        "Cold start'lara",
+        "Eski lockfile'lara"
+      ],
+      "correct": 1,
+      "explanation": "Zemin olmadan agent'lar verdict'i yeşil tutmak için coverage'ı sessizce düşürebilir."
+    },
+    {
+      "stage": "post",
+      "question": "--strict modu her warn'ı block'a ne zaman yükseltmeli?",
+      "options": [
+        "Her zaman",
+        "Release branch'leri, ship-blocking PR'lar, post-incident triage; günlük varsayılan değil çünkü her şeye strict akışı bozar",
+        "Asla",
+        "Yalnızca pazarları"
+      ],
+      "correct": 1,
+      "explanation": "--strict branch bazlı opt-in'dir; yüksek-riskli anlar için sakla."
+    }
+  ]
+}

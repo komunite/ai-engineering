@@ -1,0 +1,90 @@
+{
+  "lesson": "36-scope-contracts",
+  "title": "Scope Contract'ları ve Görev Sınırları",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Scope creep neden en az izlenen hata modu olarak adlandırılır?",
+      "options": [
+        "Agent'ı yüksek sesle çökertir",
+        "Her dokunuş o an için makul bir nedene sahipti; birlikte ele alındığında incelenenden farklı bir değişiklik oluştururlar",
+        "İzlemek için çok nadirdir",
+        "Testler bunu otomatik yakalar"
+      ],
+      "correct": 1,
+      "explanation": "Agent'lar her adımı iyi niyetle anlatır; sessiz toplam creep'tir."
+    },
+    {
+      "stage": "pre",
+      "question": "Ders hangi contract alanını contract'ın yarısı olarak adlandırıyor?",
+      "options": [
+        "goal",
+        "forbidden_files (negatif alan)",
+        "task_id",
+        "approvals_required"
+      ],
+      "correct": 1,
+      "explanation": "forbidden_files olmadan bir contract eksiktir; negatif alan contract'ın yarısıdır."
+    },
+    {
+      "stage": "check",
+      "question": "allowed/forbidden'ı neden raw path'lere değil glob'lara pin'lemeli?",
+      "options": [
+        "Glob'lar daha hızlıdır",
+        "Gerçek repo'lar dosyaları taşır; glob'lar session'lar arası refactor'lardan sağ çıkar",
+        "Glob'lar daha iyi şifrelenir",
+        "Raw path'ler JSON-serileştirilemez"
+      ],
+      "correct": 1,
+      "explanation": "Glob'lar (app/**/*.py) refactor'lar boyunca contract'ı geçerli tutar."
+    },
+    {
+      "stage": "check",
+      "question": "'Violation budget' pattern'i ne yapar?",
+      "options": [
+        "Agent için aylık bir bütçe ayarlar",
+        "Bütçe içindeki küçük scope kaymalarına warning olarak izin verir; yalnızca aşımda merge reddi tetiklenir — gönderen bir gate ile devre dışı bırakılan arasındaki fark",
+        "Model çağrılarını throttle eder",
+        "İhlal başına ücretlendirir"
+      ],
+      "correct": 1,
+      "explanation": "agent-guardrails günlük akışta gate'in kullanılabilir kalması için violationBudget kullanır."
+    },
+    {
+      "stage": "check",
+      "question": "Specsmaxxing uygulayıcısı ne rapor etti?",
+      "options": [
+        "Latency %90 düştü",
+        "Agent değişmeden üç haftada rabbit-hole oranı %52'den %21'e düştü; işi yapan contract'tı, model değil",
+        "Maliyet 5x arttı",
+        "Testler yavaşladı"
+      ],
+      "correct": 1,
+      "explanation": "Agent'ı çağırmadan önce YAML'daki scope contract'ları model değişikliği olmadan rabbit-hole oranını yarıya indirdi."
+    },
+    {
+      "stage": "post",
+      "question": "Multi-contract merge semantikleri nedir (en az ayrıcalık)?",
+      "options": [
+        "Son contract kazanır",
+        "allowed_files'ı kesiştir; forbidden_files'ı birleştir; time_budget'ın minimumunu al; approval'ları biriktir; deny-all yapışır; None'ın merge'i diğer tarafa erteler",
+        "İlk contract kazanır",
+        "Rastgele tie-break"
+      ],
+      "correct": 1,
+      "explanation": "En az ayrıcalık merge'i: allow'larda kesişim, forbid'lerde birleşim, en kısıtlayıcı zaman, biriken approval'lar."
+    },
+    {
+      "stage": "post",
+      "question": "Zaman ve network bütçeleri neden contract'a da aittir?",
+      "options": [
+        "Wall clock ve harici host erişimi scope boyutlarıdır; tek başına dosya glob'ları gerekli ama yeterli değildir",
+        "Sağlayıcılar bunları gerektirir",
+        "JSON'u küçültür",
+        "Apache 2.0 tarafından gerekli kılınır"
+      ],
+      "correct": 0,
+      "explanation": "time_budget_minutes ve network_egress allowlist'leri dosya glob'larının üzerindeki scope boyutlarıdır."
+    }
+  ]
+}

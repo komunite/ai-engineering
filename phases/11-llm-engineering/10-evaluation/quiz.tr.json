@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Birkaç LLM çıktısını manuel olarak okumak neden güvenilir bir değerlendirme yöntemi değildir?",
+    "options": ["Çok uzun sürer", "Küçük örneklemler yalnızca ölçekte ortaya çıkan başarısızlık modlarını kaçırır ve insan yargısı incelemeciler ve oturumlar arasında tutarsızdır", "Manuel inceleme çok pahalıdır", "LLM çıktıları her zaman doğrudur"],
+    "correct": 1,
+    "explanation": "10 çıktı okumak sana bir dağılımda 10 nokta gösterir. Bir prompt değişikliği çıktıların %90'ını iyileştirirken edge case'lerin %10'unu bozabilir. Sistematik değerlendirme olmadan, kullanıcılar şikayet edene kadar regression'ı kaçırırsın.",
+    "stage": "pre"
+  },
+  {
+    "question": "LLM uygulamaları bağlamında regression testing nedir?",
+    "options": ["Linear regression modellerini test etmek", "Kalitenin düşmediğinden emin olmak için her değişiklikten (prompt, model, parametreler) sonra sabit bir test seti çalıştırmak", "Training verisi üzerinde test etmek", "Eğitim sırasında model loss'unu ölçmek"],
+    "correct": 1,
+    "explanation": "Her prompt değişikliği, model değişimi veya temperature ayarı çıktı dağılımını değiştirir. Regression testleri, bir alanı iyileştiren bir değişikliğin sessizce başka bir alanı bozduğu durumları yakalar.",
+    "stage": "pre"
+  },
+  {
+    "question": "LLM-as-judge değerlendirme yaklaşımı nedir?",
+    "options": ["Modelin kendi training loss'unu değerlendirmesi", "Pahalı insan değerlendirmesini değiştiren ve binlerce test vakasına ölçeklenebilen, çıktıları rubric'lere göre skorlamak için güçlü bir LLM kullanmak", "Modelin confidence skorlarını kullanmak", "İki modelin parametre sayılarını karşılaştırmak"],
+    "correct": 1,
+    "explanation": "LLM-as-judge (input, output, rubric)'ı güçlü bir modele (örn. GPT-4) gönderir ve model çıktıyı skorlar. İnsan değerlendirmesinden daha ucuz ve hızlıdır, ancak bilinen bias'ları vardır (örn. uzun cevapları tercih etme).",
+    "stage": "post"
+  },
+  {
+    "question": "Bir LLM uygulaması için iyi bir değerlendirme veri kümesini ne yapar?",
+    "options": ["Mümkün olduğunca çok örnek", "Yaygın durumları, edge case'leri, adversarial input'ları kapsayan çeşitli input'lar ve net rubric'lerle beklenen çıktılar", "Yalnızca en zor örnekler", "İnternetten rastgele örnekler"],
+    "correct": 1,
+    "explanation": "İyi bir eval seti dağılımı kapsar: happy path vakaları, edge case'ler (boş input, çok uzun input), adversarial input'lar (prompt injection) ve muğlak sorgular. Her örneğin net bir beklenen çıktısı veya skorlama rubric'i vardır.",
+    "stage": "post"
+  },
+  {
+    "question": "Değerlendirmede non-deterministik LLM çıktılarını nasıl ele almalısın?",
+    "options": ["Tüm değerlendirmeler için temperature'ı 0'a ayarla", "Her test vakasını birden çok kez çalıştır ve çıktı varyansını hesaba katmak için toplu metrikler (pass rate, ortalama skor) kullan", "Non-determinizm değerlendirmeyi etkilemez", "Yalnızca ilk çıktıyı değerlendir"],
+    "correct": 1,
+    "explanation": "Temperature 0'da bile bazı sağlayıcılar sampling varyasyonu getirir. Her testi 3-5 kez çalıştırmak ve pass rate veya ortalama skor ölçmek, şanslı/şanssız bir örneği vurabilecek tek bir run'dan daha güvenilir bir görüntü verir.",
+    "stage": "post"
+  }
+]

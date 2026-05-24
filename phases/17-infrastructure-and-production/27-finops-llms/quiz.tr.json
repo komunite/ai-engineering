@@ -1,0 +1,78 @@
+{
+  "lesson": "27-finops-llms",
+  "title": "LLM'ler için FinOps — Birim Ekonomi ve Multi-Tenant Attribution",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Geleneksel FinOps LLM harcamasında neden çöker?",
+      "options": [
+        "LLM'lerin maliyeti yoktur",
+        "LLM faturaları her zaman ücretsizdir",
+        "Cloud sağlayıcıları kalemize etmeyi reddeder",
+        "Maliyetler kaynak-uptime'ı yerine token-transaction'lardır; tag'ler API çağrılarından otomatik propagate olmaz ve user/task/tenant'ı çağrı yerinde damgalaman gerekir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders ilk gün instrument edilmesi gereken hangi üç attribution boyutunu zorunlu kılıyor?",
+      "options": [
+        "Kullanıcı başı (user_id), task başı (task_id + route), tenant başı (tenant_id)",
+        "Sağlayıcı, model, API versiyonu",
+        "Region, AZ, datacenter",
+        "GPU, CPU, RAM"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Maliyet attribution'ında hangi dört token katmanı ayrıştırılmalıdır?",
+      "options": [
+        "Prompt, tool, memory, response",
+        "Input, output, network, disk",
+        "Cache, model, gateway, observability",
+        "GPU, CPU, RAM, storage"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Enforcement merdiveninde kill-switch tetikleyicisi nedir?",
+      "options": [
+        "Tenant harcamasının baseline'a göre z-skoru > 4; tenant'ı otomatik duraklat ve on-call'a çağrı yap",
+        "Latency P50 > 2s",
+        "Herhangi bir 5xx yanıtı",
+        "Bir dakikada $1'ı aşan harcama"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders $/M token yerine hangi birim metriği öneriyor?",
+      "options": [
+        "Gateway başına maliyet",
+        "GPU-saat başına maliyet",
+        "Saniye başına maliyet",
+        "Ürün sonucu başına maliyet (örneğin çözülen destek bileti başına maliyet, üretilen makale başına maliyet, başarılı agent görevi başına maliyet)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders olgun ekiplerin kullandığı en yüksek doğruluklu attribution pattern'ı olarak hangisini adlandırıyor?",
+      "options": [
+        "Sampling ve ekstrapolasyon",
+        "Model-tabanlı allocation",
+        "Yalnızca tag-and-aggregate",
+        "Telemetry joiner — trace ID'ler üzerinden trace'leri faturalamaya join et"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

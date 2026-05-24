@@ -1,0 +1,90 @@
+{
+  "lesson": "01-managed-llm-platforms",
+  "title": "Managed LLM Platformları — Bedrock, Vertex AI, Azure OpenAI",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bu dersten önce, bir müşteri tek bir API arkasında Claude, Llama ve Cohere'e ihtiyaç duysaydı önce hangi platforma yönelirdin?",
+      "options": [
+        "Vertex AI",
+        "AWS Bedrock",
+        "Azure OpenAI Service",
+        "Doğrudan Anthropic API"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Hangi hyperscaler'ın stratejisi marketplace yerine özel ortaklık olarak tanımlanıyor?",
+      "options": [
+        "Azure OpenAI",
+        "Vertex AI",
+        "AWS Bedrock",
+        "OCI Generative AI"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Llama 3.1 405B muadillerinde Azure OpenAI (PTU'larla) ile Bedrock on-demand arasındaki ölçülen medyan TTFT farkı kabaca nedir?",
+      "options": [
+        "~100 ms",
+        "~5 ms",
+        "~250 ms",
+        "~25 ms"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi Bedrock 2025 özelliği CloudWatch içinde doğrudan ürün başına en temiz maliyet attribution'ını sağlar?",
+      "options": [
+        "Bedrock Knowledge Bases",
+        "Application Inference Profiles",
+        "Bedrock Guardrails",
+        "Bedrock Agents"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Azure PTU'ları on-demand'e karşı tipik olarak hangi sürekli kullanım bandında başa baş noktasına ulaşır?",
+      "options": [
+        "%5-10",
+        "%80-95",
+        "%20-30",
+        "%40-60"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Dersin 2026 için önerdiği politika neden ürün-kritik LLM çağrıları için minimum iki sağlayıcıdır?",
+      "options": [
+        "SOC 2 Type II tarafından zorunlu kılınır",
+        "Frontier model liderliği aylık döner; tek satıcıya kilitlenmek seni frontier'ın üçte ikisinden mahrum bırakır",
+        "Hyperscaler'lar bir rakibi de kullanmadığın sürece BAA imzalamayı reddeder",
+        "Tek satıcı fiyatlandırması her zaman daha pahalıdır"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Üç platform arasındaki FinOps yüzeyini en iyi hangi ifade tanımlıyor?",
+      "options": [
+        "Azure native olarak en temiz, Bedrock opak",
+        "Vertex'in hiç attribution yüzeyi yok",
+        "Üçü de aynı request başına attribution'ı expose eder",
+        "Bedrock native olarak en temiz, Vertex BigQuery üzerinden en esnek, Azure instrumentation olmadan en opak"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

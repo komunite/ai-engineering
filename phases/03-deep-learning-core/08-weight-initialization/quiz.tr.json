@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir sinir ağındaki tüm ağırlıkları sıfırla başlatırsan ne olur?",
+      "options": [
+        "Ağ normal şekilde ama yavaş eğitilir",
+        "Tüm nöronlar aynı çıktıyı hesaplar ve aynı gradient'i alır; ağın katman başına yalnızca 1 etkili nöronu olur",
+        "Ağ ıraksar",
+        "Sıfır init önerilen varsayılandır"
+      ],
+      "correct": 1,
+      "explanation": "Sıfır ağırlıklarla, bir katmandaki her nöron aynı fonksiyonu hesaplar, aynı gradient'i alır ve aynı şekilde güncellenir. Bu 'simetri', yüzlerce parametrenin tek bir parametre gibi davrandığı anlamına gelir."
+    },
+    {
+      "stage": "pre",
+      "question": "Rastgele weight initialization'ın ölçeği neden önemlidir?",
+      "options": [
+        "Daha büyük ağırlıklar daha hızlı eğitilir",
+        "Varyans çok yüksekse aktivasyonlar patlar; çok düşükse aktivasyonlar kaybolur -- her ikisi de eğitimi engeller",
+        "Ölçek yalnızca çıktı katmanı için önemlidir",
+        "Ağırlıklar sıfır olmadığı sürece önemli değildir"
+      ],
+      "correct": 1,
+      "explanation": "Her katman varyansı fan_in * Var(w) ile çarpar. Bu çarpım > 1 ise sinyal katmanlar boyunca üstel olarak patlar. < 1 ise kaybolur. Doğru başlatma bu çarpımı tam olarak 1'de tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Kaiming/He initialization varyansının formülü nedir?",
+      "options": [
+        "Var(w) = 1/fan_in",
+        "Var(w) = 2/fan_in",
+        "Var(w) = 2/(fan_in + fan_out)",
+        "Var(w) = 1/(fan_in + fan_out)"
+      ],
+      "correct": 1,
+      "explanation": "Kaiming init, Var(w) = 2/fan_in kullanır. 2 faktörü, ReLU'nun aktivasyonların yarısını sıfırlamasını (negatif değerler 0 olur) telafi eder; bu da fan_in'i etkin olarak yarıya indirir."
+    },
+    {
+      "stage": "post",
+      "question": "Kaiming/He yerine Xavier/Glorot initialization'ı ne zaman kullanmalısın?",
+      "options": [
+        "Her zaman -- Xavier evrensel olarak daha iyidir",
+        "ReLU gibi çıktıların yarısını sıfırlamayan sigmoid veya tanh aktivasyonları kullanırken",
+        "Küçük veri setlerinde eğitirken",
+        "Adam optimizer kullanırken"
+      ],
+      "correct": 1,
+      "explanation": "Xavier init, sıfır yakınında kabaca doğrusal olan aktivasyonlar (sigmoid, tanh) için tasarlanmış Var(w) = 2/(fan_in + fan_out) kullanır. Kaiming'in ekstra 2 faktörü ReLU'nun yarı-sıfırlamasını telafi eder; Xavier'in buna ihtiyacı yoktur."
+    },
+    {
+      "stage": "post",
+      "question": "GPT-2 residual katman ağırlıklarını neden 1/sqrt(2N) ile ölçekler?",
+      "options": [
+        "Eğitimi hızlandırmak için",
+        "Her residual toplama varyansı artırır, dolayısıyla ölçeklendirme, birikmiş sinyalin N katman boyunca sınırsız büyümesini önler",
+        "Parametre sayısını azaltmak için",
+        "Tokenization'ı iyileştirmek için"
+      ],
+      "correct": 1,
+      "explanation": "Residual connection'lar alt katman çıktısını girdiye ekler: x = x + sublayer(x). Her toplama varyansı artırır. N residual katmanla varyans N ile orantılı olarak büyür. 1/sqrt(2N) ile ölçeklendirmek sinyali kararlı tutar."
+    }
+  ]
+}

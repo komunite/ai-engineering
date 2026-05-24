@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Çok katmanlı bir ağdaki gizli katmanın amacı nedir?",
+      "options": [
+        "Eğitim verisini depolamak",
+        "Girdileri, doğrusal olmayan karar sınırlarına olanak tanıyan yeni özellik temsillerine dönüştürmek",
+        "Parametre sayısını azaltmak",
+        "Loss fonksiyonunu uygulamak"
+      ],
+      "correct": 1,
+      "explanation": "Gizli katmanlar, yeni özellik temsilleri oluşturmak için ağırlıklar, bias'lar ve aktivasyon fonksiyonları uygular. Bu ara özellikler, ağın tek bir katmanın yapamayacağı doğrusal olmayan eşlemeler öğrenmesini sağlar."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir sinir ağında forward pass ne yapar?",
+      "options": [
+        "Gradient'leri kullanarak ağırlıkları günceller",
+        "Backpropagation için gradient'leri hesaplar",
+        "Girdiyi her katmandan geçirerek bir çıktı üretir",
+        "Eğitim verisini karıştırır"
+      ],
+      "correct": 2,
+      "explanation": "Forward pass saf hesaplamadır: her katman için ağırlıklarla çarp, bias ekle, aktivasyon uygula ve sonucu sonraki katmana ilet. Forward pass sırasında öğrenme gerçekleşmez."
+    },
+    {
+      "stage": "post",
+      "question": "2 nörondan girdi alan ve 3 nöron içeren bir katman için ağırlık matrisinin şekli nedir?",
+      "options": [
+        "(2, 3)",
+        "(3, 2)",
+        "(3, 3)",
+        "(2, 2)"
+      ],
+      "correct": 1,
+      "explanation": "Ağırlık matrisi (mevcut_katman_nöron_sayısı, önceki_katman_nöron_sayısı) = (3, 2) şekline sahiptir. Her satır, tüm girdiler boyunca bir nöronun ağırlıklarını içerir."
+    },
+    {
+      "stage": "post",
+      "question": "Universal Approximation Theorem (Evrensel Yaklaşım Teoremi) neyi garanti eder?",
+      "options": [
+        "Herhangi bir ağ polinom zamanda eğitilebilir",
+        "Yeterli nöron içeren tek bir gizli katman, herhangi bir sürekli fonksiyonu yaklaşık olarak temsil edebilir",
+        "Daha derin ağlar her zaman sığ olanlardan daha iyi performans gösterir",
+        "Sinir ağları herhangi bir hesaplama problemini çözebilir"
+      ],
+      "correct": 1,
+      "explanation": "Cybenko (1989), tek bir gizli katmana ve yeterli sayıda nörona sahip bir ağın, herhangi bir sürekli fonksiyonu istenen doğrulukta yaklaşık olarak temsil edebileceğini kanıtladı. Pratikte daha derin ağlar aynı sonucu daha az toplam parametreyle elde eder."
+    },
+    {
+      "stage": "post",
+      "question": "Sigmoid aktivasyon fonksiyonu, perceptron'larda kullanılan step fonksiyonundan farklı olarak öğrenmeyi neden mümkün kılar?",
+      "options": [
+        "Sigmoid daha büyük değerler üretir",
+        "Sigmoid'in hesaplanması daha hızlıdır",
+        "Sigmoid pürüzsüz ve her yerde türevlenebilirdir, dolayısıyla backpropagation için gradient'ler vardır",
+        "Sigmoid negatif değerler üretir"
+      ],
+      "correct": 2,
+      "explanation": "Step fonksiyonunun gradient'i neredeyse her yerde sıfırdır ve eşikte tanımsızdır. Sigmoid pürüzsüzdür ve her noktada iyi tanımlı bir türevi (s*(1-s)) vardır; bu da gradient tabanlı öğrenme için elzemdir."
+    }
+  ]
+}

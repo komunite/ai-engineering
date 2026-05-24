@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sinir ağlarını eğitmede GPU neden CPU'dan daha hızlıdır?",
+      "options": ["GPU'ların saat hızları CPU'lardan daha yüksektir", "GPU'lar aynı anda binlerce paralel matris işlemi yapabilir", "GPU'larda CPU'lardan daha fazla RAM vardır", "GPU'lar daha verimli bir programlama dili kullanır"],
+      "correct": 1,
+      "explanation": "GPU'ların paralel hesaplama için optimize edilmiş binlerce çekirdeği vardır, bu da onları sinir ağı eğitimine hakim olan matris çarpımları için ideal yapar."
+    },
+    {
+      "stage": "pre",
+      "question": "VRAM neyi ifade eder?",
+      "options": ["İşletim sisteminin swap alanı için kullandığı sanal RAM", "GPU üzerindeki, sistem RAM'inden ayrı olan video RAM", "Tüm cihazlarda toplam kullanılabilir RAM", "Bir CPU önbellek türü"],
+      "correct": 1,
+      "explanation": "VRAM (Video RAM), bir GPU üzerindeki özel bellektir. Eğitim sırasında kullanabileceğin model boyutunu ve batch size'ı sınırlar, sistemin ana RAM'inden ayrıdır."
+    },
+    {
+      "stage": "post",
+      "question": "NVIDIA GPU'nun algılandığını ve mevcut durumunu gösteren komut hangisidir?",
+      "options": ["gpu --status", "nvidia-smi", "torch.cuda.list_devices()", "lspci | grep gpu"],
+      "correct": 1,
+      "explanation": "nvidia-smi (NVIDIA System Management Interface) GPU kullanımını, bellek kullanımını, sıcaklığı ve çalışan process'leri gösterir. GPU varlığını doğrulamak için standart araçtır."
+    },
+    {
+      "stage": "post",
+      "question": "GPU ile CPU matris çarpımı karşılaştırması yaparken, GPU süresini ölçmeden önce neden torch.cuda.synchronize() çağırmak zorundasın?",
+      "options": ["Veriyi CPU'dan GPU belleğine transfer etmek için", "Zamanlayıcıyı durdurmadan önce tüm GPU işlemlerinin tamamlandığından emin olmak için", "GPU saat hızını temel frekansına sıfırlamak için", "Kullanılmayan GPU belleğini boşaltmak için"],
+      "correct": 1,
+      "explanation": "GPU işlemleri asenkrondur -- GPU hala hesaplama yaparken Python hemen geri döner. synchronize() tüm GPU işlemleri bitene kadar bloklar ve doğru zamanlama verir."
+    },
+    {
+      "stage": "post",
+      "question": "fp16 kuralını kullanarak, 24 GB VRAM'e yaklaşık kaç parametre sığabilir?",
+      "options": ["24 milyar parametre", "12 milyar parametre", "6 milyar parametre", "48 milyar parametre"],
+      "correct": 1,
+      "explanation": "fp16'da her parametre 2 byte kullanır. 24 GB / 2 byte = 12 milyar parametre. Bu kabataslak bir tahmindir; gerçek kullanım aktivasyonları, gradient'leri ve optimizer state'lerini de içerir."
+    }
+  ]
+}

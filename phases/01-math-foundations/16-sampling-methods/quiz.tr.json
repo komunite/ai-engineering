@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Temperature < 1.0 bir dil modelinin çıktı dağılımına ne yapar?",
+      "options": [
+        "Dağılımı daha düzgün (daha rastgele) yapar",
+        "Dağılımı keskinleştirir, en yüksek olasılıklı token'ı daha olası kılar",
+        "En üstteki dışındaki tüm token'ları kaldırır",
+        "Çıkış üzerinde hiçbir etkisi yoktur"
+      ],
+      "correct": 1,
+      "explanation": "Temperature < 1.0 logit'leri 1'den küçük bir sayıya böler ve logit'ler arasındaki farkları büyütür. Softmax'tan sonra en yüksek olasılıklı token daha büyük bir pay alır. Temperature 0'a yaklaştığında açgözlü (argmax) çözümleme verir."
+    },
+    {
+      "stage": "pre",
+      "question": "Top-k ve top-p (nucleus) sampling arasındaki temel fark nedir?",
+      "options": [
+        "Top-k, top-p'den daha hızlıdır",
+        "Top-k sabit sayıda token tutar; top-p kümülatif olasılığa göre değişken sayıda token tutar",
+        "Top-p yalnızca temperature = 1.0 ile çalışır",
+        "Top-k logit'ler üzerinde, top-p olasılıklar üzerinde çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Top-k, olasılık dağılımı ne olursa olsun her zaman tam olarak k token tutar. Top-p adaptif olarak kümülatif olasılığı p'yi aşan en küçük token kümesini tutar. Model emin olduğunda top-p az token tutar; belirsiz olduğunda çok token tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Standart bir z ~ N(mu, sigma^2) sampling işlemi üzerinden neden backpropagate edemezsin?",
+      "options": [
+        "Normal dağılımların gradyanları yoktur",
+        "Sampling işlemi deterministik değildir ve mu ile sigma'ya göre iyi tanımlanmış bir türevi yoktur",
+        "PyTorch normal dağılımları desteklemez",
+        "Gradyan her zaman tam olarak sıfırdır"
+      ],
+      "correct": 1,
+      "explanation": "Sampling stokastik bir süreksizlik getirir — rastgele bir çekiliş için d(sample)/d(mu) hesaplayamazsın. Reparameterization trick bunu z = mu + sigma * epsilon (epsilon ~ N(0,1) iken) yazarak çözer; z'yi mu ve sigma'nın deterministik, türevlenebilir bir fonksiyonu yapar."
+    },
+    {
+      "stage": "post",
+      "question": "Metropolis-Hastings MCMC'de, öneri standart sapması çok büyük ayarlanırsa ne olur?",
+      "options": [
+        "Zincir daha büyük adımlar attığı için daha hızlı yakınsar",
+        "Önerilerin çoğu düşük olasılıklı bölgelere düşer ve reddedilir, bu yüzden zincir neredeyse hiç hareket etmez",
+        "Durağan dağılım düzgün dağılıma değişir",
+        "Burn-in periyodu sıfır olur"
+      ],
+      "correct": 1,
+      "explanation": "Büyük öneri standart sapması ile önerilen noktalar mevcut konumdan uzakta olur ve muhtemelen düşük olasılıklı bölgelere düşer. Bunlar reddedilir, zincirin mevcut noktada takılı kalmasına neden olur. Yüksek boyutlu Gauss önerileri için optimal kabul oranı yaklaşık %23'tür."
+    },
+    {
+      "stage": "post",
+      "question": "Rejection sampling'de, hedef dağılımın boyutluluğu arttıkça kabul oranına ne olur?",
+      "options": [
+        "Boyuttan bağımsız olarak sabit kalır",
+        "Kabul edilecek daha fazla boyut olduğu için artar",
+        "Öneri hacminin çoğu reddedildiği için üstel olarak düşer",
+        "Her durumda %50'ye yaklaşır"
+      ],
+      "correct": 2,
+      "explanation": "Yüksek boyutlarda, öneri dağılımının hedef dağılımla örtüşen hacmi üstel olarak küçülür. Üst sınır M büyür ve kabul oranı (1/M) üstel olarak düşer. Bu, rejection sampling için boyutluluk lanetidir."
+    }
+  ]
+}

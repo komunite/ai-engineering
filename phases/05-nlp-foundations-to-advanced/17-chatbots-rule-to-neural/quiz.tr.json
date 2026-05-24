@@ -1,0 +1,102 @@
+{
+  "lesson": "17-chatbots-rule-to-neural",
+  "title": "Chatbot'lar — Kural Tabanlıdan Neural'a, LLM Agent'lara",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Kural tabanlı bir chatbot'ta slot-filling state machine ne yapar?",
+      "options": [
+        "Sarcasm tespit eder",
+        "En akıcı yanıtı seçer",
+        "Kullanıcı mesajını embed eder",
+        "Hangi gerekli parametrelerin (tarih, varış noktası, miktar) hâlâ eksik olduğunu izler ve sırayla sorar"
+      ],
+      "correct": 3,
+      "explanation": "Slot filling, bir görev handler'ının ihtiyaç duyduğu yapılandırılmış parametreleri iteratif olarak toplar."
+    },
+    {
+      "stage": "pre",
+      "question": "Retrieval tabanlı sohbet hallucination'a neden dirençlidir?",
+      "options": [
+        "Embedding kullanır",
+        "Tüm sorguları reddeder",
+        "Yeni metin üretmek yerine derlenmiş bir setten hazır bir yanıt döndürür",
+        "BM25 kullanır"
+      ],
+      "correct": 2,
+      "explanation": "Retrieval önceden yazılmış cevapları yüzeye çıkarır; üretim olmaması fabrikasyon içerik olmaması demektir."
+    },
+    {
+      "stage": "check",
+      "question": "Bir LLM agent loop'u tek-atışlık LLM çağrısından farkı nedir?",
+      "options": [
+        "Greedy decoding kullanımı",
+        "Softmax kullanımı",
+        "Model nihai bir cevap dönene veya step bütçesi dolana kadar LLM çağrılarını tool invocation'larıyla iç içe geçiren bir controller",
+        "Daha büyük context window"
+      ],
+      "correct": 2,
+      "explanation": "Agent'lar tool çağrıları ve sonlandırma koşulu ile bir plan-act-observe loop'u ekler."
+    },
+    {
+      "stage": "check",
+      "question": "Hybrid routing (kurallar + retrieval + LLM agent) neden 2026 production varsayılanı?",
+      "options": [
+        "Bakımı daha ucuzdur",
+        "Değerlendirme ihtiyacını ortadan kaldırır",
+        "Tek bir mimari her isteği iyi karşılayamaz; kurallar destructive eylemleri kapsar, retrieval FAQ'u kapsar, agent'lar belirsiz açık uçlu sorguları ele alır",
+        "Embedding'lerden kaçınır"
+      ],
+      "correct": 2,
+      "explanation": "Hybrid sistemler riskli eylemler için deterministik kurallar kullanır ve LLM agent'ları açık uçlu sorgular için saklar."
+    },
+    {
+      "stage": "check",
+      "question": "Prompt injection nedir?",
+      "options": [
+        "Yalnızca bir SQL injection varyantı",
+        "Bir tokenizer saldırısı türü",
+        "Embedding'lere token enjekte etmek",
+        "System prompt'u override etmeye veya agent'ın davranışını ele geçirmeye çalışan kullanıcı kaynaklı (doğrudan) veya doküman kaynaklı (dolaylı) metin"
+      ],
+      "correct": 3,
+      "explanation": "Prompt injection, güvenilmeyen kullanıcı girdisi veya tool çıktısı içindeki metinle agent'ın davranışını yeniden yazar."
+    },
+    {
+      "stage": "post",
+      "question": "OWASP Top 10 (LLM Apps 2025) içinde LLM01 olarak sıralanan risk hangisidir?",
+      "options": [
+        "Prompt injection (doğrudan ve dolaylı)",
+        "Insecure deserialization",
+        "Broken access control",
+        "SQL injection"
+      ],
+      "correct": 0,
+      "explanation": "Prompt injection, OWASP LLM Apps Top 10 (2025) içinde LLM01'dir."
+    },
+    {
+      "stage": "post",
+      "question": "Planlamayı yürütmeden ayırarak dolaylı prompt injection'ı azaltan mitigation pattern'ı hangisidir?",
+      "options": [
+        "Daha kısa bağlam",
+        "Plan-Verify-Execute: agent önce planlar, her eylemi plana karşı doğrular, sonra yürütür — tool çıktılarının planlanmamış yeni eylemler enjekte etmesini önler",
+        "Daha büyük model",
+        "Daha düşük temperature"
+      ],
+      "correct": 1,
+      "explanation": "PVE her adımı uzlaşılmış plana karşı kontrol eder, dolayısıyla tool çıktılarından enjekte edilen talimatlar reddedilir."
+    },
+    {
+      "stage": "post",
+      "question": "Destructive eylemler (ödemeler, silmeler) bir LLM-agent sisteminde bile neden yapılandırılmış bir akıştan geçmelidir?",
+      "options": [
+        "LLM'ler yavaştır",
+        "Beam search güvensizdir",
+        "Tool'lar çağrılamaz",
+        "Kendinden emin fabrikasyon, prompt injection ve scope creep, LLM'in geri alınamaz yan etkiler için tek otorite olamayacağı anlamına gelir"
+      ],
+      "correct": 3,
+      "explanation": "Hallucination ve injection saf LLM agent'lardaki geri alınamaz eylemleri güvensiz yapar; deterministik confirmation akışları gerektir."
+    }
+  ]
+}

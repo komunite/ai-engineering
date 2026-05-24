@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Language Server Protocol (LSP) nedir?",
+      "options": ["Editörler arasında dosya transfer etmek için bir protokol", "Editörlerin dile özgü bir sunucudan tip bilgisi, tamamlama ve teşhis almasını sağlayan bir standart", "Kaynak kod dosyaları için bir sıkıştırma formatı", "Uzaktan pair programming için bir ağ protokolü"],
+      "correct": 1,
+      "explanation": "LSP, editörlerin kullanılan editörden bağımsız olarak otomatik tamamlama, tip kontrolü ve hata teşhisi gibi özellikler için dil sunucularıyla iletişim kurmasını sağlayan standartlaştırılmış bir protokoldür."
+    },
+    {
+      "stage": "pre",
+      "question": "Takım projelerinde format-on-save neden faydalıdır?",
+      "options": ["Boşlukları kaldırarak dosya boyutlarını azaltır", "Manuel formatlama olmadan tüm katkıda bulunanlar arasında tutarlı kod stili sağlar", "Kod çalıştırılmadan önce runtime hatalarını yakalar", "Daha hızlı git işlemleri için kodu sıkıştırır"],
+      "correct": 1,
+      "explanation": "Format-on-save her kaydettiğinde bir formatter (Black ya da Ruff gibi) çalıştırır, böylece kimin yazdığından bağımsız olarak tüm kod aynı stil konvansiyonlarını takip eder."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi VS Code eklentisi, uzak bir GPU makinesinde kod düzenlemeyi lokal gibi çalışmaya benzetir?",
+      "options": ["GitLens", "Pylance", "Remote SSH", "Debugpy"],
+      "correct": 2,
+      "explanation": "Remote SSH uzak makineye hafif bir VS Code sunucusu kurar ve UI'yı lokal editörüne stream eder, böylece uzaktan dosya düzenleyebilir, terminal çalıştırabilir ve hata ayıklayabilirsin."
+    },
+    {
+      "stage": "post",
+      "question": "Yapay zeka işi için VS Code ayarlarında 'notebook.output.scrolling' neden açık olmalıdır?",
+      "options": ["Geniş dataframe'ler için yatay kaydırma sağlar", "Eğitim döngüsü çıktısının (binlerce satır) çıktı panelini patlatmasını engeller", "Notebook hücreleri arasında fare tekerleğiyle kaydırma sağlar", "Editörde pürüzsüz kaydırma animasyonları sağlar"],
+      "correct": 1,
+      "explanation": "Eğitim döngüleri binlerce satır çıktı yazdırabilir. Output scrolling olmadan, notebook çıktı paneli sınırsızca büyür ve notebook kullanılmaz hale gelir."
+    },
+    {
+      "stage": "post",
+      "question": "VS Code'da 'python.analysis.typeCheckingMode'u 'basic' olarak ayarlamak ne yapar?",
+      "options": ["Python dosyaları için syntax highlighting'i etkinleştirir", "Kodu çalıştırmadan önce yanlış argüman tiplerini ve tensor şekil uyumsuzluklarını yakalar", "Python kodunu PEP 8 standartlarına göre formatlar", "Python 3.12 dil özelliklerini etkinleştirir"],
+      "correct": 1,
+      "explanation": "Pylance ile basic tip kontrolü, tip uyumsuzluklarını, yanlış argüman tiplerini ve yanlış API parametrelerini düzenleme zamanında işaretler, potansiyel olarak pahalı bir eğitim script'ini çalıştırmadan önce hataları yakalar."
+    }
+  ]
+}

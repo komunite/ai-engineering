@@ -1,0 +1,78 @@
+{
+  "lesson": "12-edge-inference",
+  "title": "Edge Çıkarımı — Apple Neural Engine, Qualcomm Hexagon, WebGPU/WebLLM, Jetson",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Derse göre mobil LLM çıkarımını datacenter'dan daha yavaş yapan temel kısıt nedir?",
+      "options": [
+        "Wi-Fi latency",
+        "Compute throughput",
+        "Bellek bant genişliği (50-90 GB/s mobil DRAM vs 2-3 TB/s HBM3)",
+        "Depolama kapasitesi"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Apple'ın Neural Engine'i CPU-NPU kopya yükünden nasıl kaçınır?",
+      "options": [
+        "PCIe 5.0 kullanır",
+        "Core ML KV cache'i devre dışı bırakır",
+        "Ağırlıkları kopyadan önce FP4'e transcode eder",
+        "Apple Silicon unified memory ile gelir — CPU ve ANE aynı havuzu paylaşır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders tarayıcıda WebGPU + WebLLM için hangi quantization formatını öneriyor?",
+      "options": [
+        "NVFP4",
+        "FP8",
+        "mlc_llm convert_weight ile derlenmiş Q4 MLC (q4f16_1)",
+        "GGUF Q4_K_M"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders 2026 için kabaca hangi WebGPU mobil kapsamını rapor ediyor?",
+      "options": [
+        "Tüm tarayıcılarda %100",
+        "Yalnızca iOS Safari",
+        "%10'un altında",
+        "Yaklaşık %70-75, Firefox Android hâlâ yetişiyor"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tipik bir telefonda 128K context'i korumak neden pratik değil?",
+      "options": [
+        "Tokenizer'lar 8K üzerinde başarısız olur",
+        "Model ağırlıkları artı 32K token için KV cache artı OS yükü 8 GB RAM bütçesini kolayca aşar",
+        "WebGPU context'i 4K ile sınırlar",
+        "iOS uzun context'i yasaklar"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ses neden edge çıkarımı için killer app olarak vurgulanıyor?",
+      "options": [
+        "Sesli agent'lar latency'ye duyarlıdır (ilk token < 500 ms) ve yerel çıkarım network latency'sini tamamen yok eder",
+        "Sesli modellerin KV cache'e ihtiyacı yoktur",
+        "Sesli modeller her zaman 50 MB'a sığar",
+        "Ses yalnızca WebAssembly'de çalışır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

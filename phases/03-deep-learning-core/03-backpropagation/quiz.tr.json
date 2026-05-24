@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sinir ağları bağlamında zincir kuralı nedir?",
+      "options": [
+        "Katmanları birbirine zincirleme kuralı",
+        "Eğer y = f(g(x)) ise, dy/dx = f'(g(x)) * g'(x) -- yol boyunca türevleri çarp",
+        "Ağırlıkları başlatma yöntemi",
+        "Veriyi batch'leme tekniği"
+      ],
+      "correct": 1,
+      "explanation": "Zincir kuralı, bileşik bir fonksiyonun türevini her adımdaki yerel türevleri çarparak hesaplamanı sağlar. Backpropagation, bunu computation graph boyunca sistematik olarak uygular."
+    },
+    {
+      "stage": "pre",
+      "question": "Backpropagation, her gradient'i bağımsız olarak hesaplamaktan neden daha verimlidir?",
+      "options": [
+        "Daha az bellek kullanır",
+        "Her parametre için bir forward pass yerine tüm gradient'leri tek bir backward pass'te hesaplar",
+        "Yalnızca küçük ağlarda çalışır",
+        "Zincir kuralını kullanmaktan kaçınır"
+      ],
+      "correct": 1,
+      "explanation": "Gradient'leri bağımsız olarak hesaplamak, parametre başına bir forward pass gerektirir (büyük bir ağ için milyonlarca pass). Backpropagation, forward pass sırasında saklanan ara değerleri yeniden kullanarak tüm gradient'leri tek bir backward pass'te hesaplar."
+    },
+    {
+      "stage": "post",
+      "question": "Backward pass'te, gradient'leri biriktirirken neden '=' yerine '+=' kullanırız?",
+      "options": [
+        "Python kuralıdır",
+        "Bir değer birden fazla işlemde kullanılabilir, dolayısıyla gradient'i tüm yollardan gelen gradient'lerin toplamıdır",
+        "Overflow'u önler",
+        "Kodun daha hızlı çalışmasını sağlar"
+      ],
+      "correct": 1,
+      "explanation": "Bir Value birden fazla işleme girdi olarak kullanıldığında (örn. x hem x*w1 hem de x*w2'de kullanılır), toplam gradient'i her işlemden geri akan gradient'lerin toplamıdır. += bunları doğru şekilde biriktirir."
+    },
+    {
+      "stage": "post",
+      "question": "Derin sigmoid ağlarında vanishing gradient problemine ne sebep olur?",
+      "options": [
+        "Learning rate çok küçük",
+        "Sigmoid'in türevinin maksimumu 0.25'tir, dolayısıyla gradient'ler katmanlar boyunca üstel olarak küçülür",
+        "Ağın çok fazla parametresi var",
+        "Loss fonksiyonu yanlış seçilmiş"
+      ],
+      "correct": 1,
+      "explanation": "Sigmoid türevi 0.25'te (z=0 iken) tepe yapar. Her katman gradient'i en fazla 0.25 ile çarpar, dolayısıyla 10 katmandan sonra gradient orijinal sinyalin en fazla 0.25^10 = ~0.000001'ine düşer."
+    },
+    {
+      "stage": "post",
+      "question": "Backward pass'te topological sort neden önemlidir?",
+      "options": [
+        "Kodu daha temiz hale getirir",
+        "Her node'un gradient'inin, çocuklarına yayılmadan önce tamamen birikmiş olmasını sağlar",
+        "Forward pass'i hızlandırır",
+        "Bellek kullanımını azaltır"
+      ],
+      "correct": 1,
+      "explanation": "Topological sort, node'ları doğru sırada işlemeyi sağlar: bir node'un gradient'i, içinden yayılmadan önce tüm downstream yollardan tamamen birikmiş olmalıdır. Bu sıralama olmadan gradient'ler eksik kalır."
+    }
+  ]
+}

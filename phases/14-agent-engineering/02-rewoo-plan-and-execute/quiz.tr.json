@@ -1,0 +1,90 @@
+{
+  "lesson": "02-rewoo-plan-and-execute",
+  "title": "ReWOO ve Plan-and-Execute: Ayrıştırılmış Planlama",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "ReAct'in prompt'u neden derinlikle kuadratik olarak büyür?",
+      "options": [
+        "Model her adımda kendini yeniden tokenize eder",
+        "Her adım önceki tüm context'i, yani her önceki düşünce ve gözlemi taşır",
+        "Tool şemaları her çağrıda tekrarlanır",
+        "Sağlayıcı token başına değil byte başına ücretlendirir"
+      ],
+      "correct": 1,
+      "explanation": "ReAct her adımda önceki düşünce ve gözlemleri yeniden dahil eder, böylece toplam prompt uzunluğu derinliğin karesiyle büyür."
+    },
+    {
+      "stage": "pre",
+      "question": "ReWOO'yu tanımlayan üç rollü ayrım nedir?",
+      "options": [
+        "Reader, Writer, Reviewer",
+        "Planner, Workers, Solver",
+        "Actor, Evaluator, Reflector",
+        "Generator, Critic, Optimizer"
+      ],
+      "correct": 1,
+      "explanation": "ReWOO bir DAG üreten Planner'ı, kanıt çeken Workers'ı ve nihai cevabı oluşturan Solver'ı ayırır."
+    },
+    {
+      "stage": "check",
+      "question": "Paper, HotpotQA üzerinde ReWOO ile ReAct için hangi öne çıkan sayıları rapor ediyor?",
+      "options": [
+        "~5x daha az token ve +4 mutlak doğruluk",
+        "~2x daha fazla token ve +10 doğruluk",
+        "Aynı token ve +1 doğruluk",
+        "10x daha az token ve -2 doğruluk"
+      ],
+      "correct": 0,
+      "explanation": "ReWOO, HotpotQA'da ReAct'e göre yaklaşık 5x token azalması ve +4 mutlak doğruluk artışı raporluyor."
+    },
+    {
+      "stage": "check",
+      "question": "ReWOO plan node'unda #E1 gibi bir placeholder ne anlama gelir?",
+      "options": [
+        "Worker 1 tarafından döndürülen bir hata kodu",
+        "Dispatch zamanında daha önceki bir worker node'unun çıktısıyla yerine konulan bir referans",
+        "Kanıt çekme için yeniden deneme sayacı",
+        "Bir planner versiyon tanımlayıcısı"
+      ],
+      "correct": 1,
+      "explanation": "Plan node'ları #E1, #E2 gibi kanıt referansları kullanır ve executor bunları yukarı akış worker'ların çıktısıyla değiştirir."
+    },
+    {
+      "stage": "check",
+      "question": "ReWOO neden ReAct'ten daha iyi hata izolasyonu sağlar?",
+      "options": [
+        "Worker'lar herhangi bir hatada çalışmayı çökertir",
+        "Bir worker'daki hata Solver'ın orijinal planla birlikte gördüğü bir string'e dönüşür, böylece bozulma adım başına değil node başına olur",
+        "ReWOO her başarısız çağrıyı on kez yeniden dener",
+        "Planner her hatadan sonra taze bir DAG yeniden yayınlar"
+      ],
+      "correct": 1,
+      "explanation": "Orijinal plan context'te varken node başına hata, Solver'ın akış ortasında bir hatadan çıkmaya çalışmak yerine zarif bir şekilde bozulmasını sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi görev şekli düz ReWOO yerine Plan-and-Act'e daha iyi uyar?",
+      "options": [
+        "İki adımlı bir factoid lookup",
+        "40 adımlık web veya mobil navigasyon trajectory'si",
+        "Tek turluk bir sınıflandırma",
+        "Saf bir aritmetik sorusu"
+      ],
+      "correct": 1,
+      "explanation": "Plan-and-Act, tek bir ReAct trajectory'sinin tutarlılığını kaybettiği uzun ufuklu (30+ adım) web ve mobil agent'lar için tasarlandı."
+    },
+    {
+      "stage": "post",
+      "question": "ReWOO'nun planner distillation sonucu prodüksiyon agent'ları için ne anlama gelir?",
+      "options": [
+        "Her adımda frontier modeller kullanılmalıdır",
+        "Küçük bir planner (yaklaşık 7B) büyük bir öğretmenle eşleşebilir çünkü planner observation'ları hiç görmez",
+        "Planlama kalitesi 7B parametrenin altına düşer",
+        "Distillation gradient tabanlı RL verisi gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Planner observation'ları görmediğinden, büyük bir öğretmenden alınan plan trace'leri küçük fine-tune edilmiş bir planner'a temiz şekilde aktarılır."
+    }
+  ]
+}

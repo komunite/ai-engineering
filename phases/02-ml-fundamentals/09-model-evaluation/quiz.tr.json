@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Test seti performansına göre neden hiçbir zaman hiperparametre ayarlaması yapmamalısın?",
+      "options": [
+        "Test seti güvenilir tahminler için çok küçük",
+        "Modeli test sonuçlarına göre ayarlamak, etkili biçimde test setinde eğitim yapmaktır ve raporlanan performansı anlamsızlaştırır",
+        "Hiperparametreler eğitimden sonra değiştirilemez",
+        "Test setinin her zaman eğitim setinden farklı öznitelikleri vardır"
+      ],
+      "correct": 1,
+      "explanation": "Modelini test performansına göre her ayarladığında, test bilgisini modelleme kararlarına sızdırırsın. Test seti, yanlılığı olmayan bir tahmin için sonunda tam olarak bir kez kullanılmalıdır."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir veri setinin %95'i negatif, %5'i pozitif örnek. Bir model her örnek için 'negatif' tahmin ediyor. Doğruluğu nedir?",
+      "options": [
+        "%50",
+        "%5",
+        "%95",
+        "%0"
+      ],
+      "correct": 2,
+      "explanation": "Doğruluk = doğru tahminler / toplam = 950/1000 = %95. Bu, dengesiz veride doğruluğun neden yanıltıcı olduğunu gösterir -- işe yaramaz bir model harika görünür."
+    },
+    {
+      "stage": "post",
+      "question": "K=5 ile K-fold çapraz doğrulamada her veri noktası kaç kez doğrulama için kullanılır?",
+      "options": [
+        "5 kez",
+        "Tam olarak bir kez",
+        "Rastgele tohuma bağlıdır",
+        "Hiç -- tüm veri eğitim için kullanılır"
+      ],
+      "correct": 1,
+      "explanation": "K-fold CV'de veri K eşit fold'a bölünür. Her fold tam olarak bir kez doğrulama seti olarak kullanılırken kalan K-1 fold eğitim için kullanılır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir öğrenme eğrisi (learning curve), eğitim skoru = 0.95 ve doğrulama skoru = 0.60 olduğunu gösteriyor ve daha fazla veriyle iyileşmiyor. Ne denemelisin?",
+      "options": [
+        "Daha fazla eğitim verisi topla",
+        "Varyansı (overfitting'i) azaltmak için daha basit bir model kullan veya regularization ekle",
+        "Modele daha fazla eğitim verisi vermek için doğrulama setini kaldır",
+        "Learning rate'i artır"
+      ],
+      "correct": 1,
+      "explanation": "Eğitim (yüksek) ve doğrulama (düşük) skorları arasındaki büyük fark yüksek varyanstır (overfitting). Çözüm daha basit bir model, daha fazla regularization veya dropout gibi teknikler kullanmaktır -- fark devam ediyorsa daha fazla veri değil."
+    },
+    {
+      "stage": "post",
+      "question": "İkili bir sınıflandırıcı için AUC-ROC = 0.5. Bu neyi gösterir?",
+      "options": [
+        "Model iki sınıfı mükemmel ayırıyor",
+        "Model, pozitifleri negatiflerin üzerinde sıralamada rastgele tahminden daha iyi değil",
+        "Modelin doğruluğu %50",
+        "Modelin precision ve recall'u eşit"
+      ],
+      "correct": 1,
+      "explanation": "AUC-ROC = 0.5, modelin pozitif ve negatif örnek sıralamasının rastgeleden daha iyi olmadığı anlamına gelir. AUC = 1.0 kusursuz ayırma olurdu. Metrik eşik bağımsızdır."
+    }
+  ]
+}

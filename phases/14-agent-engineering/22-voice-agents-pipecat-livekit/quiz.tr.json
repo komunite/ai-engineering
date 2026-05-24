@@ -1,0 +1,90 @@
+{
+  "lesson": "22-voice-agents-pipecat-livekit",
+  "title": "Voice Agent'lar: Pipecat ve LiveKit",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir Pipecat pipeline'ı hangi iki akış yönünü kullanır?",
+      "options": [
+        "Read ve write",
+        "DOWNSTREAM (source'tan sink'e) ve UPSTREAM (feedback, cancel, barge-in)",
+        "Inbound ve outbound",
+        "Hot ve cold"
+      ],
+      "correct": 1,
+      "explanation": "Frame'ler source-to-sink downstream akar, control ve cancellation için upstream akar."
+    },
+    {
+      "stage": "pre",
+      "question": "Kanonik Pipecat ses pipeline'ı nedir?",
+      "options": [
+        "VAD -> STT -> LLM -> TTS -> transport",
+        "TTS -> STT -> LLM -> VAD",
+        "LLM -> embed -> retrieve -> answer",
+        "Audio -> JSON -> SQL -> response"
+      ],
+      "correct": 0,
+      "explanation": "VAD ses aktivitesini algılar, STT transcribe eder, LLM yanıtlar, TTS konuşur, transport iletir."
+    },
+    {
+      "stage": "check",
+      "question": "LiveKit Agents hangi iki voice agent sınıfı sunar?",
+      "options": [
+        "MultimodalAgent (doğrudan ses) ve VoicePipelineAgent (STT/LLM/TTS kademesi)",
+        "BatchAgent ve StreamAgent",
+        "TextAgent ve SpeechAgent",
+        "LocalAgent ve CloudAgent"
+      ],
+      "correct": 0,
+      "explanation": "MultimodalAgent doğrudan ses kullanır (Realtime-tarzı); VoicePipelineAgent metin-seviyesi kontrol için STT->LLM->TTS kullanır."
+    },
+    {
+      "stage": "check",
+      "question": "Barge-in nedir ve nasıl ele alınır?",
+      "options": [
+        "Bir LLM maliyet sıçraması; token'ları azalt",
+        "Agent konuşurken kullanıcı araya girer; UPSTREAM cancel frame'leri TTS'i utterance ortasında durdurur",
+        "Bir sağlayıcı kesintisi; bölge değiştir",
+        "Captcha hatası; yeniden dene"
+      ],
+      "correct": 1,
+      "explanation": "Barge-in kullanıcı kesintisidir; UPSTREAM cancellation Pipecat'ın bunu temiz şekilde ele alma şeklidir."
+    },
+    {
+      "stage": "check",
+      "question": "Ders hangi end-to-end latency'yi premium olarak tanımlıyor?",
+      "options": [
+        "Yaklaşık 50 ms",
+        "Yaklaşık 450-600 ms",
+        "Yaklaşık 1500 ms",
+        "Yaklaşık 5000 ms"
+      ],
+      "correct": 1,
+      "explanation": "Premium yığınlar yaklaşık 450-600 ms civarında; 800-1200 ms yaygın; 1500 ms üzeri kırık hissettirir."
+    },
+    {
+      "stage": "post",
+      "question": "STT güveni görmezden gelinirse ne yanlış gider?",
+      "options": [
+        "Latency iyileşir",
+        "Düşük güvenli transcript'ler LLM'e mutlak gerçekmiş gibi beslenir, yanlış cevaplar üretir; güvene göre kontrol et veya onay iste",
+        "TTS hızlanır",
+        "Çağrılar ucuzlar"
+      ],
+      "correct": 1,
+      "explanation": "Düşük güvenli STT'yi gerçek gibi ele almak en büyük voice-agent hata modlarından biridir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders neden gönderim öncesi bileşen latency'lerinin toplanmasını öneriyor?",
+      "options": [
+        "Sağlayıcılar latency'ye göre faturalandırır",
+        "Her bileşen 50-200 ms ekler; toplam, deneyimin kırık hissedip hissetmeyeceğini belirler",
+        "Bir compliance gereksinimini karşılar",
+        "Latency WebRTC tarafından zorunlu kılınır"
+      ],
+      "correct": 1,
+      "explanation": "Gönderim öncesi zinciri topla (VAD + STT + LLM + TTS + transport); hedefler dardır."
+    }
+  ]
+}

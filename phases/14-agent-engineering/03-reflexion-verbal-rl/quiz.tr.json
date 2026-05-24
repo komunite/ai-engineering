@@ -1,0 +1,90 @@
+{
+  "lesson": "03-reflexion-verbal-rl",
+  "title": "Reflexion: Sözel Pekiştirmeli Öğrenme",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Reflexion standart pekiştirmeli öğrenmede neyin yerini alır?",
+      "options": [
+        "Reward shaping'i sabit bir ödülle",
+        "Gradient güncellemelerini denemeler arasında saklanan doğal dil yansımalarıyla",
+        "Politika ağlarını rastgele aramayla",
+        "Episodic memory'yi parametrik bellekle"
+      ],
+      "correct": 1,
+      "explanation": "Reflexion ağırlık güncellemeleri yerine episodic memory'deki doğal dil yansımalarını kullanır."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir Reflexion sistemini tanımlayan üç bileşen nedir?",
+      "options": [
+        "Planner, Worker, Solver",
+        "Actor, Evaluator, Self-Reflector",
+        "Generator, Critic, Optimizer",
+        "Selector, Expander, Backpropagator"
+      ],
+      "correct": 1,
+      "explanation": "Reflexion agent'ı trajectory çalıştıran bir Actor'a, onları skorlayan bir Evaluator'a ve dersler yazan bir Self-Reflector'a ayırır."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi evaluator tipi unit test veya bilinen doğru cevap gibi harici ikili bir sinyal kullanır?",
+      "options": [
+        "Heuristic",
+        "Scalar",
+        "Self-evaluated",
+        "Vote-based"
+      ],
+      "correct": 1,
+      "explanation": "Scalar evaluator'lar ground truth'tan pass/fail sinyalleri okur (ALFWorld başarısı, HumanEval testleri)."
+    },
+    {
+      "stage": "check",
+      "question": "Self-evaluation neden scalar feedback'ten daha zayıf bir sinyaldir?",
+      "options": [
+        "Hesaplaması daha yavaştır",
+        "Kendisini yargılayan modelin harici bir dayanağı yoktur, bu yüzden kendi cevabını onaylayabilir",
+        "Her zaman daha büyük bir model gerektirir",
+        "Tool'lar üzerinde çalışamaz"
+      ],
+      "correct": 1,
+      "explanation": "Self-eval'ın harici bir kontrolü yok, bu yüzden kendine güvenen bir halüsinasyon yüksek puan alır; tool-temelli doğrulamayla eşleştir."
+    },
+    {
+      "stage": "check",
+      "question": "Dersin Reflexion'ın işe yaramadığı bir durum olarak listelediği hangisidir?",
+      "options": [
+        "Testlerin skorlayabildiği kod üretimi",
+        "Ağın çökmüş olması gibi harici geçici bir hata",
+        "ALFWorld navigasyon görevleri",
+        "HotpotQA multi-hop soruları"
+      ],
+      "correct": 1,
+      "explanation": "Geçici bir harici kesintiyi yansıtmak, gelecekteki çalışmalara yardım etmeyen bir yansıma üretir."
+    },
+    {
+      "stage": "post",
+      "question": "Reflexion pattern'inde memory rot nedir?",
+      "options": [
+        "Süreç yeniden başladığında yansımaları kaybetmek",
+        "Episodic buffer eski veya yanlış yansımalarla dolar ve gelecekteki denemeleri yavaşlatır veya yanlı yapar",
+        "Yansımalar sağlayıcı tarafından şifrelenir",
+        "Yansıma prompt'u context window'u aşar"
+      ],
+      "correct": 1,
+      "explanation": "Birikmiş eski veya yanlış yansımalar davranışı bozar; compaction veya TTL ile hafiflet."
+    },
+    {
+      "stage": "post",
+      "question": "Dersin Reflexion için en net eşleştiği prodüksiyon pattern'i hangisidir?",
+      "options": [
+        "Cursor'un apply-edits akışı",
+        "Claude Code'un CLAUDE.md öğrenimlerinin gelecekteki oturumlara öne eklenmesi",
+        "OpenAI'nin batch API'si",
+        "Anthropic'in prompt caching'i"
+      ],
+      "correct": 1,
+      "explanation": "CLAUDE.md öğrenimleri, pro-workflow'un learn-rule'u ve Letta'nın sleep-time compute'u — hepsi episodic yansıma buffer'ını dışsallaştırır."
+    }
+  ]
+}

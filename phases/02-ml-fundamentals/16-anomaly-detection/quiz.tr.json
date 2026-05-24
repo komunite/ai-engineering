@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Anomali tespiti neden tipik olarak sınıflandırma yerine denetimsiz bir problem olarak ele alınır?",
+      "options": [
+        "Anomali tespiti hiçbir veri gerektirmez",
+        "Etiketli anomaliler son derece nadirdir ve yeni anomali türleri daha önce görülenlerden farklıdır",
+        "Denetimli sınıflandırma her zaman daha az doğrudur",
+        "Anomali tespiti yalnızca zaman serisi verisinde çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Anomaliler nadirdir (genelde verinin <%0.1'i), dolayısıyla bir sınıflandırıcıyı eğitmek için çok az etiketli örnek vardır. Ayrıca gelecekteki anomaliler hiç görülmemiş türlerde olabilir. 'Normal'i modelleyip sapmaları işaretlemek her iki sorunu da çözer."
+    },
+    {
+      "stage": "pre",
+      "question": "32°C sıcaklık yazın normal ama kışın anormaldir. Bu hangi tür anomalidir?",
+      "options": [
+        "Nokta anomalisi (point anomaly)",
+        "Bağlamsal anomali (contextual anomaly)",
+        "Toplu anomali (collective anomaly)",
+        "İstatistiksel anomali"
+      ],
+      "correct": 1,
+      "explanation": "Bağlamsal anomali, bağlamına (zaman, konum) göre olağandışı olan bir değerdir. Değerin kendisi farklı bir bağlamda normal olabilir. Aynı veri noktası, çevredeki koşullara göre farklı yorumlanır."
+    },
+    {
+      "stage": "post",
+      "question": "Z-skoru yöntemi, ortalamadan 3 standart sapma uzaktaki noktaları işaretler. Bu yaklaşım ne zaman başarısız olur?",
+      "options": [
+        "Veri kusursuz şekilde normal dağıldığında",
+        "Veri çok modlu (multimodal), çarpık olduğunda veya eğitim verisindeki aykırı değerler ortalamayı ve std'yi şişirdiğinde",
+        "Veri setinde tam olarak 3 anomali olduğunda",
+        "Öznitelikler standartlaştırıldığında"
+      ],
+      "correct": 1,
+      "explanation": "Z-skoru tek bir Gaussian dağılım varsayar. Çok modlu veride (birden çok küme), çarpık dağılımlarda ve eğitim verisindeki aykırı değerlerin mean/std'yi kaydırdığı durumlarda başarısız olur ve gerçek anomalileri tespit etmek zorlaşır."
+    },
+    {
+      "stage": "post",
+      "question": "Isolation Forest, anomalileri mesafe tabanlı yöntemlerden nasıl farklı tespit eder?",
+      "options": [
+        "Ağaçlar yerine sinir ağları kullanır",
+        "Noktaları rastgele split'lerle izole eder; anomaliler az ve farklı oldukları için izole edilmek için daha az split gerektirir",
+        "Veri setindeki her noktaya olan mesafeyi hesaplar",
+        "Yalnızca metin verisinde çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Isolation Forest, ağaç split'leriyle veriyi rastgele bölümler. Anomaliler nadir ve farklı oldukları için daha az split'le izole edilir (kendi yapraklarında biter). Kısa ortalama yol uzunluğu = daha anormal."
+    },
+    {
+      "stage": "post",
+      "question": "Hem denetimsiz bir anomali tespitçisi hem de denetimli bir dolandırıcılık sınıflandırıcısı kuruyorsun. Denetimsiz yaklaşımı ne zaman tercih etmelisin?",
+      "options": [
+        "Her zaman -- anomali tespiti için denetimsiz her zaman daha iyidir",
+        "Tarihsel etiketli örneklerden farklı yeni dolandırıcılık örüntülerini tespit etmen gerektiğinde",
+        "Milyonlarca etiketli dolandırıcılık örneğin olduğunda",
+        "Yalnızca precision'a önem verip recall'a önem vermediğinde"
+      ],
+      "correct": 1,
+      "explanation": "Denetimli sınıflandırıcılar yalnızca eğitim verisindeki dolandırıcılık türlerini yakalar. Denetimsiz tespitçiler normalden her sapmayı işaretler ve yeni dolandırıcılık şemalarını yakalar. Takas, daha yüksek yanlış pozitif oranıdır."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "ML pipeline'ları bağlamında data leakage nedir?",
+      "options": [
+        "Ön işleme sırasında verinin yanlışlıkla silinmesi",
+        "Test setinden veya gelecekteki veriden gelen bilginin eğitim sürecine bulaşması",
+        "Modelin veriyi işlemek için çok yavaş olması",
+        "Encoding sırasında özniteliklerin düşürülmesi"
+      ],
+      "correct": 1,
+      "explanation": "Data leakage, tahmin zamanında mevcut olmayacak bilginin eğitim sırasında kullanılmasıdır. Örnek: scaler'ın mean/std'sini test verisi dahil tüm veri setinde hesaplamak."
+    },
+    {
+      "stage": "pre",
+      "question": "Eğitim/test ayrımından önce tüm veri setinde bir scaler fit etmek neden leaky kabul edilir?",
+      "options": [
+        "Ölçeklendirme veri dağılımını değiştirir",
+        "Scaler'ın istatistikleri (mean, std) test verisini içerir, dolayısıyla model eğitim sırasında dolaylı olarak test bilgisini görür",
+        "Ölçeklendirme yalnızca test setinde yapılmalıdır",
+        "Büyük veri setlerinde scaler'ı fit etmek çok uzun sürer"
+      ],
+      "correct": 1,
+      "explanation": "Scaler tüm veride fit edildiğinde mean ve standart sapması test örneklerinden bilgi kodlar. Eğitim öznitelikleri test istatistikleri kullanılarak kaydırılır ve gelecek bilgisi eğitime sızar."
+    },
+    {
+      "stage": "post",
+      "question": "sklearn'de bir pipeline adımında fit_transform ve transform çağırmak arasındaki fark nedir?",
+      "options": [
+        "Aynıdırlar -- ikisi de hem fit hem transform yapar",
+        "fit_transform veriden parametreleri öğrenip dönüşümü uygular; transform yalnızca önceden öğrenilmiş parametreleri uygular",
+        "transform eğitim verisi için; fit_transform test verisi içindir",
+        "fit_transform daha yavaş ama daha doğrudur"
+      ],
+      "correct": 1,
+      "explanation": "fit_transform veriden istatistikleri (ör. mean, std) hesaplar VE dönüştürür. transform ise zaten öğrenilmiş istatistikleri yeniden hesaplamadan uygular. Test verisinde leakage'i önlemek için transform kullanmalısın."
+    },
+    {
+      "stage": "post",
+      "question": "ColumnTransformer gerçek dünya veri setleri için neden gereklidir?",
+      "options": [
+        "Pipeline'ın birden çok CPU'da paralel çalışmasını sağlar",
+        "Aynı pipeline içinde sayısal ve kategorik sütunlara farklı ön işleme adımları uygular",
+        "Eksik değerli sütunları otomatik olarak kaldırır",
+        "Tüm sütunları aynı veri tipine dönüştürür"
+      ],
+      "correct": 1,
+      "explanation": "Gerçek veri setlerinde karışık tipler vardır. Sayısal sütunlar ölçeklendirme, kategorik sütunlar encoding gerektirir. ColumnTransformer her sütun alt kümesini tek bir pipeline içinde uygun transformer'a yönlendirir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir üretim modeli, eğitim sırasında hiç görmediği bir kategorik değer alıyor ('new_category'). Pipeline neyi ele almalı?",
+      "options": [
+        "Satırı tamamen yok say ve tahmin döndürme",
+        "Tüm modeli sıfırdan yeniden eğit",
+        "Bilinmeyen kategorileri zarif şekilde ele al, ör. 'unknown' bucket kullanarak veya target encoding'de global ortalamayı kullanarak",
+        "Bilinmeyen kategoriyi sıfır sayısına dönüştür"
+      ],
+      "correct": 2,
+      "explanation": "Sağlam pipeline'lar üretimde görülmemiş kategorileri öngörür. Çözümler arasında one-hot encoding için 'unknown' geri dönüşü veya target encoding için global ortalamaya başvurma sayılabilir."
+    }
+  ]
+}

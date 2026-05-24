@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Açıkça eğri (kuadratik) bir ilişkiyi uydurmak için doğrusal bir model kullanılıyor. Hangi hata bileşeni baskındır?",
+      "options": [
+        "Varyans: model farklı eğitim verisiyle çok fazla değişiyor",
+        "Bias: model gerçek doğrusal olmayan örüntüyü yakalamak için fazla katı",
+        "İndirgenemez gürültü: veri çok gürültülü",
+        "Hiçbiri: model kusursuz uymalı"
+      ],
+      "correct": 1,
+      "explanation": "Doğrusal bir model ne kadar veri görürse görsün kuadratik bir eğriyi yakalayamaz. Yanlış model varsayımlarından gelen bu sistematik hata bias'tır. Model underfit yapar."
+    },
+    {
+      "stage": "pre",
+      "question": "Beklenen hatanın bias-variance ayrıştırmasının üç terimi vardır. Hangisi hiçbir model tarafından azaltılamaz?",
+      "options": [
+        "Bias karesi",
+        "Varyans",
+        "İndirgenemez gürültü (sigma karesi)",
+        "Üçü de sıfıra indirilebilir"
+      ],
+      "correct": 2,
+      "explanation": "İndirgenemez gürültü, verinin kendisindeki rastgelelikten gelir (ölçüm hatası, eksik değişkenler). Hiçbir model gürültüyü tahmin edemez. Beklenen hata = bias^2 + varyans + indirgenemez gürültü."
+    },
+    {
+      "stage": "post",
+      "question": "Bir modele L2 regularization eklemek bias'ı artırır ve varyansı azaltır. Bu neden faydalıdır?",
+      "options": [
+        "Hem eğitim hem test doğruluğunu her zaman iyileştirir",
+        "Varyanstaki azalma, bias'taki artıştan daha ağır basarak toplam hatayı düşürebilir",
+        "L2 regularization indirgenemez gürültüyü ortadan kaldırır",
+        "Modeli eğitmek için daha hızlı yapar"
+      ],
+      "correct": 1,
+      "explanation": "Regularization, bias'ta küçük bir artışı varyansta daha büyük bir azalmayla takas eder. Bir model overfit yaptığında (yüksek varyans), bu takas bias biraz artsa bile toplam hatayı azaltır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir modelin eğitim hatası %2 ve test hatası %25. En olası teşhis nedir?",
+      "options": [
+        "Yüksek bias (underfitting): model çok basit",
+        "Yüksek varyans (overfitting): model eğitim verisini ezberlemiş ve genelleştiremiyor",
+        "Yüksek indirgenemez gürültü: veri çok gürültülü",
+        "Model mükemmel kalibre edilmiş"
+      ],
+      "correct": 1,
+      "explanation": "Düşük eğitim hatası + yüksek test hatası + büyük fark = yüksek varyans (overfitting). Model eğitime özgü gürültüye uyuyor. Çözümler: regularize et, karmaşıklığı azalt, daha fazla veri al."
+    },
+    {
+      "stage": "post",
+      "question": "Aynı model mimarisini 50 farklı rastgele eğitim alt kümesinde eğitip tahminlerin bunlar arasında çılgınca değiştiğini gözlemliyorsun. Bu neyi gösterir?",
+      "options": [
+        "Yüksek bias: model tutarlı olarak gerçek örüntüyü kaçırıyor",
+        "Yüksek varyans: model hangi spesifik eğitim verisini gördüğüne karşı hassas",
+        "Yüksek indirgenemez gürültü: hedef değişken rastgele",
+        "Learning rate çok yüksek"
+      ],
+      "correct": 1,
+      "explanation": "Varyans, farklı veri alt kümelerinde eğitildiğinde tahminlerin ne kadar değiştiğini ölçer. Alt kümeler arasında çılgınca farklı tahminler yüksek varyansın tanımıdır."
+    }
+  ]
+}

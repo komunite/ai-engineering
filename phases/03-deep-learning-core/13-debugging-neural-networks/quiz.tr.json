@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sinir ağı hata ayıklama, geleneksel yazılım hata ayıklamasından neden daha zordur?",
+      "options": [
+        "Sinir ağları farklı programlama dilleri kullanır",
+        "Ağlar herhangi bir hata mesajı veya çökme olmadan yanlış çıktılar üretebilir -- kod çalışır ama sonuçlar sessizce yanlıştır",
+        "Sinir ağları test edilemez",
+        "Sinir ağları için hata ayıklama aracı yoktur"
+      ],
+      "correct": 1,
+      "explanation": "Geleneksel hatalar çöker veya exception fırlatır. Sinir ağı hataları sadece yanlış bir sayı üretir -- azalmayan bir loss, plato yapan bir doğruluk veya hafifçe yanlış çıktılar. Hiçbir hata mesajı sana neyin ters gittiğini söylemez."
+    },
+    {
+      "stage": "pre",
+      "question": "'Tek batch'i overfit etme' hata ayıklama tekniği nedir?",
+      "options": [
+        "Tüm veri setinde overfit olana kadar eğitmek",
+        "Tek bir küçük batch'te loss neredeyse sıfıra ulaşana kadar eğitmek; modelin en azından birkaç örneği ezberleyebildiğini doğrulamak",
+        "Çok büyük bir batch size kullanmak",
+        "Doğrulama setini overfit etmek"
+      ],
+      "correct": 1,
+      "explanation": "Modelin küçük bir batch'i (örn. 4-8 örnek) neredeyse sıfır loss'a ezberleyemiyorsa, temelden bir şey bozuk demektir: yanlış mimari, bozuk loss fonksiyonu veya yanlış eğitim döngüsü. Bu, çalıştırılacak ilk teşhistir."
+    },
+    {
+      "stage": "post",
+      "question": "Loss'un birkaç eğitim adımı sonra NaN. En olası neden nedir?",
+      "options": [
+        "Veri seti çok küçük",
+        "Exploding gradient veya sayısal overflow; genellikle çok yüksek learning rate veya eksik gradient clipping'ten kaynaklanır",
+        "Modelin çok az parametresi var",
+        "Aktivasyon fonksiyonu yanlış"
+      ],
+      "correct": 1,
+      "explanation": "NaN loss tipik olarak sayısal overflow'tan gelir: gradient'ler patlar, ağırlıklar sınırsız büyür ve log(0) veya exp(1000) gibi işlemler infinity/NaN üretir. Learning rate'i düşür veya gradient clipping ekle."
+    },
+    {
+      "stage": "post",
+      "question": "Eğitim loss'un düşüyor ama doğrulama loss'u en baştan düz kalıyor. Bu neyi gösterir?",
+      "options": [
+        "Model overfit ediyor",
+        "Model eğitim verisi örüntülerini öğreniyor ama bunlar genelleştirmiyor -- muhtemelen bir veri pipeline sorunu (train/val veri uyumsuzluğu) veya ciddi overfitting",
+        "Learning rate çok düşük",
+        "Modelin daha fazla katmana ihtiyacı var"
+      ],
+      "correct": 1,
+      "explanation": "Doğrulama loss'u asla iyileşmiyorsa, model ya eğitim gürültüsünü ezberliyor (overfitting) ya da train ve doğrulama dağılımlarının temelden farklı olduğu bir veri pipeline hatası var."
+    },
+    {
+      "stage": "post",
+      "question": "Loss eğrin tamamen düzse (loss hiç azalmıyor), ilk önce neyi kontrol etmelisin?",
+      "options": [
+        "Farklı bir mimari dene",
+        "Gradient'lerin sıfır olmadığını, learning rate'in yeterince yüksek olduğunu ve loss fonksiyonunun gerçekten modelin tahminlerine bağlı olduğunu doğrula",
+        "Daha fazla eğitim verisi ekle",
+        "Farklı bir optimizer'a geç"
+      ],
+      "correct": 1,
+      "explanation": "Düz bir loss, modelin güncellenmediği anlamına gelir. Yaygın nedenler: sıfır gradient (dead neuron'lar, detach edilmiş tensor'lar), çok küçük learning rate veya gradient'leri modele akıtmayan bir loss fonksiyonu (örn. .backward()'tan önce .item() kullanmak)."
+    }
+  ]
+}

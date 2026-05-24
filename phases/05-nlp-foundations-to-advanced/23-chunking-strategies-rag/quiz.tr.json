@@ -1,0 +1,102 @@
+{
+  "lesson": "23-chunking-strategies-rag",
+  "title": "RAG için Chunking Stratejileri",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "RAG'de chunking stratejisi neden embedding modeli kadar önemlidir?",
+      "options": [
+        "Chunk sınırları cevabın geri çağrılabilir olup olmadığını belirler; kötü chunk'lar herhangi bir embedding'i yener",
+        "Chunking modeli küçültür",
+        "Daha küçük chunk'lar daha hızlı eğitilir",
+        "Chunking FAISS tarafından zorunludur"
+      ],
+      "correct": 0,
+      "explanation": "Vectara'nın 2025 çalışması, chunking kalitesinin retrieval kalitesi üzerinde embedding-model etkisine eşit veya onu aştığını gösterdi."
+    },
+    {
+      "stage": "pre",
+      "question": "LangChain'in RecursiveCharacterTextSplitter'ı hangi sırayı dener?",
+      "options": [
+        "Her zaman N karakterinde böl",
+        "Token ID'lerinde böl",
+        "Paragraf kırılmalarında bölmeyi, sonra newline'larda, sonra cümle sınırlarında, sonra boşluklarda dener",
+        "Yalnızca boşlukta böl"
+      ],
+      "correct": 2,
+      "explanation": "Recursive splitting paragraf -> newline -> cümle -> boşluk fallback'iyle yapıyı korumaya çalışır."
+    },
+    {
+      "stage": "check",
+      "question": "Parent-document pattern'ı neden cevap kalitesini artırır?",
+      "options": [
+        "Child'lar kesin retrieval verir; daha büyük parent block'u döndürmek reader'ın ihtiyaç duyduğu çevre bağlamı korur",
+        "Embedding'leri kaldırır",
+        "Tokenization'dan kaçınır",
+        "Daha az GPU cycle'ı kullanır"
+      ],
+      "correct": 0,
+      "explanation": "Precision için küçük child chunk'larla retrieve et, sonra bağlam için parent'a genişlet."
+    },
+    {
+      "stage": "check",
+      "question": "Anthropic'in 'contextual retrieval'ı indekslemeden önce her chunk'a ne ekler?",
+      "options": [
+        "Bir POS tag",
+        "Bir dil kodu",
+        "Chunk'ı dokümanın genel bağlamına yerleştiren LLM tarafından üretilmiş 50-100 kelimelik bir özet",
+        "Rastgele gürültü"
+      ],
+      "correct": 2,
+      "explanation": "Contextual retrieval her chunk'a LLM tarafından yazılmış bir konumlandırma özetini prepend eder; ~%35-50 recall kazancı."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi 2026 bulgusu chunk overlap hakkındaki yaygın bilgeliğe karşı çıkar?",
+      "options": [
+        "Overlap BM25 için zorunludur",
+        "Empirical 2026 benchmark'ları, overlap'ın indeks maliyetini ikiye katlarken ölçülebilir fayda sağlamadığını gösteriyor",
+        "Overlap yalnızca contextual retrieval'ı iyileştirir",
+        "Overlap %50 olmalıdır"
+      ],
+      "correct": 1,
+      "explanation": "Daha yeni çalışmalar (NQ üzerinde SPLADE+Mistral) chunk overlap'ın nadiren yardımcı olduğunu ve indeks boyutunu şişirdiğini gösteriyor."
+    },
+    {
+      "stage": "post",
+      "question": "NVIDIA'nın 2026 benchmark'ı factoid sorgularla hangi chunk boyutunu ilişkilendiriyor?",
+      "options": [
+        "64 token",
+        "Kabaca 256-512 token",
+        "2048-4096 token",
+        "8192 token"
+      ],
+      "correct": 1,
+      "explanation": "Factoid sorgular cevap sinyalini yoğunlaştıran daha küçük chunk'lardan (256-512 token) yararlanır."
+    },
+    {
+      "stage": "post",
+      "question": "Semantik chunking kullanırken min-token alt sınırı neden önemlidir?",
+      "options": [
+        "BERT tarafından zorunlu",
+        "Bir alt sınır olmadan semantik chunking 40-token'lık küçük parçalar üretebilir ve retrieval'a zarar verir",
+        "Alt sınırlar çıkarımı hızlandırır",
+        "Alt sınırlar overlap'ı önler"
+      ],
+      "correct": 1,
+      "explanation": "Semantik chunker'lar fazla bölebilir; bir min boyut zorlamak düşük sinyalli parçaları önler."
+    },
+    {
+      "stage": "post",
+      "question": "'Late chunking' geleneksel chunking'ten ne yapıyor farklı?",
+      "options": [
+        "Chunking'i tamamen atlar",
+        "Önce tüm dokümanı token seviyesinde embed eder, sonra token embedding'lerini chunk vektörlerine pool ederek chunk'lar arası bağlamı korur",
+        "Retrieval'dan sonra chunk'lar",
+        "BM25 kullanır"
+      ],
+      "correct": 1,
+      "explanation": "Late chunking önce embed eder sonra pool eder, chunk sınırları boyunca bağlamsal etkileşimleri korur."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir hipotez testinde 0.03 p-değeri ne anlama gelir?",
+      "options": [
+        "Sıfır hipotezinin doğru olma olasılığı %3'tür",
+        "Sıfır hipotezi doğruysa, bu kadar uç veri görme olasılığı %3'tür",
+        "Model %3 iyileşti",
+        "Verinin %97'si alternatif hipotezi destekler"
+      ],
+      "correct": 1,
+      "explanation": "P-değeri, sıfır hipotezinin doğru olduğunu varsayarak, elde ettiğin kadar uç veri gözlemleme olasılığıdır. H0'ın doğru olma olasılığı DEĞİLDİR — bu istatistikteki en yaygın yanlış anlama."
+    },
+    {
+      "stage": "pre",
+      "question": "Örnek varyansını hesaplarken neden n yerine (n-1)'e bölersin?",
+      "options": [
+        "Hesaplamayı daha hızlı yapar",
+        "Örnek ortalamasının gerçek anakütle ortalaması olmadığı gerçeğini hesaba katar (Bessel düzeltmesi)",
+        "Varyansı standart sapmaya dönüştürür",
+        "Yalnızca örnek büyüklüğü tek olduğunda geçerlidir"
+      ],
+      "correct": 1,
+      "explanation": "Bessel düzeltmesi (n-1'e bölme), gerçek anakütle ortalaması yerine örnek ortalamasını kullanmaktan kaynaklanan yanlılığı telafi eder. Onsuz, örnek varyansı gerçek anakütle varyansını sistematik olarak az tahmin eder."
+    },
+    {
+      "stage": "post",
+      "question": "Alpha = 0.05'te 20 farklı model konfigürasyonu test ediyorsun. En az bir yanlış pozitif olma olasılığı yaklaşık nedir?",
+      "options": [
+        "%5",
+        "%25",
+        "%64",
+        "%95"
+      ],
+      "correct": 2,
+      "explanation": "P(en az bir yanlış pozitif) = 1 - (1 - 0.05)^20 = 1 - 0.95^20 ≈ 0.64 (%64). Bu çoklu karşılaştırma problemidir. Bonferroni düzeltmesi her birini alpha/20 = 0.0025'te test ederek bunu ele alır."
+    },
+    {
+      "stage": "post",
+      "question": "Model A, 1 milyon test örneğinde 0.9234, Model B 0.9237 puan alıyor ve p-değeri = 0.001. Hangi sonuca varmalısın?",
+      "options": [
+        "Model B önemli ölçüde daha iyidir ve hemen deploy edilmelidir",
+        "Fark istatistiksel olarak anlamlıdır ama %0.03 iyileşme pratikte anlamlı olmayabilir",
+        "Örnek boyutu çok büyük olduğu için test geçersizdir",
+        "Önce test edildiği için Model A daha iyidir"
+      ],
+      "correct": 1,
+      "explanation": "1 milyon örnekle, önemsiz derecede küçük farklar bile istatistiksel olarak anlamlı hale gelir. P-değeri farkın gerçek olduğunu doğrular, ancak etki büyüklüğü (%0.03 doğruluk kazancı) deployment'ın mühendislik maliyetini haklı çıkarmayabilir. Her zaman hem p-değeri hem de etki büyüklüğü bildir."
+    },
+    {
+      "stage": "post",
+      "question": "İki ML modelini karşılaştırırken bootstrap'in eşleştirilmiş t-test'e göre avantajı nedir?",
+      "options": [
+        "Bootstrap her zaman daha küçük p-değerleri üretir",
+        "Bootstrap dağılımsal varsayım gerektirmez ve herhangi bir metrik (AUC, F1, medyan) için çalışır",
+        "Bootstrap anlamlılığa ulaşmak için daha az örneğe ihtiyaç duyar",
+        "Bootstrap yalnızca sinir ağlarıyla kullanılabilir"
+      ],
+      "correct": 1,
+      "explanation": "Bootstrap yeniden örnekleme, herhangi bir istatistiğin örnekleme dağılımını yerine koyarak yeniden örnekleyerek tahmin eder. T-test'ten farklı olarak normallik varsayımı gerektirmez. Kapalı form formülü gerekmeden herhangi bir metrik için — AUC, F1, precision@k, medyan — çalışır."
+    }
+  ]
+}

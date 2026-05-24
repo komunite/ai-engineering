@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "PyTorch'ta autograd nedir?",
+      "options": [
+        "Bir veri yükleme kütüphanesi",
+        "İşlemleri kaydeden ve manuel backward implementasyonları olmadan gradient'leri hesaplayan otomatik bir türev alma motoru",
+        "Bir model sıkıştırma aracı",
+        "Bir hyperparameter ayarlama framework'ü"
+      ],
+      "correct": 1,
+      "explanation": "PyTorch'un autograd'ı forward hesaplama sırasında bir computation graph oluşturur ve .backward() çağırdığında otomatik olarak gradient'leri hesaplar. Bu, her modülde backward() implementasyonunu manuel olarak yazma ihtiyacını ortadan kaldırır."
+    },
+    {
+      "stage": "pre",
+      "question": "torch.no_grad() ne yapar ve ne zaman kullanmalısın?",
+      "options": [
+        "Overfitting'i önler",
+        "Inference için gradient takibini devre dışı bırakır; eğitime ihtiyaç olmadığında bellek ve hesaplama tasarrufu sağlar",
+        "Tüm model ağırlıklarını dondurur",
+        "GPU hızlandırmasını etkinleştirir"
+      ],
+      "correct": 1,
+      "explanation": "Inference sırasında gradient'lere ihtiyacın yoktur. torch.no_grad() gradient takibini devre dışı bırakır; bu da computation graph'ı depolamak için kullanılacak belleği korur ve hesaplamayı hızlandırır."
+    },
+    {
+      "stage": "post",
+      "question": "PyTorch'ta nn.Linear(784, 256) neyi oluşturur?",
+      "options": [
+        "Bir ReLU aktivasyon katmanı",
+        "(256, 784) ağırlık matrisi ve (256,) bias vektörü olan bir tam bağlantılı katman",
+        "p=784/256 ile bir dropout katmanı",
+        "Bir batch normalization katmanı"
+      ],
+      "correct": 1,
+      "explanation": "nn.Linear(in_features, out_features), (256, 784) şeklinde W ve (256,) şeklinde b ile y = x @ W^T + b hesaplayan bir katman oluşturur. Bu, sıfırdan inşa ettiğin Layer sınıfının PyTorch karşılığıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi PyTorch metodu, computation graph'taki tüm parametreler için gradient'leri hesaplar?",
+      "options": [
+        "optimizer.step()",
+        "model.forward()",
+        "loss.backward()",
+        "optimizer.zero_grad()"
+      ],
+      "correct": 2,
+      "explanation": "loss.backward() computation graph'ı ters yönde gezer ve gradient gerektiren her p parametresi için dL/dp'yi hesaplar. optimizer.step() daha sonra bu gradient'leri kullanarak parametreleri günceller."
+    },
+    {
+      "stage": "post",
+      "question": "PyTorch'un eğitim döngüsü saf-Python mini framework'ten neden önemli ölçüde daha hızlıdır?",
+      "options": [
+        "PyTorch farklı bir algoritma kullanır",
+        "PyTorch işlemleri GPU'da optimize edilmiş C++/CUDA kernel'ları olarak çalıştırır; saf Python döngüleri ise her işlemi tek tek yorumlar",
+        "PyTorch daha küçük veri tipleri kullanır",
+        "PyTorch backward pass'i atlar"
+      ],
+      "correct": 1,
+      "explanation": "PyTorch matris işlemlerini, GPU'da büyük paralelizmle çalışan yüksek optimize edilmiş C++ ve CUDA kernel'larına devreder. Saf Python döngüleri her işlemde interpreter ek yüküyle sıralı olarak çalışır."
+    }
+  ]
+}

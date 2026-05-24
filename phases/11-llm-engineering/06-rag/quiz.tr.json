@@ -1,0 +1,37 @@
+[
+  {
+    "question": "RAG neyin kısaltmasıdır ve hangi problemi çözer?",
+    "options": ["Random Augmented Generation -- rastgele çıktılar üretmek", "Retrieval-Augmented Generation -- LLM'lere eğitilmedikleri harici bilgiye erişim sağlamak", "Recurrent Attention Generation -- attention mekanizmalarını iyileştirmek", "Reduced Architecture Generation -- modelleri küçültmek"],
+    "correct": 1,
+    "explanation": "RAG harici bir bilgi tabanından ilgili dokümanları retrieve eder ve bunları prompt'a ekler. Bu, LLM'e yeniden eğitim olmadan güncel, domain'e özgü bilgiye erişim sağlar.",
+    "stage": "pre"
+  },
+  {
+    "question": "Bilgiye dayalı çoğu uygulamada RAG, fine-tuning'e neden tercih edilir?",
+    "options": ["RAG daha iyi modeller üretir", "RAG daha ucuzdur, dokümanlar değiştiğinde anında güncellenebilir ve kaynak atfı sağlar -- fine-tuning pahalıdır ve eskir", "Fine-tuning çalışmaz", "RAG daha az bellek kullanır"],
+    "correct": 1,
+    "explanation": "Fine-tuning binlerce dolara mal olur, dokümanlar değiştikçe eskiyen statik bir model üretir ve kaynak atfı sunmaz. RAG anında güncellenir (sadece doküman store'u güncelle), yalnızca embedding + depolama maliyeti vardır ve kaynaklarını gösterebilir.",
+    "stage": "pre"
+  },
+  {
+    "question": "Temel bir RAG pipeline'ında adımların doğru sırası nedir?",
+    "options": ["Generate, retrieve, embed, chunk", "Dokümanları chunk'la, chunk'ları embed et, vektör veritabanına kaydet, sorguyu embed et, benzer chunk'ları retrieve et, bağlamla cevap üret", "Sorguyu embed et, cevap üret, dokümanları retrieve et", "Dokümanları kaydet, LLM'i sorgula, dokümanları cevaba ekle"],
+    "correct": 1,
+    "explanation": "Ingestion: dokümanları chunk'la -> chunk'ları embed et -> vektör veritabanına kaydet. Sorgu anı: kullanıcının sorgusunu embed et -> en benzer top-K chunk'ı retrieve et -> chunk'ları prompt'a ekle -> retrieve edilen bağlama dayalı cevap üret.",
+    "stage": "post"
+  },
+  {
+    "question": "Temel RAG sistemlerinde yaygın bir başarısızlık modu nedir?",
+    "options": ["LLM cevap vermeyi reddeder", "Retrieve edilen chunk'lar sorguya semantik olarak benzerdir ama gerçek cevabı içermezler (örn. 'Q3 gelir rakamları' sorulduğunda 'gelir stratejisi' döndürmek)", "Vektör veritabanı çöker", "Embedding'ler çok büyüktür"],
+    "correct": 1,
+    "explanation": "Semantik arama sorguya 'benzer ses çıkaran' metni bulur, mutlaka 'cevap veren' metni değil. Gelirle ilgili bir sorgu, gerçek sayıyı içeren chunk yerine gelir stratejisini tartışan chunk'ları retrieve edebilir.",
+    "stage": "post"
+  },
+  {
+    "question": "RAG kalitesini nasıl değerlendirirsin?",
+    "options": ["LLM'in herhangi bir çıktı üretip üretmediğini kontrol ederek", "Hem retrieval metrikleri (doğru chunk'ları bulduk mu?) hem de generation metrikleri (cevap, retrieve edilen bağlama sadık mı?) kullanarak", "Yalnızca yanıt süresini ölçerek", "Retrieve edilen doküman sayısını sayarak"],
+    "correct": 1,
+    "explanation": "RAG değerlendirmesinin iki parçası vardır: retrieval kalitesi (retrieve edilen chunk'ların ground truth'a göre precision/recall'u) ve generation kalitesi (bağlama sadakat, sorguya ilgi, retrieve edilen bilginin ötesinde halüsinasyon olmaması).",
+    "stage": "post"
+  }
+]

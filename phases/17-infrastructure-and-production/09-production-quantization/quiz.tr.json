@@ -1,0 +1,78 @@
+{
+  "lesson": "09-production-quantization",
+  "title": "Üretim Quantization — AWQ, GPTQ, GGUF K-quants, FP8, MXFP4/NVFP4",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders hangi quantization formatını CPU ve edge serving için üretim default'u olarak adlandırıyor?",
+      "options": [
+        "FP8",
+        "GGUF Q4_K_M / Q5_K_M",
+        "AWQ INT4",
+        "NVFP4"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "vLLM'de multi-LoRA gerektiğinde datacenter GPU serving için dersin tercihi hangi formattır?",
+      "options": [
+        "GGUF Q4_K_M",
+        "AWQ",
+        "Marlin kernel'ları ile GPTQ",
+        "NVFP4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "AWQ'daki \"modelim artık 4 GB\" tuzağı nedir?",
+      "options": [
+        "AWQ vLLM ile uyumsuzdur",
+        "AWQ INT8 KV cache gerektirir",
+        "AWQ aslında ağırlıkları küçültmez",
+        "AWQ yalnızca ağırlıkları küçültür; KV cache ve aktivasyonlar ayrıdır ve üretim batch boyutlarında 30-50 GB ekleyebilir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "AWQ'yu jenerik web metni üzerinde calibration yapmak domain modellerine neden zarar verir?",
+      "options": [
+        "Marlin kernel'larını devre dışı bırakır",
+        "Algoritma hangi ağırlıkların korunacağı konusunda yanlış kararlar verir ve domain doğruluğunu düşürür (örneğin HumanEval'de Pass@1'de birkaç puan)",
+        "Yalnızca AMD GPU'larda çalışır",
+        "Model boyutunu artırır"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Kalitenin pazarlık konusu olmadığı reasoning-ağırlıklı bir iş yükü için ders default olarak hangi precision'ı öneriyor?",
+      "options": [
+        "GPTQ INT4",
+        "INT2 GGUF",
+        "NVFP4 ağırlıklar",
+        "FP8 ağırlıklar"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders 2026 başında NVFP4 için hangi 2026 quantization sınırlamasını işaret ediyor?",
+      "options": [
+        "Henüz LoRA desteği yok",
+        "H100'de desteklenmiyor",
+        "Yalnızca CPU'da çalışıyor",
+        "FP8 KV cache ile birleştirilemiyor"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

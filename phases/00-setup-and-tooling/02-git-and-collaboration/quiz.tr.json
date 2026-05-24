@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'Versiyon kontrolü' temel olarak ne yapmana yardım eder?",
+      "options": ["Kod çalışmasını hızlandırır", "Dosyalardaki değişiklikleri zaman içinde takip eder ve başkalarıyla işbirliği yapmanı sağlar", "Disk alanından tasarruf etmek için dosyaları sıkıştırır", "Kodundaki hataları otomatik olarak düzeltir"],
+      "correct": 1,
+      "explanation": "git gibi versiyon kontrol sistemleri dosyalara yapılan her değişikliği takip eder, önceki haline geri dönmeni ve aynı kod tabanında başkalarıyla çalışmanı sağlar."
+    },
+    {
+      "stage": "pre",
+      "question": "Yazılım geliştirme bağlamında 'repository' nedir?",
+      "options": ["Google Drive gibi bir bulut depolama servisi", "Versiyon kontrolüyle yönetilen, dosyaların ve tam değişiklik geçmişinin bulunduğu bir koleksiyon", "Kullanıcı verilerini saklayan bir veritabanı", "Kütüphane kurmak için bir paket yöneticisi"],
+      "correct": 1,
+      "explanation": "Repo, git tarafından takip edilen ve tüm proje dosyalarını, ayrıca o dosyalara yapılan değişikliklerin tam geçmişini içeren bir dizindir."
+    },
+    {
+      "stage": "post",
+      "question": "git'te çalışmanı kaydetmek ve yedeklemek için doğru sıra nedir?",
+      "options": ["git push, git add, git commit", "git commit, git add, git push", "git add, git commit, git push", "git clone, git add, git push"],
+      "correct": 2,
+      "explanation": "Önce 'git add' ile değişiklikleri stage'lersin, sonra 'git commit' ile snapshot kaydedersin, sonra 'git push' ile remote'a gönderirsin. Bu günlük iş akışıdır."
+    },
+    {
+      "stage": "post",
+      "question": "'git checkout -b experiment/new-optimizer' ne yapar?",
+      "options": ["GitHub'dan experiment/new-optimizer adlı bir branch indirir", "experiment/new-optimizer adında yeni bir branch oluşturur ve ona geçer", "experiment/new-optimizer branch'ini siler", "Tüm dosyaları experiment/new-optimizer branch'iyle eşleşecek şekilde geri alır"],
+      "correct": 1,
+      "explanation": "'-b' flag'i verilen isimde yeni bir branch oluşturur ve hemen ona geçer, böylece main branch'i etkilemeden deney yapabilirsin."
+    },
+    {
+      "stage": "post",
+      "question": "Neden '.pt', '.pth' ve '.safetensors' uzantılarını .gitignore'a eklemelisin?",
+      "options": ["Bunlar commit edilmemesi gereken Python test dosyalarıdır", "Bunlar git için çok büyük olan ve tekrar üretilebilen model checkpoint dosyalarıdır", "Hassas API anahtarları içerirler", "Git hiçbir türde binary dosyayı takip edemez"],
+      "correct": 1,
+      "explanation": "Model checkpoint dosyaları (.pt, .pth, .safetensors) genelde gigabaytlar boyutundadır. Git büyük binary dosyalar için tasarlanmamıştır, bu yüzden bunlar dışlanmalı ve tekrar üretilmeli ya da ayrı saklanmalıdır."
+    }
+  ]
+}

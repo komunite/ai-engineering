@@ -1,0 +1,37 @@
+[
+  {
+    "question": "LLM'lerden yapılandırılmış JSON çıktısı almak neden zordur?",
+    "options": ["LLM'ler JSON üretemez", "LLM'ler serbest metin token-token üretir ve herhangi bir noktada geçersiz JSON (eksik parantez, yanlış tip, ekstra metin) üretebilir", "JSON LLM'ler için fazla karmaşıktır", "LLM'ler yalnızca düz metin çıktısı verir"],
+    "correct": 1,
+    "explanation": "LLM'ler token'ları autoregressive olarak üretir. Sonda fazladan virgül ekleyebilir, kapatma parantezini unutabilir, JSON etrafında markdown formatlaması içerebilir veya ekstra alanlar halüsinasyonlayabilir. Her token bağımsız olduğundan yapısal geçerlilik garanti edilmez.",
+    "stage": "pre"
+  },
+  {
+    "question": "Constrained decoding nedir?",
+    "options": ["Modelin kelime dağarcığı boyutunu sınırlamak", "Çıktının bir gramere veya şemaya uymasını sağlamak için modelin her adımda üretebileceği token'ları kısıtlamak", "Daha küçük bir model kullanmak", "Çıktıyı sıkıştırmak"],
+    "correct": 1,
+    "explanation": "Constrained decoding her üretim adımında geçersiz token'ları maskeler. Açma süslü parantezinden sonra yalnızca geçerli JSON key'leri kabul edilir. İki nokta üst üsteden sonra yalnızca geçerli value token'ları. Bu, token seviyesinde yapısal geçerliliği garanti eder.",
+    "stage": "pre"
+  },
+  {
+    "question": "LLM çıktı doğrulaması için Pydantic modellerini kullanmanın faydası nedir?",
+    "options": ["API çağrılarını hızlandırır", "Hatalı biçimlendirilmiş LLM çıktılarını net hata mesajlarıyla otomatik olarak doğrulayan, parse eden ve reddeden tipli şemalar tanımlarlar", "Token kullanımını azaltır", "Model doğruluğunu artırır"],
+    "correct": 1,
+    "explanation": "Pydantic tipleri, zorunlu alanları, değer kısıtlamalarını ve iç içe yapıları zorunlu kılar. LLM geçersiz çıktı ürettiğinde, Pydantic modele self-correction için geri beslenebilecek spesifik hata mesajları verir.",
+    "stage": "post"
+  },
+  {
+    "question": "LLM, talimatlara rağmen geçersiz JSON döndürdüğünde ne yapmalısın?",
+    "options": ["Farklı bir modele geç", "Doğrulama hatasını düzeltilmiş bir deneme için bağlam olarak modele geri gönderen bir retry döngüsü uygula", "JSON'ı manuel olarak düzelt", "Temperature'ı artır"],
+    "correct": 1,
+    "explanation": "Hata geri bildirimli bir retry döngüsü iyi çalışır: çıktıyı parse et, doğrulama hatalarını yakala, hata mesajını bağlam olarak geri gönder ('Çıktında şu hata var: ... Lütfen düzelt'). Çoğu model ikinci denemede kendini düzeltir.",
+    "stage": "post"
+  },
+  {
+    "question": "API'nin native JSON modunu, prompt tabanlı JSON çıkarımına karşı ne zaman kullanmalısın?",
+    "options": ["Her zaman native JSON modunu kullan", "Garantili yapı için native mode kullan; modelin neyi çıkaracağı konusunda akıl yürütmesi gereken karmaşık çıkarımlar için prompt tabanlıyı kullan", "Her zaman prompt tabanlı çıkarımı kullan", "Aynı sonuçları üretirler"],
+    "correct": 1,
+    "explanation": "Native JSON modu (OpenAI'nin response_format'ı, Anthropic'in tool_use'u) geçerli JSON yapısını garanti eder. Prompt tabanlı çıkarım, hangi alanların doldurulacağına dair karmaşık akıl yürütme için daha esnektir. Yapı en çok önemli olduğunda native mode kullan.",
+    "stage": "post"
+  }
+]

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "AlexNet (2012) hangi tek mimari fikirle GPU'larda derin CNN eğitmeyi pratik hale getirdi?",
+      "options": [
+        "Residual connection'lar",
+        "Tanh'ı ReLU ile değiştirmek; doygunluğa uğramaz ve yakınsamayı yaklaşık 6 kat hızlandırır",
+        "Batch normalization",
+        "Depthwise separable convolution'lar"
+      ],
+      "correct": 1,
+      "explanation": "AlexNet'in en büyük eğitim hız kazancı ReLU'dan geldi. Tanh büyük pozitif veya negatif girdilerde doygunluğa uğrar, bu da gradient'leri öldürür ve eğitilebilecek derinliği sınırlar. ReLU parçalı doğrusaldır, pozitif girdilerde doygunluğa uğramaz ve eğitimi haftalardan günlere indiren tek değişiklikti. Dropout ve GPU paralelizmi önemliydi ama derinliği açan ReLU'dur."
+    },
+    {
+      "stage": "pre",
+      "question": "VGG neden tek bir büyük kernel yerine 3x3 convolution yığınlarını tercih etti?",
+      "options": [
+        "Küçük kernel'lar CPU'da daha hızlı çalışır",
+        "İki 3x3 konv, daha az parametreyle (18C^2'ye karşı 25C^2) aynı 5x5 receptive field'ı kapsar ve arada bir ekstra ReLU bulunur",
+        "3x3 konv'lar rotasyon-değişmezdir; 5x5 değildir",
+        "Daha büyük kernel'lar SGD ile eğitilemez"
+      ],
+      "correct": 1,
+      "explanation": "Yığılmış iki 3x3 konv, tek bir 5x5 konvla aynı 5x5 patch'i görür ama daha az parametre kullanır (2 * 3 * 3 * C^2 = 18C^2, 25C^2'ye karşı) ve ek bir non-linearity içerir. O ekstra ReLU expressive power'ı artırır. VGG bu gözlemi tek bir block tipinin tam olarak tekrarlandığı bütün bir mimariye dönüştürdü."
+    },
+    {
+      "stage": "post",
+      "question": "ResNet, y = F(x) + x olarak residual connection'ları tanıttı. Bu hangi sorunu çözer?",
+      "options": [
+        "Sınıflandırıcı head'inde overfitting",
+        "ReLU'lu katmanlarda kaybolan aktivasyonlar",
+        "Degradation problemi -- ~20 düz konv katmanın üzerinden sonra eğitim loss'u kötüleşmeye başlar çünkü optimizer, birçok non-linear katman üzerinden identity mapping öğrenmekte zorlanır",
+        "Backprop sırasında bellek tüketimi"
+      ],
+      "correct": 2,
+      "explanation": "ResNet'ten önce, ağ daha fazla kapasiteye sahip olsa bile yaklaşık 20 katmandan sonra eğitim loss'u artmaya başlıyordu -- degradation problemi. Bir residual block, F'yi sıfıra sürerek identity'yi trivial olarak temsil edebilir ve optimizer'a güvenli bir varsayılan verir. Bu kaçış kapağıyla, her ekstra block ağı biraz daha iyi yapabilir ve 100+ katmanlı ağlar bu şekilde eğitilebilir hale geldi."
+    },
+    {
+      "stage": "post",
+      "question": "in_channels=64, out_channels=128, stride=2 olan bir ResNet BasicBlock'ta shortcut branch'in rolü nedir?",
+      "options": [
+        "Her zaman identity'dir; ana branch şekil değişimini halleder",
+        "Ana branch'in çıktı kanallarını ve spatial boyutunu eşleştiren stride 2'li bir 1x1 konvdur, böylece ikisi toplanabilir",
+        "Spatial boyutu yarıya indiren bir max-pool'dur",
+        "Çıkarım sırasında kaldırılan bir placeholder'dır"
+      ],
+      "correct": 1,
+      "explanation": "Bir block kanal sayısını veya spatial stride'ı değiştirdiğinde, şekiller farklı olduğu için identity yolu ana branch'e doğrudan eklenemez. Shortcut, stride=2 ve C_out çıktı kanalı olan bir 1x1 konv olur, isteğe bağlı olarak batch norm ile takip edilir. Pass-through identity yalnızca in_c == out_c ve stride == 1 olduğunda kullanılır."
+    },
+    {
+      "stage": "post",
+      "question": "ResNet-18 ~11.7M parametreye sahip ve ImageNet'te VGG-16 (138M param) ile eşleşir veya onu geçer. Bu VGG hakkında ne ima eder?",
+      "options": [
+        "VGG'nin kernel'ları iyi feature öğrenemeyecek kadar küçüktü",
+        "VGG'nin parametrelerinin çoğu, fully connected head'de ve residual connection'ların her katmanın katkıda bulunmasına izin vereceği noktayı aşan gereksiz derinlikte boşa harcanır",
+        "VGG daha kötü bir optimizer ile eğitildi",
+        "VGG'nin ImageNet doğruluğu yanlış ölçüldü"
+      ],
+      "correct": 1,
+      "explanation": "VGG-16'nın parametre sayısı, dev fully connected sınıflandırıcısı (25088 aktivasyon üzerinde üç dense katman) tarafından domine edilir ve düz derin yığını, residual yığın kadar verimli katman ekleyemez. ResNet-18, FC head'i global average pool artı tek bir linear katmanla değiştirir ve residual block'lar kullanır; bu ikisi birlikte benzer doğrulukta yaklaşık 12 kat parametre verimliliği sağlar."
+    }
+  ]
+}

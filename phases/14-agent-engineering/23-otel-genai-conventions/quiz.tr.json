@@ -1,0 +1,90 @@
+{
+  "lesson": "23-otel-genai-conventions",
+  "title": "OpenTelemetry GenAI Semantic Conventions",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "GenAI convention'larında hangi span adı bir agent çalışmasını temsil eder?",
+      "options": [
+        "agent.start",
+        "invoke_agent (opsiyonel olarak gen_ai.agent.name ile suffix'lenmiş)",
+        "run_chain",
+        "agent_loop"
+      ],
+      "correct": 1,
+      "explanation": "invoke_agent kanonik addır; agent'ın name özelliği belirlendiğinde span adında görünür."
+    },
+    {
+      "stage": "pre",
+      "question": "GenAI SIG hangi üç span kategorisini tanımlar?",
+      "options": [
+        "Model/client, agent, tool",
+        "Frontend, backend, db",
+        "Read, write, exec",
+        "Latency, error, throughput"
+      ],
+      "correct": 0,
+      "explanation": "Model/client (LLM çağrıları), agent (create/invoke), tool (her çağırım için) kategorilerdir."
+    },
+    {
+      "stage": "check",
+      "question": "Bir invoke_agent span'i ne zaman CLIENT vs INTERNAL kind kullanır?",
+      "options": [
+        "Her zaman INTERNAL",
+        "Uzak agent servisleri için CLIENT (OpenAI Assistants, Bedrock Agents); süreç-içi framework'ler için INTERNAL (LangChain, CrewAI, lokal ReAct)",
+        "Yalnızca HTTPS için CLIENT",
+        "Her zaman CLIENT"
+      ],
+      "correct": 1,
+      "explanation": "Uzak agent çağrıları CLIENT; süreç-içi agent çalışmaları INTERNAL'dır."
+    },
+    {
+      "stage": "check",
+      "question": "İçerik yakalama (input ve output) için varsayılan kural nedir?",
+      "options": [
+        "Varsayılan olarak her şeyi yakala",
+        "Instrumentation'lar varsayılan olarak yakalamamalı; yakalama gen_ai.* özellikleri ile opt-in'dir",
+        "Yalnızca output'u yakala, asla input'u",
+        "Yalnızca hatalarda yakala"
+      ],
+      "correct": 1,
+      "explanation": "Varsayılan-kapalı içerik yakalama PII ve secret'ları korur; opt-in açıktır."
+    },
+    {
+      "stage": "check",
+      "question": "Bir retrieval için danışılan corpus veya store'u hangi özellik tanımlar?",
+      "options": [
+        "gen_ai.provider.name",
+        "gen_ai.request.model",
+        "gen_ai.data_source.id",
+        "gen_ai.agent.name"
+      ],
+      "correct": 2,
+      "explanation": "gen_ai.data_source.id retrieval tarafından isabet alan RAG corpus'unu veya store'u etiketler."
+    },
+    {
+      "stage": "post",
+      "question": "Ders prodüksiyonda prompt içeriği saklamak için ne öneriyor?",
+      "options": [
+        "Her span'de tam prompt'ları düz metin olarak yakala",
+        "İçeriği harici sakla (S3, log store) ve span'de bunun yerine referans ID'leri kaydet",
+        "Asla hiçbir içerik saklama",
+        "Prompt'ları span özelliklerinde şifrele"
+      ],
+      "correct": 1,
+      "explanation": "Pointer ID'lerle harici depolama, PII'nin ops'un okuyabileceği trace'lere sızmasını önler."
+    },
+    {
+      "stage": "post",
+      "question": "GenAI convention'larının deneysel stable preview'ına nasıl opt-in yapılır?",
+      "options": [
+        "OTel collector config'i düzenleyerek",
+        "OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental ayarlayarak",
+        "SDK'yı kaynaktan yeniden derleyerek",
+        "Lisans satın alarak"
+      ],
+      "correct": 1,
+      "explanation": "Env var deneysel convention'ları sabitler, böylece özellikler sessizce yeniden adlandırılmaz."
+    }
+  ]
+}

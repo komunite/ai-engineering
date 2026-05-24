@@ -1,0 +1,90 @@
+{
+  "lesson": "02-rag-over-codebase",
+  "title": "Capstone 02 — RAG over Codebase (Cross-Repo Semantic Search)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cross-repo kod retrieval'ı için ham chunk'lar üzerinde naif cosine search neden yetersizdir?",
+      "options": [
+        "Generated code, monorepo duplikasyonu ve nadiren import edilen sembollerde sonuçları zehirler",
+        "Cosine similarity kod embedding'lerinde tanımsızdır",
+        "Vector index'ler 1KB'den büyük payload saklayamaz",
+        "Embedding modelleri kodu token olarak görmez"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Ingestion pipeline'ında AST-aware chunking ne demektir?",
+      "options": [
+        "Chunk'ları saklamadan önce gzip ile sıkıştırmak",
+        "Embedding'den önce yorumları ve whitespace'i atmak",
+        "Function ve class span'leri gibi tree-sitter düğüm sınırlarında kesmek",
+        "Kodu sabit 256-token pencerelere bölmek"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bu pipeline'da her chunk hangi üç retrievable modaliteyi alır?",
+      "options": [
+        "Token ID'leri, syntax tree ve call graph",
+        "AST, IR ve bytecode",
+        "Ham metin, gzip ve hash",
+        "Dense embedding, BM25 terimleri ve doğal dil özeti"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hybrid retrieval adımından sonra cross-encoder reranker'ın rolü nedir?",
+      "options": [
+        "Generated code'u kaldırmak için chunk'ları yeniden yazar",
+        "Sorguyu farklı bir modelde yeniden embed eder",
+        "Synthesizer'a göndermeden önce chunk'ları sıkıştırır",
+        "Her query-candidate çiftini birlikte skorlayarak cosine'dan daha yüksek doğruluk sağlar"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Synthesizer (repo/path:start-end) anchor'ları olmayan cevapları neden reddeder?",
+      "options": [
+        "Citation faithfulness cevabı gate eder, böylece kullanıcılar her iddiayı doğrulayabilir",
+        "Anchor'lar synthesis çağrısında token maliyetini düşürür",
+        "Anchor'lar downstream BM25 rerank için gereklidir",
+        "Anchor'lar vector database şeması tarafından zorunlu kılınır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Incremental re-index'in 50-dosyalık bir push'ta 60 saniyenin altında kalması için neye ihtiyacı vardır?",
+      "options": [
+        "Yalnızca metni değişen chunk'ları yeniden embed etmek ve etkilenen sembol kenarlarını yeniden hesaplamak",
+        "Her commit'te tam 2M-LOC corpus'unu yeniden embed etmek",
+        "Sembol graph'ını tamamen düşürmek",
+        "BM25 index'ini atıp sıfırdan yeniden inşa etmek"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Hangi metrik, retrieve edilen iddiaların kaynakta doğrulanabilir olup olmadığını ölçer?",
+      "options": [
+        "MRR@10",
+        "Citation faithfulness",
+        "nDCG@10",
+        "p95 query latency"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

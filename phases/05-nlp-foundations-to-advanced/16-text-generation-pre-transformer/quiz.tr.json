@@ -1,0 +1,102 @@
+{
+  "lesson": "16-text-generation-pre-transformer",
+  "title": "Transformer'lardan Önce Metin Üretimi — N-gram Dil Modelleri",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir n-gram dil modeli neyi tahmin eder?",
+      "options": [
+        "Kelimeler arası edit distance",
+        "P(etiket | doküman)",
+        "Doküman embedding'leri",
+        "Sayım istatistiklerinden P(sonraki kelime | önceki n-1 kelime)"
+      ],
+      "correct": 3,
+      "explanation": "Bir n-gram dil modeli P(w | son n-1 kelime)'yi sayılan örnekler üzerinden modeller."
+    },
+    {
+      "stage": "pre",
+      "question": "Smoothing n-gram modellerinde hangi sorunu çözer?",
+      "options": [
+        "Sayısal hassasiyet",
+        "Bellek kullanımı",
+        "Eğitimde görülmemiş n-gram'lara sıfır olasılık atama, ki bu cümle likelihood'larını sıfıra çöktürür",
+        "Tokenization uyumsuzluğu"
+      ],
+      "correct": 2,
+      "explanation": "Smoothing olasılık kütlesini yeniden dağıtır, böylece görülmemiş n-gram'lar sıfır olmayan olasılık alır."
+    },
+    {
+      "stage": "check",
+      "question": "Kneser-Ney smoothing'i naif absolute discounting'den daha iyi yapan içgörü nedir?",
+      "options": [
+        "Düşük dereceli dağılımı ham frekans yerine continuation probability (bir kelimenin geçtiği farklı bağlamların sayısı) ile tahmin eder",
+        "TF-IDF kullanır",
+        "Daha büyük n kullanır",
+        "Gradient descent kullanır"
+      ],
+      "correct": 0,
+      "explanation": "Continuation probability ham sayım yerine bağlam çeşitliliğine kredi verir."
+    },
+    {
+      "stage": "check",
+      "question": "Perplexity neyi ölçer?",
+      "options": [
+        "Held-out test seti üzerinde token başına ortalama negatif log-likelihood'un exp'i; düşük daha iyidir",
+        "Farklı n-gram sayısını",
+        "Etiketlerin cross-entropy'sini",
+        "Üretim throughput'unu"
+      ],
+      "correct": 0,
+      "explanation": "Perplexity = exp(- mean log P); düşük olması modelin test metnine daha az şaşırdığı anlamına gelir."
+    },
+    {
+      "stage": "check",
+      "question": "Perplexity rakamlarını karşılaştırırken train ve test setleri neden aynı tokenization'ı kullanmalıdır?",
+      "options": [
+        "Gradient descent tarafından zorunlu",
+        "OOV'den kaçınmak için",
+        "Perplexity tokenization şemasına bağlıdır; uyuşmayan tokenizer'lar karşılaştırılamaz skorlar üretir",
+        "Batch size'ı kontrol etmek için"
+      ],
+      "correct": 2,
+      "explanation": "Farklı tokenization'lar token sayısını ve likelihood'u değiştirir, perplexity değerlerini karşılaştırılamaz yapar."
+    },
+    {
+      "stage": "post",
+      "question": "Üretilen trigram-LM cümleleri neden yerel olarak akıcı ama küresel olarak tutarsız hissettirir?",
+      "options": [
+        "Noktalamayı düşürürler",
+        "Beam search başarısız olur",
+        "Yerel trigram bağlamı her sonraki kelimeyi yönlendirir ama modelin n-1 token'ın ötesinde uzun-vadeli belleği yoktur",
+        "Laplace smoothing kullanırlar"
+      ],
+      "correct": 2,
+      "explanation": "Yalnızca son n-1 token'a koşullanmak uzun-vadeli tutarlılığı tesadüfi yapar."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da n-gram modeller production'da hâlâ nerede çalışır?",
+      "options": [
+        "Çok dilli çeviride",
+        "Açık alan chatbot'larda",
+        "KenLM gibi kütüphaneler aracılığıyla speech recognition rescoring ve cihaz üstü autocomplete gibi gecikme kritik yollarda",
+        "Özetlemede"
+      ],
+      "correct": 2,
+      "explanation": "KenLM tarzı n-gram modeller hâlâ hızlı cihaz üstü veya rescoring bileşenleri olarak hizmet eder."
+    },
+    {
+      "stage": "post",
+      "question": "Bir neural LM'i 'iyi' ilan etmeden önce n-gram baseline hesaplamak neden hâlâ önerilir?",
+      "options": [
+        "Eğitimi hızlandırır",
+        "ROUGE tarafından zorunlu",
+        "OOV'yi kaldırır",
+        "Bir transformer LM ayarlı bir Kneser-Ney baseline'ı aynı tokenization üzerinde geniş bir farkla geçmiyorsa, eğitim pipeline'ında bir sorun var demektir"
+      ],
+      "correct": 3,
+      "explanation": "KN baseline'lar şaşırtıcı derecede güçlüdür; bir neural LM büyük farkla kazanmalıdır, aksi halde bir bug vardır."
+    }
+  ]
+}

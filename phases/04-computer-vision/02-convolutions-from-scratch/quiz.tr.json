@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "224x224 RGB bir görseli kernel_size=3, stride=1, padding=0 olan bir convolution'a veriyorsun. Çıktı spatial boyutu nedir?",
+      "options": ["224x224", "222x222", "112x112", "74x74"],
+      "correct": 1,
+      "explanation": "Çıktı boyutu = (H - K + 2P) / S + 1 = (224 - 3 + 0) / 1 + 1 = 222. Padding olmadan, her 3x3 convolution feature map'i her eksende 2 piksel küçültür -- her kenardan bir piksel kaybolur."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir konv katmanının in_channels=3, out_channels=64, kernel_size=3 ve bias var. Kaç öğrenilebilir parametresi var?",
+      "options": ["1,728", "1,792", "576", "192"],
+      "correct": 1,
+      "explanation": "C_out * C_in * K * K + C_out = 64 * 3 * 3 * 3 + 64 = 1,728 + 64 = 1,792. +C_out, çıktı kanalı başına bir bias'dır. Bunu aynı girdideki dense katmanla karşılaştır (224*224*3 -> 64 = yaklaşık 9.6M param) ve convolution'ın görseller için neden doğru prior olduğunu göreceksin."
+    },
+    {
+      "stage": "post",
+      "question": "Modern CNN'ler neden tek bir 5x5 veya 7x7 konv yerine 3x3 convolution yığınlarını tercih eder?",
+      "options": [
+        "3x3 convolution'lar donanım hızlandırmalıdır; daha büyükleri değildir",
+        "İki 3x3 konv, daha az parametreyle (2 * 9'a karşı 25) aynı 5x5 receptive field'ı kapsar ve aralarında ekstra bir non-linearity ekler",
+        "Büyük kernel'lar GPU register'larını taşırır",
+        "3x3, padding'i destekleyen tek kernel boyutudur"
+      ],
+      "correct": 1,
+      "explanation": "3x3 konv'ları yığmak, tek bir büyük konvla aynı receptive field'ı verir ama daha az parametre ve daha fazla non-linearity ile, bu da expressive power'ı artırır. VGG bunu deneysel olarak kanıtladı ve her modern aile (ResNet, ConvNeXt) bu tasarımı miras aldı."
+    },
+    {
+      "stage": "post",
+      "question": "im2col dönüşümü aslında ne yapar?",
+      "options": [
+        "Görseli GPU cache'ine sığması için sıkıştırır",
+        "Girdiden her kernel boyutlu receptive window'u çıkarır ve bunları sütunlar halinde yığar, böylece convolution tek bir matris çarpımına dönüşür",
+        "Float32 pikselleri daha hızlı aritmetik için int8'e dönüştürür",
+        "Bir batch'teki tüm görselleri tek bir 2D matriste birleştirir"
+      ],
+      "correct": 1,
+      "explanation": "im2col, girdiyi her sütun bir flatten edilmiş receptive field olacak şekilde reshape eder. Kernel'i bir satıra flatten etmek, convolution'ı cols @ w_flat.T tek bir GEMM çağrısına indirir; GPU'lar bunu quadruple Python loop'tan binlerce kat hızlı yürütür. Her production konv kütüphanesi bunun bir varyantıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Dört 3x3 convolution yığıyorsun (hepsi stride 1, pooling yok). Son katmandaki bir nöronun receptive field'ı nedir?",
+      "options": [
+        "3x3 -- her konv 3x3'tür",
+        "5x5 -- iki konv 5x5 verir ve derinlik yardım etmez",
+        "9x9 -- her konv her tarafa 2 ekler: 1 + 4*(3-1) = 9",
+        "15x15 -- her konv receptive field'ı üçe katlar"
+      ],
+      "correct": 2,
+      "explanation": "stride 1 olan L tane K x K konv için receptive field = 1 + L * (K - 1). L=4 ve K=3 ile bu 1 + 4*2 = 9 olur. Aynı formül stride ile genelleşir: receptive field, strided katmanlar boyunca multiplicative olarak büyür, bu yüzden downsampling'li derin bir ağ on veya on beş block'ta tüm görseli kapsayabilir."
+    }
+  ]
+}

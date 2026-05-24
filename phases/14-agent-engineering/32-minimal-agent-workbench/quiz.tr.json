@@ -1,0 +1,90 @@
+{
+  "lesson": "32-minimal-agent-workbench",
+  "title": "Minimal Agent Workbench",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Hangi üç dosya en küçük kullanışlı workbench'i oluşturur?",
+      "options": [
+        "AGENTS.md (router), agent_state.json (state), task_board.json (queue)",
+        "README.md, CHANGELOG.md, LICENSE",
+        "model.py, prompts.py, tools.py",
+        "Dockerfile, Makefile, .gitignore"
+      ],
+      "correct": 0,
+      "explanation": "Kısa bir router, durable state ve bir görev kuyruğu tabandır."
+    },
+    {
+      "stage": "pre",
+      "question": "Dersin AGENTS.md çerçevelemesi nedir?",
+      "options": [
+        "3000 satırlık bir onboarding manueli",
+        "Derin dokümanlara, state'e ve board'a işaret eden kısa bir router",
+        "Saf bir prompt-cache anahtarı",
+        "Repo dışında tutulan bir secret"
+      ],
+      "correct": 1,
+      "explanation": "AGENTS.md bir router'dır, manuel değil; uzun manueller görmezden gelinir."
+    },
+    {
+      "stage": "check",
+      "question": "Augment Code'un verisi iyi bir AGENTS.md hakkında ne söylüyor?",
+      "options": [
+        "Ölçülebilir bir etkisi yok",
+        "İyi bir AGENTS.md Haiku'dan Opus'a yükseltmeye eşdeğer bir kalite sıçraması verir; kötü olanı hiç dosya olmamasından daha kötüdür",
+        "Uzunluk her zaman yardımcı olur",
+        "Yalnızca Claude okur"
+      ],
+      "correct": 1,
+      "explanation": "Augment Code'un ölçümü: en iyi dosyalar model-yükseltmesi-şeklindedir, en kötüsü hiçten daha kötüdür."
+    },
+    {
+      "stage": "check",
+      "question": "Ders chat-geçmişi state'i yerine dosya-temelli state'i neden öneriyor?",
+      "options": [
+        "Disk daha ucuzdur",
+        "Chat geçmişi geçicidir; dosya session ölümünden, konuşma trimming'inden ve tool sıfırlamalarından sağ çıkar",
+        "Dosyalar daha küçüktür",
+        "SOC 2 tarafından gerekli kılınır"
+      ],
+      "correct": 1,
+      "explanation": "Session'lar ölür ve chat trim'lenir; dosya durable resmi kayıt sistemidir."
+    },
+    {
+      "stage": "check",
+      "question": "Ders AGENTS.md'de çelişen talimatlar olduğunda ne olduğunu söylüyor?",
+      "options": [
+        "Latency düşer",
+        "Çelişen talimatlar agent'ı sessizce interactive'den greedy moda düşürür (AMBIG-SWE: %48.8'den %28 çözüm oranına)",
+        "Maliyet biraz artar",
+        "Hiçbir şey"
+      ],
+      "correct": 1,
+      "explanation": "AMBIG-SWE çelişkiler ortaya çıktığında büyük bir çözüm-oranı düşüşü ölçtü; bunun yerine öncelikleri numaralandır."
+    },
+    {
+      "stage": "post",
+      "question": "Ders CLAUDE.md -> AGENTS.md gibi cross-tool symlink'leri neden öneriyor?",
+      "options": [
+        "Byte tasarrufu için",
+        "Tek bir kaynak hakikatin fork etmeden her coding agent'a yayılması için",
+        "Auditing'i geçmek için",
+        "MIT'i karşılamak için"
+      ],
+      "correct": 1,
+      "explanation": "Symlink'ler (veya Nx-tarzı generator'lar) Claude Code, Codex, Cursor, Copilot vb. arasında tek bir kanonik kaynak tutar."
+    },
+    {
+      "stage": "post",
+      "question": "İç içe AGENTS.md dosyaları hangi pattern'i izler?",
+      "options": [
+        "Yalnızca kök dosya okunur",
+        "Çalışılan dosyadan repo köküne doğru yürü, yolda bulunan her AGENTS.md'yi birleştir (en yakın kazanır; alt dizinler kökü genişletir)",
+        "Rastgele seçim",
+        "Alfabetik merge"
+      ],
+      "correct": 1,
+      "explanation": "OpenAI ana repo'sunda 88 AGENTS.md gönderir; tool'lar en yakın-yukarı-ağaç birleştirir."
+    }
+  ]
+}

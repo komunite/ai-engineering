@@ -1,0 +1,102 @@
+{
+  "lesson": "02-bag-of-words-tfidf",
+  "title": "Bag of Words, TF-IDF ve Metin Temsili",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bag of Words neyi atar?",
+      "options": [
+        "Token sırasını",
+        "Vocabulary boyutunu",
+        "Doküman uzunluğunu",
+        "Noktalama işaretlerini"
+      ],
+      "correct": 0,
+      "explanation": "BoW her dokümanda token'ları sayar ama sıralarını atar."
+    },
+    {
+      "stage": "pre",
+      "question": "TF'yi neden bir IDF faktörüyle ölçeklersin?",
+      "options": [
+        "Her dokümanda görünen kelimeler az ayırt edici sinyal taşır ve aşağı ağırlıklandırılmalıdır",
+        "Doküman uzunluğunu normalize etmek için",
+        "Eğitimi hızlandırmak için",
+        "Noktalamayı kaldırmak için"
+      ],
+      "correct": 0,
+      "explanation": "IDF her yerde geçen kelimeleri cezalandırır ve nadir olanları yükseltir."
+    },
+    {
+      "stage": "check",
+      "question": "Smooth edilmiş IDF formülü log((N+1)/(df+1)) + 1'de, sondaki +1 neyi garanti eder?",
+      "options": [
+        "Daha hızlı hesaplama",
+        "Her dokümanda geçen bir kelime 0 yerine hâlâ IDF=1 değerine sahip olur",
+        "Ham sayımlarla uyumluluk",
+        "Büyük N için sayısal kararlılık"
+      ],
+      "correct": 1,
+      "explanation": "+1 her yerde geçen kelimeleri IDF=1'de tutar, sıfırlanmazlar; scikit-learn varsayılanı budur."
+    },
+    {
+      "stage": "check",
+      "question": "Cosine similarity'den önce TF-IDF satırlarını neden L2-normalize etmelisin?",
+      "options": [
+        "Sparse vektörleri dense'e çevirmek için",
+        "Vocabulary'yi sıkıştırmak için",
+        "Sıfır girdileri kaldırmak için",
+        "Aksi halde uzun dokümanlar benzerlik skorlarına hakim olur; normalizasyon tüm dokümanları birim hiperküreye yerleştirir"
+      ],
+      "correct": 3,
+      "explanation": "L2 normalizasyon doküman uzunluğu yanlılığını kaldırır ve cosine similarity'yi dot product'a dönüştürür."
+    },
+    {
+      "stage": "check",
+      "question": "TfidfVectorizer'da duygu analizi için hangi ayarı açmak risklidir?",
+      "options": [
+        "stop_words='english'",
+        "ngram_range=(1, 2)",
+        "min_df=2",
+        "sublinear_tf=True"
+      ],
+      "correct": 0,
+      "explanation": "İngilizce stopword listeleri 'not' gibi olumsuzlukları atar, oysa bunlar duygu sinyali taşır."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da TF-IDF hâlâ hangi görevde kazanıyor?",
+      "options": [
+        "Açık uçlu diyalog",
+        "Makine çevirisi",
+        "Spam tespiti, log anomali işaretleme ve düşük gecikmeli dar sınıflandırma",
+        "Görüntü altyazılama"
+      ],
+      "correct": 2,
+      "explanation": "Kelime varlığı sinyal olduğunda ve açıklanabilirlik ya da hız önemliyse TF-IDF embedding'leri yener."
+    },
+    {
+      "stage": "post",
+      "question": "TF-IDF neden 'The movie was not good' ile 'The movie was excellent' çiftinde başarısız olur?",
+      "options": [
+        "TF-IDF stopword'leri işleyemez",
+        "TF-IDF çalışmak için bigram'lara ihtiyaç duyar",
+        "Embedding örtüşmesi çok yüksek",
+        "İki doküman çoğu token'ı paylaşır; bag-of-words olumsuzluk veya kelime sırası kavramına sahip değildir"
+      ],
+      "correct": 3,
+      "explanation": "Kelime sırası veya sözdizimsel bağlam olmadan BoW 'not' kelimesinin 'good'un duygusunu çevirdiğini modelleyemez."
+    },
+    {
+      "stage": "post",
+      "question": "TF-IDF ağırlıklı embedding hibridi nedir?",
+      "options": [
+        "TF-IDF ağırlıklarını token bazında embedding'ler üzerinde ortalama almadan önce pooling ağırlığı olarak kullanmak",
+        "TF-IDF üzerinde PCA çalıştırıp sonra yeniden embed etmek",
+        "BoW ve dense embedding'leri concatenate etmek",
+        "TF-IDF feature'ları üzerinde BERT eğitmek"
+      ],
+      "correct": 0,
+      "explanation": "Hibrit, her token'ın embedding'ini TF-IDF skoruyla ağırlıklar ve ortalama alır; semantik kapasiteyi nadir kelime vurgusuyla harmanlar."
+    }
+  ]
+}

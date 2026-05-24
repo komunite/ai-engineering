@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "ViT-MLP-LLM VLM pattern'inde, alignment sırasında diğerleri freeze tutulurken en yaygın olarak hangi bileşen eğitilir?",
+      "options": [
+        "Vision encoder",
+        "Projector (ViT ile LLM arasındaki 2-4 katmanlı MLP) -- vision token'ları LLM'in embedding uzayına eşler ve cross-modal alignment sinyalinin çoğunu taşır",
+        "LLM",
+        "Tüm bileşenler her zaman birlikte eğitilir"
+      ],
+      "correct": 1,
+      "explanation": "Standart VLM reçetesi, projector'ı önce ViT ve LLM frozen iken eğitir (alignment aşaması), sonra isteğe bağlı olarak pre-training ve instruction tuning için her şeyi unfreeze eder. Projector küçüktür (on ila yüzlerce milyon parametre) ve modalite köprüsünün ağırlığını taşır. Production'da fine-tuning sıklıkla yalnızca projector + attention üzerinde LoRA eğitir -- ucuz ve etkili."
+    },
+    {
+      "stage": "pre",
+      "question": "DeepStack (Qwen3-VL'de kullanılır) ne yapar?",
+      "options": [
+        "Yalnızca en derin ViT katmanının feature'larını kullanır",
+        "Projection'dan önce birden çok ViT derinliğindeki feature'ları yığar, böylece LLM hem yüksek seviye semantik (derin katmanlar) hem de ince spatial detayı (sığ katmanlar) görür",
+        "LLM'in derinliğini ikiye katlar",
+        "Belirli bir quantization şemasıdır"
+      ],
+      "correct": 1,
+      "explanation": "Vanilla VLM'ler yalnızca son katman ViT feature'larını projelendirir. DeepStack birden çok derinlikten örnekler, concatenate eder ve projelendirir. Derin katmanlar semantik verir ('bu bir grafik'); sığ katmanlar pozisyon ve texture verir ('x=120'deki bar kırmızı'). Kombinasyon, GUI agent aksiyonları veya yoğun captioning gibi ince lokalizasyon gerektiren görevlerde grounding boşluğunu kapatır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir production VLM yüksek metin confidence'ı gösteriyor ama üretilen metin görselde olmayan nesneleri tanımlıyor. Bu başarısızlığı hangi metrik yakalar?",
+      "options": [
+        "Perplexity",
+        "Cross-Modal Error Rate (CMER) -- metin confidence'ının yüksek olduğu ama (bir CLIP ailesi checker yoluyla) görsel-metin cosine similarity'sinin düşük olduğu çıktıların oranı; küratörlenmemiş web verisinde ~%12 tipiktir",
+        "MMMU'da accuracy",
+        "Token üretme latency'si"
+      ],
+      "correct": 1,
+      "explanation": "CMER bir production alignment KPI'sıdır. Klasik VLM halüsinasyon pattern'ini yakalar: model metni hakkında kendinden emin ama metin görselde temellenmemiş. Endpoint ve prompt tipi başına CMER'i izle; yükselen CMER'i modelin dağılım dışına kaydığı veya işleyemediği bir prompt kategorisiyle karşılaştığı sinyali olarak ele al. Skywork.ai, CMER'i first-class KPI yaparak halüsinasyonları ~%35 azalttı."
+    },
+    {
+      "stage": "post",
+      "question": "Modern VLM'ler neden supervised ImageNet ResNet yerine backbone olarak SigLIP veya özel vision encoder'ları kullanır?",
+      "options": [
+        "SigLIP daha hızlı",
+        "CLIP/SigLIP-tarzı encoder'lar metinle birlikte eğitilir, böylece çıktı uzayları zaten yaklaşık olarak dille hizalıdır; projector'ın çok daha az iş yapması gerekir ve model görsel-metinsel kavramlar hakkında daha iyi akıl yürütür",
+        "ResNet'ler token üretemez",
+        "SigLIP'in daha fazla parametresi var"
+      ],
+      "correct": 1,
+      "explanation": "Vision-language pretraining, encoder'ı metin-uyumlu bir uzayda yaşayacak şekilde şekillendirir. Supervised bir ImageNet ResNet hiçbir metin sinyali olmadan eğitildi, bu yüzden bir LLM'e köprü kurmak çok daha büyük projector'lar ve daha fazla veri gerektirir. CLIP/SigLIP/DINOv3 encoder'ları, bir LLM'in birkaç linear katmanla tüketebileceği feature'lar üretir. Hemen hemen her SOTA VLM bu nedenle bir CLIP ailesi veya SigLIP encoder kullanır."
+    },
+    {
+      "stage": "post",
+      "question": "Qwen3-VL-235B-A22B, OSWorld'de en yüksek skorları elde ediyor. OSWorld nedir ve bu neyi ima eder?",
+      "options": [
+        "Sentetik bir benchmark",
+        "Modelin desktop GUI'lerini işlettiği bir agent benchmark'ı -- buton tanımlar, UI durumunu okur, aksiyon yayar; Qwen3-VL'nin en yüksek skorları, VLM'lerin artık GUI otomasyonu için viable görsel agent'lar olduğunu ima eder",
+        "Bir poz tahmini benchmark'ı",
+        "Bir video QA benchmark'ı"
+      ],
+      "correct": 1,
+      "explanation": "OSWorld, bir modelin screenshot'lar yoluyla bir desktop ortamını otonom olarak işletip işletemeyeceğini test eder. Qwen3-VL'nin top global skorları, 'görsel agent' paradigmasının -- VLM ekranı okur, aksiyona karar verir, fare/klavyeyi tool-call eder -- pratik bölgeye geçtiğini gösterir. 2026 AI PC demoları bunu çalıştırır; ayrıca otomatik QA, RPA ve erişilebilirlik ürünlerine doğrudan bir yoldur."
+    }
+  ]
+}

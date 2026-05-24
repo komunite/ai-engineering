@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Parametre ile hiperparametre arasındaki fark nedir?",
+      "options": [
+        "Parametreler kullanıcı tarafından ayarlanır; hiperparametreler eğitim sırasında öğrenilir",
+        "Parametreler eğitim sırasında öğrenilir (ağırlıklar, bias'lar); hiperparametreler eğitim başlamadan önce ayarlanır (learning rate, maksimum derinlik)",
+        "Fark yoktur; eş anlamlıdırlar",
+        "Parametreler yalnızca sinir ağları için geçerlidir; hiperparametreler ağaç modellerine geçerlidir"
+      ],
+      "correct": 1,
+      "explanation": "Parametreler optimizasyon algoritması tarafından eğitim sırasında öğrenilir (ör. ağırlıklar). Hiperparametreler eğitimden önce ayarlanır ve öğrenmenin nasıl gerçekleştiğini kontrol eder (ör. learning rate, regularization gücü)."
+    },
+    {
+      "stage": "pre",
+      "question": "Her biri 5 değerli 4 hiperparametre üzerinde grid search kaç değerlendirme gerektirir?",
+      "options": [
+        "20",
+        "25",
+        "625",
+        "4"
+      ],
+      "correct": 2,
+      "explanation": "Grid search her kombinasyonu değerlendirir: 5^4 = 625. Bu üstel ölçekleme, grid search'ün birçok hiperparametreyle neden pratik olmadığını gösterir."
+    },
+    {
+      "stage": "post",
+      "question": "Aynı değerlendirme bütçesiyle random search neden çoğu zaman grid search'ten daha iyi performans gösterir?",
+      "options": [
+        "Random search daha iyi bir optimizasyon algoritması kullanır",
+        "Çoğu hiperparametre düşük etkili boyutluluğa sahiptir, dolayısıyla random search önemli olanları daha yoğun şekilde kapsar",
+        "Random search her zaman global optimumu bulur",
+        "Grid search sürekli hiperparametreleri işleyemez"
+      ],
+      "correct": 1,
+      "explanation": "Genelde belirli bir problem için yalnızca 1-2 hiperparametre önemlidir. Grid search önemsiz olanları değiştirerek değerlendirmeleri boşa harcar. Random search her parametre için her denemede benzersiz değerler verir ve önemli boyutları daha yoğun kapsar."
+    },
+    {
+      "stage": "post",
+      "question": "Bayesian optimizasyonda acquisition function neyi dengeler?",
+      "options": [
+        "Eğitim hızını ve model doğruluğunu",
+        "Exploitation (bilinen iyi noktaların yakınında arama) ile exploration (belirsiz bölgelerde arama)",
+        "Öznitelik sayısı ile örnek sayısını",
+        "Surrogate modelde bias ile varyansı"
+      ],
+      "correct": 1,
+      "explanation": "Acquisition function, exploitation (bilinen iyi sonuçların yakını) ile exploration (surrogate modelin belirsiz olduğu yerler) arasında denge kurarak bir sonraki değerlendirmenin nerede yapılacağına karar verir. Bu, aramayı rastgeleden daha verimli yönlendirir."
+    },
+    {
+      "stage": "post",
+      "question": "Hiperparametreleri test seti kullanarak ayarlıyor ve en iyi test performansını raporluyorsun. Bu yaklaşımın yanlışı nedir?",
+      "options": [
+        "Hiçbir şey -- bu standart bir uygulamadır",
+        "Test setine overfit yaptın; raporlanan performans iyimser ve genelleşmeyecek",
+        "Test seti ayarlama için değil, eğitim için kullanılmalıdır",
+        "Hiperparametreler yalnızca tam sayı olmalıdır"
+      ],
+      "correct": 1,
+      "explanation": "Test setinde ayarlama yapmak, o spesifik örneklerde iyi performans gösteren hiperparametreleri seçtiğin anlamına gelir. Bu test setine overfitting'tir. Ayarlama için doğrulama seti kullan ve test setini son değerlendirme için sakla."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Daha fazla öznitelik eklemek bir modelin performansını neden gerçekten kötüleştirebilir?",
+      "options": [
+        "Daha fazla öznitelik her zaman model doğruluğunu artırır",
+        "Alakasız öznitelikler gürültü ekler, overfitting riskini artırır ve faydalı özniteliklerden gelen sinyali sulandırır",
+        "Modellerin kabul edebileceği öznitelik sayısı için sıkı bir sınır vardır",
+        "Daha fazla öznitelik modelin belleği tüketmesine yol açar"
+      ],
+      "correct": 1,
+      "explanation": "Alakasız öznitelikler modelin eğitim verisindeki gürültüye overfit yapma fırsatı verir. Boyutsallığı artırır, veriyi seyrek ve mesafeleri anlamsız hale getirir (boyutsallığın laneti)."
+    },
+    {
+      "stage": "pre",
+      "question": "Filter ve wrapper öznitelik seçim yöntemleri arasındaki temel fark nedir?",
+      "options": [
+        "Filter yöntemleri öznitelikleri değerlendirmek için model kullanır; wrapper yöntemler istatistik kullanır",
+        "Filter yöntemleri öznitelikleri model olmadan istatistiklerle skorlar; wrapper yöntemler öznitelik alt kümelerini değerlendirmek için model eğitir",
+        "Filter yöntemleri her zaman wrapper yöntemlerden daha doğrudur",
+        "Wrapper yöntemler aynı anda yalnızca bir öznitelik seçebilir"
+      ],
+      "correct": 1,
+      "explanation": "Filter yöntemleri (variance threshold, mutual information, korelasyon) öznitelikleri istatistiksel ölçümlerle skorlar. Wrapper yöntemler (RFE, forward selection) farklı öznitelik alt kümelerini değerlendirmek için modelleri tekrar tekrar eğitir."
+    },
+    {
+      "stage": "post",
+      "question": "Mutual information, Pearson korelasyonunun yakalayamayacağı ilişkileri tespit edebilir. Hangi tür ilişkiler?",
+      "options": [
+        "Sürekli öznitelikler arasındaki doğrusal ilişkiler",
+        "Kuadratik veya periyodik bağımlılıklar gibi doğrusal olmayan ilişkiler",
+        "Yalnızca kategorik öznitelikler arasındaki ilişkiler",
+        "1000'den fazla veri noktası gerektiren ilişkiler"
+      ],
+      "correct": 1,
+      "explanation": "Pearson korelasyonu yalnızca doğrusal ilişkiyi ölçer. Kuadratik bir ilişkinin (y = x^2) korelasyonu sıfır ama mutual information'ı yüksektir. MI, değişkenler arasındaki herhangi bir istatistiksel bağımlılığı yakalar."
+    },
+    {
+      "stage": "post",
+      "question": "L1 (Lasso) regularization eğitimin bir parçası olarak öznitelik seçimi yapar. Nasıl?",
+      "options": [
+        "Eğitim başlamadan önce düşük varyanslı öznitelikleri kaldırır",
+        "Alakasız özniteliklerin ağırlıklarını tam olarak sıfıra çeker ve onları modelden etkili biçimde eler",
+        "Öznitelikleri hedefle korelasyona göre sıralar",
+        "Her öznitelik için ayrı modeller eğitir"
+      ],
+      "correct": 1,
+      "explanation": "L1 regularization loss'a |w| cezası ekler. L1 kısıtlamasının geometrisi (elmas şekli), bazı ağırlık çözümlerinin tam olarak sıfırda kalmasına neden olur; bu da öznitelikleri otomatik seçen seyrek modeller üretir."
+    },
+    {
+      "stage": "post",
+      "question": "RFE en az önemli özniteliği kaldırıp yeniden eğitir. Bu, düşük öneme sahip tüm öznitelikleri tek seferde kaldırmaktan neden daha iyidir?",
+      "options": [
+        "Daha iyi değildir -- tek seferde hepsini kaldırmak her zaman tercih edilir",
+        "Öznitelik önemleri öznitelikler kaldırıldıkça değişir; yinelemeli kaldırma öznitelikler arası etkileşimleri hesaba katar",
+        "RFE tek adımlı kaldırmadan farklı bir önem metriği kullanır",
+        "Tek tek kaldırmak yalnızca sinir ağları için gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "Öznitelik önemleri görelidir. Korelasyonlu bir öznitelik kaldırıldığında, eşinin önemi artabilir. Yinelemeli kaldırma, modelin her adımda önemleri yeniden değerlendirmesine izin verir ve bu etkileşimleri yakalar."
+    }
+  ]
+}

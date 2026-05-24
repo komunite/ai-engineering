@@ -1,0 +1,37 @@
+[
+  {
+    "question": "Zero-shot ve few-shot prompting arasındaki temel fark nedir?",
+    "options": ["Zero-shot daha hızlıdır", "Zero-shot yalnızca talimat verir; few-shot asıl sorgudan önce örnek input-output gösterimleri içerir", "Few-shot farklı bir model kullanır", "Zero-shot system prompt kullanmaz"],
+    "correct": 1,
+    "explanation": "Few-shot prompting, modele beklenen kalıbı gösteren çözülmüş örnekler (gösterimler) içerir. Bu, birine bir formu doldurmasını istemeden önce onu nasıl doldurması gerektiğini göstermeye benzer.",
+    "stage": "pre"
+  },
+  {
+    "question": "'Chain of Thought' prompting ne yapar?",
+    "options": ["Birden fazla API çağrısını birbirine zincirler", "Modele nihai cevabı vermeden önce ara akıl yürütme adımlarını göstermesini söyleyerek çok adımlı problemlerde doğruluğu artırır", "Sırayla birden fazla modeli bağlar", "Daha uzun cevaplar üretir"],
+    "correct": 1,
+    "explanation": "CoT prompting (örn. 'Adım adım düşünelim') modele problemleri çalışmak için 'müsvedde kağıdı' verir. GSM8K matematik problemlerinde, bu tek başına GPT-4o doğruluğunu %78'den %91'e çıkardı.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tree-of-Thought, Chain-of-Thought'tan nasıl farklıdır?",
+    "options": ["Depolama için bir ağaç veri yapısı kullanır", "Birden fazla akıl yürütme yolunu paralel olarak keşfeder ve hangi yolun en iyi cevaba götürdüğünü değerlendirir", "Sadece daha uzun bir chain of thought'tur", "Farklı bir model kullanır"],
+    "correct": 1,
+    "explanation": "CoT tek bir akıl yürütme yolunu izler. Tree-of-Thought birden fazla aday yol üretir, bunları (muhtemelen LLM'in kendisiyle) değerlendirir ve en iyisini seçer. Bu, ilk akıl yürütme yolunun yanlış olabileceği problemlerde yardımcı olur.",
+    "stage": "post"
+  },
+  {
+    "question": "Few-shot örnekleri seçerken en çok ne önemlidir?",
+    "options": ["Mümkün olduğunca çok örnek kullanmak", "Farklı durumları kapsayan ve istediğin tam formatı ve akıl yürütme kalıbını gösteren çeşitli örnekler seçmek", "En kısa örnekleri kullanmak", "Test setinden örnekler kullanmak"],
+    "correct": 1,
+    "explanation": "Örnek kalitesi miktarı geçer. Farklı edge case'leri kapsayan 3-5 çeşitli, iyi formatlanmış örnek, context window token'larını boşa harcayan 20 tekrarlayıcı örnekten modele kalıbı daha iyi öğretir.",
+    "stage": "post"
+  },
+  {
+    "question": "CoT prompting, model olsa da olmasa da aynı bilgiye sahip olduğu halde neden doğruluğu artırır?",
+    "options": ["Gizli model yeteneklerini aktive eder", "Ara token'lar üretmek nihai cevap için daha geniş etkili bir bağlam yaratır ve modelin kendi akıl yürütmesine koşullanmasına izin verir", "Daha fazla işlem gücü kullanır", "Model ağırlıklarını değiştirir"],
+    "correct": 1,
+    "explanation": "CoT olmadan model cevaba tek bir token'da doğrudan atlamak zorundadır. CoT ile her ara adım, modelin bir sonraki adım için koşullandığı bir token'dır. Model esasen 'yüksek sesle düşünür', cevaba doğru inşa eder.",
+    "stage": "post"
+  }
+]

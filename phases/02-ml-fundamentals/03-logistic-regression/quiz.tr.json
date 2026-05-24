@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sigmoid fonksiyonunun çıktı aralığı nedir?",
+      "options": [
+        "Negatif sonsuzdan pozitif sonsuza",
+        "0 ile 1 arası (uç değerler dahil değil)",
+        "-1 ile 1 arası",
+        "0'dan pozitif sonsuza"
+      ],
+      "correct": 1,
+      "explanation": "Sigmoid fonksiyonu 1/(1+e^(-z)), kesinlikle 0 ile 1 arasında değerler üretir; bunlar olasılık olarak yorumlanabilir."
+    },
+    {
+      "stage": "pre",
+      "question": "Lojistik regresyon, sınıflandırma için kullanılmasına rağmen neden 'regresyon' olarak adlandırılır?",
+      "options": [
+        "Sürekli değerler tahmin edip onları yuvarlar",
+        "Adı, kullandığı lojistik (sigmoid) fonksiyondan gelir, regresyon analizinden değil",
+        "Başlangıçta regresyon için tasarlandı, sonradan uyarlandı",
+        "Doğrusal regresyon gibi mean squared error'u minimize eder"
+      ],
+      "correct": 1,
+      "explanation": "İsim, lojistik fonksiyondan (sigmoid) gelir. Adına rağmen lojistik regresyon, sınıf olasılıklarını çıktı veren bir sınıflandırma algoritmasıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Lojistik regresyon için neden MSE yerine binary cross-entropy kullanılır?",
+      "options": [
+        "Cross-entropy'yi hesaplamak daha hızlıdır",
+        "Sigmoid ile MSE, yerel minimumları olan dışbükey (konveks) olmayan bir cost yüzeyi oluşturur; cross-entropy ise konvekstir",
+        "MSE yalnızca doğrusal modellerle kullanılabilir",
+        "Cross-entropy yalnızca veri seti dengeli olduğunda çalışır"
+      ],
+      "correct": 1,
+      "explanation": "MSE ile sigmoid aktivasyonu birleştiğinde birçok yerel minimumu olan dışbükey olmayan bir cost yüzeyi oluşur. Sigmoid ile binary cross-entropy ise konvekstir ve tek bir global minimum garanti eder."
+    },
+    {
+      "stage": "post",
+      "question": "Bir spam filtresinin precision = 0.95 ve recall = 0.60. Bu pratikte ne anlama gelir?",
+      "options": [
+        "Tüm e-postaların %95'i doğru sınıflandırılıyor ve spam'in %60'ı yakalanıyor",
+        "Bir e-postayı spam olarak işaretlediğinde %95 doğru, ama gerçek spam'in yalnızca %60'ını yakalıyor",
+        "İşaretlenen e-postaların %60'ı spam ve tüm spam'in %95'i yakalanıyor",
+        "Model test setinde %95, eğitim setinde %60 doğrulukta"
+      ],
+      "correct": 1,
+      "explanation": "Precision = 0.95, spam olarak tahmin edilen e-postaların %95'inin gerçekten spam olduğu anlamına gelir (az yanlış alarm). Recall = 0.60, gerçek spam'in yalnızca %60'ının yakalandığı (%40'ı kaçtığı) anlamına gelir."
+    },
+    {
+      "stage": "post",
+      "question": "4 sınıflı softmax regresyonunda çıktı olasılıkları için ne doğrudur?",
+      "options": [
+        "Her sınıf 0 ile 1 arasında bağımsız bir olasılık alır",
+        "Dört çıktı olasılığı toplamı 1'dir ve en yüksek olasılığa sahip sınıf tahmindir",
+        "Yalnızca en yüksek 2 sınıf sıfır olmayan olasılık alır",
+        "Çıktılar ham skorlardır, olasılık değildir"
+      ],
+      "correct": 1,
+      "explanation": "Softmax, ham skorlardan oluşan bir vektörü toplamı 1 olan olasılıklara dönüştürür. Tahmin edilen sınıf, en yüksek olasılığa sahip olandır."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "13-llm-observability",
+  "title": "LLM Observability Stack Seçimi",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders 2026 LLM observability pazarını nasıl bölüyor?",
+      "options": [
+        "Geliştirme platformları (eval/prompt/session paketli) vs gateway/telemetry araçları",
+        "On-prem vs cloud",
+        "Vendor vs açık kaynak",
+        "Python vs TypeScript"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders hangi aracı MIT lisanslı çekirdek, güçlü self-host hikayesi ve aylık 50K event ücretsiz cloud tier'a sahip olarak konumlandırıyor?",
+      "options": [
+        "LangSmith",
+        "Phoenix",
+        "Arize AX",
+        "Langfuse"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Arize AX'in Datadog gibi monolitik observability stack'lere göre ana ölçek iddiası nedir?",
+      "options": [
+        "Her zaman daha pahalı",
+        "Zero-copy Iceberg/Parquet entegrasyonu sayesinde ölçekte kabaca 100x daha ucuz",
+        "Günde 1M event altında ücretsiz",
+        "%10 daha ucuz"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders taşınabilirlik için yanlış instrumentation katmanı olarak neyi adlandırıyor?",
+      "options": [
+        "Agent framework'ünün içinde instrument etmek, çünkü seni o framework'e bağlar",
+        "Başarılı isteklerde %5'te sample almak",
+        "OpenTelemetry GenAI semantic convention'larını kullanmak",
+        "HTTP/OpenAI-SDK katmanında instrument etmek"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders observability araçları arasındaki 2026 interop katmanı olarak hangi OpenTelemetry convention'larını tanımlıyor?",
+      "options": [
+        "OTel messaging semantic convention'ları",
+        "OTel database semantic convention'ları",
+        "GenAI semantic convention'ları (gen_ai.system, gen_ai.request.model, gen_ai.usage.input_tokens)",
+        "OTel HTTP semantic convention'ları"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders neden tam-trace retention'ın günde 1M request üzerinde ölçeklenmediğini savunuyor?",
+      "options": [
+        "Retention depolaması LLM çağrılarının kendisinden daha pahalıdır; ekipler sample almalıdır (örneğin %100 hata, %100 yüksek-maliyet, %5 başarılı)",
+        "OpenTelemetry trace hacmini sınırlar",
+        "Vendor'lar bunu engeller",
+        "Phoenix yalnızca 1M trace destekler"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

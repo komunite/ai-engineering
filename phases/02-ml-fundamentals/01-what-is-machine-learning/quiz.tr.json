@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Denetimli öğrenmede model, eğitim sırasında ne alır?",
+      "options": [
+        "Etiketsiz, yalnızca girdi verisi",
+        "Doğru cevabın da verildiği girdi-çıktı çiftleri",
+        "Her eylem için bir ödül sinyali",
+        "İnsan uzman tarafından yazılmış bir kurallar kümesi"
+      ],
+      "correct": 1,
+      "explanation": "Denetimli öğrenme, girdi-çıktı çiftleri (etiketli veri) üzerinde eğitilir. Model, girdileri bilinen doğru çıktılara eşlemeyi öğrenir."
+    },
+    {
+      "stage": "pre",
+      "question": "Veriyi eğitim ve test setlerine ayırmanın amacı nedir?",
+      "options": [
+        "Daha az veri kullanarak eğitimi hızlandırmak",
+        "Eğitim verisi kaybolursa diye yedek veri tutmak",
+        "Modelin eğitim sırasında hiç görmediği veriye genelleyip genelleyemediğini değerlendirmek",
+        "Veri setindeki sınıfları dengelemek"
+      ],
+      "correct": 2,
+      "explanation": "Test seti, genelleme yeteneğini ölçer. Eğitim verisi üzerinde değerlendirme yaparsan, öğrenmeyi değil ezberlemeyi ölçmüş olursun."
+    },
+    {
+      "stage": "post",
+      "question": "Bir model, eğitim verisinde %98 doğruluk alırken test verisinde %55 alıyor. Bu neyin örneğidir?",
+      "options": [
+        "Underfitting: model çok basit",
+        "Overfitting: model genel örüntüleri öğrenmek yerine eğitim gürültüsünü ezberlemiş",
+        "Veri kayması (data drift): test dağılımı değişmiş",
+        "İyi genelleme: model gerçek örüntüleri öğrenmiş"
+      ],
+      "correct": 1,
+      "explanation": "Eğitim doğruluğu (yüksek) ile test doğruluğu (düşük) arasındaki büyük fark overfitting'in tipik göstergesidir. Model eğitim verisini ezberlemiştir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir e-ticaret sitesi, önceden tanımlı etiket olmadan müşterileri satın alma davranışlarına göre segmentlere ayırmak istiyor. Bu hangi ML türüdür?",
+      "options": [
+        "Denetimli öğrenme (sınıflandırma)",
+        "Denetimli öğrenme (regresyon)",
+        "Denetimsiz öğrenme (kümeleme)",
+        "Pekiştirmeli öğrenme"
+      ],
+      "correct": 2,
+      "explanation": "Önceden tanımlı etiket olmadan veride doğal gruplamalar bulmak kümelemedir, bu da denetimsiz öğrenmenin bir biçimidir."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi senaryo makine öğrenmesi için iyi bir kullanım alanı DEĞİLDİR?",
+      "options": [
+        "Geçmiş davranış verisinden müşteri kaybını (churn) tahmin etmek",
+        "Milyonlarca ödeme akışında sahte işlemleri tespit etmek",
+        "Sıcaklığı Celsius'tan Fahrenheit'a çevirmek",
+        "Cilt lezyonu görüntülerini iyi huylu veya kötü huylu olarak sınıflandırmak"
+      ],
+      "correct": 2,
+      "explanation": "Celsius'tan Fahrenheit'a çevirme sabit bir formüldür (F = 9/5 * C + 32). Basit, iyi tanımlı kurallar ML gerektirmez. ML burada hiçbir fayda sağlamadan karmaşıklık ekler."
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "lesson": "10-attention-mechanism",
+  "title": "Attention Mekanizması — Çığır Açan Buluş",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bahdanau attention seq2seq'te hangi problemi çözdü?",
+      "options": [
+        "Tokenization uyumsuzluğunu",
+        "Decoder'ın yalnızca encoder'ın son state'ini gördüğü sabit boyutlu context-vector darboğazını",
+        "Encoder'lardaki vanishing gradient'ı",
+        "Beam search gecikmesini"
+      ],
+      "correct": 1,
+      "explanation": "Attention decoder'ın yalnızca sonuncuyu değil, her encoder state'ini sorgulamasına izin verir."
+    },
+    {
+      "stage": "pre",
+      "question": "Decoder adım t'deki attention context vektörü nedir?",
+      "options": [
+        "Decoder'ın girdi embedding'i",
+        "Ağırlıkları bir query-key skorundan gelen encoder hidden state'lerinin ağırlıklı ortalaması",
+        "Encoder'ın son hidden state'i",
+        "Rastgele bir projeksiyon"
+      ],
+      "correct": 1,
+      "explanation": "Context = sum of alpha_i * h_i, encoder state'lerinin adıma bağlı ağırlıklı ortalaması."
+    },
+    {
+      "stage": "check",
+      "question": "Bahdanau (additive) attention'da v_a vektörü hangi rolü oynar?",
+      "options": [
+        "Dropout'u kontrol eder",
+        "Attention-dim hidden bileşimi encoder konumu başına bir skalar skora dönüştüren projeksiyondur",
+        "Konumları kodlar",
+        "Softmax'i bias'lar"
+      ],
+      "correct": 1,
+      "explanation": "v_a, bir d_attn vektörünü skalar skora indirgemek için tanh(W_a s + U_a h) ile dot product alır."
+    },
+    {
+      "stage": "check",
+      "question": "Luong'un 'dot' attention varyantında hangi kısıt geçerli olmalı?",
+      "options": [
+        "Decoder state ve encoder state aynı boyutluluğu paylaşmalı (d_s == d_h)",
+        "Encoder bidirectional olmalı",
+        "Softmax log-space olmalı",
+        "Beam search gereklidir"
+      ],
+      "correct": 0,
+      "explanation": "dot projeksiyon olmadan s^T h kullanır, dolayısıyla boyutlar tam eşleşmelidir."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi Q/K/V eşlemesi klasik (Bahdanau/Luong) attention'ı tanımlar?",
+      "options": [
+        "Q, K, V kaynağın üç bağımsız öğrenilmiş projeksiyonudur",
+        "Q rastgele, K ve V öğrenilir",
+        "Q encoder'dan, K ve V decoder'dan",
+        "Q = decoder state; K ve V = encoder state'leri (aynı tensor)"
+      ],
+      "correct": 3,
+      "explanation": "Klasik attention'da key ve value'lar encoder state'leridir; transformer'lar K ve V'yi öğrenilmiş projeksiyonlarla ayırır."
+    },
+    {
+      "stage": "post",
+      "question": "Ham attention ağırlıklarını 'açıklama' olarak raporlamak neden kırılgan sayılır?",
+      "options": [
+        "Attention ağırlıkları etiket sızdırır",
+        "Çok küçükler, çizilemez",
+        "Araştırmalar (örn. Jain ve Wallace, 2019) bazı görevlerde attention dağılımlarının tahminleri değiştirmeden permüte edilebildiğini gösterdi",
+        "Attention ağırlıkları differentiable değildir"
+      ],
+      "correct": 2,
+      "explanation": "Attention ağırlıkları tahminlerle korelasyonludur ama ablation/karşı-olgu kontrolleri olmadan sadık açıklamalar değildir."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi adım Bahdanau attention'ı transformer self-attention'a köprüler?",
+      "options": [
+        "Beam search'ü düşürmek",
+        "Daha fazla RNN katmanı eklemek",
+        "Softmax'i sigmoid ile değiştirmek",
+        "Bir diziyi kendisine karşı ayrı öğrenilmiş Q, K ve V projeksiyonlarıyla, paralel head'lerde sorgulamak"
+      ],
+      "correct": 3,
+      "explanation": "Self-attention aynı diziyi sorgular, K ve V projeksiyonları ayrılmıştır ve head'ler arasında paralelleştirilir."
+    },
+    {
+      "stage": "post",
+      "question": "Attention'da masking için pratik bir kullanım nedir?",
+      "options": [
+        "Dropout'un yerini almak",
+        "Padding token'ları için attention ağırlığını sıfıra ayarlamak, böylece context vektörüne katkıda bulunmazlar",
+        "Konumları kodlamak",
+        "Model boyutunu azaltmak"
+      ],
+      "correct": 1,
+      "explanation": "Padding (veya decoder'da gelecek token'lar) maskeleme softmax'in geçersiz konumlara ağırlık yaymasını önler."
+    }
+  ]
+}

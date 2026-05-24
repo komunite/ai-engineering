@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Fourier dönüşümü bir sinyale ne yapar?",
+      "options": [
+        "Daha az depolama kullanması için sinyali sıkıştırır",
+        "Sinyali farklı frekans, genlik ve fazlardaki sinüs dalgalarına ayrıştırır",
+        "Sinyalden gürültüyü kaldırır",
+        "Sinyali analogtan dijitale dönüştürür"
+      ],
+      "correct": 1,
+      "explanation": "Fourier dönüşümü bir sinyali zaman alanından frekans alanına dönüştürür. Her frekans katsayısı X[k], k frekansındaki bir sinüs dalgasının genliğini ve fazını söyler. Sinyal bu sinüs dalgalarının toplamı olarak yeniden ifade edilir."
+    },
+    {
+      "stage": "pre",
+      "question": "Doğrudan DFT'ye kıyasla Fast Fourier Transform'un (FFT) zaman karmaşıklığı nedir?",
+      "options": [
+        "İkisi de O(N^2)",
+        "FFT O(N log N), DFT O(N^2)",
+        "FFT O(N), DFT O(N log N)",
+        "FFT O(log N), DFT O(N)"
+      ],
+      "correct": 1,
+      "explanation": "Doğrudan DFT, her biri N girişin toplamı olan N çıkış hesaplar: O(N^2). Cooley-Tukey FFT, sinyali tekrarlı olarak çift/tek yarımlara böler ve log2(N) seviyenin her birinde O(N) iş yapar, bu da O(N log N) verir. N = 1 milyon için bu 20 milyona karşı 1 trilyon işlemdir."
+    },
+    {
+      "stage": "post",
+      "question": "Konvolüsyon teoremi neyi söyler?",
+      "options": [
+        "Zaman alanında konvolüsyon, frekans alanında toplamaya eşittir",
+        "Zaman alanında konvolüsyon, frekans alanında noktasal çarpmaya eşittir",
+        "Konvolüsyon her zaman bir sinyalin uzunluğunu artırır",
+        "Konvolüsyon ve korelasyon özdeş işlemlerdir"
+      ],
+      "correct": 1,
+      "explanation": "Konvolüsyon teoremi, zaman alanında konvolüsyonun frekans alanında noktasal çarpmaya eşit olduğunu belirtir: x * h = IFFT(FFT(x) . FFT(h)). Bu, büyük kernel'lar için FFT tabanlı konvolüsyonun O(N*M) yerine O(N log N) olmasının nedenidir."
+    },
+    {
+      "stage": "post",
+      "question": "FFT'den önce bir sinyali sıfırla doldurmak (zero-padding) neden gerçek frekans çözünürlüğünü artırmaz?",
+      "options": [
+        "Zero-padding iyileşmeyi iptal eden gürültü ekler",
+        "Zero-padding mevcut frekans bin'leri arasında interpolasyon yapar ama orijinal örneklemelerden eksik olan frekans detayını ortaya çıkaramaz",
+        "Zero-padding yalnızca 2'nin kuvveti sinyal uzunluklarında çalışır",
+        "FFT algoritması sıfırla doldurulmuş örnekleri yok sayar"
+      ],
+      "correct": 1,
+      "explanation": "Gerçek frekans çözünürlüğü gözlem süresi T = N/fs'ye bağlıdır. Zero-padding daha fazla frekans bin'i ekler (daha ince ızgara) ama yalnızca mevcut spektrumu interpolasyona tabi tutar — birbirinden 1/T Hz'den daha yakın frekansları çözmeden daha düzgün görünen bir sonuç verir."
+    },
+    {
+      "stage": "post",
+      "question": "Orijinal Transformer'ın sinüzoidal pozisyon kodlamalarında, farklı boyut çiftlerine neden geometrik olarak ayrılmış frekanslar atanır?",
+      "options": [
+        "Attention'ın hesaplama maliyetini azaltır",
+        "Her frekans farklı bir çözünürlük sağlar — yüksek frekanslar ince pozisyonu, düşük frekanslar kaba pozisyonu kodlar; her pozisyona benzersiz bir parmak izi verir",
+        "Geometrik aralık FFT algoritması tarafından gereklidir",
+        "Tüm kodlama değerlerinin 0 ile 1 arasında olmasını sağlar"
+      ],
+      "correct": 1,
+      "explanation": "Yüksek frekanslı boyutlar pozisyona göre hızla değişir (ince çözünürlük), düşük frekanslı boyutlar yavaş değişir (kaba çözünürlük). Birlikte, çoklu frekans kodlaması her pozisyona benzersiz bir desen verir — Fourier katsayılarının bir sinyali benzersiz şekilde tanımlamasına benzer."
+    }
+  ]
+}

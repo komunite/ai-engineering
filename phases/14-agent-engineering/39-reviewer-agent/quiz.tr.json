@@ -1,0 +1,90 @@
+{
+  "lesson": "39-reviewer-agent",
+  "title": "Reviewer Agent: Builder'ı Marker'dan Ayır",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Builder kendi işini neden güvenilir şekilde notlayamaz?",
+      "options": [
+        "Token'ı tükenir",
+        "Acceptance gerekli ama yeterli değildir; problem-fit, scope disiplini, belgelenmiş varsayımlar ve handoff hazırlığı farklı input'larla farklı bir role ihtiyaç duyar",
+        "Authentication kaybeder",
+        "Model self-grading'i reddeder"
+      ],
+      "correct": 1,
+      "explanation": "Builder ile reviewer arasındaki boşluk güvenilirliğin yaşadığı yerdir; acceptance yalnızca daha zayıf bir versiyonu kanıtlar."
+    },
+    {
+      "stage": "pre",
+      "question": "Bunlardan hangisi beş rubric boyutundan biri DEĞİLDİR?",
+      "options": [
+        "Problem fit",
+        "Scope disiplini",
+        "Doğrulama kalitesi",
+        "Çıkarım latency'si"
+      ],
+      "correct": 3,
+      "explanation": "Beşi: problem fit, scope disiplini, varsayımlar, doğrulama kalitesi, handoff hazırlığı."
+    },
+    {
+      "stage": "check",
+      "question": "Rol ayrımı neyi gerektirir?",
+      "options": [
+        "Farklı bir model",
+        "Farklı bir system prompt ve farklı input'lar; postür değişir ve reviewer'ın diff'e yazma erişimi yoksa aynı model iki rolü de oynayabilir",
+        "Farklı fiziksel donanım",
+        "Yeni bir hesap"
+      ],
+      "correct": 1,
+      "explanation": "Disiplin postür ve input'tadır, model kimliğinde değil."
+    },
+    {
+      "stage": "check",
+      "question": "Cloudflare'ın 2026 review mimarisi nasıl görünüyor?",
+      "options": [
+        "Tek büyük reviewer",
+        "Bulguları deduplicate eden bir Review Coordinator altında paralel yedi uzmana kadar reviewer; yalnızca coordinator için top-tier model, uzmanlar için daha ucuz katmanlar",
+        "Round-robin iki reviewer",
+        "Tek sıralı LLM"
+      ],
+      "correct": 1,
+      "explanation": "Cloudflare 30 günde 131,246 review çalıştırması yürüttü, uzman + coordinator mimarisini kullanarak."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi dersin listelediği dört LLM-judge yanlılığından biri DEĞİLDİR?",
+      "options": [
+        "Position bias (A,B vs B,A sıralama tutarsızlığı)",
+        "Verbosity bias (daha uzun çıktılar daha yüksek puan alır)",
+        "Self-preference (aynı model ailesi)",
+        "Vector locality"
+      ],
+      "correct": 3,
+      "explanation": "Dördü: position, verbosity, self-preference, authority; vector locality bunlardan biri değildir."
+    },
+    {
+      "stage": "post",
+      "question": "Kalibrasyon seti nedir?",
+      "options": [
+        "Yeni bir eğitim corpus'u",
+        "Bilinen doğru verdict'leri olan 10-20 geçmiş görev kapanışı; her prompt değişikliğinde yeniden çalıştırılır; reviewer anlaşması %80'in altına düşerse gönderim öncesi rubric'i düzelt",
+        "Bir A/B test fixture'ı",
+        "Bir vector index"
+      ],
+      "correct": 1,
+      "explanation": "Kalibrasyon setleri reviewer'ı dürüst tutar; anlaşma sapmışsa veriyi değil, rubric'i düzeltirsin."
+    },
+    {
+      "stage": "post",
+      "question": "Reviewer'ın raporu workbench'in geri kalanıyla nereye entegre olur?",
+      "options": [
+        "Doğrulamayı değiştirir",
+        "Handoff packet'ine (Ders 40) paketlenir; insan incelemesi boş bir sayfadan değil, rapordan başlar",
+        "Gate'i override eder",
+        "Yalnızca manager'a gider"
+      ],
+      "correct": 1,
+      "explanation": "Review raporu handoff'u besler, böylece bir sonraki session ve insan reviewer yazılı bir verdict'ten başlar."
+    }
+  ]
+}

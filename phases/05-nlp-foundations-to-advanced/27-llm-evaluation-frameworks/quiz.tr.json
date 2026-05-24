@@ -1,0 +1,102 @@
+{
+  "lesson": "27-llm-evaluation-frameworks",
+  "title": "LLM Değerlendirmesi — RAGAS, DeepEval, G-Eval",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Modern LLM çıktılarını değerlendirmek için Exact Match ve token-F1 neden yetersizdir?",
+      "options": [
+        "Çok yavaşlar",
+        "Differentiable değiller",
+        "GPU gerektirirler",
+        "Semantik eşdeğerliği kaçırırlar; 'June 29th, 2007' ile 'June 29, 2007' doğru olmasına rağmen 0 EM alır"
+      ],
+      "correct": 3,
+      "explanation": "Exact-match/F1, insanların doğru olarak işaretleyeceği paraphrase veya biçimlendirme farklılıklarını tanıyamaz."
+    },
+    {
+      "stage": "pre",
+      "question": "RAGAS faithfulness metriği neyi ölçer?",
+      "options": [
+        "Retrieval recall",
+        "Cevaptaki her iddianın NLI yoluyla geri çağrılan bağlam tarafından entail edilip edilmediği",
+        "Gecikme",
+        "Saniyede token"
+      ],
+      "correct": 1,
+      "explanation": "Faithfulness, NLI entailment kullanarak her cevap iddiasını geri çağrılan bağlama karşı kontrol eder."
+    },
+    {
+      "stage": "check",
+      "question": "Skorlara güvenmeden önce judge-model calibration'ı insan etiketlerine karşı neden gereklidir?",
+      "options": [
+        "GDPR tarafından zorunlu",
+        "Judge ve insan etiketleri arasındaki Spearman korelasyonu çok düşükse (örn. 0.7'nin altında), skor sinyal değil gürültüdür",
+        "Calibration judge'ı hızlandırır",
+        "Calibration bir tokenization sorunudur"
+      ],
+      "correct": 1,
+      "explanation": "Calibration olmadan judge skorlarının kaliteyi mi yoksa model biasını mı yansıttığını söyleyemezsin."
+    },
+    {
+      "stage": "check",
+      "question": "LLM-as-judge setup'larında self-evaluation bias nedir?",
+      "options": [
+        "Aynı LLM ailesini hem üretmek hem yargılamak için kullanmak, skorları bağımsız bir judge'a karşı %10-20 şişirir",
+        "Daha düşük gecikme",
+        "Judge'lar cache'lenmiş çıktılarda daha hızlı çalışır",
+        "Judge'lar system prompt'ları görmezden gelir"
+      ],
+      "correct": 0,
+      "explanation": "Aynı aile generator+judge skorları yukarı bias eder; yargılamak için farklı bir model ailesi kullan."
+    },
+    {
+      "stage": "check",
+      "question": "G-Eval naif bir 'score 0-1' prompt'ının üstüne özellikle ne ekler?",
+      "options": [
+        "Daha büyük bağlam",
+        "Daha düşük maliyet",
+        "Çok dilli skorlama",
+        "Daha kararlı skorlar veren, adlandırılmış değerlendirme adımlarıyla açık bir chain-of-thought rubric'i"
+      ],
+      "correct": 3,
+      "explanation": "G-Eval'ın yapılandırılmış eval-step'leri serbest formlu 'puanla' prompt'larından daha güvenilir skorlar üretir."
+    },
+    {
+      "stage": "post",
+      "question": "Yalnızca toplam ortalama skoru raporlamak neden tehlikelidir?",
+      "options": [
+        "Toplamlar çok büyüktür",
+        "Toplamlar judge'ı görmezden gelir",
+        "Toplamların GPU'ya ihtiyacı var",
+        "0.85 ortalama %5 felaket hatayı saklayabilir; her zaman alt çeyreği incele"
+      ],
+      "correct": 3,
+      "explanation": "Ortalamalar kuyruk hatalarını saklar; yüksek şiddetteki sorunları yakalamak için en alttaki %10'u yüzeye çıkar."
+    },
+    {
+      "stage": "post",
+      "question": "Judge modeli + sürümünü CI'da neden pinlemelisin?",
+      "options": [
+        "Anthropic tarafından zorunlu",
+        "Daha düşük maliyet",
+        "Tokenizer drift",
+        "Judge'ı upgrade etmek her metriği değiştirir; dondurulmuş bir judge olmadan boylamsal karşılaştırma kırılır"
+      ],
+      "correct": 3,
+      "explanation": "Bir judge upgrade'i metrik baseline'ı sessizce kaydırır; pinlemek çalıştırmalar arası karşılaştırılabilirliği korur."
+    },
+    {
+      "stage": "post",
+      "question": "DeepEval RAGAS'a göre nerede konumlanır?",
+      "options": [
+        "DeepEval LLM'ler için pytest gibidir (CI gate'leri, G-Eval, hallucination metrikleri); RAGAS referans-free RAG izlemede uzmanlaşır",
+        "DeepEval yalnızca hosted'dır",
+        "DeepEval bir tokenizer'dır",
+        "RAGAS'ın yerini tamamen alır"
+      ],
+      "correct": 0,
+      "explanation": "DeepEval CI/CD regresyon testini anchor eder; RAGAS referans-free RAG izlemeyi ele alır."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "26-compliance-frameworks",
+  "title": "Uyumluluk — SOC 2, HIPAA, GDPR, PCI-DSS, EU AI Act, ISO 42001",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "EU AI Act yüksek-riskli sistemler için yaptırım ne zaman başlıyor?",
+      "options": [
+        "2 Şubat 2025",
+        "2 Ağustos 2026",
+        "2024'te zaten tamamen yürürlükte",
+        "1 Ocak 2030"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "EU AI Act hangi iki kademeli para cezası tavanını tanımlıyor?",
+      "options": [
+        "Herhangi bir ihlal için sabit €1M'a kadar",
+        "Herhangi bir ihlal için €100K'ya kadar",
+        "Yüksek-riskli sistem yükümlülükleri için €15M veya global yıllık cironun %3'üne kadar (Md. 99(4)); yasaklı AI uygulamaları için €35M veya %7'ye kadar (Md. 99(3))",
+        "Mali ceza yok, yalnızca kaldırma emirleri"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Post-processing PII temizliği neden savunulabilir bir GDPR duruşu değildir?",
+      "options": [
+        "Ölçekte çok yavaştır",
+        "GDPR redaction'ı tamamen yasaklar",
+        "Post-processing real-time ile aynıdır",
+        "Model veriyi zaten gördü; bu yüzden 2026'da savunulabilir standart real-time çıkarım-katmanı redaction'ıdır (LLM çağrısından önce)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "SOC 2 Type I ile Type II arasındaki pratik fark nedir?",
+      "options": [
+        "Type I HIPAA BAA gerektirir",
+        "Type I, Type II'den daha titizdir",
+        "Type I kontrollerin tasarlanmış ve belgelenmiş olduğunu beyan eder; Type II kontrollerin 6-12 ay boyunca etkin işlediğini beyan eder",
+        "Type II yalnızca startup'lar içindir"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Cross-framework kontrol haritalaması neyi sağlamayı hedefler?",
+      "options": [
+        "Birden fazla framework gereksinimini karşılayan tek bir kontrol policy'si (örneğin erişim logging ISO 27001 A.5.15-5.18, GDPR Md. 32, HIPAA §164.312(a)'ya eşlenir)",
+        "Denetimleri ortadan kaldırma",
+        "Tüm framework'lerin yerine ISO 42001'i koyma",
+        "Framework başına daha fazla farklı kontrol"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders HIPAA + LLM iş yükleri için ne öneriyor?",
+      "options": [
+        "HIPAA LLM'lere uygulanmaz",
+        "İmzalı bir BAA olmadan PHI'yi asla harici bir AI servisine gönderme; üç hyperscaler ve büyük LLM API sağlayıcıları BAA sunar",
+        "Yalnızca on-prem modeller kullan, asla managed",
+        "PHI'yi herhangi bir sağlayıcıya ship et; BAA opsiyoneldir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir SVM'deki support vector'ler nedir?",
+      "options": [
+        "Eğitim setindeki tüm veri noktaları",
+        "Karar sınırına en yakın olan ve hyperplane'i belirleyen eğitim noktaları",
+        "Kernel dönüşümünden sonraki öznitelik vektörleri",
+        "Eğitim sırasında öğrenilen ağırlık vektörleri"
+      ],
+      "correct": 1,
+      "explanation": "Support vector'ler tam olarak margin sınırlarında yatan eğitim noktalarıdır. Karar hyperplane'ini belirleyen tek noktalar bunlardır. Support vector olmayan noktaları kaldırmak sınırı değiştirmez."
+    },
+    {
+      "stage": "pre",
+      "question": "Karar sınırını bulurken SVM neyi maksimize eder?",
+      "options": [
+        "Doğru sınıflandırılan eğitim noktası sayısını",
+        "Margin'i -- karar sınırı ile her sınıfın en yakın noktaları arasındaki mesafeyi",
+        "Tüm noktaların sınıra olan toplam mesafesini",
+        "Karar sınırının karmaşıklığını"
+      ],
+      "correct": 1,
+      "explanation": "SVM'ler iki sınıf arasındaki margin'i maksimize eden hyperplane'i bulur. Daha geniş bir margin, görülmemiş veride daha iyi genelleme sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Bir SVM'de C parametresini artırdığında ne olur?",
+      "options": [
+        "Margin genişler ve daha fazla yanlış sınıflandırmaya izin verilir",
+        "Margin daralır, daha az yanlış sınıflandırmaya izin verilir ve model overfit yapabilir",
+        "Kernel fonksiyonu linear'den RBF'e değişir",
+        "Support vector sayısı her zaman artar"
+      ],
+      "correct": 1,
+      "explanation": "Büyük C, yanlış sınıflandırmaları ağır cezalandırır ve eğitim verisine yakın oturan dar bir margin üretir. Bu overfitting'e yol açabilir. Küçük C, daha geniş ve daha regularize edilmiş bir margin için daha fazla ihlale izin verir."
+    },
+    {
+      "stage": "post",
+      "question": "Kernel trick, SVM'lerin doğrusal olmayan sınırlar öğrenmesini nasıl sağlar?",
+      "options": [
+        "SVM'yi sinir ağıyla değiştirir",
+        "Veriyi açıkça o uzaya eşlemeden, yüksek boyutlu bir uzayda dot product'ları hesaplar",
+        "Eğitimden önce aykırı değerleri veri setinden çıkarır",
+        "Girdi verisine doğrudan polinomsal öznitelikler ekler"
+      ],
+      "correct": 1,
+      "explanation": "Kernel trick, her x_i . x_j dot product'ını K(x_i, x_j) ile değiştirir; dot product'ı yüksek boyutlu (RBF için sonsuz boyutlu) bir öznitelik uzayında, o uzayı hiç oluşturmadan hesaplar."
+    },
+    {
+      "stage": "post",
+      "question": "Hinge loss, y * f(x) >= 1 olduğunda sıfırdır. Bu sınıflandırma açısından ne anlama gelir?",
+      "options": [
+        "Nokta yanlış sınıflandırılmış",
+        "Nokta doğru sınıflandırılmış ve margin dışında yatıyor",
+        "Nokta tam karar sınırının üzerinde",
+        "Nokta göz ardı edilmesi gereken bir gürültü örneği"
+      ],
+      "correct": 1,
+      "explanation": "y * f(x) >= 1 olduğunda nokta hem doğru sınıflandırılmıştır HEM DE margin sınırının üzerinde veya ötesindedir. Yalnızca margin içindeki veya yanlış sınıflandırılmış noktalar (y * f(x) < 1) hinge loss'a katkı sağlar."
+    }
+  ]
+}

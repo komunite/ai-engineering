@@ -1,0 +1,78 @@
+{
+  "lesson": "10-cold-start-mitigation",
+  "title": "Serverless LLM'ler için Cold Start Hafifletme",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Mitigation olmadan taze bir node üzerinde 70B model için cold start tipik olarak kabaca ne kadar sürer?",
+      "options": [
+        "1 saatten fazla",
+        "30-60 saniye",
+        "3-8 dakika",
+        "10 saniyenin altında"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Container imajlarını önceden tohumlamak ve adım-2 imaj pull'unu yok etmek için ders hangi AWS tarafı özelliği öneriyor?",
+      "options": [
+        "EC2NodeClass'tan referans verilen Bottlerocket dual-volume mimarisi",
+        "ECS task definition'ları",
+        "Spot fleet placement",
+        "Yalnızca EBS volume snapshot'ları"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi Modal özelliği, post-load durumu doğrudan HBM'e deserialize ederek \"saniyelerde sıcak GPU boot\"a en yakın şeyi sağlar?",
+      "options": [
+        "Katmanlı NVMe-DRAM yükleme",
+        "Live migration",
+        "GPU bellek snapshot'ları (checkpoint'ler)",
+        "Run:ai Model Streamer"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Live migration node'lar arasında neden KV cache yerine input token'ları transfer eder?",
+      "options": [
+        "Live migration GDPR tarafından gerekli kılınır",
+        "Input token'lar daha büyük entropy'ye sahiptir",
+        "KV cache şifrelenmiştir ve taşınamaz",
+        "Hedefte KV'yi yeniden hesaplamak, GB'larca KV cache'i network üzerinden transfer etmekten daha ucuzdur"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "En az bir replica'yı canlı tutarak doğrudan GPU maliyetini öngörülebilir hazırlığa karşı takas eden serverless katmanı hangisidir?",
+      "options": [
+        "min_workers >= 1 olan warm pool",
+        "Katmanlı yükleme",
+        "Bottlerocket pre-seeding",
+        "Live migration"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders neden cold-start hafifletmenin tek bir araç olarak seçilmesi yerine katmanlar arasında istiflenmesi gerektiğini söylüyor?",
+      "options": [
+        "Hiçbir katman her adımı (node provision, imaj pull, ağırlık yükleme, engine init) tek başına ortadan kaldırmaz; katmanları istiflemek her adımı sıkıştırır",
+        "Bu bir regülasyon gereksinimidir",
+        "Modal tüm stack'in sahibidir",
+        "Beş katmanın tümü vLLM'de paketlenmiştir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Diffusion eğitimi neden forward Markov zincirini adım adım simüle etmek yerine herhangi bir t timestep'ini doğrudan seçebilir?",
+      "options": [
+        "Bu ara adımları yok sayan bir yaklaşımdır",
+        "Çünkü birçok Gaussian eklemesinin bileşimi yine bir Gaussian verir ve tek adımda örnekleyebileceğin kapalı formdaki q(x_t|x_0) = N(sqrt(alpha_bar_t) x_0, (1 - alpha_bar_t) I) sağlar",
+        "Çünkü x_t, x_0'dan bağımsızdır",
+        "PyTorch'un autograd'ı tarafından gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "Tekrarlanan Gaussian eklemeleri analitik olarak kapanır. Kümülatif çarpım alpha_bar_t, 't adım sonra ne kadar sinyal kaldığını' encode eder ve zinciri çalıştırmadan x_t'yi doğrudan örnekleyebilirsin. Bu yüzden diffusion eğitimi adım başına O(T) yerine O(1)'dir."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir DDPM'in sinir ağı aslında neyi tahmin eder?",
+      "options": [
+        "Bir sonraki görseli x_{t-1}'i doğrudan",
+        "t adımında eklenen gürültü epsilon'u, ondan x_{t-1}'in ortalaması analitik olarak türetilir",
+        "Girdinin sınıf label'ını",
+        "Sinyal-gürültü oranını"
+      ],
+      "correct": 1,
+      "explanation": "DDPM, modeli epsilon'u tahmin edecek şekilde parametrize eder. Gürültü tahmini ve gürültü schedule'ı verildiğinde, x_{t-1}'in Gaussian ortalaması ve varyansı kapalı formdadır. x_0 veya x_{t-1} yerine epsilon tahmin etmek loss'u düz bir MSE'ye sadeleştirir ve sayısal olarak daha iyi gradient'ler verir."
+    },
+    {
+      "stage": "post",
+      "question": "DDIM neden DDPM ile benzer örnek kalitesini ~20 kat daha az adımda elde eder?",
+      "options": [
+        "DDIM eğitim objective'ini değiştirir",
+        "DDIM sampling'i, trajektori çok daha az adımla aynı son noktaya yakın çarparak ayrıklaştırılabilen deterministik bir ODE olarak yeniden formüle eder; yeniden eğitim gerekmez",
+        "DDIM daha hızlı bir model mimarisi kullanır",
+        "DDIM daha küçük görseller üretir"
+      ],
+      "correct": 1,
+      "explanation": "DDIM'in temel gözlemi, ters sürecin deterministik olarak yeniden parametrize edildiğinde, birkaç adımın iyi yaklaştığı bir ODE'ye dönüşmesidir. Model (ağırlıklar ve loss) DDPM'den değişmez; yalnızca sampler farklıdır. Bir DDPM checkpoint'i DDIM, DPM-Solver veya Euler sampler ile değiştirilebilir şekilde kullanılabilir."
+    },
+    {
+      "stage": "post",
+      "question": "T=1000 olan bir lineer beta schedule için `alpha_bar_t`'yi çiziyorsun ve t=600'e kadar sıfıra yaklaştığını görüyorsun. Bu neden önemli?",
+      "options": [
+        "Önemli değil",
+        "Son %40 timestep'i neredeyse hiç sinyal eklemez; bu timestep'leri eğitmek, ağa zaten yaklaşık olarak N(0, I) olan gürültüyü denoise etmeyi öğretir ve bu kapasiteyi boşa harcar. Cosine veya sigmoid schedule'lar gürültü enjeksiyonunu daha eşit yayarak bunu düzeltir",
+        "alpha_bar_t sonda sıfır olmalı",
+        "PyTorch lineer schedule gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Lineer beta schedule'lar diffusion sürecini çok erken bitirir. t=600'de sinyal zaten yok edilmiştir; t=600-1000'den eğitim ve sampling hiçbir şey eklemez. Cosine schedule'lar (Nichol & Dhariwal) sinyali daha uzun süre tutar, bu yüzden modern modeller bunları kullanır, özellikle daha düşük çözünürlüklerde."
+    },
+    {
+      "stage": "post",
+      "question": "Time conditioning U-Net'e neden one-hot timestep yerine sinüsoidal embedding ile eklenir?",
+      "options": [
+        "One-hot vektörler çok büyük",
+        "Bir sinüsoidal embedding t'de düzgündür, bu da ağın tam olarak görmediği timestep'ler arasında interpolasyon yapmasına izin verir ve mimarinin birden çok derinlikte additive olarak kullanabileceği ölçek bilgisini encode eder",
+        "Sinüsoidal BatchNorm tarafından gereklidir",
+        "One-hot zincir kuralını ihlal ederdi"
+      ],
+      "correct": 1,
+      "explanation": "Sinüsoidal embedding'ler ağa, birden çok frekansta t'nin sürekli bir temsilini verir. Herhangi bir timestep o embedding uzayında benzersiz bir noktadır ve yakın timestep'ler yakın embedding'lerdir. Bu, modelin öğrenilmiş bir timestep başına embedding'den çok daha az parametreyle tüm T değerleri arasında genelleştirmesine izin verir. Transformer pozisyonel encoding ile aynı fikir."
+    }
+  ]
+}

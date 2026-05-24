@@ -1,0 +1,90 @@
+{
+  "lesson": "07-memory-virtual-context-memgpt",
+  "title": "Bellek: Virtual Context ve MemGPT",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "MemGPT hangi OS analojisi üzerine kurulu?",
+      "options": [
+        "Process'ler ve thread'ler",
+        "Sanal bellek: ana context RAM olarak, harici depo disk olarak, bellek tool'ları page in/out olarak",
+        "Network socket'leri",
+        "File descriptor'lar"
+      ],
+      "correct": 1,
+      "explanation": "MemGPT prompt'u RAM'e, harici depoyu diske ve bellek tool'larını page-fault tarzı transfer'lere haritalar."
+    },
+    {
+      "stage": "pre",
+      "question": "Daha büyük context window'ları neden belleği tam çözmüyor?",
+      "options": [
+        "Sağlayıcılar 4k token ile sınırlandırıyor",
+        "Taşma, attention dilüsyonu ve oturumlar arası kalıcılık eksikliği 128k pencerelerle bile vurmaya devam ediyor",
+        "Uzun context maliyetsiz",
+        "Model uzun girdiyi reddediyor"
+      ],
+      "correct": 1,
+      "explanation": "Mem0, 128k-pencere baseline'larının harici belleği olan 4k bir agent'ın yakaladığı fact'leri kaçırdığını ölçtü; taşma, dilüsyon ve kalıcılık devam ediyor."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi MemGPT'nin kanonik bellek tool'larından biri DEĞİLDİR?",
+      "options": [
+        "core_memory_append",
+        "archival_memory_search",
+        "conversation_search",
+        "gradient_memory_update"
+      ],
+      "correct": 3,
+      "explanation": "Gradient bellek tool'u yoktur; yüzey core/archival/conversation operasyonlarıdır."
+    },
+    {
+      "stage": "check",
+      "question": "MemGPT'de interrupt pattern'i ne yapar?",
+      "options": [
+        "Herhangi bir hatada tüm agent çalıştırmasını durdurur",
+        "Konuşma ortasında agent bir bellek tool'u çağırır, runtime onu yürütür ve sonuç sonraki tura eklenir",
+        "Context window'u tamamen atlar",
+        "Bir model yeniden eğitimini tetikler"
+      ],
+      "correct": 1,
+      "explanation": "Memory-as-interrupt: bellek tool'unu çağır, runtime çeker, sonuç bir sonraki turda yeni bir observation olarak döner (Unix read() gibi)."
+    },
+    {
+      "stage": "check",
+      "question": "MemGPT 2024'te hangi prodüksiyon sistemine evrildi?",
+      "options": [
+        "Mem0",
+        "Letta",
+        "Zep",
+        "Pinecone"
+      ],
+      "correct": 1,
+      "explanation": "MemGPT Eylül 2024'te Letta oldu; araştırma repo'su cpacker/MemGPT köken olarak hâlâ duruyor."
+    },
+    {
+      "stage": "post",
+      "question": "Bu context'te memory poisoning nedir?",
+      "options": [
+        "Vector index'leri bozan bir bug",
+        "Saldırganın içeriği bir bellek notu olarak saklanır ve gelecekteki recall'larda yeniden alınır",
+        "RAM mevcutken diskten okumak",
+        "Embedding model versiyon kayması"
+      ],
+      "correct": 1,
+      "explanation": "Harici bellek alınan metindir; saldırgan-erişilebilir içerik bir bellek notuna girerse agent bir sonraki oturumda onu yeniden işler."
+    },
+    {
+      "stage": "post",
+      "question": "Ders neden prodüksiyon bellek sistemlerinin MemGPT varyantları olduğunu söylüyor?",
+      "options": [
+        "Aynı vector DB'yi kullanıyorlar",
+        "Letta, Mem0, Assistants thread'leri ve Claude Agent SDK iki-katmanlı (veya daha fazla) paged-memory pattern'ini çalıştırıyor; farklar operasyonel şekildedir",
+        "MemGPT marka sahibidir",
+        "Ağırlık paylaşıyorlar"
+      ],
+      "correct": 1,
+      "explanation": "Pattern'e göre değil operasyonel şekle göre seç; hepsi MemGPT page in/out iskeletini paylaşır."
+    }
+  ]
+}

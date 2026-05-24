@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Kalkülüsteki zincir kuralı neyi söyler?",
+      "options": ["Toplamın türevi, türevlerin toplamıdır", "Bileşke fonksiyonların türevi, tek tek türevlerinin çarpımıdır", "Çarpımın integrali, integrallerin çarpımıdır", "Fonksiyonlar yalnızca doğrusal iseler türevlenebilir"],
+      "correct": 1,
+      "explanation": "y = f(g(x)) için zincir kuralı dy/dx = f'(g(x)) * g'(x) der. Zincirin her halkasındaki türevleri çarparsın. Bu, backpropagation'ın matematiksel temelidir."
+    },
+    {
+      "stage": "pre",
+      "question": "Hesaplama grafiği (computational graph) nedir?",
+      "options": ["Loss'a karşı eğitim adımlarının grafiği", "Düğümleri işlemler, kenarları değerleri ileri veya gradyanları geri taşıyan yönlü graf", "Bir sinir ağının mimarisini gösteren diyagram", "Eğitim verilerini saklamak için kullanılan bir graf veritabanı"],
+      "correct": 1,
+      "explanation": "Hesaplama grafiği, bir hesaplamadaki işlemler dizisini temsil eder. Veri grafı ileri akar, gradyanlar ise backpropagation sırasında geri akar."
+    },
+    {
+      "stage": "post",
+      "question": "PyTorch neden ileri-mod yerine ters-mod autodiff (backpropagation) kullanır?",
+      "options": ["Ters mod sayısal olarak daha doğrudur", "Ters mod tüm gradyanları tek bir geri geçişte hesaplar; ileri mod ise her giriş değişkeni için bir geçiş gerektirir -- sinir ağlarının milyonlarca girişi ama tek bir loss çıkışı vardır", "Ters mod daha az bellek kullanır", "İleri mod doğrusal olmayan fonksiyonları işleyemez"],
+      "correct": 1,
+      "explanation": "Sinir ağlarının milyonlarca ağırlık girişi vardır ama tek bir skaler loss üretirler. Ters mod toplamda bir geri geçiş gerektirir. İleri mod her ağırlık için bir geçiş -- milyonlarca geçiş -- gerektirir ve bu pratikte uygulanamaz."
+    },
+    {
+      "stage": "post",
+      "question": "Value class autograd motorunda, backward fonksiyonu gradyanları biriktirmek için neden '=' yerine '+=' kullanır?",
+      "options": ["Gradyanları birden çok örnek üzerinde ortalamak için", "Birden fazla işlemde kullanılan bir değer her birinden gradyan katkıları alır ve bunların toplanması gerekir", "Gradyanlarda sayısal taşmayı önlemek için", "Python closure'larda '=' operatörünü desteklemediği için"],
+      "correct": 1,
+      "explanation": "Bir değer birden fazla işleme beslendiğinde (örneğin x hem x*y hem de x+z'de kullanılırsa), toplam gradyanı tüm gelen gradyan katkılarının toplamıdır. '=' kullanmak önceki katkıların üzerine yazar."
+    },
+    {
+      "stage": "post",
+      "question": "Gradient checking nedir ve ne zaman kullanmalısın?",
+      "options": ["Patlayan gradyanları önlemek için gradyanların bir eşik altında olup olmadığını kontrol etmek", "Backward pass'in doğruluğunu doğrulamak için autodiff gradyanlarını sayısal sonlu-fark gradyanlarıyla karşılaştırmak", "Eğitim sırasında tüm parametrelerin sıfır olmayan gradyan alıp almadığını kontrol etmek", "Vanishing gradient'leri tespit etmek için eğitim sırasında gradyan büyüklüklerini izlemek"],
+      "correct": 1,
+      "explanation": "Gradient checking, (f(x+h) - f(x-h)) / 2h ile sayısal türevleri hesaplar ve bunları autodiff gradyanlarıyla karşılaştırır. Autograd motoruna yeni işlemler eklerken veya eğitim hatalarını ayıklarken kullan."
+    }
+  ]
+}

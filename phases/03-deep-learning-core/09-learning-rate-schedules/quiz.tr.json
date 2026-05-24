@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sabit bir learning rate sinir ağlarını eğitmek için neden genellikle suboptimaldir?",
+      "options": [
+        "Çok fazla bellek kullanır",
+        "Geç eğitim için ya çok yüksektir (osilasyona neden olur) ya da erken eğitim için çok düşüktür (hesaplamayı boşa harcar)",
+        "Sabit learning rate'ler overfitting'e yol açar",
+        "Yalnızca SGD ile çalışırlar"
+      ],
+      "correct": 1,
+      "explanation": "Optimal adım boyutu eğitim sırasında değişir. Başlangıçta büyük adımlar hızla mesafe alır. Eğitimin geç aşamalarında bir minimuma oturmak için küçük adımlar gerekir. Sabit bir oran her iki ihtiyacı da karşılayamaz."
+    },
+    {
+      "stage": "pre",
+      "question": "Learning rate warmup'ın amacı nedir?",
+      "options": [
+        "Overfitting'i önlemek",
+        "Adaptif optimizer istatistiklerinin (momentum, varyans) büyük adımlar atılmadan önce stabilize olmasına izin vermek",
+        "Batch size'ı kademeli olarak artırmak",
+        "Ağırlıkları doğru şekilde başlatmak"
+      ],
+      "correct": 1,
+      "explanation": "Adam'ın moment tahminleri sıfırla başlatılır. Erken gradient güncellemeleri güvenilmez istatistiklere dayanır. Warmup, küçük bir LR ile başlar ve yukarı çıkar; Adam'a anlamlı tahminler biriktirmesi için zaman verir."
+    },
+    {
+      "stage": "post",
+      "question": "Llama 3, GPT-3 ve çoğu modern LLM hangi learning rate schedule'ını kullanır?",
+      "options": [
+        "Sabit learning rate",
+        "Her 30 epoch'ta step decay",
+        "Linear warmup ve ardından cosine decay",
+        "Üstel decay"
+      ],
+      "correct": 2,
+      "explanation": "Linear warmup + cosine decay, transformer eğitimi için standarttır. Llama 3, 3e-4'ten 3e-5'e cosine decay ile 2000 warmup adımı kullandı. Bu schedule milestone ayarı gerektirmez."
+    },
+    {
+      "stage": "post",
+      "question": "1cycle policy'yi diğer schedule'lardan farklı kılan nedir?",
+      "options": [
+        "Sabit bir learning rate kullanır",
+        "Eğitimin ilk yarısında learning rate'i YUKARI doğru, sonra tekrar aşağıya çeker -- yüksek LR fazı regularization gibi davranır",
+        "Yalnızca SGD ile çalışır",
+        "Hyperparameter ayarı gerektirmez"
+      ],
+      "correct": 1,
+      "explanation": "Leslie Smith'in 1cycle'ı LR'yi düşükten yükseğe (ilk yarı), sonra yüksekten çok düşüğe (ikinci yarı) çeker. Yüksek LR fazı, modelin en iyi havzaya oturmadan önce loss landscape'inin daha fazlasını keşfetmesine yardımcı olur."
+    },
+    {
+      "stage": "post",
+      "question": "Eğitim loss'u aniden sıçrar ve ıraksarsa, en olası learning rate problemi nedir?",
+      "options": [
+        "Learning rate çok düşük",
+        "Learning rate çok yüksek, optimizer'ın minimumun üzerinden geçmesine neden oluyor",
+        "Warmup süresi çok uzun",
+        "Schedule çok yavaş decay ediyor"
+      ],
+      "correct": 1,
+      "explanation": "Çok yüksek bir learning rate, optimizer'ın loss havzasından daha büyük adımlar atmasına neden olur; minimumun üzerinden geçer ve loss artar. Bu, ani ıraksama olarak kendini gösterir."
+    }
+  ]
+}

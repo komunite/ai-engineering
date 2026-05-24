@@ -1,0 +1,102 @@
+{
+  "lesson": "24-coreference-resolution",
+  "title": "Coreference Resolution",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Coreference resolution'ın amacı nedir?",
+      "options": [
+        "Aynı gerçek dünya entity'sine referans veren tüm mention'ları (named, nominal, pronominal) kümele",
+        "Söz türlerini etiketle",
+        "İlişkileri çıkar",
+        "Zamirleri isimlere çevir"
+      ],
+      "correct": 0,
+      "explanation": "Coref aynı entity'ye referans veren mention span'lerini kümeler."
+    },
+    {
+      "stage": "pre",
+      "question": "'Nominal' bir mention hangi tür ifadedir?",
+      "options": [
+        "Yalnızca özel isim",
+        "'CEO' veya 'şirket' gibi bir isim öbeği",
+        "'o' gibi bir zamir",
+        "Bir fiil"
+      ],
+      "correct": 1,
+      "explanation": "Nominal mention'lar 'şirket' gibi isim öbekleridir; pronominal mention'lar zamirlerdir."
+    },
+    {
+      "stage": "check",
+      "question": "Modern (Lee ve diğerleri, 2017) coref mimarisi nedir?",
+      "options": [
+        "BM25 retrieval",
+        "Yalnızca kural tabanlı sözdizimsel parsing",
+        "Karar ağaçları",
+        "End-to-end span tabanlı: span'leri sırala, mention'ları skorla, sonra antecedent olasılıklarını skorla ve greedy kümele"
+      ],
+      "correct": 3,
+      "explanation": "End-to-end neural coref span'leri sıralar ve mention + antecedent skorlamayı birlikte öğrenir."
+    },
+    {
+      "stage": "check",
+      "question": "CoNLL F1 neyi ortalar?",
+      "options": [
+        "Diller arası F1",
+        "MUC, B-cubed ve CEAF-phi4 F1 skorlarını",
+        "Token ve span F1'i",
+        "Precision ve recall'ı"
+      ],
+      "correct": 1,
+      "explanation": "CoNLL F1, MUC, B-cubed ve CEAF-phi4 metriklerinin ortalamasıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Bridging anaphora nedir?",
+      "options": [
+        "Bir hatalı çeviri",
+        "'Tekerlekler' gibi, daha önce bahsedilen bir arabanın tekerleklerini ima eden örtük bir referans",
+        "Referansından önceki bir zamir",
+        "Antecedent'i olmayan bir zamir"
+      ],
+      "correct": 1,
+      "explanation": "Bridging, bir mention'ı açıkça belirtilmeyen ancak ima edilmiş bir part-of veya ilgili entity'ye bağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Uzun dokümanlarda yalnızca LLM ile coref neden güvenilmezdir?",
+      "options": [
+        "LLM'ler metin okuyamaz",
+        "Tokenizer'lar başarısız olur",
+        "Tek çağrılı LLM'ler 50+ paragraf arasında mention'ları aşırı birleştirir veya sessizce düşürür; sliding-window artı merge gerektirir",
+        "Coref CFG gerektirir"
+      ],
+      "correct": 2,
+      "explanation": "Uzun-doc LLM coref bozulur; sliding-window ile cross-window merge bunu hafifletir."
+    },
+    {
+      "stage": "post",
+      "question": "Coref kümelerini aşağı akış görevlerinden önce NER sonuçlarına neden birleştirmelisin?",
+      "options": [
+        "Wikidata tarafından zorunlu",
+        "Token sayısını artırmak için",
+        "Daha düşük gecikme",
+        "Aşağı akış görevleri yüzey mention başına bir entity yerine cluster başına bir entity görür ve kapsama dramatik şekilde artar"
+      ],
+      "correct": 3,
+      "explanation": "Birleştirme olmadan NER her yüzey formunu ayrı sayar ve entity mention'larının %60-80'ini kaçırır."
+    },
+    {
+      "stage": "post",
+      "question": "Sabit kodlanmış cinsiyet kuralları coref sistemlerinde neden kırılganlıktır?",
+      "options": [
+        "Non-binary referent'ler, organizasyonlar ve hayvanlar üzerinde başarısız olurlar; öğrenilmiş skorlama daha sağlamdır",
+        "GPU gerektirirler",
+        "Çok hızlı çalışırlar",
+        "POS tag kullanamazlar"
+      ],
+      "correct": 0,
+      "explanation": "Cinsiyet heuristic'leri demografik olarak çeşitli metinde başarısız olur; öğrenilmiş modeller tercih edilir."
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "lesson": "13-question-answering",
+  "title": "Soru-Cevap Sistemleri",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Extractive QA neyi tahmin eder?",
+      "options": [
+        "Üretilmiş bir doğal dil cevabı",
+        "Yalnızca bir güven skoru",
+        "Cevabın verilen pasaj içinde başlangıç ve bitiş token indekslerini",
+        "Geri çağrılan bir pasaj ID'sini"
+      ],
+      "correct": 2,
+      "explanation": "Extractive QA, cevabı içeren pasaj span'ini çıkar."
+    },
+    {
+      "stage": "pre",
+      "question": "Temel bir RAG pipeline'ını hangi iki bileşen tanımlar?",
+      "options": [
+        "Birlikte eğitilen bir encoder ve decoder",
+        "Bir reranker ve bir çevirmen",
+        "Tokenizer ve POS tagger",
+        "Bir retriever (ilgili pasajları bulur) ve bir reader (cevabı çıkarır veya üretir)"
+      ],
+      "correct": 3,
+      "explanation": "RAG = retriever (ilgili bağlamı bulur) artı reader (ondan cevap verir)."
+    },
+    {
+      "stage": "check",
+      "question": "SQuAD'de Exact Match (EM) neyi ölçer?",
+      "options": [
+        "Edit distance",
+        "Kelime başına örtüşme",
+        "Tahminin normalizasyondan sonra (küçük harf, noktalama temizleme, article'ları kaldırma) referansla tam eşleşip eşleşmediğini",
+        "Token seviyesi F1"
+      ],
+      "correct": 2,
+      "explanation": "EM, tanımlı bir normalizasyon adımından sonra tam eşitliktir; kısmi eşleşmeler sıfır puan alır."
+    },
+    {
+      "stage": "check",
+      "question": "deepset/roberta-base-squad2 bir SQuAD 1.1 modeline ne ekler?",
+      "options": [
+        "Çok dilli destek",
+        "Cevaplanamaz sorular üzerinde eğitim, böylece model bir null cevap tahmin edebilir",
+        "Daha büyük context window",
+        "Diller arası retrieval"
+      ],
+      "correct": 1,
+      "explanation": "SQuAD 2.0 cevaplanamayan ögeleri içerir; üzerinde eğitilen modeller 'cevap yok' tahmin edebilir."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi RAGAS boyutu özellikle hallucination'ları hedefler?",
+      "options": [
+        "Answer relevance",
+        "Context recall",
+        "Faithfulness, cevap iddiaları ile geri çağrılan bağlam arasında NLI entailment ile ölçülür",
+        "Context precision"
+      ],
+      "correct": 2,
+      "explanation": "Faithfulness, her cevap iddiasını geri çağrılan bağlama karşı NLI entailment ile kontrol eder."
+    },
+    {
+      "stage": "post",
+      "question": "Reader accuracy'sini değerlendirmeden önce neden retrieval recall'ı ölçmelisin?",
+      "options": [
+        "Transformer'lar tarafından zorunlu kılınmıştır",
+        "Recall ROUGE'u belirler",
+        "Reader gecikmesi ona bağlıdır",
+        "Doğru pasaj top-k içinde değilse, reader ne kadar iyi olursa olsun başaramaz"
+      ],
+      "correct": 3,
+      "explanation": "Doğru pasaj eksikse reader cevaplayamaz; retrieval recall reader performansını sınırlar."
+    },
+    {
+      "stage": "post",
+      "question": "Hangi prompt pattern RAG üretiminde hallucination'ları azaltır?",
+      "options": [
+        "Modele yalnızca sağlanan bağlamdan cevap vermesini ve bağlam yetersizse 'bilmiyorum' demesini söylemek",
+        "Daha fazla pasaj eklemek",
+        "Modelden yaratıcı olmasını istemek",
+        "Soruyu kaldırmak"
+      ],
+      "correct": 0,
+      "explanation": "Grounding + açık reddetme talimatları hallucination oranlarını önemli ölçüde keser."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da generative RAG yerine extractive QA ne zaman hâlâ tercih edilir?",
+      "options": [
+        "Sohbet QA'sında",
+        "Otoriter kaynaklardan birebir alıntının gerekli olduğu düzenlenmiş alanlarda (hukuk, tıp, audit)",
+        "Çok dilli destek için",
+        "Açık alan trivia'da"
+      ],
+      "correct": 1,
+      "explanation": "Extractive QA otoriter bir corpus'tan birebir alıntı verir, ki compliance bağlamları bunu talep eder."
+    }
+  ]
+}

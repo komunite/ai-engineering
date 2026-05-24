@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Gradient descent'te learning rate neyi kontrol eder?",
+      "options": [
+        "Model tarafından kullanılan öznitelik sayısını",
+        "Modelin kaç epoch eğitileceğini",
+        "Her parametre güncelleme adımının büyüklüğünü",
+        "Eğitim verisinin test verisine oranını"
+      ],
+      "correct": 2,
+      "explanation": "Learning rate, gradient descent adımı başına ağırlıkların ne kadar değişeceğini kontrol eden bir scalar'dır. Çok büyükse ıraksamaya, çok küçükse yavaş yakınsamaya yol açar."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir regresyon modeli için R-kare = 0 ne anlama gelir?",
+      "options": [
+        "Model mükemmel tahminler yapıyor",
+        "Model, hedefin ortalamasını her seferinde tahmin etmekten daha iyi değil",
+        "Modelin hatası negatif",
+        "Model henüz eğitilmemiş"
+      ],
+      "correct": 1,
+      "explanation": "R-kare = 0, modelin hedefteki varyansın hiçbirini açıklamadığı anlamına gelir. Her seferinde sadece ortalamayı tahmin etmekle tamamen aynı performansı verir."
+    },
+    {
+      "stage": "post",
+      "question": "Çoklu doğrusal regresyonda gradient descent için feature scaling neden önemlidir?",
+      "options": [
+        "Modeli daha yorumlanabilir hale getirir",
+        "Cost yüzeyinin uzamasını önler ve daha hızlı yakınsamaya izin verir",
+        "Gereken öznitelik sayısını azaltır",
+        "Modelin global minimumu bulmasını garanti eder"
+      ],
+      "correct": 1,
+      "explanation": "Öznitelikler çok farklı ölçeklere sahipse cost yüzeyi uzar. Gradient descent yakınsamak için çok daha fazla adım atar. Öznitelikleri standartlaştırmak yüzeyi daha küresel hale getirir."
+    },
+    {
+      "stage": "post",
+      "question": "Normal denklem optimal ağırlıkları doğrudan verir. Bunun yerine neden gradient descent tercih edersin?",
+      "options": [
+        "Gradient descent her zaman daha doğru sonuç verir",
+        "Normal denklem doğrusal regresyon için çalışmaz",
+        "Normal denklemdeki matris tersi alımı, öznitelik sayısında O(n^3)'tür ve binlerce öznitelik için çok yavaştır",
+        "Gradient descent veriyi depolamaktan daha az bellek gerektirir"
+      ],
+      "correct": 2,
+      "explanation": "Normal denklem, X^T * X'in tersini almayı gerektirir; bu, öznitelik sayısında O(n^3)'tür. Büyük öznitelik sayıları için gradient descent daha verimlidir."
+    },
+    {
+      "stage": "post",
+      "question": "10. dereceden bir polinom regresyon modeli eğitim verisine kusursuz uyuyor (R^2 = 1.0) ama test verisinde R^2 = 0.3. Ne yapmalısın?",
+      "options": [
+        "Daha iyi eğitim uyumu için polinom derecesini 20'ye çıkar",
+        "Overfitting'i önlemek için model karmaşıklığını azalt (daha düşük derece) veya regularization (Ridge) ekle",
+        "Modelin ezberleyememesi için daha az eğitim verisi topla",
+        "Test setini kaldır ve sadece eğitim R^2'sini raporla"
+      ],
+      "correct": 1,
+      "explanation": "Mükemmel eğitim uyumu ile zayıf test uyumu overfitting'dir. Çözüm karmaşıklığı azaltmak (daha düşük polinom derecesi) veya büyük ağırlıkları cezalandırmak için regularization eklemektir."
+    }
+  ]
+}

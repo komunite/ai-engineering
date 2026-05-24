@@ -1,0 +1,102 @@
+{
+  "lesson": "19-subword-tokenization",
+  "title": "Subword Tokenization — BPE, WordPiece, Unigram, SentencePiece",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Subword tokenization sana kelime seviyesi vocabulary'ye karşı ne kazandırır?",
+      "options": [
+        "Nadir kelimeler bilinen subword parçalarına ayrışır, OOV'yi ortadan kaldırır ve vocabulary'yi sınırlı tutar",
+        "Daha küçük modeller",
+        "Daha hızlı eğitim",
+        "Daha iyi embedding'ler"
+      ],
+      "correct": 0,
+      "explanation": "Subword token'lar her girdiyi ayrıştırarak kapsar, kelime seviyesi vocab'in OOV problemini kaldırır."
+    },
+    {
+      "stage": "pre",
+      "question": "GPT-2 neden karakter seviyesi BPE yerine byte-level BPE kullanır?",
+      "options": [
+        "Transformer'lar tarafından zorunlu",
+        "Byte BPE merge'leri atlar",
+        "256-byte temel vocabulary her UTF-8 girdiyi kapsar, hiçbir [UNK] token'ı olmamasını garanti eder",
+        "Byte'lar daha küçüktür"
+      ],
+      "correct": 2,
+      "explanation": "Byte-level BPE 256 byte'tan başlar ve her girdi encode olur; hiçbir şey OOV değildir."
+    },
+    {
+      "stage": "check",
+      "question": "Unigram tokenizer vocabulary'sini nasıl kurar?",
+      "options": [
+        "Greedy IDF ağırlıklandırma",
+        "Büyük bir aday setinden başla, kaldırılması corpus log-likelihood'una en az zarar veren token'ları iteratif olarak prune et",
+        "Greedy sık çift birleştirme",
+        "Rastgele örnekleme"
+      ],
+      "correct": 1,
+      "explanation": "Unigram bir unigram dil modeli fit eder ve hedef vocab boyutuna ulaşmak için en az faydalı token'ları iteratif olarak çıkarır."
+    },
+    {
+      "stage": "check",
+      "question": "WordPiece'in merge kriteri BPE'den ne ile ayrılır?",
+      "options": [
+        "WordPiece byte kullanır",
+        "WordPiece unsupervised'dır",
+        "WordPiece eğitim corpus likelihood'unu maksimize eden çiftleri birleştirir, BPE en sık çifti birleştirir",
+        "WordPiece merge'leri atlar"
+      ],
+      "correct": 2,
+      "explanation": "WordPiece merge'leri likelihood ile seçer; BPE ham frekans ile seçer."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi araç doğrudan ham çok dilli Unicode metin üzerinde bir tokenizer eğitir?",
+      "options": [
+        "spaCy",
+        "tiktoken",
+        "tokenizers-lite",
+        "SentencePiece (boşluğu özel bir işaretleyici olarak encode eder ve BPE veya Unigram eğitir)"
+      ],
+      "correct": 3,
+      "explanation": "SentencePiece BPE/Unigram'i ön tokenization olmadan ham metinde eğitir; tiktoken yalnızca encode eder."
+    },
+    {
+      "stage": "post",
+      "question": "Production CI neden deploy edilen tokenizer.json'ı hash kontrolü yapmalıdır?",
+      "options": [
+        "Tokenizer drift'i modelin eğitildiği token ID'lerinden farklı ID'ler üretir, çıktıları sessizce bozar",
+        "Hugging Face tarafından zorunlu",
+        "Depolamayı sıkıştırmak için",
+        "Vocabulary boyutunu azaltır"
+      ],
+      "correct": 0,
+      "explanation": "Küçük tokenizer değişiklikleri bile ID'leri kaydırır; bir hash kontrolü drift'i kullanıcılara ulaşmadan yakalar."
+    },
+    {
+      "stage": "post",
+      "question": "Tek bir emoji'nin birçok token alması için yaygın bir neden nedir?",
+      "options": [
+        "Emoji'ler ayrılmıştır",
+        "Çok-codepoint'li emoji'ler birden fazla UTF-8 byte'a encode olur; özel token'lar olmadan her byte kendi subword'ü olur",
+        "Emoji'ler float olarak depolanır",
+        "Emoji'ler stop karakterleridir"
+      ],
+      "correct": 1,
+      "explanation": "Bileşik emoji'ler birkaç byte olarak encode olur; byte-level tokenizer'lar glyph başına birden çok token kullanabilir."
+    },
+    {
+      "stage": "post",
+      "question": "Yeni bir monolingual transformer için vocabulary boyutunu hangi heuristic yönlendirir?",
+      "options": [
+        "Her zaman 8000",
+        "Her zaman 1M",
+        "1B parametrenin altındaki modeller için kabaca 32k; 1-10B için 50-100k; çok dilli veya frontier modeller için 200k+",
+        "Eğitim corpus boyutuna eşle"
+      ],
+      "correct": 2,
+      "explanation": "Vocab boyutu model ve dil kapsamına göre ölçeklenir; bunlar kaba topluluk varsayılanlarıdır."
+    }
+  ]
+}

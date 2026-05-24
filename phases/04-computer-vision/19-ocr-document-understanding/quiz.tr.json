@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "OCR neden düz cross-entropy yerine CTC loss kullanır?",
+      "options": [
+        "CTC daha hızlı",
+        "OCR sabit uzunluklu bir feature dizisini timestep başına hizalama olmadan değişken uzunluklu bir karakter dizisine eşler; CTC loss, repeat ve blank'leri kaldırdıktan sonra hedefe indirgenen tüm hizalamalar üzerinde marginalize eder, böylece karakter seviyesi zaman etiketi olmadan eğitebilirsin",
+        "CTC PyTorch tarafından gereklidir",
+        "Cross-entropy uzun diziler için taşar"
+      ],
+      "correct": 1,
+      "explanation": "Tanıma, zaman adımı başına bir dağılım üretir, ancak hedef metnin adım başına hizalaması yoktur. CTC bunu, merge-repeats-and-remove-blanks işlemi yoluyla hedefe indirgenen her hizalama üzerinde toplam alarak halleder. Bu yüzden CRNN'ler, her karakterin görselde nerede başlayıp bittiğini bilmeden yalnızca (görsel, metin) çiftleri üzerinde eğitilebilir."
+    },
+    {
+      "stage": "pre",
+      "question": "CTC decoding'de blank token ne yapar?",
+      "options": [
+        "Diziyi sabit uzunluğa pad eder",
+        "Aynı bitişik karakterleri ayırır, böylece çift L'li 'hello' gibi çıktılar modelin 'h e l _ l o' yayması ile üretilebilir -- blank olmadan, 'l l' tek bir 'l'ye çökerdi",
+        "Gürültülü bölgeleri maskeler",
+        "Dizi sonunu gösterir"
+      ],
+      "correct": 1,
+      "explanation": "Blank, CTC'nin çift karakterleri encode etmesini sağlayan mekanizmadır. 'll', 'merge repeats' adımının ikisini farklı tutması için iki l arasında bir blank'a ihtiyaç duyar: 'l _ l' birleştirmeden hayatta kalır, 'l l' kalmaz. Blank olmadan CTC, bitişik aynı karakter içeren herhangi bir kelimeyi temsil edemez."
+    },
+    {
+      "stage": "post",
+      "question": "Greedy CTC decoding bazen basit veri setlerinde beam search'ten neden daha iyidir?",
+      "options": [
+        "Greedy her zaman daha iyidir",
+        "Model her adımda kendinden eminse (temiz el yazısı, basılı font'lar), greedy'nin argmax'ı genellikle beam kazananıdır; beam search hiçbir accuracy kazancı olmadan latency ekler. Gürültülü veya belirsiz girdilerde beam search yardımcı olur",
+        "Beam search bir dil modeli gerektirir",
+        "Greedy'yi implement etmek daha kolay"
+      ],
+      "correct": 1,
+      "explanation": "Beam search yalnızca adım başına argmax güvenilmez olduğunda kazanır -- belirsiz karakterler, örtüşen harfler, bozulmuş tarama. Temiz basılı metin için model her adımda kendinden emindir ve greedy beam'in CER'inin %1'i içindedir. Her zaman ikisini benchmark et; latency takası gerçektir."
+    },
+    {
+      "stage": "post",
+      "question": "Donut açık metin tespiti ve karakter tanımayı nasıl atlar?",
+      "options": [
+        "İçeride harici bir OCR motoru kullanır",
+        "Görselden doğrudan son çıktı string'ini (genellikle JSON) üretmek için eğitilmiş bir ViT encoder + metin decoder'dır; model lokalizasyon ve tanımayı eğitim objective'i ile zımnen öğrenir",
+        "Sabit layout'lu doküman kategorileriyle sınırlıdır",
+        "Görselleri bir CNN metin detector'ı ile ön işler"
+      ],
+      "correct": 1,
+      "explanation": "Donut end-to-end bir modeldir: ViT encoder tüm dokümanı görür, transformer decoder hedef metni veya JSON'u auto-regressive olarak yayar. Detector + recognizer + layout modülü pipeline'ı yok. Bu, aşamalar arası hata birikimini atlar ama önemsediğin belirli doküman tipleri için büyük etiketli eğitim setleri gerektirir."
+    },
+    {
+      "stage": "post",
+      "question": "Makbuzlardan `invoice_total` çıkarmak için 2026'da hangi yaklaşım tipik olarak en iyisidir?",
+      "options": [
+        "Tesseract çıktısı üzerinde el yapımı bir regex",
+        "Hedef makbuzların küçük bir etiketli setinde fine-tune edilmiş Donut veya bir VLM; ikisi de layout ve semantik çıkarımı tek bir modelde halleder ve makbuz varyantları arasında pipeline tabanlı yaklaşımlardan daha iyi genelleşir",
+        "Yalnızca klasik OCR yeterince güvenilir",
+        "Her alan için ayrı bir CNN"
+      ],
+      "correct": 1,
+      "explanation": "Yapısal alan çıkarımı eskiden LayoutLM + heuristic'lerin alanıydı. End-to-end modeller (Donut, Qwen-VL-OCR) o yolu geride bıraktı: bir görsel kabul ederler ve doğrudan JSON üretirler. Küçük bir etiketli makbuz seti için (100-1000), Donut'u fine-tune etmek herhangi bir OCR + kural pipeline'ından daha yüksek F1'e ulaşır."
+    }
+  ]
+}

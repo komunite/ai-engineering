@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir action-conditioned dünya modeli (Genie 3) ile saf bir video üretim modeli (Sora 2) arasındaki mimari fark nedir?",
+      "options": [
+        "Action-conditioned modeller daha küçük",
+        "Saf video üreticileri t=0'da bir prompt'a koşullanır ve roll out yapar; action-conditioned dünya modelleri frame başına latent veya açık bir aksiyon alır, böylece kullanıcı roll out'u üretim ortasında yönlendirebilir",
+        "Yalnızca eğitim veri setleri farklıdır",
+        "Dünya modelleri yalnızca 3D sahnelerde çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Sora 2, spacetime token'lar üzerinde autoregressive'dir; prompt'u sahneyi belirler ama roll out ortasında yönü değiştiremezsin. Genie 3 her adımda latent bir aksiyonu çıkarsar veya alır ve bir sonraki frame tahminini buna koşullar, böylece kullanıcının simüle edilen dünyayla etkileşime girmesine izin verir. Bu interaktiflik, bir modeli bir 'dünya simülatörü' yapan şeydir, bir video üretici değil."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir video transformer'da divided attention ne demektir?",
+      "options": [
+        "Token'ların yarısı maskeli",
+        "Her block bir temporal attention (aynı spatial pozisyon, frame'ler arası) ve ardından bir spatial attention (aynı frame, pozisyonlar arası) yapar; bu maliyeti O((T*H*W)^2)'den O((H*W)*T^2) + O(T*(H*W)^2)'ye faktörize eder -- joint product'tan dramatik olarak daha ucuz",
+        "Yalnızca katmanların yarısı attention çalıştırır",
+        "Attention GPU'lar arasında bölünür"
+      ],
+      "correct": 1,
+      "explanation": "Spacetime token'lar üzerinde tam joint attention yasaklayıcıdır: T=150 temporal token ve 60x45 spatial grid (2700 spatial token) için joint (T*H*W)^2 ≈ 1.6e11 çifttir. Divided attention her spatial pozisyonda temporal attention çalıştırır (H*W * T^2 ≈ 6.1e7) ve her timestep'te spatial attention (T * (H*W)^2 ≈ 1.1e9) -- birkaç büyüklük sıralı daha az. TimeSformer bu pattern'i tanıttı; neredeyse her 2026 video DiT'i (Sora, Wan, HunyuanVideo) bir divided veya window varyantı kullanır."
+    },
+    {
+      "stage": "post",
+      "question": "Sora 2'nin 2026 sürümü daha iyi fiziksel makullük reklamı yaptı. Bu spesifik olarak hangi başarısızlık modlarını hedefliyordu?",
+      "options": [
+        "Renk dengesi ve kontrast",
+        "Ağırlık, denge, nesne kalıcılığı, neden-sonuç -- model şimdi düşürülen nesneleri, çarpışan karakterleri ve 'kasıtlı başarısızlıkları' (kaçırılmış bir zıplama) Sora 1'den daha inandırıcı şekilde halleder",
+        "Görseller içinde metin render etme",
+        "Video uzunluğu"
+      ],
+      "correct": 1,
+      "explanation": "Önceki nesil video modelleri spagetti yemek, bardaktan içmek ve kalıcı nesneli sahnelerde meşhur şekilde başarısız oluyordu -- eller nesnelerden geçerdi, öğeler aksiyon ortasında kaybolurdu. Sora 2 ağırlık, denge, nesne kalıcılığı ve neden-sonuç konusunda iyileştirmeleri açıkça reklam ediyor, dahili ve halka açık makullük benchmark'larına karşı ölçülmüş. Bunlar alanın hâlâ üzerinde çalıştığı baskın kalite başarısızlıklarıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Gelişmekte olan robotik stack'inde (VLM + video üretimi + inverse dynamics), inverse dynamics modeli ne yapar?",
+      "options": [
+        "Bir sonraki frame'i üretir",
+        "Bir çift (mevcut gözlem, video modelinden istenen sonraki gözlem) alır ve onları birbirine bağlayacak düşük seviyeli motor aksiyonunu çıkarır; bu, hayal edilen roll out'lar ile gerçek aktüasyon arasındaki döngüyü kapatır",
+        "VLM'i eğitir",
+        "Eğitim verisini etiketler"
+      ],
+      "correct": 1,
+      "explanation": "VLM planlar, video modeli hayal eder ve inverse dynamics modeli hayali motor komutlarına dönüştürür. İki ardışık gözlem verildiğinde, inverse dynamics şunu sorar: bu geçişi hangi aksiyon üretti? Bu üç bileşenli stack, bir robotun büyük ölçüde öğrenilmiş bir simülatörde eğitilmesine izin verir, veri üretmek için video modelini ve yürütmek için inverse dynamics modelini kullanarak."
+    },
+    {
+      "stage": "post",
+      "question": "Otonom sürüş ekipleri hangi maliyeti yerine geçirmek için dünya modellerini (Cosmos-Drive, Gaia-2, DrivingWorld) kullanır?",
+      "options": [
+        "Gerçek filo sigortası",
+        "Nadir veya tehlikeli corner case'ler (yaya jaywalk'ları, buzlu yollar, olağandışı araçlar) için pahalı gerçek dünya veri toplama; sentezlenen sürüş videosu o senaryolar için talep üzerine eğitim ve değerlendirme verisi sağlar",
+        "Yol ücretleri",
+        "Araç değer kaybı"
+      ],
+      "correct": 1,
+      "explanation": "Corner-case sürüş verisi toplamak milyonlarca gerçek dünya mili gerektirir. Cosmos-Drive, Gaia-2 ve DrivingWorld bunu trajektorilere ve haritalara koşullu olarak üretir. Ekipler bu veriyi eğitim setlerini genişletmek, planner'ları tekrarlanabilir koşullarda değerlendirmek ve gerçekte etik olarak süremedikleri senaryoları de-risk etmek için kullanır. Gerçek dünya toplamanın bir kısmını sentez ile değiştirmek, 2026'da video dünya modelleri için en açık production kazançlarından biridir."
+    }
+  ]
+}

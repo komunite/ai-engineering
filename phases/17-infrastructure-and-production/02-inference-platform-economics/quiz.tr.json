@@ -1,0 +1,78 @@
+{
+  "lesson": "02-inference-platform-economics",
+  "title": "Çıkarım Platformu Ekonomisi — Fireworks, Together, Baseten, Modal, Replicate, Anyscale",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders 2026 çıkarım sağlayıcılarını organize etmek için hangi üç pazar segmentini kullanıyor?",
+      "options": [
+        "Ücretsiz, ücretli, enterprise",
+        "Single-tenant, multi-tenant, on-prem",
+        "Custom silikon, GPU platformları, API-first marketplace'ler",
+        "Açık kaynak, ticari, hybrid"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Yaklaşık hangi sürekli GPU kullanımında dakika başı faturalama (Baseten, Modal) token başı faturalamayı (Fireworks, Together) geçmeye başlar?",
+      "options": [
+        "%60",
+        "%90",
+        "%30",
+        "%5"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi platform Python-native serverless, saniye başı faturalama ve pre-warming sonrası 2-4s cold start olarak tanımlanıyor?",
+      "options": [
+        "Baseten",
+        "Modal",
+        "Fireworks",
+        "Anyscale"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Fireworks'ün dikkat çekici LoRA fiyatlandırma farklılaştırıcısı nedir?",
+      "options": [
+        "LoRA ile servis edilen requestler base modelden daha pahalıdır",
+        "LoRA hiç desteklenmiyor",
+        "LoRA requestleri ayrı bir dedicated GPU sözleşmesi gerektirir",
+        "LoRA ile servis edilen requestler base modelin token başı fiyatından ücretlendirilir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "SOC 2 Type II, HIPAA-uyumlu duruş ve dedicated GPU'lara ihtiyacı olan regüle bir sağlık müşterisine hangi platform uygundur?",
+      "options": [
+        "Baseten",
+        "Together",
+        "Anyscale",
+        "Replicate"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders neden custom-engine iddialarının platform katmanında çoğunlukla pazarlama gölgesi olduğunu savunuyor?",
+      "options": [
+        "Token başı fiyatlandırma tek gerçek farklılaştırıcıdır",
+        "vLLM ve SGLang üretim açık kaynak çıkarımının yaklaşık %80'ini temsil ediyor; bu yüzden platform farklılaşması engine yerine DX, attribution ve SLA'lardan geliyor",
+        "Tüm custom engine'ler TensorRT-LLM fork'udur",
+        "Custom engine'ler vLLM'i asla geçemez"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

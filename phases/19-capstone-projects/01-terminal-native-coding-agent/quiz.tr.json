@@ -1,0 +1,90 @@
+{
+  "lesson": "01-terminal-native-coding-agent",
+  "title": "Capstone 01 — Terminal-Native Coding Agent",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "2026'nın terminal coding agent'ları hangi loop şeklini paylaşır?",
+      "options": [
+        "Plan, act, observe, recover",
+        "Encode, decode, sample, stream",
+        "Train, evaluate, deploy, monitor",
+        "Fetch, embed, rank, synthesize"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Harness her görevi neden E2B veya Daytona sandbox içinde çalıştırır?",
+      "options": [
+        "Dosya sistemini ve tool çalıştırmayı host'tan izole etmek için, böylece worktree tamamlandığında yıkılabilir",
+        "Model sağlayıcı rate limit'lerini atlamak için",
+        "Soğuk cache'lerde token throughput benchmark'lamak için",
+        "Agent loop'a GPU erişimi sağlamak için"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Yıkıcı shell komutlarını çalıştırılmadan önce engellemek için doğal yer hangi built-in hook'tur?",
+      "options": [
+        "PreToolUse",
+        "SessionStart",
+        "Stop",
+        "PostToolUse"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Capstone her tool sonucunu yaklaşık 4k token ile sınırlandırır. Bu öncelikle hangi hata moduna karşı koruma sağlar?",
+      "options": [
+        "Kötücül shell metakarakterleri üzerinden sandbox kaçışı",
+        "Bir tool büyük bir dump döndürdüğünde context zehirlenmesi ve kontrolsüz maliyet",
+        "Devam ettirilen session'lar arasında bayat plan state'i",
+        "Tool-call izlerine model overfitting'i"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "150k-token eşiğinde PreCompact hook ne yapar?",
+      "options": [
+        "Çalıştırmayı iptal eder ve kullanıcı bütçesini iade eder",
+        "Eski turları bir prior-state bloğuna özetler, böylece plan ve yeni gözlemler hâlâ sığar",
+        "İlerlemeyi yedeklemek için mevcut branch'i force-push eder",
+        "Backing model'i daha küçük bir draft model ile değiştirir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Capstone, 30-issue'lık SWE-bench Pro alt kümesinde harness'ını hangi baseline ile karşılaştırır?",
+      "options": [
+        "OpenCode",
+        "mini-swe-agent",
+        "Live-SWE-agent",
+        "Aider"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Deliverable hangi metrik setine karşı ölçüm yapar?",
+      "options": [
+        "WER, MOS ve first-audio-out",
+        "Perplexity, BLEU ve ROUGE",
+        "pass@1, turns-per-task ve dollar-per-task",
+        "MRR@10 ve nDCG@10"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

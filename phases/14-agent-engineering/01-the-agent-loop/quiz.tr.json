@@ -1,0 +1,90 @@
+{
+  "lesson": "01-the-agent-loop",
+  "title": "Agent Döngüsü: Gözlemle, Düşün, Aksiyon Al",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tek başına bir LLM neden agent yerine autocomplete gibi davranır?",
+      "options": [
+        "Dosya okuyamaz, sorgu çalıştıramaz veya iddiaları dış dünyaya karşı doğrulayamaz",
+        "Context window'u bir soruyu tutamayacak kadar küçüktür",
+        "System prompt olmadan cevap vermeyi reddeder",
+        "Her seferinde yalnızca tek token üretir"
+      ],
+      "correct": 0,
+      "explanation": "Döngüsü ve tool'u olmayan bir LLM yalnızca ağırlıklarından metin üretebilir; state'i gözlemleyemez veya üzerinde aksiyon alamaz."
+    },
+    {
+      "stage": "pre",
+      "question": "Yao ve diğerleri 2022'deki kanonik ReAct trace'inde hangi üç etiket geçer?",
+      "options": [
+        "Prompt, Response, Reward",
+        "Thought, Action, Observation",
+        "Plan, Execute, Reflect",
+        "System, User, Assistant"
+      ],
+      "correct": 1,
+      "explanation": "ReAct tek bir akış içinde Thought, Action ve Observation satırlarını iç içe geçirir."
+    },
+    {
+      "stage": "check",
+      "question": "Dersin agent döngüsü için listelediği beş bileşenden hangisi DEĞİLDİR?",
+      "options": [
+        "Message buffer",
+        "Tool registry",
+        "Observation formatter",
+        "Gradient optimizer"
+      ],
+      "correct": 3,
+      "explanation": "Beş bileşen: message buffer, tool registry, durdurma koşulu, tur bütçesi ve observation formatter. Gradient optimizer eğitime aittir, çıkarım döngüsüne değil."
+    },
+    {
+      "stage": "check",
+      "question": "Döngüde tur bütçesinin rolü nedir?",
+      "options": [
+        "Yanıt başına token sayısını sınırlar",
+        "Kontrolden çıkan agent'ları engellemek için döngü iterasyonlarına sert üst sınır koyar",
+        "Registry'nin kaç tool ifşa ettiğini kontrol eder",
+        "LLM sağlayıcısının rate limit'ini ayarlar"
+      ],
+      "correct": 1,
+      "explanation": "Tur bütçesi döngü iterasyonlarına konan bir sınırdır; 2026 agent'ları genelde 40-400 adım çalışır ve göreve uygun bir sınıra ihtiyaç duyar."
+    },
+    {
+      "stage": "check",
+      "question": "2025-2026 native-reasoning kaymasında prompt tabanlı Thought token'larına göre ne değişti?",
+      "options": [
+        "Döngünün kontrol akışı DAG ile değiştirildi",
+        "Thought token'ları artık ayrı bir reasoning kanalında yayınlanıyor ve turlar arasında taşınıyor",
+        "Modeller tool çağrılarını bıraktı ve sadece chain-of-thought'a güveniyor",
+        "Observation'lar prompt'tan tamamen kaldırıldı"
+      ],
+      "correct": 1,
+      "explanation": "Reasoning içeriği özel bir kanala taşınıyor (sağlayıcılar arası genelde şifreli), ama gözlemle-düşün-aksiyon al kontrol akışı değişmedi."
+    },
+    {
+      "stage": "post",
+      "question": "Ders tool çıktılarının neden güvenilmez girdi olduğunu söylüyor?",
+      "options": [
+        "Tool runtime'ları yavaş ve güvenilmezdir",
+        "Çekilen içerik delete-the-repo gibi gizli talimatlar taşıyabilir ve sadece doğrudan kullanıcı girdisi izin sayılır",
+        "Tool sonuçları her zaman modelin context window'undan büyüktür",
+        "Sağlayıcı tool çıktı byte'larını varsayılan olarak temizler"
+      ],
+      "correct": 1,
+      "explanation": "OpenAI CUA dokümanları açıkça yalnızca doğrudan kullanıcı talimatlarının izin sayıldığını belirtir; tool çıktıları düşmanca talimatlar taşıyabilir ve güvenilmez kabul edilmelidir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders neden 2026'daki her framework'ün arka planda hâlâ ReAct çalıştırdığını iddia ediyor?",
+      "options": [
+        "Sağlayıcılar prompt'ta ReAct anahtar kelimelerini zorunlu kıldığı için",
+        "Gözlemle-düşün-aksiyon al kontrol akışı değişmezdir; framework'ler etrafındaki checkpointing, actor'lar, rol şablonları ve tracing'de ayrışır",
+        "Yao ve diğerleri döngü üzerinde patent sahibi olduğu için",
+        "LangGraph diğer tüm framework'leri kendisinden inherit etmeye zorladığı için"
+      ],
+      "correct": 1,
+      "explanation": "Claude Agent SDK, OpenAI Agents SDK, LangGraph, AutoGen, CrewAI, Agno ve Mastra arasındaki farklar döngünün kendisi değil, döngüyü saran şeylerle ilgilidir."
+    }
+  ]
+}

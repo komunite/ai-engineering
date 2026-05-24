@@ -1,0 +1,78 @@
+{
+  "lesson": "11-multi-region-kv-locality",
+  "title": "Çoklu-Bölge LLM Serving ve KV Cache Locality",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Round-robin load balancing cache'lenmiş LLM çıkarımı için neden aktif olarak zararlıdır?",
+      "options": [
+        "Prefix'i tutan node'a düşmeyen bir request cache hit yerine tam prefill bedelini öder",
+        "Round-robin sticky session gerektirir",
+        "Round-robin TLS'i bozar",
+        "Round-robin yalnızca stateful veritabanları için geçerlidir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cache-aware bir router hangi iki girdiyi tüketir?",
+      "options": [
+        "Rastgele karıştırmalar ve request boyutu",
+        "Yalnızca user_id ve tenant_id",
+        "Round-robin sayaçları ve TLS anahtarları",
+        "Replica'lardan gelen KV-cache event'leri ve gelen request üzerindeki prefix hash'i"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Llama 3.3 70B FP8 üzerinde 2K-token prompt için cache hit ile soğuk prefill arasındaki TTFT farkı kabaca nedir?",
+      "options": [
+        "Aynı",
+        "Yaklaşık 10x (~80 ms vs ~800 ms)",
+        "Yaklaşık 1.1x",
+        "Yaklaşık 1000x"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cache hit'leri için bölgeler arası routing neden her zaman bölgesel routing'i yenmez?",
+      "options": [
+        "Cache-aware routing bölgeler arası imkansızdır",
+        "GORGO araştırması cache hit'lerinin latency'ye yardım etmediğini buldu",
+        "Bölgeler arası routing tüm hyperscaler'lar tarafından yasaklanmıştır",
+        "Tasarruf edilen prefill, network RTT tarafından gölgelenebilir; örneğin 440 ms gidiş-dönüş 800-80 ms prefill tasarrufunu gölgeleyebilir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders %32 LLM DR başarısızlık nedeni olarak neyi gösteriyor?",
+      "options": [
+        "Ağırlıkları içeren ama tokenizer dosyalarını ya da quantization configlerini kaçıran backup'lar",
+        "Bölge kotası tükenmesi",
+        "Yanlış yapılandırılmış load balancer'lar",
+        "Şifrelenmemiş backup'lar"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders Bedrock CRI gibi ticari bölgeler arası çıkarım tekliflerini ne diye anlatıyor?",
+      "options": [
+        "KV-cache-aware'dirler ve uygulama katmanı routing'inin yerini alırlar",
+        "Yalnızca us-east-1'de çalışırlar",
+        "TTFT yerine availability'yi optimize ederler ve çıkarımı opak olarak ele alırlar — yine de uygulama katmanı cache-aware router'a ihtiyacın var",
+        "GDPR altında yasaklıdırlar"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

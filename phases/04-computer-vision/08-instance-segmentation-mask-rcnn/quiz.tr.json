@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Mask R-CNN neden RoIPool'u RoIAlign ile değiştirdi?",
+      "options": [
+        "RoIAlign GPU'larda daha hızlı",
+        "RoIPool box koordinatlarını birden çok adımda integer'a yuvarlar, feature map'i girdi piksellerinden bir feature-map pikseli kadar yanlış hizalar; RoIAlign yuvarlama olmadan bilinear sampling kullanır ve lokalizasyonu korur",
+        "RoIPool yalnızca CPU'da çalışır",
+        "RoIPool telif hakkı sorunuydu"
+      ],
+      "correct": 1,
+      "explanation": "RoIPool'un yuvarlaması stride boyutu kadar yanlış hizalamaya mal olur (örn. stride-32 feature map'te 32 piksel). RoIAlign bilinear interpolasyon ile tam float koordinatlarda örnekler. Değişiklik orijinal makalede COCO'da mask AP'yi 3-4 puan kaldırdı ve şimdi lokalizasyona önem veren her detector'da standart."
+    },
+    {
+      "stage": "pre",
+      "question": "Mask R-CNN'in mask head'i, öneri başına sınıf başına 28x28 mask çıkarır. Neden sınıf başına?",
+      "options": [
+        "Çünkü binary mask'ler backprop için sınıf başına kanal gerektirir",
+        "Mask tahminini sınıflandırmadan ayırma: mask head yalnızca her sınıf için şekli ayrı ayrı öğrenmek zorundadır, böylece sınıflandırıcının kararı hangi mask'in üretildiğini değil, çıkarımda hangi kanalın okunduğunu etkiler",
+        "Binary mask'ler tek bir kanalda taşar",
+        "Makale gerektirdi"
+      ],
+      "correct": 1,
+      "explanation": "Öneri başına sınıf başına bir mask üretmek, mask şekli öğrenmeyi sınıflandırmadan ayırır. Çıkarımda yalnızca tahmin edilen sınıfla eşleşen kanalı okursun. Bu multi-task decoupling önemlidir çünkü mask şekli ve sınıf olasılığı farklı gradient'lerle eğitilen farklı target'lardır."
+    },
+    {
+      "stage": "post",
+      "question": "torchvision'ın Mask R-CNN tahmin dict'inde `labels` 0'dan değil 1'den başlar. Neden?",
+      "options": [
+        "Eski bug",
+        "Sınıf 0 arka plan için ayrılmıştır; kullanıcı sınıfları her zaman 1 tabanlıdır, böylece sınıflandırıcı head'i arka planı kendi logit'leri ve gradient'leri olan gerçek bir sınıf olarak ele alabilir",
+        "torchvision baştan sona 1 tabanlı indeksleme kullanır",
+        "Eğitim verisi belirledi"
+      ],
+      "correct": 1,
+      "explanation": "Çoğu detector arka planı sınıf 0, açık foreground sınıflarını 1..C olarak ele alır. (C+1) sınıf üzerindeki softmax, ağa tüm sınıflarda yalnızca düşük confidence yerine 'burada nesne yok' diye aktif olarak tahmin etmeyi öğrenmesine izin verir. 4 gerçek sınıflı bir veri seti, predictor'ı değiştirirken num_classes = 5'e ihtiyaç duyar."
+    },
+    {
+      "stage": "post",
+      "question": "Mask R-CNN'i 500 görsellik bir veri setinde fine-tune ediyorsun ve val mAP plato yaparken train loss düşmeye devam ediyor. İlk denenecek şey nedir?",
+      "options": [
+        "Daha fazla epoch ekle",
+        "Backbone ve FPN'i freeze et böylece model yalnızca RPN ve head'leri fine-tune eder; 500 görsel 23M backbone parametresini overfit etmeden güncellemek için çok azdır",
+        "Segmentation U-Net'e geç",
+        "Daha yüksek learning rate kullan"
+      ],
+      "correct": 1,
+      "explanation": "Küçük veri setlerinde her parametreyi fine-tune etmek için yeterli sinyalin yok. Önceden eğitilmiş backbone ve FPN'i (ImageNet + COCO feature'ları) freeze etmek ve yalnızca RPN objectness head'i ile iki sınıflandırıcı/mask head'i eğitmek standart reçetedir ve bu platoyu genellikle tek bir eğitim run'ında düzeltir."
+    },
+    {
+      "stage": "post",
+      "question": "Mask R-CNN içindeki FPN'in 4, 8, 16, 32 stride'larda dört seviyesi var (P2, P3, P4, P5). Neden yalnızca tek bir seviye kullanmıyor?",
+      "options": [
+        "Daha fazla GPU bellek kullanmak için",
+        "Doğal görsellerdeki nesneler bir ölçek aralığına yayılır; her öneriyi boyutuna uyan FPN seviyesine yönlendirmek, head'e o nesne için doğru receptive field'a sahip bir feature map verir ve bu her zaman tek ölçek kullanmaktan kesinlikle daha iyidir",
+        "Dört seviye keyfidir",
+        "Parametre sayısını azaltmak için"
+      ],
+      "correct": 1,
+      "explanation": "Stride-32 feature map'te küçük bir nesne tek bir hücreyi kaplar, bu da neredeyse hiç spatial bilgi içermez. FPN küçük nesneleri yüksek çözünürlüklü, sığ seviyelere (P2) ve büyük nesneleri düşük çözünürlüklü, derin seviyelere (P5) yönlendirir, receptive field'ı nesne boyutuna eşleştirir. Bu yüzden her modern detector'da bir pyramid vardır."
+    }
+  ]
+}

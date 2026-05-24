@@ -1,0 +1,90 @@
+{
+  "lesson": "09-hybrid-memory-mem0",
+  "title": "Hibrit Bellek: Vector + Graph + KV (Mem0)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Hangi sorgu sınıfını bir KV store en iyi şekilde işler?",
+      "options": [
+        "Uzun konuşmalar üzerinde semantik benzerlik",
+        "(user, type, entity) ile anahtarlanmış doğrudan fact lookup",
+        "Bir faturalama varlığını paylaşan müşteriler arasında erişilebilirlik",
+        "Valid-at-time temporal sorgular"
+      ],
+      "correct": 1,
+      "explanation": "KV tam anahtarlarda O(1)'dir; vector benzerlik içindir, graph ilişkiler içindir."
+    },
+    {
+      "stage": "pre",
+      "question": "Mem0 her add()'da paralel yazdığı üç depo hangisidir?",
+      "options": [
+        "Vector, KV, graph",
+        "Cache, queue, log",
+        "Postgres, Redis, ClickHouse",
+        "Embedding, attention, FFN"
+      ],
+      "correct": 0,
+      "explanation": "Mem0 her yazımı vector, KV ve graph depolarına fan out eder."
+    },
+    {
+      "stage": "check",
+      "question": "Mem0'ın fusion skoruna hangi üç boyut beslenir?",
+      "options": [
+        "Relevance, importance, recency",
+        "Precision, recall, F1",
+        "Latency, throughput, cost",
+        "Confidence, perplexity, BLEU"
+      ],
+      "correct": 0,
+      "explanation": "Skor relevance, importance ve recency'nin ağırlıklı toplamıdır; ağırlıklar ürüne göre ayarlanır."
+    },
+    {
+      "stage": "check",
+      "question": "Mem0g gelen bir fact mevcut bir edge ile çeliştiğinde ne yapar?",
+      "options": [
+        "Edge'i siler",
+        "Mevcut edge'i invalid olarak işaretler ama silmez, böylece temporal sorgular hâlâ geçebilir",
+        "Bir exception fırlatır",
+        "user_id'yi yeniden yazar"
+      ],
+      "correct": 1,
+      "explanation": "Soft invalidation temporal (valid-at-time) sorgular için geçmişi korur."
+    },
+    {
+      "stage": "check",
+      "question": "Ders fusion ağırlıklarını ürüne göre ayarlamayı neden öneriyor?",
+      "options": [
+        "Sağlayıcılar bunu gerektiriyor",
+        "Chat agent'larında recency baskınken, compliance agent'larında importance ve retrieval agent'larında relevance baskındır",
+        "Vector kütüphaneleri eşit ağırlıkları reddediyor",
+        "Apache 2.0 gerektiriyor"
+      ],
+      "correct": 1,
+      "explanation": "Farklı ürünler relevance/importance/recency üzerinde farklı yanlılık ister; tek bir ağırlık seti hepsine uymaz."
+    },
+    {
+      "stage": "post",
+      "question": "Mem0'ın kullandığı kapsam taksonomisi nedir?",
+      "options": [
+        "Public, private, secret",
+        "User, session, agent",
+        "Local, regional, global",
+        "Read, write, admin"
+      ],
+      "correct": 1,
+      "explanation": "Kapsamlar user (oturumlar arası), session (tek thread), agent (instance başına state)."
+    },
+    {
+      "stage": "post",
+      "question": "Bu pattern'de embedding drift nedir ve ders nasıl hafifletmeyi öneriyor?",
+      "options": [
+        "Vector'ler şifrelenir; anahtarları döndür",
+        "Vector retrieval kalitesi corpus büyüdükçe bozulur; periyodik olarak en çok kullanılan top-N kaydı yeniden embed et",
+        "Embedding'ler integer'ları taşırır; float64'e geç",
+        "Embedding API URL değiştirir; bir domain'i pinle"
+      ],
+      "correct": 1,
+      "explanation": "Sıcak kayıtların periyodik yeniden embedding'i corpus büyüdükçe retrieval kalitesini sabit tutar."
+    }
+  ]
+}

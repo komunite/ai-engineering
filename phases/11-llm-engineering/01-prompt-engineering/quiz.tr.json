@@ -1,0 +1,37 @@
+[
+  {
+    "question": "İnsanların LLM'ler için prompt yazarken yaptığı en yaygın hata nedir?",
+    "options": ["Çok fazla token kullanmak", "Modelin format, kapsam ve kısıtlamalar konusunda tahminde bulunmasına yol açan belirsiz, yetersiz tanımlı talimatlar yazmak", "Yanlış API kullanmak", "Yeterli örnek kullanmamak"],
+    "correct": 1,
+    "explanation": "LLM'ler talimatları kelimesi kelimesine takip eder. 'Bana bir pazarlama e-postası yaz' modele hiçbir kısıtlama vermez. Ton, hedef kitle, uzunluk, format ve kısıtlamaları belirtmek dramatik biçimde daha iyi sonuçlar üretir.",
+    "stage": "pre"
+  },
+  {
+    "question": "Etkili bir prompt'un dört temel bileşeni nedir?",
+    "options": ["Input, output, model, temperature", "Rol, bağlam, kısıtlamalar ve çıktı formatı", "System, user, assistant, function", "Sorgu, doküman, cevap, skor"],
+    "correct": 1,
+    "explanation": "Etkili prompt'lar şunları belirtir: modelin kim olması gerektiği (rol), neyi bilmesi gerektiği (bağlam), neyi yapıp neyi yapmaması gerektiği (kısıtlamalar) ve cevabı nasıl yapılandıracağı (çıktı formatı).",
+    "stage": "pre"
+  },
+  {
+    "question": "Prompt'larına neden çıktı format talimatları eklemelisin?",
+    "options": ["Prompt'u kısaltır", "Format talimatları olmadan model kendi yapısını seçer; bu çağrılar arasında değişir ve programatik olarak parse etmesi zordur", "API maliyetini düşürür", "Halüsinasyonu önler"],
+    "correct": 1,
+    "explanation": "LLM'ler deterministik değildir. Açık format talimatları olmadan bir çağrı madde işaretleri, bir sonraki düz metin, bir sonraki markdown döndürebilir. Format belirtmek tutarlı, parse edilebilir çıktılar sağlar.",
+    "stage": "post"
+  },
+  {
+    "question": "System prompt'un amacı nedir?",
+    "options": ["API çağrısını kimlik doğrulamak", "Tüm konuşmaya uygulanan kalıcı davranış kurallarını, rolü ve kısıtlamaları belirlemek", "Modelin mimarisini tanımlamak", "Konuşma geçmişini sıkıştırmak"],
+    "correct": 1,
+    "explanation": "System prompt, modelin tüm oturum için persona'sını, kurallarını ve kısıtlamalarını belirler. Her user turn'ünden önce çalışır ve production'da model davranışını kontrol etmenin birincil mekanizmasıdır.",
+    "stage": "post"
+  },
+  {
+    "question": "Bir prompt değişikliğinin çıktı kalitesini gerçekten iyileştirip iyileştirmediğini nasıl test edersin?",
+    "options": ["Birkaç çıktıyı oku ve gözle karar ver", "Prompt'u çeşitli bir test setinde çalıştır ve tanımlanmış metriklerdeki (doğruluk, format uyumu, ilgi) değişiklikleri ölç", "Modele daha iyi yapıp yapmadığını sor", "API yanıt süresini kontrol et"],
+    "correct": 1,
+    "explanation": "Prompt değişikliklerini bir avuç örnek üzerinde değerlendirmek güvenilmezdir. Çeşitli test vakaları ve tanımlanmış metrikleri olan sistematik bir değerlendirme harness'ı, değişikliklerin sadece seçilmiş örneklerde değil, dağılım genelinde yardımcı olup olmadığını gösterir.",
+    "stage": "post"
+  }
+]

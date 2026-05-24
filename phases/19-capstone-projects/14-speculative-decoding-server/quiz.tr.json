@@ -1,0 +1,90 @@
+{
+  "lesson": "14-speculative-decoding-server",
+  "title": "Capstone 14 — Speculative-Decoding Inference Server",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Speculative decoding'in arkasındaki iki katmanlı mekanizma nedir?",
+      "options": [
+        "İki target model token başına dönüşümlü çalışır",
+        "Bir embedding modeli ve bir synthesizer",
+        "Bir retrieval cache ve bir reranker",
+        "Bir draft model k aday token önerir; target model bunları tek geçişte doğrular"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "EAGLE-3, ngram draft'ların yapmadığı neyi yapar?",
+      "options": [
+        "Target modelin yerini alır",
+        "Daha yüksek acceptance rate için draft head'leri target modelin gizli durumları üzerinde eğitir",
+        "Tokenizasyonu tamamen atlatır",
+        "Yalnızca CPU'larda çalışır"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "p99 tail latency neden 1, 8 ve 32 batch boyutlarında raporlanır?",
+      "options": [
+        "Sabit durum token/saniye, ret üzerine verify geçişinin vanilla decoding'den daha pahalı olduğunu gizleyebilir",
+        "vLLM 8'in altında batch boyutu sunamaz",
+        "p99 yalnızca batch 32'de önemlidir",
+        "Tail latency batch boyutundan bağımsızdır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Trafik dağılımı kaydığında acceptance rate neden drift eder?",
+      "options": [
+        "vLLM modelleri saatlik döndürür",
+        "Draft hizalaması girdi dağılımına bağlıdır: ShareGPT, kod ve domain verisi farklı desenleri uygular",
+        "OS scheduler GPU belleğini yeniden karıştırır",
+        "Quantization runtime'da değişir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Deployment hangi Kubernetes HPA sinyaline göre ölçeklenir?",
+      "options": [
+        "Cluster autoscaler düğümleri",
+        "CPU kullanımı",
+        "Disk IOPS",
+        "Inference istekleri üzerinde queue-wait süresi"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "P-EAGLE seri EAGLE-3'ün üzerine ne katar?",
+      "options": [
+        "FP4 ağırlıklarına quantization",
+        "Target modelin kaldırılması",
+        "Tek bir target geçişinde doğrulanan draft branch'lerinin ağacı boyunca paralel speculation",
+        "Otomatik dataset küratörlüğü"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Rubric speculative olmayan baseline'a karşı hangi throughput hedefini talep eder?",
+      "options": [
+        "İki modelde eşleşen kalitede en az 2.5x",
+        "Baseline'ın üzerinde herhangi bir iyileşme",
+        "Eşleşen kalitede kabaca 1.1x",
+        "Herhangi bir kalitede tam olarak 10x throughput"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

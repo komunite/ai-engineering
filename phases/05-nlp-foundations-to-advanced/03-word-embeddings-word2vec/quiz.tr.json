@@ -1,0 +1,102 @@
+{
+  "lesson": "03-word-embeddings-word2vec",
+  "title": "Word Embedding'ler — Sıfırdan Word2Vec",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Dağılımsal hipotez nedir?",
+      "options": [
+        "Bir kelimeyi etrafındaki kelimelerle tanırsın",
+        "Kelimeler dokümanlar arasında düzgün dağılır",
+        "Tüm kelimeler 300 boyutta embed edilebilir",
+        "Sık kelimeler en çok anlamı taşır"
+      ],
+      "correct": 0,
+      "explanation": "Firth'in (1957) dağılımsal hipotezi: benzer bağlamlar benzer anlam ifade eder."
+    },
+    {
+      "stage": "pre",
+      "question": "Word2Vec'te vocabulary üzerinde düz softmax neden pratik değildir?",
+      "options": [
+        "100k+ vocabulary terimleri üzerinde softmax hesaplamak eğitim adımı başına aşırı pahalıdır",
+        "Softmax olasılıkları modelleyemez",
+        "Softmax'in gradient'i yoktur",
+        "Vanishing gradient'a yol açar"
+      ],
+      "correct": 0,
+      "explanation": "Tam vocabulary softmax çok pahalıdır; negative sampling bunu binary classification olarak yeniden formüle eder."
+    },
+    {
+      "stage": "check",
+      "question": "Skip-gram ile CBOW arasındaki fark nedir?",
+      "options": [
+        "Skip-gram bigram kullanır; CBOW unigram",
+        "Skip-gram merkezden bağlam kelimelerini tahmin eder; CBOW bağlamdan merkez kelimeyi tahmin eder",
+        "Skip-gram bağlamdan merkez kelimeyi tahmin eder; CBOW tersini yapar",
+        "Skip-gram derin bir ağ eğitir; CBOW sığdır"
+      ],
+      "correct": 1,
+      "explanation": "Skip-gram: merkez -> bağlam. CBOW: bağlam -> merkez."
+    },
+    {
+      "stage": "check",
+      "question": "Negative sampling'de, pozitif çift (merkez, bağlam) için hedef nedir?",
+      "options": [
+        "sigmoid(W[center] dot W'[context])'i 1'e yakın olacak şekilde maksimize etmek",
+        "Onları ortogonal olmaya zorlamak",
+        "Dot product'larını minimize etmek",
+        "Vektörleri dekoreleli yapmak"
+      ],
+      "correct": 0,
+      "explanation": "Pozitif çiftler sigmoid'i 1'e yakın eğitir; örneklenen negatifler sigmoid'i 0'a yakın eğitir."
+    },
+    {
+      "stage": "check",
+      "question": "Word2Vec eğitildikten sonra hangi ağırlık matrisi word embedding'leri olur?",
+      "options": [
+        "Eğitim sonrası ayrı bir projeksiyon",
+        "Input-to-hidden W matrisi (merkez kelime tablosu)",
+        "İkisi birlikte çarpılmış",
+        "Hidden-to-output W' matrisi"
+      ],
+      "correct": 1,
+      "explanation": "Merkez kelime tablosu W standart embedding çıktısıdır; W' genelde atılır veya ortalamaya katılır."
+    },
+    {
+      "stage": "post",
+      "question": "Word2Vec neden polysemy'de (örn. 'bank') başarısız olur?",
+      "options": [
+        "Window size çok küçük",
+        "Nadir kelimeleri görmezden gelir",
+        "Negative sampling nadir anlamları düşürür",
+        "Her kelime için tek statik bir vektör atar, dolayısıyla 'river bank' ve 'financial bank' aynı vektörü paylaşır"
+      ],
+      "correct": 3,
+      "explanation": "Statik embedding'ler anlamları ayırt edemez; bağlamsal embedding'ler (ELMo/BERT) bunu çözer."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da bir transformer yerine ne zaman hâlâ Word2Vec'i tercih edersin?",
+      "options": [
+        "Hafif, cihaz üstü, alan-spesifik retrieval'da tek satır lookup gecikme bütçesi olduğunda",
+        "Bağlamsal disambiguation'a ihtiyaç duyduğunda",
+        "Girdiler çok uzunken",
+        "Diyalog kalitesi önemliyse"
+      ],
+      "correct": 0,
+      "explanation": "Çok küçük gecikme bütçelerinde, cihaz üstü çıkarımda veya hızlı alan-spesifik eğitimde Word2Vec kazanır."
+    },
+    {
+      "stage": "post",
+      "question": "'king - man + woman ~ queen' meşhur analojisini ne mümkün kılar?",
+      "options": [
+        "Model royalty'yi bir flag bit olarak kodlar",
+        "Skip-gram royal vocabulary üzerinde eğitilir",
+        "Vektör aritmetiği, cinsiyetler arasında transfer olan 'royal' gibi doğrusal yönleri yakalar",
+        "Cosine similarity cinsiyete göre değişmezdir"
+      ],
+      "correct": 2,
+      "explanation": "Embedding uzayındaki yönler ilişkisel özellikleri kodlar, dolayısıyla toplama/çıkarma sistematik hareket eder."
+    }
+  ]
+}

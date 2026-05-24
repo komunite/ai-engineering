@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir LLM servisini çağırırken API anahtarı ne için kullanılır?",
+      "options": ["Sunucuya gönderilen veriyi şifrelemek için", "Kimliğini doğrulamak ve istekleri yetkilendirmek için", "Bant genişliğini azaltmak için istekleri sıkıştırmak için", "Sunucunun hangi programlama dilini kullanacağını seçmek için"],
+      "correct": 1,
+      "explanation": "API anahtarı, hesabını tanımlayan, isteklerini yetkilendiren ve sağlayıcının kullanım ve faturalamayı takip etmesini sağlayan benzersiz bir string'dir."
+    },
+    {
+      "stage": "pre",
+      "question": "API anahtarları neden asla doğrudan kaynak koda hardcode edilmemelidir?",
+      "options": ["Hardcode edilmiş anahtarlar kodun daha yavaş çalışmasına neden olur", "Yanlışlıkla git'e commit edilip herkese açık şekilde ifşa olabilirler", "Python 50 karakterden uzun string literal'leri okuyamaz", "API sağlayıcıları kaynak dosyalarda görünen anahtarları engeller"],
+      "correct": 1,
+      "explanation": "Kaynak kodda hardcode edilen anahtarlar versiyon kontrolüne commit edilip public repolara gönderilme riski taşır, oradan başkaları tarafından scrape edilip kötüye kullanılabilir."
+    },
+    {
+      "stage": "post",
+      "question": "Lokal geliştirme için API anahtarlarını saklamanın önerilen yolu nedir?",
+      "options": ["Script'inin başında bir Python değişkeninde", ".gitignore'da listelenmiş bir .env dosyasında", "Kolay erişim için README.md'de", "requirements.txt'de paket sürümlerinin yanında"],
+      "correct": 1,
+      "explanation": "Bir .env dosyası anahtarları environment variable olarak saklar ve .gitignore'a eklenmelidir, böylece asla versiyon kontrolüne commit edilmez. SDK'lar anahtarları environment variable'lardan otomatik okur."
+    },
+    {
+      "stage": "post",
+      "question": "Anthropic'e yapılan ham HTTP API çağrısında, API anahtarını hangi header taşır?",
+      "options": ["Authorization: Bearer sk-ant-...", "x-api-key: sk-ant-...", "Content-Type: application/json", "anthropic-version: 2023-06-01"],
+      "correct": 1,
+      "explanation": "Anthropic'in API'si kimlik doğrulama için yaygın 'Authorization: Bearer' yapısı yerine 'x-api-key' header'ını kullanır. Bu, API tasarımına özgüdür."
+    },
+    {
+      "stage": "post",
+      "question": "Bir API'nin rate limit'ini aştığında ne olur?",
+      "options": ["API anahtarın kalıcı olarak iptal edilir", "Sunucu bir hata döner (genelde HTTP 429) ve tekrar denemeden önce beklemen gerekir", "İsteğin otomatik olarak kuyruğa alınıp daha sonra işlenir", "API isteğini sessizce düşürür ve cevap vermez"],
+      "correct": 1,
+      "explanation": "Rate limiting HTTP 429 (Too Many Requests) döner. Beklemen ve tekrar denemen gerekir, genelde exponential backoff ile. Rate limit'ler kötüye kullanımı engeller ve adil kullanımı sağlar."
+    }
+  ]
+}

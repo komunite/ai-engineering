@@ -1,0 +1,90 @@
+{
+  "lesson": "28-orchestration-patterns",
+  "title": "Orchestration Pattern'leri: Supervisor, Swarm, Hierarchical",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders hangi dört orchestration pattern'ini listeler?",
+      "options": [
+        "Supervisor-worker, swarm/peer-to-peer, hierarchical, debate",
+        "Sequential, parallel, distributed, federated",
+        "Plan, act, reflect, refine",
+        "Push, pull, batch, stream"
+      ],
+      "correct": 0,
+      "explanation": "Supervisor-worker, swarm, hierarchical ve debate 2026 framework'leri arasında tekrar eder."
+    },
+    {
+      "stage": "pre",
+      "question": "LangChain'in supervision konusundaki 2026 önerisi nedir?",
+      "options": [
+        "Her zaman create_supervisor kullan",
+        "Daha ince context-engineering kontrolü için create_supervisor yerine doğrudan tool çağrılarını tercih et",
+        "Supervision'dan tamamen kaçın",
+        "Supervisor'ları GPU'da çalıştır"
+      ],
+      "correct": 1,
+      "explanation": "Tool-çağrısı bazlı supervision her uzmanın ne göreceği üzerinde hassas kontrol verir."
+    },
+    {
+      "stage": "check",
+      "question": "Bir swarm'ı supervisor-worker topolojisinden ne ayırır?",
+      "options": [
+        "Swarm GPU kullanır",
+        "Swarm'ın merkezi bir router'ı yoktur; agent'lar paylaşılan bir tool yüzeyi aracılığıyla doğrudan handoff yapar",
+        "Swarm tek agent'lıdır",
+        "Swarm yalnızca cron'da çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Swarm peer-to-peer'dir; supervisor yönlendirmeyi tek bir LLM aracılığıyla merkezleştirir."
+    },
+    {
+      "stage": "check",
+      "question": "Hierarchical orchestration ne zaman haklı çıkar?",
+      "options": [
+        "Her zaman; ücretsiz ölçeklenir",
+        "Tek bir supervisor'ın context bütçesi tüm uzmanların açıklamalarını tutamadığında",
+        "Yalnızca GPU'larla",
+        "Asla; bir antipattern'dır"
+      ],
+      "correct": 1,
+      "explanation": "İç içe supervisor'lar bir supervisor'ın bütçesini aşan büyük uzman popülasyonları içindir."
+    },
+    {
+      "stage": "check",
+      "question": "Anthropic'in desteklediği önerilen karar sırası nedir?",
+      "options": [
+        "Her zaman hierarchical multi-agent ile başla",
+        "Tek bir agent artı workflow pattern'leri ile başla; ihtiyaç olunca topoloji ekle; supervisor önce, sonra swarm, sonra hierarchical; doğruluk maliyeti yendiğinde debate",
+        "Debate ile başla",
+        "Swarm ile başla ve tek agent'a doğru daralt"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic'in tavsiyesi ihtiyaçlarına uygun sistemi inşa etmek, en sofistike olanı değil."
+    },
+    {
+      "stage": "post",
+      "question": "Bu derste fake hierarchy nedir?",
+      "options": [
+        "Yanlış etiketlenmiş YAML",
+        "Yalnızca iki gerçek ekip varken 'kurumsal' olduğu için üç supervisor katmanı; daralt",
+        "TypeScript ile yazılmış bir orchestrator",
+        "Bir test fixture'ı"
+      ],
+      "correct": 1,
+      "explanation": "Gerçek ekiplere karşılık gelmeyen katmanlar getirisiz operasyonel karmaşıklık ekler."
+    },
+    {
+      "stage": "post",
+      "question": "Bir swarm'da zıplayan handoff'ları (A -> B -> A -> B) nasıl hafifletirsin?",
+      "options": [
+        "Temperature'u 0'a pin'le",
+        "Hop sayacı ekle ve N transfer sonrası reddet",
+        "Tracing'i devre dışı bırak",
+        "Rate limit'i düşür"
+      ],
+      "correct": 1,
+      "explanation": "Bir hop sayacı swarm döngülerini sonsuza dek dönmeden sınırlar."
+    }
+  ]
+}

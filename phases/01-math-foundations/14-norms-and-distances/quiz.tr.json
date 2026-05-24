@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cosine similarity iki vektör arasında neyi ölçer?",
+      "options": [
+        "Aralarındaki Öklid mesafesini",
+        "Büyüklüklerini göz ardı ederek aralarındaki açıyı",
+        "Eleman-bazlı çarpımlarının toplamını",
+        "Tek bir boyuttaki maksimum farkı"
+      ],
+      "correct": 1,
+      "explanation": "Cosine similarity, iki vektör arasındaki açının kosinüsünü büyüklüklerine göre normalize ederek ölçer. -1 (zıt) ile +1 (aynı yön) arasındadır ve vektör uzunluğunu göz ardı eder; bu yüzden belge uzunluğunun gürültü olduğu NLP'de baskındır."
+    },
+    {
+      "stage": "pre",
+      "question": "L1 mesafesine neden 'Manhattan mesafesi' denir?",
+      "options": [
+        "Manhattan'da icat edildi",
+        "Bir ızgara üzerinde, sanki şehir blokları üzerinde yürüyormuşçasına mesafeyi ölçer",
+        "Yalnızca tam olarak iki boyutta çalışır",
+        "Tüm boyutlardaki maksimum farkı hesaplar"
+      ],
+      "correct": 1,
+      "explanation": "L1 mesafesi, her eksen boyunca mutlak farkları toplar; bu, yalnızca eksenler boyunca hareket edebildiğin (köşegen yok) bir ızgaradaki en kısa yola karşılık gelir — şehir sokak ızgarasında yürümek gibi."
+    },
+    {
+      "stage": "post",
+      "question": "L1 regularization (Lasso) neden seyrek ağırlıklar üretirken L2 regularization (Ridge) üretmez?",
+      "options": [
+        "L1, L2'den daha büyük bir ceza sabiti kullanır",
+        "L1 elmas kısıtının köşeleri ağırlıkların sıfır olduğu eksenlerdedir; loss kontur çizgileri muhtemelen köşelere dokunur",
+        "L2 regularization yalnızca bias terimlerine uygulanır",
+        "L1 regularization bir eşiğin altındaki ağırlıkları sıfıra kırpar"
+      ],
+      "correct": 1,
+      "explanation": "L1 kısıt bölgesi, köşeleri eksenlerle hizalanmış elmas şeklindedir. Loss fonksiyonunun kontur elipsleri, elmasla ilk olarak büyük olasılıkla bir veya daha fazla ağırlığın tam olarak sıfır olduğu bir köşede temas eder. L2 kısıtı köşesi olmayan bir dairedir, dolayısıyla temas noktasında tüm ağırlıklar sıfırdan farklıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Olasılık dağılımlarını karşılaştırırken Wasserstein mesafesinin KL diverjansına göre avantajı nedir?",
+      "options": [
+        "Wasserstein her zaman KL diverjansından küçüktür",
+        "Wasserstein, dağılımlar örtüşmediğinde bile anlamlı gradyanlar sağlar; KL sonsuza gider",
+        "Wasserstein simetriktir ama KL değildir",
+        "Hem B hem de C doğrudur"
+      ],
+      "correct": 3,
+      "explanation": "Wasserstein mesafesi gerçek bir metriktir (simetrik, üçgen eşitsizliğini sağlar) ve örtüşmeyen dağılımlar için bile gradyan sağlar. KL diverjansı asimetriktir ve dağılımlar örtüşmediğinde sonsuza gider; bu yüzden WGAN'lar KL tabanlı GAN'ların yerini almıştır."
+    },
+    {
+      "stage": "post",
+      "question": "Öklid mesafesi yerine Mahalanobis mesafesini ne zaman kullanırsın?",
+      "options": [
+        "Tüm öznitelikler ikili (0 veya 1) olduğunda",
+        "Öznitelikler farklı ölçeklere sahip olduğunda ve birbiriyle korelasyonlu olduğunda",
+        "Vektör yerine string karşılaştırdığında",
+        "L2'den daha hızlı bir hesaplamaya ihtiyacın olduğunda"
+      ],
+      "correct": 1,
+      "explanation": "Mahalanobis mesafesi verinin kovaryans yapısını hesaba katar, L2 mesafesini hesaplamadan önce öznitelikleri dekorele eder ve normalize eder. Farklı ölçeklerde ve korelasyonlu öznitelikleri doğru şekilde işler; Öklid mesafesi ise tüm boyutlara eşit davranır."
+    }
+  ]
+}

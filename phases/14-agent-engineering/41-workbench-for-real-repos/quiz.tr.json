@@ -1,0 +1,90 @@
+{
+  "lesson": "41-workbench-for-real-repos",
+  "title": "Gerçek Repo'da Workbench",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Aynı görevi prompt-only ve workbench-güdümlü pipeline'lardan geçirmenin hedefi nedir?",
+      "options": [
+        "Modelleri karşılaştırmak",
+        "Bir şüpheciye argümanlarla değil sayılarla teslim edebileceğin bir before/after raporu üretmek",
+        "Bir vendor seçmek",
+        "GPU'ları benchmark etmek"
+      ],
+      "correct": 1,
+      "explanation": "Sayılar tartışmayı yapar; argüman bir oyuncak değil, gerçek hisli bir görevde sunulur."
+    },
+    {
+      "stage": "pre",
+      "question": "Bunlardan hangisi ölçülen beş sonuçtan biri DEĞİLDİR?",
+      "options": [
+        "tests_actually_run",
+        "acceptance_met",
+        "files_outside_scope",
+        "model_perplexity"
+      ],
+      "correct": 3,
+      "explanation": "Beşi: tests_actually_run, acceptance_met, files_outside_scope, handoff_quality, reviewer_total."
+    },
+    {
+      "stage": "check",
+      "question": "LangChain'in Anatomy of an Agent Harness'i Terminal Bench 2.0'da neyi ölçtü?",
+      "options": [
+        "Modeller hepsi top-3'te birleşti",
+        "Aynı model yalnızca harness'ı değiştirerek top 30 dışından beşinci sıraya taşındı",
+        "Top model 25 sıra kaybetti",
+        "Harness değişiklikleri sıralamayı değiştirmedi"
+      ],
+      "correct": 1,
+      "explanation": "Aynı modelde 25-sıra farkı baş harness-vs-model fişidir."
+    },
+    {
+      "stage": "check",
+      "question": "preprints.org paper'ı kurumsal agent projelerinin başarısızlık oranı olarak neyi alıntılıyor?",
+      "options": [
+        "%8",
+        "Yaklaşık %88'i prodüksiyona ulaşamıyor, hatalar akıl yürütme etrafında değil runtime etrafında kümeleniyor",
+        "Yaklaşık %50",
+        "Hiçbiri başarısız olmuyor"
+      ],
+      "correct": 1,
+      "explanation": "Dil Agent'ları için Harness Engineering preprint'i hataları runtime sorunlarına (eski state, kırılgan retry'lar, aşırı büyümüş context) bağlar."
+    },
+    {
+      "stage": "check",
+      "question": "WebAgent baseline doğruluğu uzun-context koşullarında ne yapar?",
+      "options": [
+        "Sabit kalır",
+        "%40-50'den %10'un altına düşer, çoğunlukla sonsuz döngüler ve hedef kaybından",
+        "%30 artar",
+        "Yarıya iner ama %30'un üstünde kalır"
+      ],
+      "correct": 1,
+      "explanation": "Uzun-context çöküşü Ralph Loop ve handoff packet'inin emmek için var olduğu şeydir."
+    },
+    {
+      "stage": "post",
+      "question": "Ders false negative'ler (prompt-only'in daha hızlı olduğu durumlar) hakkında ne söylüyor?",
+      "options": [
+        "Mevcut değiller",
+        "Tek-adım olgusal görevler, tek-satır lint'ler, formatter çalıştırmaları prompt-only ile daha hızlıdır; workbench overkill çerçevelenmesin diye onları dürüstçe sayıver",
+        "Workbench'in başarısız olduğunu kanıtlarlar",
+        "Harness tezini geçersiz kılarlar"
+      ],
+      "correct": 1,
+      "explanation": "Prompt-only-en-hızlı durumlarının dürüst sayımı harness argümanını güvenilir tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Bu dersten gelen raporu nereye alıntılarsın?",
+      "options": [
+        "İç HR incelemesi",
+        "Birisi 'bu sprint için' doğrulama kapısını kaldırmak istediğinde veya yeni bir agent ürünü çıktığında ve taşınabilir bir zaman-tasarrufu benchmark'ına ihtiyaç duyduğunda",
+        "Yalnızca pazarlama deck'lerinde",
+        "Yalnızca hackathon'larda"
+      ],
+      "correct": 1,
+      "explanation": "Sayılar açıklamadan daha uzağa gider; baskı yüzeyleri atlatmaya çalıştığında raporu alıntıla."
+    }
+  ]
+}

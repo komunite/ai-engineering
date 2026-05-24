@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir modeli benchmark ediyorsun ve '4090 üzerinde görsel başına ortalama 12ms' raporluyorsun. Ne eksik?",
+      "options": [
+        "Hiçbir şey; tam bir benchmark",
+        "Yüzdeler (p50/p95/p99), warmup disiplini ve CUDA senkronizasyonu; tek başına bir ortalama tail latency'yi gizler ve kernel yürütmesi yerine kernel dispatch'i ölçüyor olabilir",
+        "Model boyutu",
+        "Veri seti adı"
+      ],
+      "correct": 1,
+      "explanation": "Production latency yüzdeler cinsinden ölçülür çünkü gerçek zamanlı sistemler ortalamalarda değil, tail'lerde başarısız olur. Warmup olmadan, JIT derleme ilk birkaç ölçümü şişirir. torch.cuda.synchronize olmadan, GPU kernel launch'ları kernel bitmeden döner, böylece yürütmeyi değil, dispatch'i ölçersin. Sayının anlamlı olması için üçünün de doğru olması gerekir."
+    },
+    {
+      "stage": "pre",
+      "question": "FLOPs ve cihaz üstü latency mükemmel şekilde correlate olmaz. Neden?",
+      "options": [
+        "FLOPs sayıcılar bozuk",
+        "Farklı işlemlerin farklı donanım dostluğu vardır; depthwise convolution'lar daha düşük FLOPs'a sahip olabilir ama GPU'larda memory-bound'tur, dense convolution'lar ise Tensor Core'ları verimli kullanır. Bellek bant genişliği, kernel launch overhead'i ve cache davranışı da latency'yi ham FLOPs'un ötesinde şekillendirir",
+        "FLOPs batch size'ı yok sayar",
+        "PyTorch FLOPs'u yanlış sayar"
+      ],
+      "correct": 1,
+      "explanation": "FLOPs ucuz bir proxy'dir. Wall-clock latency, bir işlemin donanımın güçlü yanlarıyla ne kadar iyi eşleştiğine bağlıdır: yoğun matmul'lar Tensor Core'ları doldurur; depthwise konv'lar bellek bant genişliğinde takılır; attention sequence-length^2 bellek okumalarında takılır. Mimari arama için FLOPs yararlıdır; deployment kararları için hedef cihaz üzerinde ölç."
+    },
+    {
+      "stage": "post",
+      "question": "Post-training static INT8 quantization, ImageNet sınıfındaki vision modellerinde tipik olarak ne kadar accuracy kaybeder?",
+      "options": [
+        "5-10 yüzde puanı",
+        "Düzgün kalibre edildiğinde 0.1-1 yüzde puanı; batch-norm-fused konv modelleri INT8 altında özellikle iyi davranır",
+        "Her zaman 0; lossless'tır",
+        "20+ puan; kullanılamaz"
+      ],
+      "correct": 1,
+      "explanation": "İyi kalibre edilmiş vision modellerinde static PTQ bir puanın kesirinden yaklaşık 1 puana kaybeder. Daha büyük kayıp modları (a) yetersiz kalibrasyon verisi, (b) aşırı outlier'lı aktivasyonların quantize edilmesi (kanal başına quantization veya clipping ile düzelt), (c) un-fused BatchNorm katmanları. Bunlar halledildiğinde INT8 esasen ücretsizdir."
+    },
+    {
+      "stage": "post",
+      "question": "Mobil uygulamanın 10MB altında ve 10ms altı latency'li bir vision modeline ihtiyacı var. Hangi backbone'u seçersin?",
+      "options": [
+        "ResNet-50",
+        "INT8'e quantize edilmiş MobileNetV3-Small veya EfficientNet-Lite-B0; ikisi de bu bütçeyi hedefler ve TFLite / Core ML'e temiz şekilde derlenir",
+        "ViT-Base",
+        "ConvNeXt-Large"
+      ],
+      "correct": 1,
+      "explanation": "2026'da mobil vision deployment hâlâ MobileNetV3 ve EfficientNet-Lite varyantları tarafından domine ediliyor çünkü bu bütçe için tasarlandılar: depthwise konv'lar, h-swish, squeeze-excite, ilk günden quantization-aware. ResNet-50 ve ViT-Base FP32'de 100MB+ ve INT8'de 25MB+'dır, latency ölçülmeden boyut bütçesini aşarlar."
+    },
+    {
+      "stage": "post",
+      "question": "Bir PyTorch modelini opset 17 ile ONNX'e export ediyorsun ve 'Unsupported operator' ile başarısız oluyor. En olası nedenler nelerdir?",
+      "options": [
+        "ONNX kütüphanesi eski",
+        "(1) ONNX mapping'i olmayan özel bir op; (2) tracing'in yakalayamadığı non-deterministic kontrol akış yolu; (3) Python'da implicit olan ama ONNX karşılığı olmayan bir tensor-scalar etkileşimi. Çözümler: op'u değiştir, kontrol akışı için `torch.jit.script` kullan veya opset'i yükselt",
+        "Modelin çok fazla parametresi var",
+        "Girdi shape'i yanlış"
+      ],
+      "correct": 1,
+      "explanation": "ONNX export varsayılan olarak tracing'tir, bu yüzden tracing'in yakalayamadığı herhangi bir şey -- runtime kontrol akışı, Python seviyesi branch'ler, özel CUDA op'lar -- başarısız olur. Çoğu başarısızlık ONNX karşılığı olmayan tek bir node'tur (genellikle minik bir özel op veya torch.special.* çağrısı). Çözüm, op'u değiştirmek, `torch.jit.script`'e geçmek veya op'un var olduğu daha yeni bir opset'e taşımaktır."
+    }
+  ]
+}

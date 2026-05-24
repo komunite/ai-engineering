@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir sinir ağı eğitimi bağlamında 'optimizasyon' ne anlama gelir?",
+      "options": ["Kodun daha hızlı çalışmasını sağlamak", "Loss fonksiyonunu minimize eden model ağırlıklarını bulmak", "Modeldeki parametre sayısını azaltmak", "Eğitim için en iyi donanımı seçmek"],
+      "correct": 1,
+      "explanation": "Bir sinir ağını eğitmek tam olarak optimizasyondur. Loss fonksiyonu modelin ne kadar yanlış olduğunu ölçer ve optimizasyon onu olabildiğince küçük yapan ağırlık değerlerini bulur."
+    },
+    {
+      "stage": "pre",
+      "question": "Gradient descent sırasında learning rate çok büyükse ne olur?",
+      "options": ["Eğitim global minimuma daha hızlı yakınsar", "Optimizer minimumu aşar ve loss diverjans gösterir (sıçrar veya artar)", "Gradyanlar sıfır olur", "Model otomatik olarak learning rate'i azaltır"],
+      "correct": 1,
+      "explanation": "Çok büyük bir learning rate her adımın vadiyi aşmasına neden olur, potansiyel olarak duvarlar arasında sekebilir veya tamamen diverjans gösterebilir. Loss azalmak yerine artar."
+    },
+    {
+      "stage": "post",
+      "question": "Adam, vanilla gradient descent'ten nasıl farklıdır?",
+      "options": ["Adam sabit bir learning rate kullanır, GD adaptif oranlar kullanır", "Adam, her ağırlığa kendi adaptif learning rate'ini vermek için gradyanların ve karesi alınmış gradyanların yürüyen ortalamalarını izler", "Adam tam ikinci dereceden türevleri hesaplar, GD birinci dereceden türevleri kullanır", "Adam adım başına tüm veri setini işler, GD mini-batch'ler kullanır"],
+      "correct": 1,
+      "explanation": "Adam, ağırlık başına birinci moment (gradyan yönü) ve ikinci moment (gradyan büyüklüğü) tahminlerini tutar. sqrt(ikinci moment)'e bölmek, büyük gradyanlı ağırlıklara küçük adımlar, küçük gradyanlı ağırlıklara büyük adımlar verir."
+    },
+    {
+      "stage": "post",
+      "question": "Mini-batch SGD'deki gürültü neden bir rahatsızlık olarak değil, faydalı olarak görülür?",
+      "options": ["Gürültü eğitim sırasında bellek kullanımını azaltır", "Gürültü, optimizer'ın gürültüsüz bir optimizer'ın takılıp kalacağı sığ yerel minimumlardan ve eyer noktalarından kaçmasına yardımcı olur", "Gürültü faydalı değildir; her zaman yakınsamayı yavaşlatır", "Gürültü loss fonksiyonunu konveks yapar"],
+      "correct": 1,
+      "explanation": "Rastgele mini-batch'lerden gelen stokastik gürültü, optimizer'ı sığ yerel minimumlardan ve eyer noktalarından çıkarabilecek rastgele bozulmalar sağlar, bu da daha iyi genelleme sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Cosine annealing learning rate çizelgesi ne yapar?",
+      "options": ["Eğitim boyunca learning rate'i kosinüs eğrisine göre artırır", "Yüksek bir learning rate ile başlar ve isteğe bağlı warmup ile birlikte kosinüs eğrisine göre düzgün bir şekilde azaltır", "Learning rate'i iki sabit değer arasında değiştirir", "Learning rate'i mevcut epoch numarasının kosinüsüne ayarlar"],
+      "correct": 1,
+      "explanation": "Cosine annealing, learning rate'i yarım kosinüs eğrisine göre lr_max'tan lr_min'e düzgün şekilde azaltır. Bu, hızlı ilerleme için erken büyük adımlar ve ince yakınsama için geç küçük adımlar sağlar."
+    }
+  ]
+}

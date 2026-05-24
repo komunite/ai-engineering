@@ -1,0 +1,90 @@
+{
+  "lesson": "33-instructions-as-executable-constraints",
+  "title": "Çalıştırılabilir Kısıtlar Olarak Agent Talimatları",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Aspirasyonel bir kural ile operasyonel bir kural arasındaki fark nedir?",
+      "options": [
+        "Aspirasyonel kurallar ücretli; operasyonel kurallar ücretsiz",
+        "Aspirasyonel kuralların kontrolü yoktur ('dikkatli ol'); operasyonel kurallar workbench'in çalıştırabileceği makine-kontrol edilebilir bir fonksiyon taşır",
+        "Operasyonel kurallar daha uzundur",
+        "Aspirasyonel kurallar bir manager gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Operasyonel kurallar test edilebilir; aspirasyonel kurallar dileklerdir."
+    },
+    {
+      "stage": "pre",
+      "question": "Ders çoğu kuralı hangi beş kategoriyle kapsar?",
+      "options": [
+        "Startup, forbidden, definition of done, uncertainty, approval",
+        "Read, write, exec, fork, exit",
+        "Plan, act, reflect, refine, ship",
+        "Low, medium, high, critical, fatal"
+      ],
+      "correct": 0,
+      "explanation": "Startup, forbidden, definition of done, uncertainty handling, approval sınırları beşidir."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi severity tag yürütmeyi durdurur ve bir operatör override'ı gerektirir?",
+      "options": [
+        "info",
+        "warn",
+        "block",
+        "soft"
+      ],
+      "correct": 2,
+      "explanation": "block sert hatadır; warn annotate eder; info raporlar."
+    },
+    {
+      "stage": "check",
+      "question": "Ders neden yazım anında severity tag'lemeyi öneriyor?",
+      "options": [
+        "Markdown'da daha güzel görünür",
+        "Ekipler erken severity'yi abartır ve deadline baskısı altında zayıflatır; severity'yi önceden yazmak kalibrasyonu zorlar",
+        "Linter'lar bunu gerektirir",
+        "Token tasarrufu sağlar"
+      ],
+      "correct": 1,
+      "explanation": "Severity kalibrasyonu baskı altında geriye dönük değil, bilinçli olmalıdır."
+    },
+    {
+      "stage": "check",
+      "question": "Markdown-as-source, JSON-as-cache pattern'i ne yapar?",
+      "options": [
+        "Markdown'ı değiştirir",
+        "agent-rules.md yazılı dosyadır; agent-rules.lock.json bir pre-commit hook tarafından yeniden üretilen hot-path cache'tir (package.json + lock'la aynı şekilde)",
+        "Kuralları şifreler",
+        "İncelemeyi devre dışı bırakır"
+      ],
+      "correct": 1,
+      "explanation": "Markdown incelenebilir kalır; JSON parsing hot path dışında kalır."
+    },
+    {
+      "stage": "post",
+      "question": "Forcing function olarak kural expiry'si nedir?",
+      "options": [
+        "24 saatten eski kurallar fail closed olur",
+        "Her kural bir expires_at taşır (varsayılan 90 gün); tetiklenmeyen kurallar üç ayda bir gözden geçirme tetikler — gerekçelendir, zayıflat veya sil",
+        "Cache dolduğunda kurallar geçerliliğini yitirir",
+        "Kurallar otomatik geçer; gözden geçirmeye gerek yok"
+      ],
+      "correct": 1,
+      "explanation": "Cloudflare'ın verisi expiry'li setlerin 30 kuralın altında kaldığını gösterdi; expiry'siz setler kullanılmamış 80+'a büyüdü."
+    },
+    {
+      "stage": "post",
+      "question": "Kurallar framework guardrail'leriyle nasıl ilişkilidir?",
+      "options": [
+        "Kurallar guardrail'lerin yerini alır",
+        "Guardrail'ler kuralları runtime'da zorlar; kural seti bu guardrail'lerin uyguladığı insan-okunabilir contract'tır",
+        "Guardrail'ler kurallara alternatiftir",
+        "Yalnızca biri gereklidir"
+      ],
+      "correct": 1,
+      "explanation": "İkisi de gereklidir: runtime ihlalleri yakalar; kural seti runtime'ın doğru şeyi yaptığını kanıtlar."
+    }
+  ]
+}

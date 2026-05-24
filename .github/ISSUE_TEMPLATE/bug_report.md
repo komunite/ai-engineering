@@ -1,31 +1,38 @@
 ---
-name: Bug report
-about: Something in a lesson or on the site is wrong
-title: "[bug] "
+name: Hata bildirimi
+about: Bir derste veya sitede bir şey yanlış
+title: "[hata] "
 labels: bug
 ---
 
-## Where
+<!--
+İngilizce şablon: https://github.com/rohitg00/ai-engineering-from-scratch/blob/main/.github/ISSUE_TEMPLATE/bug_report.md
+İçerik upstream'le ilgiliyse (İngilizce ders kodunda bug vb.), lütfen doğrudan upstream'de issue açın.
+-->
 
-- Phase / lesson: <!-- e.g. Phase 4 · 06-object-detection-yolo -->
-- File / URL: <!-- e.g. phases/04-computer-vision/06-object-detection-yolo/code/main.py or aiengineeringfromscratch.com/lesson.html?path=... -->
+## Nerede
 
-## What's wrong
+- Faz / ders: <!-- örn. Faz 4 · 06-object-detection-yolo -->
+- Dosya / URL: <!-- örn. phases/04-computer-vision/06-object-detection-yolo/code/main.py ya da https://ai-muhendisligi.komunite.com.tr/phases/04-computer-vision/06-object-detection-yolo/ -->
+- Dil: <!-- TR / EN — sorun yalnızca Türkçe sürümde mi yoksa İngilizce'de de var mı? -->
 
-<!-- One-paragraph description. What did you expect vs. what you saw. -->
+## Sorun ne
 
-## Reproduce
+<!-- Tek paragraf açıklama. Ne beklediniz, ne gördünüz. -->
+
+## Yeniden üret
 
 1.
 2.
 3.
 
-## Environment
+## Ortam
 
-- OS:
-- Python / Node / other runtime version:
-- How you ran it (local, Colab, Docker, etc.):
+- İşletim sistemi:
+- Python / Node / başka runtime sürümü:
+- Nasıl çalıştırdınız (yerel, Colab, Docker, vb.):
+- Tarayıcı (site hatası ise):
 
-## Screenshot or logs
+## Ekran görüntüsü veya log
 
-<!-- Drop a screenshot or paste the traceback if you have one. -->
+<!-- Bir ekran görüntüsü atın ya da varsa traceback'i yapıştırın. -->

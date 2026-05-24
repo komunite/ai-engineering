@@ -1,0 +1,90 @@
+{
+  "lesson": "40-multi-session-handoff",
+  "title": "Multi-Session Handoff",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir handoff packet'inde yük taşıyıcı alan hangisidir?",
+      "options": [
+        "summary",
+        "next_action (onsuz, doküman bir status raporudur, handoff değil)",
+        "commands_run",
+        "verdict_pointer"
+      ],
+      "correct": 1,
+      "explanation": "next_action dışında her şey olan bir handoff bir status raporudur; bir sonraki session'ı üretken yapan şey bir sonraki somut adımdır."
+    },
+    {
+      "stage": "pre",
+      "question": "Handoff'lar neden yazılmaz, üretilir?",
+      "options": [
+        "Generator'lar daha hızlıdır",
+        "Elle yazılmış handoff'lar zor günde atlanır; generator workbench artifact'lerini okur ve packet'i yayar, böylece agent yalnızca workbench'i generator'ın özetleyebileceği bir state'te bırakır",
+        "Generator'lar daha iyi şifreler",
+        "Apache 2.0 gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Otomasyon niyet ve tutarlılık arasındaki boşluğu kapatır."
+    },
+    {
+      "stage": "check",
+      "question": "Packet hangi iki formda gönderilir?",
+      "options": [
+        "PDF ve PNG",
+        "handoff.md (insan-okunabilir) ve handoff.json (makine-okunabilir, her ikisi de aynı kaynak artifact'lerden; uyuşmazlıkta JSON kazanır)",
+        "E-posta ve Slack",
+        "YAML ve TOML"
+      ],
+      "correct": 1,
+      "explanation": "İnsanlar için Markdown, sonraki agent için JSON; ikisi de aynı generator'dan gelir."
+    },
+    {
+      "stage": "check",
+      "question": "Ders compaction'ı handoff'tan nasıl ayırıyor?",
+      "options": [
+        "Aynıdırlar",
+        "Compaction bir session'ı uzatır; handoff birini temiz şekilde kapatır ve bir sonrakini taze context'te başlatır. Packet bu geçişi ucuz yapar",
+        "Compaction ücretli, handoff ücretsiz",
+        "Handoff GPU gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Hermes Issue 20372 çerçevelemesi: in-place sıkıştırma kaliteyi bozmadan önce kompakt bir handoff yaz, sonra taze bir session'da resume et."
+    },
+    {
+      "stage": "check",
+      "question": "Ders bir session'ı toparlamanın ne zaman yapılmasını öneriyor?",
+      "options": [
+        "%100 context'te, sonra panik",
+        "%50-75 context bütçesinden önce, context bozulmadan; sıkıştırma artifact'leri state'i kirletmeden yazmak ucuzdur",
+        "Yalnızca gece yarısı",
+        "Yalnızca merge sonrası"
+      ],
+      "correct": 1,
+      "explanation": "Erken toparlamak generator'ın input'larını temiz tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Ders packet'te feedback log'unu neye trim etmeyi öneriyor?",
+      "options": [
+        "Yalnızca ilk K girişe",
+        "Son K girişe artı sıfır olmayan exit'i olan her girişe, böylece packet küçük kalır ama hata geçmişi sağ çıkar",
+        "Rastgele N girişe",
+        "Yalnızca en son girişe"
+      ],
+      "correct": 1,
+      "explanation": "Asimetrik trim: hatalar sağ kalmalı; kuyruktaki önemsiz şeyler ucuz tutulur."
+    },
+    {
+      "stage": "post",
+      "question": "Multi-agent session'lar arası koordinasyonu işleten metadata nedir?",
+      "options": [
+        "Top secret şifreleme",
+        "branch, last_known_good_commit ve status (active | superseded | archived); branch ve konu başına yalnızca bir aktif handoff",
+        "Paylaşılan bir Slack kanalı",
+        "Merkezi bir queue"
+      ],
+      "correct": 1,
+      "explanation": "Eski handoff'lar baskın multi-agent hatasıdır; status + branch + LKG aktif seti küçük tutar."
+    }
+  ]
+}

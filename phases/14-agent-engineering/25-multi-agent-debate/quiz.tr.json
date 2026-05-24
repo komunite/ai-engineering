@@ -1,0 +1,90 @@
+{
+  "lesson": "25-multi-agent-debate",
+  "title": "Multi-Agent Debate ve İşbirliği",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Society of Minds protokolü N model instance'a ne yaptırır?",
+      "options": [
+        "Her biri farklı bir benchmark çalıştırır",
+        "Bağımsız olarak cevap önerirler, sonra R tur boyunca birbirlerinin önerilerini okuyup eleştirirler ta ki yakınsayana kadar",
+        "Paylaşılan bir veri seti üzerinde eğitilirler",
+        "Fiyat müzakeresi yaparlar"
+      ],
+      "correct": 1,
+      "explanation": "N öneren, R tur, cross-critique, yakınsama; kanonik Du ve diğerlerinin debate'i."
+    },
+    {
+      "stage": "pre",
+      "question": "Cross-model debate (örn. ChatGPT + Bard) neden single-model debate'i geçer?",
+      "options": [
+        "Farklı satıcılar fiyat müzakere eder",
+        "Heterojenlik paylaşılan kör noktaları azaltır, böylece cross-critique daha fazla hata yakalar",
+        "Daha ucuzdur",
+        "Satıcılar ağırlık paylaşır"
+      ],
+      "correct": 1,
+      "explanation": "Modelleri karıştırmak bağımsız hata dağılımları getirir, debate'in tavanını yükseltir."
+    },
+    {
+      "stage": "check",
+      "question": "Sparse topoloji üzerinde tam mesh'e kıyasla ana token-maliyet kazancı nedir?",
+      "options": [
+        "Sparse topoloji model gerektirmez",
+        "Her debater yalnızca peer'lerin bir alt kümesini okur, böylece critique-op sayısı düşer ve doğruluk genelde eşleşir",
+        "Sparse topoloji turları iki katına çıkarır",
+        "LLM'i kaldırır"
+      ],
+      "correct": 1,
+      "explanation": "Sparse (star, ring, hub-and-spoke) birçok görevde doğruluğu kaybetmeden critique op'larını azaltır."
+    },
+    {
+      "stage": "check",
+      "question": "Ders debate'in zarar verdiği bir durum olarak hangisini listeler?",
+      "options": [
+        "Açık uçlu akıl yürütme",
+        "Basit bir olgusal lookup, çünkü bir lookup beş debate'ten daha ucuzdur",
+        "Satranç hamle geçerliliği",
+        "Biyografi üretimi"
+      ],
+      "correct": 1,
+      "explanation": "Latency ve maliyete duyarlı önemsiz lookup'lar N x R debate'ten yarar görmez."
+    },
+    {
+      "stage": "check",
+      "question": "Convergence collapse nedir?",
+      "options": [
+        "Network kesintisi",
+        "Tüm agent'ların ilk yanlış cevapta yakınsaması; zorunlu disagreement turlarıyla hafiflet",
+        "Process çökmesi",
+        "TLS handshake hatası"
+      ],
+      "correct": 1,
+      "explanation": "Yanlış bir cevaba erken anlaşma, round-1 önerilerini farklı olmaya zorlayarak hafifletilir."
+    },
+    {
+      "stage": "post",
+      "question": "Prompt homojenleştirmesi debate'i neden zayıflatır?",
+      "options": [
+        "Apache 2.0'ı ihlal eder",
+        "Aynı prompt'lar neredeyse aynı cevapları üretir, cross-critique sinyalini kaldırır",
+        "Çok fazla token kullanır",
+        "Supervisor'ı atlar"
+      ],
+      "correct": 1,
+      "explanation": "Çeşitli prompt'lar (ideal olarak çeşitli modeller) öneri dağılımını geniş tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Derse göre hangi prodüksiyon pattern'i bir debate varyantıdır?",
+      "options": [
+        "Sentez adımı olan Anthropic orchestrator-workers",
+        "Saf single-shot RAG",
+        "Yalnızca cron schedule",
+        "Vector indexing"
+      ],
+      "correct": 0,
+      "explanation": "Sentezli orchestrator-workers prodüksiyonda debate-şekilli bir pattern'dir."
+    }
+  ]
+}

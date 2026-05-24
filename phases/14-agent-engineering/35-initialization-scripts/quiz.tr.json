@@ -1,0 +1,90 @@
+{
+  "lesson": "35-initialization-scripts",
+  "title": "Agent'lar için Initialization Script'leri",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir init script'i neyi ortadan kaldırır?",
+      "options": [
+        "Çıkarımdan gelen latency",
+        "Session başına setup vergisi: runtime prob etme, repo listeleme, her yeni session'da aynı kontrolleri yeniden deneme",
+        "Sağlayıcı rate limit'leri",
+        "Authn token'ları"
+      ],
+      "correct": 1,
+      "explanation": "Script vergiyi bir kez öder ve cevapları agent'ın okuduğu init_report.json'a yazar."
+    },
+    {
+      "stage": "pre",
+      "question": "Init script'inin hata-modu contract'ı nedir?",
+      "options": [
+        "Yumuşak başarısız ol ve devam et",
+        "Sesli başarısız ol, hızlı başarısız ol, tek bir yerde başarısız ol; workbench bozuksa başlamayı reddet",
+        "Her zaman başar",
+        "Sonsuza dek yeniden dene"
+      ],
+      "correct": 1,
+      "explanation": "Tüm amaç workbench bozulduğunda başlamayı reddetmektir; sessiz fallback amacı bozar."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi dersin listelediği prob'lardan biri DEĞİLDİR?",
+      "options": [
+        "Runtime versiyonları",
+        "Bağımlılık mevcudiyeti",
+        "Test komutu çözümlenebilirliği",
+        "Token-by-token sampling sıcaklığı"
+      ],
+      "correct": 3,
+      "explanation": "Prob'lar runtime versiyonları, deps, test komutu, yollar, env değişkenleri, state tazeliği, son bilinen iyi commit içerir."
+    },
+    {
+      "stage": "check",
+      "question": "Ders init'in neden idempotent olmasını söylüyor?",
+      "options": [
+        "SOC 2'yi karşılar",
+        "İki kez çalıştırmak taze bir timestamp dışında no-op olmalı, böylece CI'ya, hook'lara veya pre-task slash command'a bağlanabilir",
+        "Idempotence para tasarrufu sağlar",
+        "JSON Schema tarafından gerekli kılınır"
+      ],
+      "correct": 1,
+      "explanation": "Idempotence init'i birçok giriş noktasından (hook'lar, CI, slash command) çağırmayı güvenli yapar."
+    },
+    {
+      "stage": "check",
+      "question": "Son bilinen iyi commit anchoring nedir?",
+      "options": [
+        "Ekip liderinin en son commit'i",
+        "Mevcut commit'i bir LKG dosyasına karşı prob et; diff bir bütçeyi aşarsa insan onayı olmadan başlamayı reddet",
+        "Repo'daki en erken commit",
+        "HEAD ve main'in merge base'i"
+      ],
+      "correct": 1,
+      "explanation": "Cloudflare'ın AI Code Review'u reviewer'ları session'lar arası kayma birikmesini önlemek için LKG'ye karşı kapsamlar."
+    },
+    {
+      "stage": "post",
+      "question": "TTL'li lock dosyası pattern'i ne yapar?",
+      "options": [
+        "Repo'yu düzenlemelerden kilitler",
+        "Başarılı prob geçişinden sonra prereqs.lock yazar; sonraki çalışmalar lock'a 24 saat güvenir ve manifest hash eşleşirse pahalı prob'ları atlar",
+        "24 saat boyunca tüm yazımları bloklar",
+        "CI'yı devre dışı bırakır"
+      ],
+      "correct": 1,
+      "explanation": "Docker katman cache'leriyle aynı şekil: idempotent prob + içerik hash'i = atla."
+    },
+    {
+      "stage": "post",
+      "question": "Init hot path'inde ASLA ne görünmemelidir?",
+      "options": [
+        "Lokal dosya sistemi okumaları",
+        "Network çağrıları, LLM çağrıları, harici lisans kontrolleri; prob'lar üç saniyenin altında deterministik altyapıdır",
+        "Env değişkenlerini okumak",
+        "Lockfile okumak"
+      ],
+      "correct": 1,
+      "explanation": "LLM çağıran bir prob, prob değil workflow'dur; init'i deterministik tut."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'Tek-agent tavanı' (single-agent ceiling) nedir?",
+      "options": ["Bir agent'in kullanabileceği maksimum tool sayısı", "Tek bir agent'in başarısız olduğu nokta: görev tek bir context window'u aşıyor, farklı uzmanlık gerektiriyor veya paralel iş gerektiriyor", "Bir agent'in dakikada yapabileceği API çağrı sayısı limiti", "Tek bir GPU'da çalışabilen maksimum model boyutu"],
+      "correct": 1,
+      "explanation": "Tek bir agent'in tek bir context window'u, tek bir system prompt'u vardır ve sıralı işler. Görev 50 dosya okumayı gerektirdiğinde (context taşması), araştırma ile kodlama arasında geçiş yapmayı gerektirdiğinde (karışık uzmanlık) ya da eşzamanlı bağımsız iş gerektirdiğinde (paralellik), tek bir agent çöker."
+    },
+    {
+      "stage": "pre",
+      "question": "Neden tek güçlü bir genel agent yerine birden fazla uzmanlaşmış agent kullanırsın?",
+      "options": ["Birden fazla agent her zaman tek büyük bir modelden daha ucuzdur", "Her agent odaklı bir system prompt'a, daha küçük bir context'e ve özel tool'lara sahip olabilir; bu kendi alt görevinde daha iyi performansa yol açar", "Birden fazla agent aynı context window'u paylaşabilir", "Genel agent'lar tool kullanamaz"],
+      "correct": 1,
+      "explanation": "Arama için optimize edilmiş bir araştırmacı agent, implementasyon için optimize edilmiş bir kodlayıcı agent ve kod kalitesi için optimize edilmiş bir reviewer agent; her biri, üçü birden olmaya çalışan tek bir agent'ten kendi işini daha iyi yapar."
+    },
+    {
+      "stage": "post",
+      "question": "Bir pipeline (sıralı) çoklu-agent pattern'ı, paralel fan-out pattern'ından ne zaman daha iyidir?",
+      "options": ["Toplam latency'yi minimize etmek istediğinde", "Her aşama bir öncekinin çıktısına bağımlı olduğunda — örneğin önce araştırma, sonra kod, sonra review", "Tüm alt görevler birbirinden bağımsız olduğunda", "Görevden daha fazla GPU'n olduğunda"],
+      "correct": 1,
+      "explanation": "Pipeline pattern'ları, iş doğası gereği sıralı olduğunda doğrudur: kodlayıcının araştırmacının çıktısına, reviewer'ın da kodlayıcının çıktısına ihtiyacı var. Paralel fan-out, alt görevler bağımsız olduğunda daha iyidir."
+    },
+    {
+      "stage": "post",
+      "question": "Çoklu-agent sistemlerinde supervisor pattern nedir?",
+      "options": ["Bir insanın her agent'a manuel olarak görev ataması", "Görevi parçalayan, worker agent'lara delege eden, sonuçları toplayan ve sonraki adımlara karar veren merkezi bir orchestrator agent", "Hata ayıklama için agent eylemlerini loglayan bir izleme sistemi", "Agent'ların en iyi yanıt için oy verdiği bir pattern"],
+      "correct": 1,
+      "explanation": "Supervisor agent bir proje yöneticisi gibi davranır: görevi alt görevlere böler, uzmanlaşmış worker'lara atar, çıktılarını gözden geçirir ve iterasyon yapıp yapmayacağına ya da finalize edip etmeyeceğine karar verir. Bu, iş akışı üzerinde merkezi kontrol sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Çoklu-agent sistemlerinin tek agent'lara kıyasla birincil ödünü (tradeoff) nedir?",
+      "options": ["Çoklu-agent sistemleri her zaman daha düşük kaliteli sonuçlar üretir", "Birden fazla LLM çağrısı ve agent-arası iletişimden kaynaklanan artan karmaşıklık, latency ve maliyet; karmaşık görevlerin daha iyi ele alınmasıyla takas edilir", "Çoklu-agent sistemleri daha fazla eğitim verisi gerektirir", "Çoklu-agent sistemleri harici tool kullanamaz"],
+      "correct": 1,
+      "explanation": "Her ek agent, daha fazla LLM çağrısı (maliyet), daha fazla round-trip (latency) ve daha fazla hata modu (hata ayıklama karmaşıklığı) demektir. Çoklu-agent yalnızca görev gerçekten tek bir agent'in kaldırabileceğinin ötesine geçtiğinde değerlidir."
+    }
+  ]
+}

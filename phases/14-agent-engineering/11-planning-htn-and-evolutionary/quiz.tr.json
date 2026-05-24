@@ -1,0 +1,90 @@
+{
+  "lesson": "11-planning-htn-and-evolutionary",
+  "title": "HTN ve Evrimsel Arama ile Planlama",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir HTN serbest formatlı bir LLM planının üzerine ne ekler?",
+      "options": [
+        "Operator ön koşulları ve etkileri zorlandığında kanıtlanabilir doğruluk",
+        "Daha ucuz çıkarım",
+        "Daha kısa prompt'lar",
+        "Daha iyi embedding'ler"
+      ],
+      "correct": 0,
+      "explanation": "HTN'nin ön koşullar ve etkilerle sembolik operator'leri yapı gereği sağlamlığı garanti eder."
+    },
+    {
+      "stage": "pre",
+      "question": "AlphaEvolve hangi problem sınıfı için yapıldı?",
+      "options": [
+        "Serbest formatlı düzyazı üretimi",
+        "Makine-kontrol edilebilir, deterministik bir fitness fonksiyonu olan optimizasyonlar",
+        "Multi-turn chat belleği",
+        "Vector arama sıralaması"
+      ],
+      "correct": 1,
+      "explanation": "Evrimsel arama deterministik bir evaluator'a ihtiyaç duyar; AlphaEvolve böyle birinin var olduğu alanları hedefler."
+    },
+    {
+      "stage": "check",
+      "question": "ChatHTN bir LLM kullanırken plan sağlamlığını nasıl korur?",
+      "options": [
+        "Korumaz; sağlamlık best-effort'tır",
+        "LLM önerileri yalnızca aday decomposition'lar olarak girer, operator şemasına karşı doğrulanır; sembolik katman doğruluğu sahiplenir",
+        "LLM'i HTN trace'lerinde fine-tune eder",
+        "Vector veritabanı kullanır"
+      ],
+      "correct": 1,
+      "explanation": "LLM method library'sini genişletir ama operator ön koşullarını ve etkilerini atlayamaz."
+    },
+    {
+      "stage": "check",
+      "question": "Dersin alıntıladığı AlphaEvolve sonucu hangisidir?",
+      "options": [
+        "4x4 karmaşık matris çarpımı için 56 yıl içinde Strassen üzerinde ilk iyileştirme",
+        "Gemini'de çıkarımın 10x hızlanması",
+        "HumanEval'de GPT-4'ü geçmek",
+        "P=NP'nin ilk kanıtı"
+      ],
+      "correct": 0,
+      "explanation": "AlphaEvolve 4x4 karmaşık matmul için 48 skaler çarpım buldu, 56 yıl içinde Strassen üzerindeki ilk iyileştirme."
+    },
+    {
+      "stage": "check",
+      "question": "Bir HTN'in hangi öğesi ön koşulları ve etkileri olan primitif doğrudan-çalıştırılabilir bir aksiyondur?",
+      "options": [
+        "Task",
+        "Method",
+        "Operator",
+        "State"
+      ],
+      "correct": 2,
+      "explanation": "Operator'ler primitiflerdir; method'lar bileşik görevleri parçalar; state fact'ler kümesidir."
+    },
+    {
+      "stage": "post",
+      "question": "Dersin gerçek bir evaluator olmadan AlphaEvolve hakkındaki uyarısı nedir?",
+      "options": [
+        "Yavaştır",
+        "Bir LLM'e kodun daha iyi olup olmadığını sormak fitness fonksiyonu değildir; evaluator deterministik ve hızlı olmalı",
+        "Apache 2.0'ı ihlal eder",
+        "GPU'larda çalışamaz"
+      ],
+      "correct": 1,
+      "explanation": "Deterministik bir evaluator olmadan aramanın yakınsayacağı bir sinyali yoktur."
+    },
+    {
+      "stage": "post",
+      "question": "HTN veya AlphaEvolve yerine ReAct veya ReWOO'ya ne zaman uzanmalısın?",
+      "options": [
+        "Asla; HTN kesinlikle daha iyidir",
+        "Formal sağlamlığa veya makine-kontrol edilebilir bir fitness'a ihtiyacın olmadığında; çoğu agent görevi buraya düşer",
+        "Bir GPU cluster'ın olduğunda",
+        "Latency 100 ms'in altında olduğunda"
+      ],
+      "correct": 1,
+      "explanation": "Ders aşırı mühendisliğe karşı açıkça uyarır: çoğu görev formal planlama veya evrimsel aramaya ihtiyaç duymaz."
+    }
+  ]
+}

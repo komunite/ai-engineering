@@ -1,0 +1,78 @@
+{
+  "lesson": "22-load-testing-llm-apis",
+  "title": "LLM API'leri için Load Testing — k6 ve Locust Neden Yalan Söyler",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Locust tabanlı LLM load testinde GIL tuzağı nedir?",
+      "options": [
+        "Locust yalnızca Windows'ta çalışır",
+        "Locust HTTP'yi desteklemez",
+        "Client-side tokenization Python GIL altında çalışır ve request generation'ın arkasına kuyruğa girer, raporlanan inter-token latency'yi şişirir",
+        "Locust CUDA gerektirir"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Prompt-tekdüzelik tuzağı nedir?",
+      "options": [
+        "Tekdüze prompt'lar her zaman sunucuyu yavaşlatır",
+        "Gerçek bir dağılımdan örneklemek uzun prompt'ları yetersiz temsil eder",
+        "Tekdüze prompt'lar streaming gerektirir",
+        "Aynı prompt'u loop'ta kullanmak prefix caching'i tam concurrent decode gibi gösterir, raporlanan throughput'u şişirir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders hangi dört yük pattern'ini öneriyor?",
+      "options": [
+        "10 gün boyunca sabit 1 RPS",
+        "Manuel tıklama testleri",
+        "Steady-state, ramp, spike, soak",
+        "Yalnızca burst"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders gerçekçi bir prompt dağılımı oluşturmayı nasıl öneriyor?",
+      "options": [
+        "Ortalama ve standart sapma kullanarak gerçek bir dağılımdan örnek al (örneğin LLMPerf'ün --mean-input-tokens / --stddev-input-tokens) ya da gerçek trafiği yeniden oynat",
+        "Request başına rastgele karakter",
+        "5 prompt el yazısı ve karıştır",
+        "Cache hit'leri en üst seviyeye çıkarmak için her zaman aynı prompt'u kullan"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Hangi 2026 araç kombinasyonu CI/CD SLA gate'leri ve Kubernetes-native dağıtık çalıştırmalar için en iyi olarak konumlandırılıyor?",
+      "options": [
+        "k6 v2026.1.0 ile k6 Operator 1.0 GA (TestRun / PrivateLoadZone CRD'leri)",
+        "Yalnızca guidellm",
+        "Yalnızca Vegeta",
+        "Stock Locust 2.43.3"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Soak yük pattern'i hangi arıza modunu yakalar?",
+      "options": [
+        "Saatler boyunca bellek sızıntıları, connection-pool drift'i ve observability taşması",
+        "Cold-start kuyruğu",
+        "Tokenizer GIL çekişmesi",
+        "Cache eviction fırtınaları"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

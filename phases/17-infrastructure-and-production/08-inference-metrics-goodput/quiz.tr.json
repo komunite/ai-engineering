@@ -1,0 +1,78 @@
+{
+  "lesson": "08-inference-metrics-goodput",
+  "title": "Çıkarım Metrikleri — TTFT, TPOT, ITL, Goodput, P99",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "TTFT'ye (time to first token) hangi bileşenler hakimdir?",
+      "options": [
+        "Yalnızca decode forward süresi",
+        "Ağırlıklar için disk I/O",
+        "Tokenizer GIL yükü",
+        "Queue süresi, network request süresi ve prefill süresi"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders ürün için gerçekten önemli olan tek metrik olarak hangisini adlandırıyor?",
+      "options": [
+        "GPU duty cycle",
+        "Token/saniye olarak toplam throughput",
+        "Goodput — her SLO kısıtını eşzamanlı karşılayan request oranı",
+        "Ortalama ITL"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "LLM latency'si için ortalama neden raporlanacak yanlış istatistiktir?",
+      "options": [
+        "Ortalama streaming yanıtlar üzerinde hiç hesaplanamaz",
+        "Ortalama yalnızca prefill için çalışır, decode için değil",
+        "LLM latency dağılımları sağa-çarpıktır; kullanıcılar ortalamanın gizlediği P99 aykırı değerlerini düzenli olarak yaşar",
+        "Ortalama GenAI-Perf tarafından desteklenmez"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "GenAI-Perf ve LLMPerf aynı çalıştırma için TPOT'ta neden anlaşmazlığa düşer?",
+      "options": [
+        "GenAI-Perf yalnızca Blackwell'de çalışır",
+        "GenAI-Perf ITL hesaplamasından TTFT'yi hariç tutar; LLMPerf dahil eder, dolayısıyla araç seçimi sayıyı değiştirir",
+        "LLMPerf mikrosaniye, GenAI-Perf milisaniye kullanır",
+        "Farklı requestler örnekler"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Uzun çıktılı requestlerde (>500 token), uçtan uca latency'ye hangi metrik hakimdir?",
+      "options": [
+        "TPOT çarpı çıktı uzunluğu",
+        "Cold-start süresi",
+        "TTFT",
+        "Network yanıt süresi"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Dersin 2026'da 70B chat modeli için makul tüketici-yönelik SLO'sunu en iyi hangi set yakalar?",
+      "options": [
+        "Yalnızca P50, üstünde percentile yok",
+        "TTFT P99 800 ms, TPOT P99 25 ms, <300 token çıktılar için E2E P99 3 s, goodput >= %99",
+        "TTFT P99 8s, TPOT P99 200ms, goodput %50",
+        "Ortalama TTFT 10 ms, ortalama TPOT 1 ms"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

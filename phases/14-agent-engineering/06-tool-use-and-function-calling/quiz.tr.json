@@ -1,0 +1,90 @@
+{
+  "lesson": "06-tool-use-and-function-calling",
+  "title": "Tool Use ve Function Calling",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Toolformer aday bir tool annotation'ını tutup tutmayacağına karar vermek için hangi sinyali kullanır?",
+      "options": [
+        "İnsan etiket uyumu",
+        "Tool sonucunu dahil etmenin çevredeki metin üzerindeki next-token loss'unu düşürüp düşürmediği",
+        "Tool'un 100 ms içinde dönüp dönmediği",
+        "Tool'un geçerli JSON üretip üretmediği"
+      ],
+      "correct": 1,
+      "explanation": "Toolformer'ın self-supervised sinyali, tool sonuçları next-token loss'unu düşüren annotation'ları tutar."
+    },
+    {
+      "stage": "pre",
+      "question": "Dersin raporladığı BFCL V4 dağılımı nedir?",
+      "options": [
+        "%100 single-turn",
+        "%40 agentic, %30 multi-turn, %10 live, %10 non-live, %10 halüsinasyon",
+        "%50 live, %50 sentetik",
+        "%33 agentic, %33 planlama, %33 yansıma"
+      ],
+      "correct": 1,
+      "explanation": "BFCL V4 ağırlıkları %40 agentic / %30 multi-turn / %10 live / %10 non-live / %10 halüsinasyon."
+    },
+    {
+      "stage": "check",
+      "question": "Bir tool'un description'ı neden yük taşıyıcıdır?",
+      "options": [
+        "UI'da kullanıcının gördüğü şeydir",
+        "Model doğru tool'u seçmek için onu okur; kötü description'lar yanlış-tool hatalarının en yaygın sebebidir",
+        "Faturalandırma kovalarını kontrol eder",
+        "JSON Schema tarafından gerekli kılınır"
+      ],
+      "correct": 1,
+      "explanation": "Tool description'ları modelin tool seçimi için birincil sinyalidir; zayıf description'lar yanlış-tool yönlendirmesine neden olur."
+    },
+    {
+      "stage": "check",
+      "question": "Paralel tool calling'de tool_use_id ne rol oynar?",
+      "options": [
+        "JSON payload'ını sıkıştırır",
+        "Her tool sonucunu kendi kaynağı olan çağrıyla ilişkilendirir, böylece sırasız dönen sonuçlar doğru yönlendirilir",
+        "Çağrıyı bir API anahtarına karşı yetkilendirir",
+        "Caching'i etkinleştirir"
+      ],
+      "correct": 1,
+      "explanation": "tool_use_id korelasyon token'ıdır; karıştırmak sonuçları yanlış çağrıya yönlendirir."
+    },
+    {
+      "stage": "check",
+      "question": "V3 state tabanlı değerlendirme hangi hata sınıfını yakalamaya çalışır?",
+      "options": [
+        "Token sızıntısı",
+        "Doğru görünen ama API'yi yanlış state'te bırakan AST eşleşen tool çağrıları",
+        "Yavaş tool yürütmesi",
+        "Şema versiyon kayması"
+      ],
+      "correct": 1,
+      "explanation": "State tabanlı değerlendirme, sözdizimsel çağrı eşleştirmesi yerine sonuç API state'ini (örn. dosyanın gerçekten oluşturulmuş olması) kontrol eder."
+    },
+    {
+      "stage": "post",
+      "question": "Ders, function calling için açık problemler arasında hangi 2026 problemini listelemez?",
+      "options": [
+        "Uzun-ufuklu tool zincirleme",
+        "Birçok tool arasında dinamik karar verme",
+        "Turlar arası bellek",
+        "Token seviyesi decoding hızı"
+      ],
+      "correct": 3,
+      "explanation": "Açık problemler bellek, dinamik karar verme, uzun-ufuklu zincirler ve halüsinasyon tespiti; decoding hızı listede yok."
+    },
+    {
+      "stage": "post",
+      "question": "Generic run_shell(cmd) tool'u neden bu derste kırmızı bayrak olarak adlandırılıyor?",
+      "options": [
+        "Yavaştır",
+        "Sandbox sınırını genişletir; git_status() gibi spesifik tool'lar okuma/yazma yüzeyini ve riski sınırlar",
+        "Paralel çağrılamaz",
+        "Sağlayıcılar reddeder"
+      ],
+      "correct": 1,
+      "explanation": "Dar tool'lar sandbox yüzeyini kısıtlar; generic bir shell tool'u host'un tam yüzeyini açar."
+    }
+  ]
+}

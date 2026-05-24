@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Gradient descent'te momentum hangi problemi çözer?",
+      "options": [
+        "Bellek kullanımını azaltır",
+        "Geçmiş gradient'leri biriktirerek osilasyonu söndürür; tutarlı yönlerdeki hareketi hızlandırır",
+        "Learning rate ihtiyacını ortadan kaldırır",
+        "Overfitting'i önler"
+      ],
+      "correct": 1,
+      "explanation": "Dar vadilerde gradient'ler vadi boyunca yavaş ilerlerken karşıdan karşıya osilasyon yapar. Momentum geçmiş gradient'leri biriktirir: tutarlı yönler güçlenirken osilasyonlu yönler birbirini götürür; bu da daha pürüzsüz ve hızlı bir yakınsama verir."
+    },
+    {
+      "stage": "pre",
+      "question": "Adam ile AdamW arasındaki temel fark nedir?",
+      "options": [
+        "AdamW daha yüksek bir learning rate kullanır",
+        "AdamW, weight decay'i gradient üzerinden değil doğrudan ağırlıklara uygular; doğru regularization sağlar",
+        "AdamW momentum kullanmaz",
+        "AdamW yalnızca transformer'larla çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Adam + L2'de, adaptif learning rate regularization terimini parametre başına farklı ölçeklendirir. AdamW weight decay'i gradient güncellemesinden ayırır ve gradient istatistiklerinden bağımsız olarak ağırlıklara üniform daralma uygular."
+    },
+    {
+      "stage": "post",
+      "question": "Adam erken eğitim adımlarında bias correction'ı neden kullanır?",
+      "options": [
+        "Overfitting'i önlemek için",
+        "Moment tahminleri sıfırla başlatılır, dolayısıyla erken değerler sıfıra doğru biased olur; correction bu soğuk başlangıcı telafi eder",
+        "Büyük gradient'leri clip etmek için",
+        "Yakınsamayı hızlandırmak için"
+      ],
+      "correct": 1,
+      "explanation": "Adım 1'de beta1=0.9 ile m_1 = 0.1 * gradient (10 kat çok küçük). (1 - 0.9^1) = 0.1'e bölmek bunu gerçek gradient'e düzeltir. Correction ~50 adımdan sonra ihmal edilebilir hale gelir."
+    },
+    {
+      "stage": "post",
+      "question": "Adam için standart varsayılan hyperparameter'lar nelerdir?",
+      "options": [
+        "lr=0.1, beta1=0.5, beta2=0.5",
+        "lr=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8",
+        "lr=0.01, beta1=0.99, beta2=0.99",
+        "lr=0.0001, beta1=0.8, beta2=0.9"
+      ],
+      "correct": 1,
+      "explanation": "Orijinal Adam makalesi (Kingma & Ba, 2014) lr=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8 önerir. Bu varsayılanlar çoğu problemde iyi çalışır."
+    },
+    {
+      "stage": "post",
+      "question": "Transformer ve LLM'leri eğitmek için modern varsayılan optimizer hangisidir?",
+      "options": [
+        "Düz SGD",
+        "Momentum'lu SGD",
+        "RMSProp",
+        "AdamW"
+      ],
+      "correct": 3,
+      "explanation": "AdamW (decoupled weight decay'li Adam), BERT, GPT, LLaMA ve neredeyse tüm modern transformer'ları eğitmek için kullanılır. Adaptif learning rate'leri doğru weight decay regularization ile birleştirir."
+    }
+  ]
+}

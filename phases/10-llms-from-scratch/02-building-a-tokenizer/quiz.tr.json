@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Basit bir BPE tokenizer çok dilli veya kod girdisinde neden bozulur?",
+      "options": [
+        "BPE doğası gereği tek dillidir",
+        "Düzgün Unicode işleme, byte fallback ve pre-tokenization regex olmadan yanlış veya verimsiz token dizileri üretir",
+        "Çok dilli metin tokenize edilemez",
+        "BPE yalnızca ASCII'de çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Naif bir BPE implementasyonu çok-byte'lık Unicode karakterleri işleyemeyebilir, kelime sınırları arasında yanlış merge yapabilir ve eğitilen vocabulary dışındaki karakterler için byte-level fallback'i olmayabilir."
+    },
+    {
+      "stage": "pre",
+      "question": "Production bir tokenizer'da pre-tokenization regex'in rolü nedir?",
+      "options": [
+        "Noktalama işaretlerini çıkarır",
+        "BPE merge'lerinden önce metni kelime sınırlarında böler, boşluklar ve kelime sınırları arasında merge yapılmasını önler",
+        "Boşlukları sıkıştırır",
+        "Metni küçük harfe çevirir"
+      ],
+      "correct": 1,
+      "explanation": "Pre-tokenization regex metni parçalara böler (genelde kelime sınırları, sayılar ve noktalama işaretlerinde) ki BPE merge'leri yalnızca parça içinde gerçekleşsin. Bu olmadan BPE 'end' kelimesini sonraki kelimeden önceki boşlukla birleştirebilir."
+    },
+    {
+      "stage": "post",
+      "question": "Special token nedir ve tokenizer'lar neden bunları işleyecek şekilde tasarlanır?",
+      "options": [
+        "Sık görülen token'lar",
+        "<|endoftext|> veya [PAD] gibi model davranışını kontrol eden ve tek, belirli bir ID olarak kodlanması gereken ayrılmış token'lar",
+        "En yüksek embedding değerlerine sahip token'lar",
+        "Yalnızca değerlendirme sırasında kullanılan token'lar"
+      ],
+      "correct": 1,
+      "explanation": "Special token'lar yapısal amaçlara hizmet eder: doküman sınırlarını işaretlemek, dizileri padlemek, üretimin başlangıç/bitişini belirtmek. Subword'lere bölünmeden, tam ID'leriyle tanınmalı ve kodlanmalıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Özel bir tokenizer'ın iyi olup olmadığını nasıl değerlendirirsin?",
+      "options": [
+        "İsmini tokenize edip edemediğine bakarak",
+        "Çeşitli metinlerde sıkıştırma oranını (karakter başına token) ölçerek ve tiktoken gibi yerleşik tokenizer'larla karşılaştırarak",
+        "Vocabulary boyutunu sayarak",
+        "Yalnızca encoding hızını ölçerek"
+      ],
+      "correct": 1,
+      "explanation": "Sıkıştırma oranı (token başına byte veya kelime başına token) verimliliği ölçer. İyi bir tokenizer aynı metin için daha az token üretir, bu da context window'a daha fazla içerik sığması demektir. Diller ve domain'ler arasında karşılaştır."
+    },
+    {
+      "stage": "post",
+      "question": "Modern LLM'lerde neden byte-level BPE word-level tokenization'a tercih edilir?",
+      "options": [
+        "Daha hızlıdır",
+        "Unknown token üretmeden herhangi bir girdiyi temsil edebilir, aynı zamanda yaygın pattern'lar için verimli subword merge'leri öğrenir",
+        "Daha küçük vocabulary üretir",
+        "Word-level tokenization daha doğrudur"
+      ],
+      "correct": 1,
+      "explanation": "Word-level tokenizer'lar görülmemiş kelimeleri işleyemez ([UNK] token'ları üretir). Byte-level BPE ham byte'larla başlar (herhangi bir girdinin kapsamasını garanti eder) ve yaygın diziler için merge'ler öğrenir, kapsama ile verimliliği dengeler."
+    }
+  ]
+}

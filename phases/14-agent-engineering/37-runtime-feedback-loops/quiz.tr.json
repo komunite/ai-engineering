@@ -1,0 +1,90 @@
+{
+  "lesson": "37-runtime-feedback-loops",
+  "title": "Runtime Feedback Loop'ları",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Feedback runner agent'ı neye zorlar?",
+      "options": [
+        "Hayali çıktıya tepki vermeye",
+        "Olgulara tepki vermeye: her komutta döngüye yakalanan yapılandırılmış stdout/stderr/exit/duration kayıtları",
+        "Doğrulamayı atlamaya",
+        "Farklı bir model kullanmaya"
+      ],
+      "correct": 1,
+      "explanation": "Runner 'testler geçti' (hayal) ile 'testler gerçekten çalıştı ve sıfır çıktı' (kayıtlı) arasındaki boşluğu kapatır."
+    },
+    {
+      "stage": "pre",
+      "question": "Feedback telemetriden nasıl farklıdır?",
+      "options": [
+        "Telemetri ücretlidir",
+        "Feedback bu çalıştırmanın bir sonraki turu içindir; telemetri zaman içinde çalıştırmaları inceleyen operatörler içindir (farklı dosyalar, farklı retention)",
+        "Telemetri OTel kullanır; feedback GraphQL kullanır",
+        "Aynı şeydirler"
+      ],
+      "correct": 1,
+      "explanation": "İkisi de alan paylaşır ama farklı dosyalarda farklı retention ile yaşar; feedback intra-run, telemetri cross-run'dır."
+    },
+    {
+      "stage": "check",
+      "question": "Her feedback kaydında MUTLAKA hangi alan görünmeli?",
+      "options": [
+        "model_id",
+        "exit_code (ve null exit döngüyü ilerletmeyi reddetmeli)",
+        "embedding_vector",
+        "prompt_cache_token"
+      ],
+      "correct": 1,
+      "explanation": "exit_code net başarı sinyalidir; null exit ilerleme olmadığı anlamına gelir."
+    },
+    {
+      "stage": "check",
+      "question": "Runner büyük çıktıları nasıl trunc eder?",
+      "options": [
+        "Rastgele sampling",
+        "'N satır truncate edildi' işaretiyle deterministik head + tail, böylece aynı çıktı her zaman aynı kaydı üretir",
+        "Yalnızca ilk 10 satır",
+        "gzip ile sıkıştırır"
+      ],
+      "correct": 1,
+      "explanation": "Deterministik truncation token maliyetini sınırlarken kayıtları replay edilebilir tutar; kuyruklar hata özetini taşır."
+    },
+    {
+      "stage": "check",
+      "question": "Yazım anında neden redact ediyoruz, okuma anında değil?",
+      "options": [
+        "Sıkıştırma için",
+        "Saldırganın ulaştığı şey disk üzerindeki dosyadır; yalnızca okumada redact etmek secret'ları JSONL dosyalarda bırakır",
+        "Okuma-zamanı redaction JSON'u bozar",
+        "Daha hızlıdır"
+      ],
+      "correct": 1,
+      "explanation": "Append öncesi Bearer, password=, api_key=, AKIA..., xox[baprs]- ile eşleşen satırları redact et; pattern'leri üç ayda bir denetle."
+    },
+    {
+      "stage": "post",
+      "question": "parent_command_id workbench'e ne kazandırır?",
+      "options": [
+        "Daha ucuz çıkarım",
+        "Yeniden denemeler kendi parent attempt'lerine bağlanır, böylece reviewer ve audit hata zincirini görür; bu olmadan retry'lar bağımsız başarılar gibi görünür",
+        "Daha hızlı dosya I/O",
+        "Daha düşük bellek"
+      ],
+      "correct": 1,
+      "explanation": "Parent bağlantısı retry zincirlerini reviewer'a (Ders 39) ve doğrulama kapısına görünür yapar."
+    },
+    {
+      "stage": "post",
+      "question": "feedback_record.jsonl'ı neden rotation ile 1 MB'a sınırla?",
+      "options": [
+        "JSON daha büyük dosyaları işleyemez",
+        "Agent yalnızca mevcut dosyayı okur; rotation runtime maliyetini sınırlı tutar ve CI artifact'leri tam seti yakalar",
+        "Diskler çok yavaş",
+        "Sağlayıcı byte başına ücretlendirir"
+      ],
+      "correct": 1,
+      "explanation": "Sınırlı mevcut dosya + döndürülmüş geçmiş, logrotate'in kullandığıyla aynı pattern; sıcak döngüde öngörülebilir maliyet."
+    }
+  ]
+}

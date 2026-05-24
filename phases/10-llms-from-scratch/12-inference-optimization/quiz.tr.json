@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "LLM çıkarımının iki fazı nedir?",
+      "options": [
+        "Eğitim ve değerlendirme",
+        "Prefill (prompt'u paralel işler, compute-bound) ve decode (token'ları teker teker üretir, memory-bound)",
+        "Encoding ve decoding",
+        "Forward ve backward"
+      ],
+      "correct": 1,
+      "explanation": "Prefill tüm prompt token'larını paralel işler (hesaplama ile sınırlı). Decode token'ları autoregressive olarak teker teker üretir (model ağırlıklarını yüklemek için bellek bant genişliğiyle sınırlı). Farklı optimizasyonlar her fazı hedefler."
+    },
+    {
+      "stage": "pre",
+      "question": "Autoregressive üretim sırasında KV cache neyi ortadan kaldırır?",
+      "options": [
+        "Attention mask ihtiyacını",
+        "Her üretim adımında önceki tüm token'lar için key ve value vektörlerinin gereksiz yeniden hesaplanmasını",
+        "Embedding lookup'ı",
+        "Softmax hesaplamasını"
+      ],
+      "correct": 1,
+      "explanation": "KV cache olmadan, N. token'ı üretmek önceki N-1 token için attention key ve value'larını yeniden hesaplamayı gerektirir. KV cache bu vektörleri saklar, böylece her yeni token yalnızca kendi K ve V'sini hesaplar ve adım başına O(N) hesaplama tasarrufu sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Continuous batching nedir ve neden throughput'u iyileştirir?",
+      "options": [
+        "Tüm istekleri tek bir büyük batch'te işlemek",
+        "Tüm batch'in bitmesini beklemek yerine, çalışan batch'e istekler başladıkça ve bittikçe dinamik olarak ekleyip çıkarmak",
+        "Daha büyük batch boyutları kullanmak",
+        "Birden çok model arasında batch'lemek"
+      ],
+      "correct": 1,
+      "explanation": "Statik batch'lemede kısa bir istek, en uzun istek bitene kadar batch slot'unu tutar. Continuous batching, tamamlanan slot'ları hemen yeni isteklerle doldurur, GPU'yu meşgul tutar ve genel throughput'u iyileştirir."
+    },
+    {
+      "stage": "post",
+      "question": "PagedAttention (vLLM'de kullanılan) hangi problemi çözer?",
+      "options": [
+        "Attention hesaplamasını hızlandırır",
+        "KV cache belleğini sanal bellek gibi sabit boyutlu bloklarla yönetir, değişken uzunluklu dizilerden kaynaklanan fragmentasyonu ortadan kaldırır",
+        "Model boyutunu azaltır",
+        "Tokenization hızını iyileştirir"
+      ],
+      "correct": 1,
+      "explanation": "Değişken uzunluklu diziler için KV cache bellek fragmentasyonuna neden olur (tahsisler arasında israf boşluklar). PagedAttention KV cache'i sabit bloklarda tahsis eder ve bunları OS sanal belleği gibi bir page table ile eşler."
+    },
+    {
+      "stage": "post",
+      "question": "Speculative decoding nedir?",
+      "options": [
+        "Birden çok yanıt üretip en iyisini seçmek",
+        "Büyük modelin paralel doğruladığı birden çok token önermek için küçük bir taslak model kullanmak, üretimi hızlandırır",
+        "Kullanıcının hangi token'ları istediğini tahmin etmek",
+        "Sık üretilen dizileri cache'lemek"
+      ],
+      "correct": 1,
+      "explanation": "Küçük hızlı bir model N aday token üretir. Büyük model bu N token'ı tek bir forward pass'te (paralel) doğrular. K token kabul edilirse, kabaca 1 büyük-model adımının süresinde K token üretmiş olursun."
+    }
+  ]
+}

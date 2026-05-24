@@ -1,0 +1,102 @@
+{
+  "lesson": "06-named-entity-recognition",
+  "title": "Named Entity Recognition",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "BIO tagging nedir?",
+      "options": [
+        "Token başına etiketler: entity başlangıcı için B-TYPE, içerisi için I-TYPE, dışı için O",
+        "Bir binary entity vs non-entity şeması",
+        "Bir tokenization stili",
+        "Entity'lerin ağaç temsili"
+      ],
+      "correct": 0,
+      "explanation": "BIO, span çıkarımını B/I/O öneklerle token sınıflandırmasına dönüştürür."
+    },
+    {
+      "stage": "pre",
+      "question": "Kural tabanlı gazetteer'lar production NER'de neden kırılgandır?",
+      "options": [
+        "GPU gerektirirler",
+        "Yavaştırlar",
+        "Yeni entity'ler üzerinde sıfır coverage'a sahiplerdir ve disambiguation yapamazlar (örn. Apple meyve vs şirket)",
+        "Çok token'lı entity'leri ele alamazlar"
+      ],
+      "correct": 2,
+      "explanation": "Gazetteer'lar bilinen string'leri eşleyebilir ama anlamı ayırt edemez veya görülmemiş isimlere genelleyemez."
+    },
+    {
+      "stage": "check",
+      "question": "CRF'in NER için HMM'e karşı temel avantajı nedir?",
+      "options": [
+        "CRF'ler Viterbi algoritmasından kaçınır",
+        "CRF'ler eğitim verisine asla ihtiyaç duymaz",
+        "CRF'ler discriminative'dir ve keyfi özellikleri (shape, capitalization, komşular) karıştırabilir",
+        "CRF'ler daha hızlıdır"
+      ],
+      "correct": 2,
+      "explanation": "CRF'ler discriminative'dir ve zengin, örtüşen özellikler üzerinde koşullandırma yapmana izin verir."
+    },
+    {
+      "stage": "check",
+      "question": "Bir BiLSTM-CRF mimarisinde CRF katmanı hangi rolü oynar?",
+      "options": [
+        "Tokenization yapar",
+        "LSTM emission'larının üstüne tag-to-tag geçişlerini modelleyerek geçerli BIO tag dizilerini zorunlu kılar",
+        "LSTM'i ön-eğitir",
+        "Embedding'leri değiştirir"
+      ],
+      "correct": 1,
+      "explanation": "LSTM özelliklerinin üstündeki CRF etiketler arası bağımlılıkları modeller ve geçersiz dizileri eler."
+    },
+    {
+      "stage": "check",
+      "question": "NER neden token seviyesi F1 değil, entity seviyesi F1 ile değerlendirilmelidir?",
+      "options": [
+        "Entity seviyesi F1 hesaplaması daha kolay",
+        "Tahmin edilen span'ler gerçek span'lerle tam olarak eşleşmelidir; token seviyesi F1 kısmi eşleşmeleri sayarak accuracy'yi şişirir",
+        "Token seviyesi F1 BIO'yu işleyemez",
+        "Entity seviyesi F1 HuggingFace tarafından zorunlu kılınır"
+      ],
+      "correct": 1,
+      "explanation": "Span tam eşleşmesi anlamlı metriktir; token seviyesi F1 kısmi örtüşmeyle skorları şişirir."
+    },
+    {
+      "stage": "post",
+      "question": "HuggingFace NER pipeline'ında aggregation_strategy='simple' ne yapar?",
+      "options": [
+        "Çıktıyı küçük harfe çevirir",
+        "Tokenization'ı atlar",
+        "Bitişik B-X ve I-X token'larını tek bir span'e birleştirir",
+        "Yalnızca en güvenli entity'yi döndürür"
+      ],
+      "correct": 2,
+      "explanation": "Aynı tipteki bitişik BIO token'larını span seviyesi entity'lere birleştirir."
+    },
+    {
+      "stage": "post",
+      "question": "Standart BIO neden iç içe geçmiş entity'lerde başarısız olur?",
+      "options": [
+        "BIO bir transformer gerektirir",
+        "BIO düz token başına bir şemadır ve farklı tipte iki örtüşen span'i ifade edemez",
+        "BIO çok token'lı entity'leri temsil edemez",
+        "BIO tip etiketini düşürür"
+      ],
+      "correct": 1,
+      "explanation": "BIO token başına bir etiket atar; iç içe span'lar çok-geçişli veya span tabanlı modeller gerektirir."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da klasik NER (CRF veya BiLSTM-CRF) ne zaman hâlâ LLM'i yener?",
+      "options": [
+        "İç içe entity'lerde",
+        "Girdi İngilizce olduğunda her zaman",
+        "Açık alan anlatımlarda",
+        "Sıkı gecikme bütçeleri, bol etiket, kararlı ontolojiler veya non-generative regulatory kısıtlar altında"
+      ],
+      "correct": 3,
+      "explanation": "Klasik NER gecikme, etiketli veri rejimleri, sabit ontolojiler ve on-prem kısıtlarında kazanır."
+    }
+  ]
+}

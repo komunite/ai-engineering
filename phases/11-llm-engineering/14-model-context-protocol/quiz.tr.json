@@ -1,0 +1,66 @@
+{
+  "lesson": "14-model-context-protocol",
+  "title": "Model Context Protocol",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "Bir MCP server hangi üç primitive'i sunar?",
+      "options": [
+        "Functions, types, classes",
+        "Tools, resources, prompts",
+        "Endpoint'ler, webhook'lar, queue'lar",
+        "Agent'lar, skill'ler, workflow'lar"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "MCP hangi wire format'ını kullanır?",
+      "options": [
+        "HTTP üzerinden GraphQL",
+        "Protobuf ile gRPC",
+        "JSON-RPC 2.0",
+        "OpenAPI ile REST"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Hangi metadata alanı bir tool'un state'i değiştirdiğini ve insan onayı gerektirmesi gerektiğini sinyaller?",
+      "options": [
+        "readonly: false",
+        "mutating: true",
+        "destructiveHint: true",
+        "requiresAuth: true"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "2025-06-18'de önceki SSE-only remote transport'unun yerini alan transport hangisidir?",
+      "options": [
+        "WebTransport",
+        "Streamable HTTP",
+        "WebSocket-only",
+        "gRPC bidi"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bir tool, inline kalmak yerine ne zaman kendi MCP server'ına ayrılmalıdır?",
+      "options": [
+        "Günde 10 kereden az çağrıldığında",
+        "İki veya daha fazla host'tan çağrıldığında ve read-only/cache'lenebilir olduğunda",
+        "1KB'tan fazla veri döndürdüğünde",
+        "Asla; MCP yalnızca lokal dev içindir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

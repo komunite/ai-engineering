@@ -1,0 +1,78 @@
+{
+  "lesson": "23-sre-for-ai",
+  "title": "AI için SRE — Multi-Agent Olay Müdahalesi, Runbook'lar, Öngörücü Tespit",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders AI SRE için hangi multi-agent şeklini öneriyor?",
+      "options": [
+        "Üç agent arasından birinin rastgele seçilmesi",
+        "Supervisor olmadan seri halinde iki agent",
+        "Her şeye sahip monolitik tek bir agent",
+        "Olayı uzmanlaşmış log, metric ve runbook agent'ları için alt-sorgulara bölen, sonra sentezleyip insana sunan supervisor agent"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders hangi otomatik remediation setini güvenli olarak adlandırıyor?",
+      "options": [
+        "Servis topolojisini yeniden tasarlama",
+        "Veritabanlarını değiştirme",
+        "IAM policy'lerini değiştirme",
+        "Pod restart, belirli bir deploy'u geri al, önceden onaylanmış sınırlar içinde bir havuzu ölçeklendir, önceden onaylanmış bir feature flag'ı etkinleştir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "NeuBird Hawkeye halüsinasyonlu kök nedenleri filtrelemek için adversarial değerlendirmeyi nasıl kullanır?",
+      "options": [
+        "İki model aynı olayı bağımsız analiz eder; mutabakat = yüksek güven, anlaşmazlık = iki hipotezle birlikte insana eskalate et",
+        "GAN tarzı eğitim kullanır",
+        "Her zaman daha yüksek güvenli modelin yanıtını seçer",
+        "Aynı modeli aynı girdide iki kez çalıştırır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Operasyonel bellek AI SRE'de neyi çözer?",
+      "options": [
+        "Çıkarım pod'larının cold start'ı",
+        "Network egress filtreleme",
+        "Ekip değişiklikleri sırasında kabile bilgisinin kaybı — runbook'lar ve post-mortem'lar agent'ların her olayda retrieve ettiği bir vector DB'de yaşar",
+        "Token maliyeti attribution'ı"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders pre-incident tahmini için hangi MIT 2025 sonucunu gösteriyor?",
+      "options": [
+        "1 saniye önden %100 tahmin",
+        "Log'lar + GPU sıcaklıkları + API hata pattern'leri kullanılarak kesintilerin %89'u 10-15 dakika önceden tahmin edildi",
+        "Tahminler çözülmeden kalıyor",
+        "Önden zaman olmadan %10"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders öngörücü tespit hakkında hangi operasyonel kısıtı vurguluyor?",
+      "options": [
+        "Tahminler runbook'ların yerine geçer",
+        "Tahminler asla eyleme bağlanmamalıdır",
+        "Eyleme dökülmeyen tahminler yalnızca dashboard'dur — operasyonel soru, tahminin hangi eylemi (pre-drain, çağrı, auto-scale) tetiklediğidir",
+        "Tahminler her zaman doğrudur"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,31 +1,37 @@
-<!-- Thanks for contributing. Fill out what applies. Delete sections that don't. -->
+<!--
+Katkınız için teşekkürler. Uygulanan kısımları doldurun, uymayan bölümleri silin.
+İngilizce şablon için: https://github.com/rohitg00/ai-engineering-from-scratch/blob/main/.github/PULL_REQUEST_TEMPLATE.md
+-->
 
-## What this PR does
+## Bu PR ne yapıyor
 
-<!-- One-sentence summary. -->
+<!-- Tek cümlelik özet. -->
 
-## Kind of change
+## Değişiklik türü
 
-- [ ] New lesson
-- [ ] Fix to an existing lesson
-- [ ] Translation
-- [ ] New output (prompt, skill, agent, MCP server)
-- [ ] Docs / website / tooling
+- [ ] Yeni ders (yalnızca Türkçe çeviri ya da yeni Türkçe içerik için — İngilizce ders eklemek istiyorsan upstream'e PR aç: `rohitg00/ai-engineering-from-scratch`)
+- [ ] Mevcut bir derse düzeltme (Türkçe metin)
+- [ ] Yeni çeviri (`docs/tr.md`, `outputs/*.tr.md`, `quiz.tr.json`)
+- [ ] Yeni çıktı (prompt, skill, agent, MCP server)
+- [ ] Web sitesi / build / araçlar
+- [ ] Sözlük / terim çevirisi (`glossary/terms.tr.md`)
 
 ## Checklist
 
-- [ ] Code runs without errors with the listed dependencies
-- [ ] No comments in code files (docs explain, code is self-explanatory)
-- [ ] Built from scratch first, then shown with a framework (for new lessons)
-- [ ] Lesson folder matches `LESSON_TEMPLATE.md` structure
-- [ ] ROADMAP.md row for the lesson is a markdown link (`[Name](phases/...)`), not bare text
-- [ ] One lesson per commit (atomic per-lesson rule)
-- [ ] Tested locally / code output matches what `docs/en.md` claims
+- [ ] Kod, listelenen bağımlılıklarla hatasız çalışıyor
+- [ ] Kod dosyalarında yorum yok (açıklama doc'ta, kod kendini açıklıyor)
+- [ ] Önce sıfırdan inşa, sonra framework (yeni dersler için)
+- [ ] Ders klasörü `LESSON_TEMPLATE.tr.md` yapısıyla eşleşiyor
+- [ ] ROADMAP satırı markdown link biçiminde (`[Ad](phases/...)`), düz metin değil
+- [ ] Ders başına tek commit (atomik per-lesson kuralı)
+- [ ] Yerel olarak test edildi / kod çıktısı `docs/tr.md` ya da `docs/en.md`'nin iddia ettiğiyle eşleşiyor
+- [ ] Çeviri için: `CLAUDE.md`'deki çeviri konvansiyonları (bölüm başlıkları, çevrilmeyen teknik terimler) takip edildi
+- [ ] Quiz çevirisi varsa: `python3 -c "import json; json.load(open('FILE'))"` ile JSON doğrulandı; `stage`, `correct`, `options` sırası korundu
 
-## Phase / lesson
+## Faz / ders
 
-<!-- e.g. Phase 5 · 03-tokenizers -->
+<!-- örn. Faz 5 · 03-tokenizers -->
 
-## Notes for reviewer
+## Reviewer için notlar
 
-<!-- Anything surprising, any deviations from the template, open questions. -->
+<!-- Şaşırtıcı bir şey, şablondan sapmalar, açık sorular. -->

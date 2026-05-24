@@ -1,0 +1,90 @@
+{
+  "lesson": "08-memory-blocks-sleep-time-compute",
+  "title": "Memory Blocks ve Sleep-Time Compute (Letta)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Letta'nın üç bellek katmanı nedir?",
+      "options": [
+        "Cache, KV, archival",
+        "Core, recall, archival",
+        "RAM, swap, disk",
+        "Working, episodic, semantic"
+      ],
+      "correct": 1,
+      "explanation": "Letta core (her zaman görünür), recall (konuşma geçmişi) ve archival (harici) katmanlarını kullanır."
+    },
+    {
+      "stage": "pre",
+      "question": "Sleep-time compute hangi prodüksiyon problemini hedefler?",
+      "options": [
+        "Bellek consolidation'ı kritik yolda yapmaktan kaynaklanan tail latency",
+        "Matematik problemlerinde daha yüksek doğruluk",
+        "Daha düşük embedding maliyeti",
+        "Daha hızlı JSON parsing"
+      ],
+      "correct": 0,
+      "explanation": "Sleep-time, prune/summarize/reconcile işlemlerini kullanıcıya açık yoldan çıkarır, böylece birincil yanıtlar hızlı kalır."
+    },
+    {
+      "stage": "check",
+      "question": "Letta'da hangi özellik bir memory block alanı DEĞİLDİR?",
+      "options": [
+        "label",
+        "value",
+        "limit",
+        "embedding_model_version"
+      ],
+      "correct": 3,
+      "explanation": "Block'lar id, label, value, limit, description taşır; embedding model versiyonu block şemasının parçası değildir."
+    },
+    {
+      "stage": "check",
+      "question": "Sleep-time agent neden birincilden daha güçlü bir model çalıştırabilir?",
+      "options": [
+        "Özel bir API anahtarı alır",
+        "Kritik yolun dışındadır, bu yüzden latency kısıtlı değildir",
+        "Rate limit'lerden muaftır",
+        "Bellek operasyonları yarı token maliyetlidir"
+      ],
+      "correct": 1,
+      "explanation": "Kullanıcı yanıtlarını engellemediği için sleep-time agent daha yavaş ve daha pahalı olabilir."
+    },
+    {
+      "stage": "check",
+      "question": "Human ve Persona block'ları hangi pattern'e genelleşir?",
+      "options": [
+        "Vector embedding'ler",
+        "Keyfi kullanıcı tanımlı tipli düzenlenebilir block'lar (Task, Project, Safety, ...)",
+        "JSON-RPC kanalları",
+        "OS process'leri"
+      ],
+      "correct": 1,
+      "explanation": "Letta iki MemGPT block'unu id, label, value, limit, description'lı herhangi bir kullanıcı tanımlı block'a genelleştirir."
+    },
+    {
+      "stage": "post",
+      "question": "Bu pattern'de silent drift nedir?",
+      "options": [
+        "Birincil agent'ın sleep-time agent'ın altında bir block'u yeniden yazdığını hiç görmemesi; versiyonlama ve görünür diff'lerle düzelt",
+        "Yavaş disk yazımı",
+        "Embedding model yükseltmeleri",
+        "Rate-limit jitter'ı"
+      ],
+      "correct": 0,
+      "explanation": "Block'ları versiyonlamak ve trace'te diff'leri görünür kılmak, sleep-time yeniden yazımlarını birincil döngüye görünür yapar."
+    },
+    {
+      "stage": "post",
+      "question": "Letta V1'de inline `Thought:` token'ları ve send_message/heartbeat pattern'i yerine ne geldi?",
+      "options": [
+        "Ayrı bir kanalda yayınlanan ve turlar arasında taşınan native reasoning",
+        "Düşüncelere ayrılmış ikinci bir LLM",
+        "Daha büyük bir system prompt",
+        "Kullanıcının elle yazdığı düşünceler"
+      ],
+      "correct": 0,
+      "explanation": "Letta V1 (letta_v1_agent) prompt-şekilli düşünceler yerine sağlayıcı seviyesi native reasoning kullanır."
+    }
+  ]
+}

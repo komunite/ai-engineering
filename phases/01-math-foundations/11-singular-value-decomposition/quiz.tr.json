@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "SVD'nin eigendecomposition'a göre avantajı nedir?",
+      "options": ["SVD'yi hesaplamak her zaman daha hızlıdır", "SVD herhangi bir şekildeki herhangi bir matriste çalışır; eigendecomposition ise tam eigenvector kümesine sahip kare matrisler gerektirir", "SVD daha küçük çıktı matrisleri üretir", "SVD sayısal hesaplama gerektirmez"],
+      "correct": 1,
+      "explanation": "Eigendecomposition yalnızca n doğrusal bağımsız eigenvector'a sahip kare matrislerde çalışır. SVD HERHANGİ bir m x n matrisini şekil veya rank kısıtlaması olmadan U * Sigma * V^T şeklinde ayrıştırır."
+    },
+    {
+      "stage": "pre",
+      "question": "'Düşük rank yaklaşımı' (low-rank approximation) ne anlama gelir?",
+      "options": ["Bir matristen düşük değerli satırları çıkarmak", "Bir matrisi yalnızca en önemli bileşenlerini tutarak, daha az bağımsız yönü olan daha basit bir matris üreterek yaklaşıklamak", "Bir matrisi daha düşük hassasiyetli bir veri türüne dönüştürmek", "Bir matrisin satırlarını büyüklüklerine göre sıralamak"],
+      "correct": 1,
+      "explanation": "Rank-k yaklaşımı yalnızca en büyük k singular value'yu ve onların vektörlerini tutar, geri kalanı atar. Eckart-Young teoremi bunun o rank'ın MÜMKÜN OLAN EN İYİ yaklaşımı olduğunu kanıtlar."
+    },
+    {
+      "stage": "post",
+      "question": "SVD A = U * Sigma * V^T'de her faktör hangi geometrik işlemi temsil eder?",
+      "options": ["U ölçekler, Sigma döndürür, V^T öteler", "V^T giriş uzayında döndürür, Sigma temel eksenler boyunca ölçekler, U çıkış uzayına döndürür", "U sıkıştırır, Sigma genişletir, V^T normalize eder", "Üç faktör de aynı işlemi yapar: döndürme"],
+      "correct": 1,
+      "explanation": "SVD her matrisin şunu yaptığını ortaya koyar: (1) V^T girişleri temel yönlerle hizalamak için döndürür, (2) Sigma her eksen boyunca gerer/sıkıştırır, (3) U sonucu çıkış uzayına döndürür. Döndür, ölçekle, döndür."
+    },
+    {
+      "stage": "post",
+      "question": "sklearn neden PCA'yı kovaryans matrisinin eigendecomposition'ı yerine SVD kullanarak uygular?",
+      "options": ["SVD ML için daha doğru olan farklı sonuçlar üretir", "SVD doğrudan veri matrisi üzerinde çalışır, kovaryans matrisini oluşturmaktan kaçınır, koşul sayısının karesini almaktan kaçınır ve sayısal kararlılığı iyileştirir", "SVD'yi GPU'larda paralelleştirmek daha kolaydır", "SVD verinin merkezlenmesini gerektirmez"],
+      "correct": 1,
+      "explanation": "A^T*A oluşturmak singular value'ların (ve koşul sayısının) karesini alır. A'nın singular value'ları [1000, 0.001] ise, A^T*A'nın eigenvalue'ları [10^6, 10^-6] olur -- 6 hassasiyet basamağı kaybedilir. SVD doğrudan A üzerinde çalışarak bunu önler."
+    },
+    {
+      "stage": "post",
+      "question": "Truncated SVD, öneri sistemlerinin eksik puanları tahmin etmesini nasıl sağlar?",
+      "options": ["Eksik girişleri ortalama puanla doldurur", "Puan matrisini gizli (latent) kullanıcı ve film profillerine ayrıştırır; bir kullanıcı profilinin film profili ile dot product'ı eksik puanı tahmin eder", "Benzer kullanıcıları kümeler ve puanlarını kopyalar", "Gözlenen puanlar üzerinde bir sinir ağı eğitir"],
+      "correct": 1,
+      "explanation": "SVD puan matrisini kullanıcı profillerine (U), gizli faktör önemine (Sigma) ve film profillerine (V^T) ayrıştırır. Düşük-rank yeniden yapılandırma, kullanıcı tercihlerini açıklayan gizli faktörlere (tür, dönem, stil) dayanarak eksik girişleri doldurur."
+    }
+  ]
+}

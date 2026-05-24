@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "3D Gaussian Splatting neden 2026'ya kadar fotorealistik sahne reconstruction için production varsayılanı olarak NeRF'in yerini büyük ölçüde aldı?",
+      "options": [
+        "Gaussian Splatting her durumda NeRF'ten daha yüksek görsel kalitesi üretir",
+        "3DGS açıktır (piksel başına MLP yok): render etme 100+ fps'de GPU rasterizasyonudur, eğitim saatler yerine dakikalar alır, sahneler düzenlenebilirdir ve Khronos + OpenUSD ikisi de 2026'da bunu standartlaştırdı",
+        "NeRF araştırma kaydından geri çekildi",
+        "PyTorch NeRF operatörlerini desteklemeyi bıraktı"
+      ],
+      "correct": 1,
+      "explanation": "3DGS, implicit bir MLP'yi milyonlarca açık 3D Gaussian ile değiştirir. Render etme, GPU'ların consumer hardware'da 100+ fps'de çalıştırdığı sıralı alpha compositing olur. Eğitim dakikalar içinde çalışır. Her Gaussian düzenlenebilirdir. 2026'da Khronos, glTF için 3DGS uzantısını onayladı ve OpenUSD 26.03 native bir schema gönderdi, bu da 3DGS'yi portable bir production format'ına dönüştürdü."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir sahnedeki bir 3D Gaussian pozisyon, rotasyon, ölçek, opaklık ve view-dependent renk (specular highlight gibi) işlemek için hangi ek temsili taşır?",
+      "options": [
+        "İkinci bir RGB texture",
+        "Gaussian başına küçük bir MLP",
+        "Spherical harmonics katsayıları: derece 3'e kadar renk kanalı başına 16 katsayı verir, render zamanında viewing direction'a karşı değerlendirilir",
+        "Bir light probe cubemap"
+      ],
+      "correct": 2,
+      "explanation": "Spherical harmonics küre üzerindeki Fourier base'idir. Her Gaussian, renginin viewing direction ile nasıl değiştiğini encode eden öğrenilmiş SH katsayıları saklar. Render zamanında katsayıları, pikselden Gaussian merkezine giden birim vektöre karşı değerlendirirsin, texture veya MLP olmadan specular highlight'lar, hafif yansımalar ve view-dependent shading verir."
+    },
+    {
+      "stage": "post",
+      "question": "3DGS eğitimi sırasında densification 'clone' ve 'split' işlemlerini içerir. Her birini ne tetikler?",
+      "options": [
+        "Hiçbir şey -- Gaussian'lar başlatmadan sonra sabittir",
+        "Küçük ölçekli yüksek gradient büyüklüğü clone'u tetikler (daha fazla yerel detay gerekli); büyük ölçekli yüksek gradient split'i tetikler (bir Gaussian bölgeyi fit edemeyecek kadar düzgün). Eşik altı opaklık prune'u tetikler",
+        "Son checkpoint'ten beri geçen süre",
+        "Her epoch sırasında rastgele örnekleme"
+      ],
+      "correct": 1,
+      "explanation": "Adaptif densification, 3DGS'nin ~100k SfM-seeded Gaussian'dan yakınsamada 1-5M'e büyümesini sağlayan şeydir. Clone, az çözünürlüklü küçük Gaussian'ları çoğaltır; split, çok büyük Gaussian'ları iki küçük olana ayırır; prune, sigmoid opaklığı eşiğin altına bozulmuş Gaussian'ları atar. Bu üç işlem artı parametreler üzerinde gradient descent tüm eğitim dinamiklerini oluşturur."
+    },
+    {
+      "stage": "post",
+      "question": "Hem NeRF hem de 3DGS'de bir piksel için renk denklemi `C = sum_i alpha_i * T_i * c_i` burada `T_i = prod_{j<i}(1 - alpha_j)`. Bu paylaşılan denklem iki yöntem hakkında ne söyler?",
+      "options": [
+        "Her açıdan matematiksel olarak özdeştirler",
+        "İkisi de aynı volumetrik render denklemini integre eder; fark yalnızca temsildedir (implicit MLP örnekleri vs açık sparse Gaussian'lar) ve render prosedüründedir (ray marching vs rasterizasyon) -- bu yüzden görsel kaliteleri karşılaştırılabilirdir",
+        "NeRF kesinlikle daha iyidir",
+        "3DGS kesinlikle daha iyidir"
+      ],
+      "correct": 1,
+      "explanation": "Paylaşılan denklem klasik volumetric render'dır. NeRF onu ışınlar boyunca örnekleyerek ve bir MLP sorgulayarak değerlendirir. 3DGS, Gaussian'ları 2D'ye projelendirerek ve piksel başına sıralı primitive'leri alpha-compositing ederek değerlendirir. Aynı fizik, aynı loss, farklı veri yapıları ve render algoritmaları. Bu özdeşlik, benzer final PSNR / LPIPS'e gelmelerinin nedenidir; pratik fark hız ve düzenlenebilirliktedir."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da bir 3DGS sahnesini Unreal Engine, Vision Pro, Blender ve bir Three.js web viewer'ında göndermek istiyorsun. Hangi export format'ı en güvenli bahistir?",
+      "options": [
+        "Tek başına ham `.ply`",
+        "`KHR_gaussian_splatting` uzantılı glTF (Khronos RC Şubat 2026) ve/veya `UsdVolParticleField3DGaussianSplat` ile OpenUSD 26.03; bunlar 2026'da iki onaylanmış/standartlaştırılmış formatlardır",
+        "Viewer başına özel bir binary blob",
+        "3D Gaussian'ların PNG şeritleri"
+      ],
+      "correct": 1,
+      "explanation": "2024'e kadar her viewer'ın kendi formatı vardı. Khronos Şubat 2026'da glTF için KHR_gaussian_splatting'i onayladı ve OpenUSD 26.03 Nisan 2026'da native bir 3DGS schema'sı ekledi. Birine export etmek motor, viewer ve pipeline'lar arasında portability verir. `.ply` araştırma için ortak değişim dili olarak kalır ama daha az yapısaldır. Çapraz araç production için glTF + USD 2026 cevabıdır."
+    }
+  ]
+}

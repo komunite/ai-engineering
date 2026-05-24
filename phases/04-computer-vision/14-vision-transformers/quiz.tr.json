@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir ViT bir görseli nasıl bir token dizisine dönüştürür?",
+      "options": [
+        "Tüm görseli tek bir vektöre flatten eder",
+        "Görseli örtüşmeyen patch'lere bölmek ve her birini tek bir işlemde bir token embedding'ine linear olarak projelendirmek için kernel_size = stride = patch_size olan bir konv uygular",
+        "Önce bir CNN çalıştırır ve feature map'ini token olarak kullanır",
+        "Piksel yoğunluklarını sıralar"
+      ],
+      "correct": 1,
+      "explanation": "Bir ViT'nin ilk katmanı, 224x224 bir görseli 14x14 grid'lik 16x16 patch'lere dönüştüren ve her birini dim=768'e projelendiren kernel_size = stride = 16 olan bir konvtur. O tek konv hem patchification hem de projection yapar. Sonuç, standart bir transformer encoder'ın işleyebileceği 196 token'dır."
+    },
+    {
+      "stage": "pre",
+      "question": "ViT'deki [CLS] token nedir ve neden gereklidir?",
+      "options": [
+        "Token dizisine eklenmiş öğrenilmiş bir vektör; N transformer katmanından sonra çıktısı tüm görseli aggregate eder ve sınıflandırıcı head'ini besler",
+        "Özel bir piksel değeri",
+        "Eksik veri için bir placeholder",
+        "Bir dropout mask"
+      ],
+      "correct": 0,
+      "explanation": "ViT, BERT'in konvansiyonunu izler: patch dizisine öğrenilmiş bir vektör (CLS token) ekler. Self-attention her token'ın her diğer token'ı görmesine izin verir, böylece CLS token tüm patch'lerden global bilgiyi aggregate eder. Sınıflandırıcı yalnızca CLS çıktısını okur. Alternatif tasarımlar tüm patch token'ları üzerinde average pooling kullanır (ConvNeXt ve birçok post-ViT modeli tarafından kullanılır)."
+    },
+    {
+      "stage": "post",
+      "question": "Orijinal ViT makalesi neden ResNet'i geçmek için JFT-300M pretraining'e ihtiyaç duydu ve DeiT neden ihtiyaç duymadı?",
+      "options": [
+        "ViT, JFT-300M olmadan bozuk",
+        "ViT'nin inductive bias'ları CNN'lerden zayıftır; yeterli veri olmadan overfit eder. DeiT, güçlü augmentation (RandAugment, Mixup, CutMix), stochastic depth ve isteğe bağlı olarak CNN distillation ile ViT'lerin yalnızca ImageNet-1k üzerinde iyi eğitildiğini gösterdi",
+        "DeiT farklı attention kullanır",
+        "ViT makalesi yanlıştı"
+      ],
+      "correct": 1,
+      "explanation": "ViT'nin inductive bias eksikliği (yerleşik locality yok, translation equivariance yok), ağın bunları veriden öğrenmesi gerektiği anlamına gelir. 1M ImageNet görseliyle bu zordur; 300M JFT görseliyle kolaydır. DeiT, veriyi eğitim reçetesi iyileştirmeleriyle değiştirdi: ağır augmentation, stochastic depth ve bir CNN öğretmeninden distillation -- hepsi prior eksikliğini telafi eder."
+    },
+    {
+      "stage": "post",
+      "question": "Pre-LayerNorm (`x = x + sublayer(LN(x))`) ve post-LayerNorm (`x = LN(x + sublayer(x))`) -- modern transformer'larda hangisi kullanılır ve neden?",
+      "options": [
+        "Post-LN; daha basit",
+        "Pre-LN; learning rate warmup olmadan daha derin ağları stabil olarak eğitir ve yaklaşık 6 katmanın üzerinde post-LN'nin yaşadığı gradient instability'lerini önler",
+        "Aynılar",
+        "Hiçbiri; modern transformer'lar LayerNorm'u atlar"
+      ],
+      "correct": 1,
+      "explanation": "Post-LN orijinal transformer'dı (2017) ve 6-8 katmanın üzerinde dikkatli warmup + küçük learning rate gerektiriyordu. Pre-LN (Xiong ve diğerleri, 2020; ViT, GPT-2+ ve her modern LLM tarafından kullanılır) sayısal olarak daha stabildir: residual stream LN'den geçmeden birikir ve her sublayer normalize edilmiş bir girdi üzerinde çalışır. 12 katmandan derin her transformer pre-LN kullanır."
+    },
+    {
+      "stage": "post",
+      "question": "Swin Transformer windowed attention'ı tanıtır. Hangi sorunu çözer?",
+      "options": [
+        "Kaybolan gradient'ler",
+        "Tam attention O((H*W)^2) maliyetine sahiptir; Swin, attention'ı 7x7 patch'lik yerel pencerelere kısıtlar ve maliyeti O(H*W * window^2)'ye düşürür. Alternating block'lar, pencereyi boyutunun yarısı kadar kaydırır, böylece bilgi sonunda görsel boyunca karışır",
+        "BatchNorm desteklenmiyor",
+        "Texture'a overfitting"
+      ],
+      "correct": 1,
+      "explanation": "4x4 patch'li 224x224 bir görselin 56*56 = 3136 token'ı vardır; tam attention katman başına 3136^2 = ~10M çifttir. Swin yalnızca 7x7 pencereler içinde attention yapar, pencere başına 49^2 = 2401 çift verir (artı pencere sayısı). Alternating block'lardaki shifted pencereler bilgiyi birkaç katman üzerinde pencereler arasında karıştırır. Bu, attention'dan vazgeçmeden CNN benzeri bir locality prior'unu transformer'a geri getirir."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Yapay zeka/ML kodunda hata ayıklamayı tipik bir web uygulamasındakinden temelde farklı kılan nedir?",
+      "options": ["Yapay zeka kodu farklı programlama dilleri kullanır", "Yapay zeka bug'ları genelde çökmez -- sessizce yanlış sonuçlar üretirler, hata mesajı yoktur", "Yapay zeka kodu print ifadeleri gibi standart araçlarla ayıklanamaz", "Yapay zeka kodu ayıklamak için her zaman bir GPU gerektirir"],
+      "correct": 1,
+      "explanation": "En kötü yapay zeka bug'ları geçerli görünen çıktı üretir. Yanlış yapılandırılmış bir eğitim döngüsü, model hiçbir şey öğrenmezken saatlerce hatasız çalışabilir, stack trace'lerle çöken web uygulamalarının aksine."
+    },
+    {
+      "stage": "pre",
+      "question": "Bir profiler neyi ölçer?",
+      "options": ["Kodun doğru çıktı üretip üretmediğini", "Kodun her parçasının ne kadar zaman ve bellek tükettiğini", "Kod tabanında kaç bug olduğunu", "Unit testlerin kod kapsamını"],
+      "correct": 1,
+      "explanation": "Profiler'lar kaynak tüketimini ölçer -- fonksiyon başına çalışma süresi, bellek tahsisi ve GPU kullanımı -- darboğazları bulmana ve performansı optimize etmene yardım eder."
+    },
+    {
+      "stage": "post",
+      "question": "Modelin test setinde %99 doğruluk elde ediyor. Hangi yapay zekaya özgü bug'dan ilk şüphelenmelisin?",
+      "options": ["Modelin çok fazla parametresi vardır", "Data leakage -- test örnekleri eğitim setine sızmış olabilir", "Learning rate çok yüksek", "Batch size çok büyük"],
+      "correct": 1,
+      "explanation": "Şüpheli derecede yüksek doğruluk genelde data leakage'a işaret eder -- train ve test verisi arasında örtüşme, ya da hedef etiketi içeren feature'lar. Her zaman train/test örtüşmesini kontrol et."
+    },
+    {
+      "stage": "post",
+      "question": "Bir eğitim döngüsünün zaman dağılımını profile ettiğinde en yaygın bulgu nedir?",
+      "options": ["Backward pass sürenin %90'ını alır", "Veri yükleme, forward ve backward pass'lerin toplamından daha fazla zaman alır", "Log yazmak en çok zamanı alır", "GPU bellek tahsisi darboğazdır"],
+      "correct": 1,
+      "explanation": "DataLoader'da num_workers=0 olduğunda veri yükleme genelde eğitim süresinin %60'ından fazlasını alır. Çözüm, GPU hesaplamasıyla paralel olarak veri yüklemek için num_workers > 0 ayarlamaktır."
+    },
+    {
+      "stage": "post",
+      "question": "500. adımda NaN loss görüyorsun. Hangi yaklaşım kök nedeni bulmana yardım eder?",
+      "options": ["Farklı bir random seed ile eğitimi sıfırdan başlat", "Gradient'lerde NaN/Inf kontrolü için detect_nan kullan ve hata noktasına breakpoint() ekle", "Gradient'leri stabilize etmek için batch size'ı artır", "Adam optimizer'dan SGD'ye geç"],
+      "correct": 1,
+      "explanation": "Önce NaN'ın NEREDE ortaya çıktığını her parametre için gradient'leri kontrol ederek belirle. NaN adımında koşullu bir breakpoint, tensor değerlerini interaktif olarak incelemeni sağlar. Yaygın nedenler: çok yüksek learning rate, log(0) ya da sıfıra bölme."
+    }
+  ]
+}

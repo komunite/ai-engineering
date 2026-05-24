@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Birden fazla zayıf sınıflandırıcıyı ensemble'da birleştirmek doğruluğu neden iyileştirir?",
+      "options": [
+        "Her zayıf sınıflandırıcı test setinin farklı bir kısmını ezberler",
+        "Sınıflandırıcılar farklı hatalar yaparsa, çoğunluk oylaması bireysel hataları siler",
+        "Ensemble'lar her zaman tek modellerden daha fazla eğitim verisi kullanır",
+        "Zayıf sınıflandırıcılar güçlü olanlardan her zaman daha hızlıdır"
+      ],
+      "correct": 1,
+      "explanation": "Anahtar çeşitliliktir. Sınıflandırıcılar bağımsız hatalar yaparsa, çoğunluk oylaması yanlış bir cevabın yarıdan fazla modeli kandırması gerektiği anlamına gelir. Hatalar birbirini götürür ve ensemble doğruluğu herhangi bir bireyi aşar."
+    },
+    {
+      "stage": "pre",
+      "question": "Bagging ile boosting arasındaki temel fark nedir?",
+      "options": [
+        "Bagging modelleri rastgele alt kümelerde paralel eğitir; boosting önceki hatalara odaklanarak sıralı eğitir",
+        "Bagging derin sinir ağları kullanır; boosting karar ağaçları kullanır",
+        "Bagging bias'ı azaltır; boosting varyansı azaltır",
+        "Bagging etiketli veri gerektirir; boosting denetimsiz çalışır"
+      ],
+      "correct": 0,
+      "explanation": "Bagging modelleri bootstrap örneklerinde bağımsız eğitir (paralel, varyansı azaltır). Boosting modelleri sıralı eğitir; her yeni model şu ana kadarki ensemble'ın hatalarına odaklanır (bias'ı azaltır)."
+    },
+    {
+      "stage": "post",
+      "question": "AdaBoost'ta her turdan sonra yanlış sınıflandırılmış bir eğitim noktasının örnek ağırlığına ne olur?",
+      "options": [
+        "Aynı kalır",
+        "Artar, böylece bir sonraki zayıf öğrenici bu zor örneğe daha çok odaklanır",
+        "Azalır, böylece bir sonraki öğrenici bunu görmezden gelir",
+        "Eğitim setinden kaldırılır"
+      ],
+      "correct": 1,
+      "explanation": "AdaBoost her turdan sonra yanlış sınıflandırılmış örneklerin ağırlığını artırır. Bu, bir sonraki zayıf öğreniciyi ensemble'ın şu anda yanlış yaptığı örneklere daha fazla dikkat etmeye zorlar."
+    },
+    {
+      "stage": "post",
+      "question": "100 ağaçlı bir random forest, 200 ağaçla aynı test doğruluğunu veriyor. 500'e çıkarmak da iyileşme göstermiyor. Neden?",
+      "options": [
+        "Random forest underfit yapıyor ve farklı bir algoritma gerekiyor",
+        "Yeterli ağaçtan sonra varyans azaltma plato yapar ve daha fazla ağaç eklemek overfitting yaratmadan azalan getiri sağlar",
+        "500 ağaç izin verilen maksimumdur",
+        "Ağaçların hepsi aynı, dolayısıyla daha fazla eklemenin etkisi yok"
+      ],
+      "correct": 1,
+      "explanation": "Random forest'lar (boosting'in aksine) daha fazla ağaçla overfit yapmaz. Ancak yeterli çeşitli ağaç ortalandıktan sonra varyans azaltma plato yapar. Daha fazla ağaç doğruluğu iyileştirmeden hesaplama maliyeti ekler."
+    },
+    {
+      "stage": "post",
+      "question": "Gradient boosting her yeni ağacı hangi değere uydurur?",
+      "options": [
+        "Orijinal hedef değerlere",
+        "Mevcut ensemble tahminlerinin artıklarına (residual)",
+        "Rastgele öznitelik alt kümelerine",
+        "Önceki ağacın tahminlerine"
+      ],
+      "correct": 1,
+      "explanation": "Gradient boosting'de her yeni ağaç, mevcut ensemble'ın artıklarını (loss'un negatif gradient'i) tahmin etmek için eğitilir. Bu, kalan hatayı sıralı olarak azaltır."
+    }
+  ]
+}

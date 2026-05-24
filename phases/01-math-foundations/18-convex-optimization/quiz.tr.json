@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir konveks fonksiyonun tanımlayıcı özelliği nedir?",
+      "options": [
+        "Tam olarak bir kritik noktası vardır",
+        "Grafiği üzerindeki herhangi iki nokta arasındaki doğru parçası grafiğin üzerinde veya üzerindedir",
+        "Türevi her zaman pozitiftir",
+        "Yalnızca pozitif gerçek sayılarda tanımlanabilir"
+      ],
+      "correct": 1,
+      "explanation": "Bir fonksiyon konvekstir eğer herhangi iki nokta x, y ve [0,1] aralığında herhangi bir t için: f(tx + (1-t)y) <= t*f(x) + (1-t)*f(y). Geometrik olarak, grafik üzerindeki herhangi iki nokta arasındaki kiriş asla grafiğin altına inmez."
+    },
+    {
+      "stage": "pre",
+      "question": "Aşağıdaki ML problemlerinden hangisinin konveks loss yüzeyi vardır?",
+      "options": [
+        "ReLU aktivasyonlu 3 katmanlı sinir ağı eğitmek",
+        "Cross-entropy loss ile lojistik regresyon",
+        "k-means kümeleme",
+        "Öneri için matris faktörizasyonu"
+      ],
+      "correct": 1,
+      "explanation": "Lojistik regresyon konveks bir loss'a sahiptir (log-loss ağırlıklara göre konvekstir). Sinir ağları, k-means ve matris faktörizasyonu konveks değildir. Konveks problemler için herhangi bir yerel minimum global minimumdur."
+    },
+    {
+      "stage": "post",
+      "question": "Newton metodu f(x) = 5x^2 + 3x + 1 fonksiyonunun minimumuna kaç adımda yakınsar?",
+      "options": [
+        "1 adım (kuadratik fonksiyonlar için tam çözümdür)",
+        "Yaklaşık 10 adım",
+        "Yaklaşık 100 adım",
+        "Learning rate'e bağlıdır"
+      ],
+      "correct": 0,
+      "explanation": "Newton metodu yerel bir kuadratik yaklaşım uydurur ve onun minimumuna atlar. Gerçek bir kuadratik fonksiyon için yaklaşım tam çözümdür, dolayısıyla Newton metodu başlangıç noktasından bağımsız olarak tek bir adımda yakınsar."
+    },
+    {
+      "stage": "post",
+      "question": "KKT koşullarında 'tamamlayıcı gevşeklik' (lambda_i * g_i(x) = 0) ne anlama gelir?",
+      "options": [
+        "Tüm kısıtların optimumda aktif olması gerekir",
+        "Ya kısıt aktiftir (g_i = 0) ya da çarpanı sıfırdır (lambda_i = 0) — aktif olmayan bir kısıtın etkisi yoktur",
+        "Tüm kısıtların gradyanları dik olmalıdır",
+        "Lagrangian optimumda her zaman sıfırdır"
+      ],
+      "correct": 1,
+      "explanation": "Tamamlayıcı gevşeklik, her kısıtın ya bağlayıcı (g_i = 0, sınırda oturuyor) ya da alakasız (lambda_i = 0, çözümü etkilemiyor) olduğu anlamına gelir. SVM'lerde, bu yüzden yalnızca destek vektörleri (lambda_i > 0 olan aktif kısıtlar) karar sınırını belirler."
+    },
+    {
+      "stage": "post",
+      "question": "SGD, konveks olmayan sinir ağı yüzeylerinde konvekslik garantilerinin olmamasına rağmen neden iyi çözümler bulur?",
+      "options": [
+        "Sinir ağları yüksek boyutlarda gizlice konvekstir",
+        "SGD her zaman global minimumu bulur",
+        "Yüksek boyutlarda, kritik noktaların çoğu eyer noktasıdır (kötü yerel minimumlar değil) ve SGD gürültüsü bunlardan kaçmaya yardımcı olur",
+        "Loss fonksiyonu model performansıyla alakasızdır"
+      ],
+      "correct": 2,
+      "explanation": "Yüksek boyutlu parametre uzaylarında, rastgele kritik noktalar büyük ölçüde eyer noktalarıdır. Var olan az sayıda yerel minimum, global minimuma yakın loss değerlerine sahip olma eğilimindedir. SGD'nin stokastik gürültüsü eyer noktalarından kaçmaya yardımcı olur ve aşırı parametreleştirme yüzeyi düzleştirir."
+    }
+  ]
+}

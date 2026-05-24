@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "ImageNet dağılımına yakın yeni bir görev için 500 etiketli görselin var. Hangi rejim en mantıklısı?",
+      "options": [
+        "Bir ResNet-50'yi sıfırdan eğit",
+        "ImageNet ile önceden eğitilmiş bir backbone'u freeze et ve yalnızca yeni bir linear head eğit",
+        "Her katmanı aynı büyük LR ile fine-tune et",
+        "Önceden eğitilmiş ağırlıkları yok say; küçük veri setleri küçük modellerle en iyi çalışır"
+      ],
+      "correct": 1,
+      "explanation": "500 görsel ile derin bir ağı sıfırdan eğitmek veya tüm katmanları önceden eğitilmiş feature'ları tahrip etmeden end-to-end fine-tune etmek için yeterli sinyalin yok. Backbone'u freeze edip yalnızca yeni bir head (linear probe) eğitmek, önceden eğitilmiş feature'ları doğrudan kullanır ve küçük, yakın-domain veri setleri için standart reçetedir."
+    },
+    {
+      "stage": "pre",
+      "question": "ImageNet önceden eğitilmiş bir ağın erken konv katmanları, ImageNet hiç X-ray içermese bile medikal görsellere neden iyi transfer olur?",
+      "options": [
+        "PyTorch erken katmanları otomatik olarak yeniden başlatır",
+        "Erken katmanlar generic visual primitive'leri encode eder -- kenarlar, oryantasyonlar, kontrast -- bunlar neredeyse her görsel domain'de paylaşılır; yalnızca geç katmanlar ImageNet kategorilerine özelleşir",
+        "ImageNet gizlice medikal veri içerir",
+        "Transfer yalnızca domain'ler eşleştiğinde çalışır"
+      ],
+      "correct": 1,
+      "explanation": "Gabor benzeri filtreler ve basit texture detektörleri, erken CNN katmanlarının herhangi bir doğal görsel corpus'unda öğrendiği feature'lardır. Bunlar fotoğrafçılık, medikal görüntüleme, mikroskopi ve uydu verisi arasında geçerli olan ışık, gölge ve kenar istatistiklerini yansıtır. Geç katmanlar progresif olarak özelleşir, bu yüzden fine-tuning son birkaç block'a odaklanır."
+    },
+    {
+      "stage": "post",
+      "question": "Diskriminatif learning rate'lerle end-to-end fine-tune ederken, erken katmanlar neden geç katmanlardan daha küçük bir LR almalı?",
+      "options": [
+        "Erken katmanlarda daha az parametre var",
+        "Erken katmanlar korumak istediğin genel feature'ları encode eder; geç katmanlar göreve özgü feature'ları encode eder ve hareket etmelidir; erken katmanlarda daha küçük bir LR feature drift'i ve catastrophic forgetting'i önler",
+        "PyTorch doğruluk için katman bazında LR gerektirir",
+        "Erken katmanlarda daha küçük bir LR eğitimi hızlandırır"
+      ],
+      "correct": 1,
+      "explanation": "Erken katmanlar zaten doğru visual primitive'leri encode ediyor; bu feature'ların korunması için minik güncellemeler istiyorsun. Geç katmanların yeni göreve doğru hareket etmesi gerekiyor. Tüm model için tek bir learning rate, her iki uca da zarar veren bir uzlaşmayı zorlar. Diskriminatif LR'ler, her aşamanın kendi hızında hareket etmesine izin verir, bu da fine-tuning için deneysel optimal noktadır."
+    },
+    {
+      "stage": "post",
+      "question": "Bir ResNet'i 800 grayscale görsellik 10 sınıflı bir medikal veri setinde (3 kanala kopyalanmış) fine-tune ediyorsun. Accuracy %10 (10 sınıf için rastgele şans). En olası neden nedir?",
+      "options": [
+        "Yanlış loss fonksiyonu kullandın",
+        "BatchNorm running istatistikleri ImageNet RGB fotoğraflarından ve grayscale-medikal dağılımıyla kötü eşleşiyor, bu yüzden ilk birkaç BN katmanı ileri yayılan gürültü üretir",
+        "ResNet grayscale girdi işleyemez",
+        "800 görsel herhangi bir transfer learning için basitçe çok az"
+      ],
+      "correct": 1,
+      "explanation": "BatchNorm, running_mean ve running_var'ı ImageNet'ten saklar. Küçük, dağılım-kaymalı bir veri setinde bu buffer'lar kısa bir fine-tune sırasında yeterince hızlı adapte olamaz ve BN aktivasyonları yanlış istatistiklerle normalize eder. Çözümler: BN istatistiklerini freeze et, GroupNorm'a geç veya hedef veri seti üzerinde BN-only warmup pass ile BN istatistiklerini önceden eğit."
+    },
+    {
+      "stage": "post",
+      "question": "İki run karşılaştırıyorsun: (a) frozen ImageNet backbone üzerinde linear probe, %82 accuracy; (b) end-to-end fine-tune, %78 accuracy. Ne sonuç çıkarmalısın?",
+      "options": [
+        "Fine-tuning yararlı değil; linear probe'u yayınla",
+        "Linear probe'un altına düşen bir fine-tune neredeyse her zaman bir eğitim bug'ıdır -- LR çok yüksek, BN yanlış ele alınmış veya scheduler/optimizer yanlış yapılandırılmış; transfer hakkında herhangi bir şey sonuçlamadan önce tanı koy",
+        "Veri seti çok büyük",
+        "Önceden eğitilmiş ağırlıklar kötü"
+      ],
+      "correct": 1,
+      "explanation": "Fine-tuning her zaman linear probe'u geçmeli veya eşleşmelidir; linear probe, backbone LR = 0 olan fine-tuning'in özel bir durumudur. Fine-tune daha kötüyse, pipeline aktif olarak önceden eğitilmiş feature'ları tahrip ediyordur. Çözüm backbone LR'yi düşürmek, diskriminatif LR uygulamak veya BN'i freeze etmektir -- fine-tuning'i terk etmek değil."
+    }
+  ]
+}

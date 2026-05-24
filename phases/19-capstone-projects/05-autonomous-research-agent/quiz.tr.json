@@ -1,0 +1,90 @@
+{
+  "lesson": "05-autonomous-research-agent",
+  "title": "Capstone 05 — Autonomous Research Agent (AI-Scientist Class)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "AI-Scientist sınıfı agent deneyleri keşfetmek için hangi arama şeklini kullanır?",
+      "options": [
+        "Token çıktıları üzerinde beam search",
+        "Novelty x quality x budget skoru ile deney düğümleri üzerinde best-first tree search",
+        "Saf reinforcement learning from human feedback",
+        "Rastgele skorlamayla breadth-first genişleme"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Sandbox neden --network=none ve sınırlı kaynak cap'leri ile yapılandırılmıştır?",
+      "options": [
+        "Agent'ı prompt caching kullanmaya zorlamak için",
+        "Deterministik floating-point aritmetiğini zorlamak için",
+        "Varsayılan olarak GPU passthrough'a izin vermek için",
+        "Ağ egress'ini engellemek ve deney yan etkilerini tekrar üretilebilir bir zarf içinde tutmak için"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Writer loop'taki vision critique adımının rolü nedir?",
+      "options": [
+        "Şekilleri bar chart'lara çevirir",
+        "LaTeX draft'ı PDF'e derler, ardından bir VLM'in layout, şekil okunabilirliği ve iddia-kanıt hizalamasını eleştirmesini sağlar",
+        "Ekran görüntülerinden yeni deney fikirleri üretir",
+        "Render zamanında matplotlib'in yerini alır"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Reviewer ensemble pipeline'ı nasıl gate eder?",
+      "options": [
+        "Tek bir judge ikili bir bayrak üzerinde kabul veya reddeder",
+        "Reviewer'lar anonim oy verir ve çoğunluk kazanır",
+        "İncelemeler yalnızca yayından sonra çalışır",
+        "Beş judge NeurIPS tarzı rubric'lerde skorlar ve ağırlıklı toplam bir eşiği aşmalıdır, yoksa draft writer'a geri döner"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Capstone makale başına hangi maliyet disiplinini zorunlu kılar?",
+      "options": [
+        "Langfuse counter'ları ve pre-run tahminleri üzerinden izlenen 30$'lık sert bütçe",
+        "Kalite kontrolleri olmadan yalnızca maliyet optimizasyonu",
+        "Sınırsız compute, yalnızca sert wall-clock",
+        "GPU-saatleri izlenir ama hiç cap'lenmez"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Hangi skorlama fonksiyonu ağaç düğümlerini daha fazla genişletme için sıralar?",
+      "options": [
+        "Novelty x quality x kalan bütçe",
+        "İlgili makalelerin atıf sayısı",
+        "Rastgele uniform öncelik",
+        "Çıktı uzunluğu ve token sayısı"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Red-team raporu sisteme karşı neyi test eder?",
+      "options": [
+        "System prompt'larda cache hit rate",
+        "Vector DB'de multi-tenant veri sızıntısı",
+        "Paket kaybı altında latency kuyruğu",
+        "Fork bomb, ağ exfiltration ve dosya sistemi kaçışı gibi sandbox-escape girişimleri"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

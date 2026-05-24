@@ -1,0 +1,102 @@
+{
+  "lesson": "07-pos-tagging-parsing",
+  "title": "POS Tagging ve Syntactic Parsing",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "POS tagging'in amacı nedir?",
+      "options": [
+        "Duygu tespit etmek",
+        "Cümleyi çevirmek",
+        "Named entity'leri çıkarmak",
+        "Her token'a bir gramatik kategori (isim, fiil vb.) atamak"
+      ],
+      "correct": 3,
+      "explanation": "POS tagging her token'ı söz türü ile etiketler."
+    },
+    {
+      "stage": "pre",
+      "question": "Diller arası çalışmada varsayılan tagset hangisidir?",
+      "options": [
+        "Penn Treebank",
+        "Stanford Dependencies",
+        "Universal Dependencies",
+        "CoNLL-2003"
+      ],
+      "correct": 2,
+      "explanation": "Universal Dependencies daha kaba, dilden bağımsız 17-tag'lik bir set sağlar."
+    },
+    {
+      "stage": "check",
+      "question": "Bigram HMM POS tagger neyi modeller?",
+      "options": [
+        "Yalnızca P(tag'ler)",
+        "Dependency parse'ları",
+        "Embedding benzerliklerini",
+        "P(tag | önceki tag) geçişlerini artı P(kelime | tag) emission'larını, Viterbi ile decode ederek"
+      ],
+      "correct": 3,
+      "explanation": "Bigram HMM tag geçişlerini ve word emission'larını kullanır; Viterbi en yüksek olasılıklı diziyi bulur."
+    },
+    {
+      "stage": "check",
+      "question": "Viterbi algoritması bir HMM tagger için neyi hesaplar?",
+      "options": [
+        "Tag lattice üzerinde dinamik programlama ile tek en yüksek olasılıklı tag dizisini",
+        "Geçiş matrisini",
+        "Her tag'in marjinal olasılığını",
+        "Yalnızca forward olasılıkları"
+      ],
+      "correct": 0,
+      "explanation": "Viterbi O(n * |T|^2) dinamik programlama ile argmax dizisini bulur."
+    },
+    {
+      "stage": "check",
+      "question": "Dependency parsing ne üretir?",
+      "options": [
+        "Her kelimenin bir head kelimesi ve etiketli gramatik ilişkisi olan bir ağaç",
+        "Düz bir BIO dizisi",
+        "NP/VP/PP etiketlerinin constituency ağacı",
+        "Bir coreference zinciri"
+      ],
+      "correct": 0,
+      "explanation": "Dependency parse kelime başına (head, ilişki) kenarları verir; constituency parse iç içe öbek yapıları verir."
+    },
+    {
+      "stage": "post",
+      "question": "PTB POS tagging'de accuracy tavanı neden yaklaşık %97-98 civarındadır?",
+      "options": [
+        "Modeller hiçbir görevde %98'i geçemez",
+        "Universal Dependencies %98'de sınırlanır",
+        "İnsan annotatörler ancak %97 oranında anlaşır, dolayısıyla ~%98'in üstündeki modeller test verisini overfit ediyor olabilir",
+        "Donanım sınırlamaları"
+      ],
+      "correct": 2,
+      "explanation": "Annotatör anlaşmazlığı ulaşılabilir accuracy'yi sınırlar; çok yüksek rakamlar genelde overfitting sinyali verir."
+    },
+    {
+      "stage": "post",
+      "question": "POS tagging 2026 LLM pipeline'larında neden hâlâ önemli?",
+      "options": [
+        "LLM'ler onsuz çalışamaz",
+        "Lemmatization, aspect-based sentiment, query decomposition, structured-output validation ve diller arası transfer hâlâ POS veya dependency parse tüketir",
+        "Tokenization için gerekli",
+        "Transformer'ların yerini alır"
+      ],
+      "correct": 1,
+      "explanation": "POS ve dependency parse'lar LLM'ler düzyazıyı üretse bile birçok yapılandırılmış aşağı akış görevini besler."
+    },
+    {
+      "stage": "post",
+      "question": "Çoğu production POS / parse görevinde hangi kütüphaneye yönelmelisin?",
+      "options": [
+        "scikit-learn",
+        "NumPy",
+        "spaCy (veya en iyi accuracy ya da daha geniş dil kapsama için stanza/trankit)",
+        "Kendi parser'ını yaz"
+      ],
+      "correct": 2,
+      "explanation": "spaCy hızlı production-grade POS + dependency parser ile gelir; stanza/trankit daha geniş dilleri kapsar."
+    }
+  ]
+}

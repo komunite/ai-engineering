@@ -1,0 +1,102 @@
+{
+  "lesson": "15-topic-modeling",
+  "title": "Konu Modelleme — LDA ve BERTopic",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "LDA her doküman hakkında ne varsayar?",
+      "options": [
+        "Her doküman tam olarak bir konuya aittir",
+        "Dokümanlar cümlelerdir",
+        "Her doküman bir konu karışımıdır; her konu kelimeler üzerinde bir dağılımdır",
+        "Dokümanlar konulardan bağımsızdır"
+      ],
+      "correct": 2,
+      "explanation": "LDA'nın generatif hikayesi karma üyeliktir: her doküman bir konu dağılımına, her konu bir kelime dağılımına sahiptir."
+    },
+    {
+      "stage": "pre",
+      "question": "BERTopic konu kümelerini oluşturmak için ne kullanır?",
+      "options": [
+        "Vocabulary üzerinde doğrudan softmax",
+        "Dokümanları bir sentence transformer ile encode et, UMAP ile boyut azalt, sonra HDBSCAN ile kümele",
+        "BM25 ardından k-means çalıştır",
+        "End-to-end bir LSTM eğit"
+      ],
+      "correct": 1,
+      "explanation": "BERTopic = embedding'ler + UMAP + HDBSCAN, konu kelimeleri için class-based TF-IDF ile."
+    },
+    {
+      "stage": "check",
+      "question": "scikit-learn'ün LDA'sı neden TF-IDF değil, ham sayımlar (CountVectorizer) bekler?",
+      "options": [
+        "TF-IDF çok yavaş",
+        "LDA'nın olasılıksal modeli integer term sayımları üzerinde tanımlıdır; TF-IDF altta yatan dağılımı bozar",
+        "LDA float'ları işleyemez",
+        "Bellek sınırları"
+      ],
+      "correct": 1,
+      "explanation": "LDA likelihood sayımları varsayar; TF-IDF değerlerini beslemek model varsayımını ihlal eder."
+    },
+    {
+      "stage": "check",
+      "question": "BERTopic çıktısında HDBSCAN'in -1 etiketi ne anlama gelir?",
+      "options": [
+        "Rezerve bir kategori",
+        "Yoğunluk tabanlı algoritmanın güvenle atayamadığı outlier doküman kümesi",
+        "Stopword kümesi",
+        "En üst konu"
+      ],
+      "correct": 1,
+      "explanation": "HDBSCAN kümelenmemiş noktaları -1 ile işaretler; BERTopic'te bunlar hiçbir konuya uymayan dokümanlardır."
+    },
+    {
+      "stage": "check",
+      "question": "Topic-model değerlendirmesi için yaygın varsayılan coherence metriği hangisidir?",
+      "options": [
+        "BLEU",
+        "Accuracy",
+        "Yalnızca perplexity",
+        "En üst konu kelimelerinin kayan pencereleri üzerinde NPMI ile c_v coherence"
+      ],
+      "correct": 3,
+      "explanation": "c_v coherence (Roder ve diğerleri, 2015) kanonik otomatik konu-coherence metriğidir."
+    },
+    {
+      "stage": "post",
+      "question": "LDA ne zaman genelde BERTopic'ten daha iyi uyar?",
+      "options": [
+        "Kısa tweet'lerde",
+        "Karma üyelikli konu dağılımlarının yararlı olduğu uzun dokümanlarda; embedding'ler girdiyi truncate ederdi",
+        "Embedding'ler gürültülüyken",
+        "Doküman başına tek konu gerektiğinde"
+      ],
+      "correct": 1,
+      "explanation": "Uzun dokümanlar LDA'nın karma üyelik modelinden yararlanır; BERT encoder'lar girdileri truncate eder."
+    },
+    {
+      "stage": "post",
+      "question": "BERTopic kısa metinde (tweet'ler, manşetler) neden tipik olarak kazanır?",
+      "options": [
+        "Kısa metnin daha az konusu vardır",
+        "Daha hızlıdır",
+        "Embedding uzayındaki semantik benzerlik, bag-of-words sayımlarının çok seyrek olduğu yerde anlamı yakalar",
+        "Daha fazla dili destekler"
+      ],
+      "correct": 2,
+      "explanation": "BERT embedding'leri kelime örtüşme istatistiklerinin başarısız olduğu kısa metin için semantik benzerlik sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Konular için izlemen gereken yaygın bir LDA hata modu nedir?",
+      "options": [
+        "Toplamı 1 eden doküman karışımları",
+        "Etiketli kategorilerle mükemmel eşleşen konular",
+        "Stopword'leri veya aşırı sık terimleri emen çöp konular",
+        "Çok az dokümanlı konular"
+      ],
+      "correct": 2,
+      "explanation": "LDA stopword emen çöp konular yaratabilir; daha sıkı min_df/max_df ve stopword filtrelemesi bunu hafifletir."
+    }
+  ]
+}

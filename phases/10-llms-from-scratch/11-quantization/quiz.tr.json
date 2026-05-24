@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "FP16'da 70B parametreli bir model yalnızca ağırlıklar için ne kadar VRAM gerektirir?",
+      "options": [
+        "35 GB",
+        "70 GB",
+        "140 GB",
+        "280 GB"
+      ],
+      "correct": 2,
+      "explanation": "70 milyar parametre * FP16 parametre başına 2 byte = 140 milyar byte = 140 GB. Bu tek bir A100'ü (80GB) aşar, yalnızca ağırlıkları yüklemek için en az iki GPU gerektirir."
+    },
+    {
+      "stage": "pre",
+      "question": "LLM'ler bağlamında quantization nedir?",
+      "options": [
+        "Kullanılmayan model katmanlarını çıkarmak",
+        "Bellek kullanımını azaltmak ve çıkarım hızını artırmak için ağırlıkların sayısal hassasiyetini düşürmek (örn. FP16'dan INT4'e)",
+        "Eğitim verisini sıkıştırmak",
+        "Vocabulary boyutunu azaltmak"
+      ],
+      "correct": 1,
+      "explanation": "Quantization yüksek hassasiyetli floating point ağırlıkları daha düşük hassasiyetli tamsayılara eşler. INT4 quantization her ağırlığı 16 yerine 4 bit'te saklar, belleği minimum doğruluk kaybıyla 4 kat azaltır."
+    },
+    {
+      "stage": "post",
+      "question": "Post-training quantization (PTQ) ile quantization-aware training (QAT) arasındaki temel fark nedir?",
+      "options": [
+        "PTQ daha doğrudur",
+        "PTQ eğitim sonrası yeniden eğitim olmadan quantize eder; QAT eğitim sırasında quantization'ı simüle eder ki model azaltılmış hassasiyete tolerans göstermeyi öğrensin",
+        "QAT gradyan kullanmaz",
+        "PTQ daha fazla veri gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "PTQ hızlıdır (sadece kalibre et ve quantize et) ama doğruluk kaybedebilir. QAT eğitim sırasında sahte quantization içerir ve modelin ağırlıklarını hassasiyet kaybına daha dayanıklı olacak şekilde ayarlamasına izin verir. QAT genelde daha iyi doğruluk verir."
+    },
+    {
+      "stage": "post",
+      "question": "'Per-channel' quantization ne anlama gelir ve neden 'per-tensor'dan daha iyidir?",
+      "options": [
+        "Her output channel'ı ayrı quantize eder, her biri için farklı scale/zero-point kullanır ve quantization hatasını azaltır",
+        "Her seferinde bir renk kanalı işler",
+        "Kanal başına ayrı GPU kullanır",
+        "Bir data parallelism türüdür"
+      ],
+      "correct": 0,
+      "explanation": "Per-tensor tüm ağırlık matrisi için tek bir scale factor kullanır. Per-channel her output channel (satır) için ayrı bir scale kullanır. Farklı kanalların farklı değer aralıkları olduğundan, per-channel bunları daha doğru yakalar."
+    },
+    {
+      "stage": "post",
+      "question": "Llama 3 70B'deki ağırlıkların %95'i neden -0.1 ile +0.1 arasındadır?",
+      "options": [
+        "Model kötü eğitilmiş",
+        "Eğitim sırasında weight decay ve normalization ağırlıkları küçük değerlere iter, bu da tam FP16 aralığını israflı yapar",
+        "Ağırlıklar henüz yakınsamadı",
+        "Bu Llama mimarisine özgü"
+      ],
+      "correct": 1,
+      "explanation": "Weight decay regularization ağırlıkları sıfıra doğru küçültür. Layer normalization aktivasyonları merkezde tutar. Birlikte sıfıra yakın yoğunlaşmış ağırlık dağılımları üretirler ve düşük hassasiyetli quantization'ı etkili kılarlar."
+    }
+  ]
+}

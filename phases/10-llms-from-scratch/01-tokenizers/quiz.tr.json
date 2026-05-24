@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir LLM pipeline'ında tokenizer'ın temel amacı nedir?",
+      "options": [
+        "Metinden stop word'leri çıkarmak",
+        "Metni, modelin işleyebileceği bir tamsayı dizisine dönüştürmek",
+        "Metni diller arasında çevirmek",
+        "Metni depolama için sıkıştırmak"
+      ],
+      "correct": 1,
+      "explanation": "LLM'ler metni değil sayıları işler. Tokenizer her karakteri, kelimeyi ve sembolü sabit bir vocabulary'den tamsayı ID'lerine dönüştürür. Bu dönüşüm nötr değildir -- modelin dili nasıl 'gördüğünü' belirler."
+    },
+    {
+      "stage": "pre",
+      "question": "BPE (Byte Pair Encoding) vocabulary'sini oluşturmak için ne yapar?",
+      "options": [
+        "Metni yalnızca tek tek karakterlere böler",
+        "Hedef vocabulary boyutuna ulaşana kadar en sık görülen komşu token çiftini iteratif olarak birleştirir",
+        "Tüm kelimeler için sözlük araması kullanır",
+        "Substring'lere rastgele ID'ler atar"
+      ],
+      "correct": 1,
+      "explanation": "BPE tek tek byte/karakterlerle başlar ve en yaygın komşu çiftleri tekrar tekrar birleştirir. 'th' + 'e' birleşip 'the' olur. Binlerce merge sonrasında yaygın kelimeler tek token olurken nadir kelimeler subword parçalarına bölünür."
+    },
+    {
+      "stage": "post",
+      "question": "Vocabulary boyutu LLM tasarımında neden bir tradeoff yaratır?",
+      "options": [
+        "Daha büyük vocabulary'ler her zaman daha iyi performans gösterir",
+        "Çok küçük olunca uzun diziler oluşur (daha fazla hesaplama); çok büyük olunca nadir token'lara embedding parametresi harcanır",
+        "Vocabulary boyutu model performansını etkilemez",
+        "Daha küçük vocabulary'ler her zaman daha verimlidir"
+      ],
+      "correct": 1,
+      "explanation": "Küçük vocabulary (örn. karakter seviyesi) her kelimenin çok sayıda token olması demektir, bu da sequence length'i ve hesaplamayı artırır. Büyük vocabulary, eğitim verisinde nadiren görülen token'lara parametre harcar. Çoğu LLM 32K-100K token kullanır."
+    },
+    {
+      "stage": "post",
+      "question": "Tokenization'da byte-level fallback hangi problemi çözer?",
+      "options": [
+        "Tokenization'ı hızlandırır",
+        "Herhangi bir girdinin (emoji, nadir alfabeler, ikili veri) 'unknown' token olmadan kodlanabilmesini sağlar",
+        "Vocabulary boyutunu azaltır",
+        "Model doğruluğunu iyileştirir"
+      ],
+      "correct": 1,
+      "explanation": "Byte-level fallback ile tokenizer, vocabulary'de olmayan herhangi bir karakter için ham byte değerlerine (256 olası) geri dönebilir. Bu tam kapsama garanti eder -- hiçbir girdi 'unknown' olmaz."
+    },
+    {
+      "stage": "post",
+      "question": "Tokenizer LLM'lerde İngilizce dışı dillerin performansını nasıl etkiler?",
+      "options": [
+        "Tokenizer'lar tüm diller için eşit derecede iyi çalışır",
+        "Eğitim verisinde az temsil edilen diller daha kötü token merge'leri alır, kelime başına daha fazla token gerektirir ve context window'u israf eder",
+        "İngilizce dışı metinler her zaman karakter-tokenize edilir",
+        "Tokenization dil performansını etkilemez"
+      ],
+      "correct": 1,
+      "explanation": "BPE merge'leri eğitim verisinden öğrenilir. Japonca metin korpusun %5'iyse, Japonca karakterler daha az merge alır ve kelime başına İngilizce'den 2-5 kat daha fazla token gerektirir. Bu da İngilizce dışı metin için context window'u efektif olarak küçültür."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "lesson": "06-sglang-radixattention",
+  "title": "Prefix-Ağırlıklı İş Yükleri için SGLang ve RadixAttention",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "SGLang'ın KV cache yeniden kullanımının arkasındaki temel veri yapısı nedir?",
+      "options": [
+        "Her node'un bir token aralığı ve KV block'larına sahip olduğu bir radix tree",
+        "Tam prompt ile keyleyen bir hash table",
+        "Request id ile keyleyen bir skip list",
+        "Attention skorlarının B-tree'si"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "FCFS scheduling SGLang üzerinde prefix-ağırlıklı trafik için neden yanlıştır?",
+      "options": [
+        "FCFS yalnızca AMD GPU'larda çalışır",
+        "FCFS önerilen SGLang policy'sidir",
+        "FCFS PagedAttention ile uyumsuzdur",
+        "FCFS, bir sonraki uzun-prefix isteği gelmeden önce sıcak bir prefix dalını evict edebilir ve radix-tree yeniden kullanımını kırabilir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "SGLang'ın cache-aware scheduler'ı radix şekline uymak için hangi eviction granülerliğini kullanır?",
+      "options": [
+        "Yalnızca request başı",
+        "En kısa süre kullanılan yapraklardan başlayarak tüm dallar",
+        "Tek token'lar",
+        "Rastgele eviction"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Radix-tree paylaşılan prefix'i keşfedilebilir tutmak için en doğrudan mühendis kaldıracı nedir?",
+      "options": [
+        "GPU bellek kullanım düğmesini düşürmek",
+        "Prompt-template sıralamasını düzeltmek; böylece değişmeyen içerik (system, tools, schema'lar) her zaman önce gelir",
+        "Her zaman static batching kullanmak",
+        "Continuous batching'i devre dışı bırakmak"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders RadixAttention'ın hangi iş yükü pattern'inde kazanmasını BEKLEMİYOR?",
+      "options": [
+        "Paylaşılan tool şemalarına sahip agent'lar",
+        "Tekrarlayan preamble'lara sahip ses iş yükleri",
+        "Paylaşılan retrieval preamble'ı olan RAG",
+        "Benzersiz prompt'lar ve paylaşılan system prompt olmayan tek-atışlık generation"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "ProjectDiscovery'nin deployment'ı prefix-cache hit oranını %7'den %74'e ne yaparak çıkardı?",
+      "options": [
+        "Dinamik içeriği cache'lenebilir prefix'in dışına taşıyarak",
+        "GPU sayısını 8'den 16'ya çıkararak",
+        "Prompt değişikliği yapmadan vLLM'den SGLang'a geçerek",
+        "Continuous batching'i devre dışı bırakarak"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

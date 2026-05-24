@@ -1,0 +1,90 @@
+{
+  "lesson": "30-eval-driven-agent-development",
+  "title": "Eval-Driven Agent Geliştirme",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Dersin adlandırdığı üç değerlendirme katmanı nedir?",
+      "options": [
+        "Statik benchmark'lar, özel offline eval'ler, online prodüksiyon eval'leri",
+        "Unit, integration, end-to-end",
+        "Smoke, regression, acceptance",
+        "Pre, check, post"
+      ],
+      "correct": 0,
+      "explanation": "Statik (SWE-bench, GAIA), özel offline (LLM-judge, exec, trajectory), online (replay'ler, alarm'lar, maliyet/latency)."
+    },
+    {
+      "stage": "pre",
+      "question": "Anthropic'in önerilen başlangıç noktası nedir?",
+      "options": [
+        "Multi-agent debate ile başla",
+        "Basit prompt'larla başla, kapsamlı değerlendirmeyle optimize et ve yalnızca ihtiyaç olduğunda multi-step agentic sistemler ekle",
+        "Hierarchical orchestration ile başla",
+        "Yalnızca bir frontier modelle başla"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic açıkça değerlendirmenin diğer her seçeneği yönlendiren dış döngü olduğunu söyler."
+    },
+    {
+      "stage": "check",
+      "question": "Evaluator-optimizer tight loop nedir?",
+      "options": [
+        "Train, evaluate, deploy",
+        "Proposer çıktı üretir, evaluator yargılar, evaluator geçene kadar refine et (Self-Refine genelleştirilmiş)",
+        "Sample, sort, deduplicate",
+        "Cache, retry, fail"
+      ],
+      "correct": 1,
+      "explanation": "Self-Refine'ın genelleştirilmiş halidir: herhangi bir akış propose-judge-refine'a sarılabilir."
+    },
+    {
+      "stage": "check",
+      "question": "Eval'lerin nerede yaşaması için 2026 best practice nedir?",
+      "options": [
+        "Yalnızca ayrı bir vendor dashboard'da",
+        "Kodun yanında, her PR'da CI'da çalıştır, eval skorlarına göre merge'leri kontrol et",
+        "Yalnızca üç ayda bir çalıştır",
+        "Sadece QA ekibine ait"
+      ],
+      "correct": 1,
+      "explanation": "Kodla aynı yerde, CI ile kontrollü, regresyon izlenen standarttır."
+    },
+    {
+      "stage": "check",
+      "question": "Ders grounding olmayan bir LLM-judge'a karşı neden uyarıyor?",
+      "options": [
+        "Çok yavaştır",
+        "Judge'lar da halüsinasyon yapar; CRITIC pattern'iyle eşleştir, böylece yargı harici tool'lara dayanır",
+        "Apache 2.0'ı ihlal eder",
+        "Yalnızca GPU'da çalışır"
+      ],
+      "correct": 1,
+      "explanation": "CRITIC (Ders 5) geçerlidir: tool-temelli doğrulama judge'ı dürüst tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Eval'lere overfit etmenin tehlikesi nedir?",
+      "options": [
+        "Compute maliyeti artar",
+        "Eval setine optimize etmek prodüksiyon kullanışlılığından sapar; case'leri döndür",
+        "Vector indexleri parçalanır",
+        "Latency çok düşer"
+      ],
+      "correct": 1,
+      "explanation": "Eval set rotasyonu optimizasyonu prodüksiyon gerçekliğiyle hizalı tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Flaky eval'ler neden sorun yaratır?",
+      "options": [
+        "Çıkarım maliyetini ikiye katlar",
+        "Non-deterministik case'ler false alarm üretir; seed'leri pin'le ve state snapshot al",
+        "Veritabanına ulaşamazlar",
+        "Context window'u aşarlar"
+      ],
+      "correct": 1,
+      "explanation": "Flake regresyonları okunmaz yapar; determinizm (seed'ler, state snapshot'ları) gereklidir."
+    }
+  ]
+}

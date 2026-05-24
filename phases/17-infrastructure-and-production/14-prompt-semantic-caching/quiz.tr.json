@@ -1,0 +1,78 @@
+{
+  "lesson": "14-prompt-semantic-caching",
+  "title": "Prompt Caching ve Semantik Caching Ekonomisi",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "L1 semantik caching ile L2 prompt/prefix caching arasındaki fark nedir?",
+      "options": [
+        "L1 embedding benzerlik hit'lerinde LLM'i tamamen atlar; L2 tekrarlanan prefix'ler için sağlayıcıda attention KV'sini yeniden kullanır",
+        "L1 sağlayıcı tarafıdır, L2 istemci tarafıdır",
+        "L2 embedding'leri saklar; L1 attention KV'sini saklar",
+        "L1 ve L2 aynıdır"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi Anthropic mekanizması L2 prompt caching için block'ları cache'lenebilir olarak işaretler?",
+      "options": [
+        "Request block'larında explicit cache_control attribute'u",
+        "Ayrı bir /caches endpoint'i",
+        "Tool tanımlarındaki dosya adı suffix'leri",
+        "Implicit bir prompt-uzunluk eşiği"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Parallelization anti-pattern'ı faturayı nasıl şişirir?",
+      "options": [
+        "Paralel requestler batching'i bypass eder",
+        "Parallelization request başına guardrail ücretini tetikler",
+        "Tüm paralel requestler otomatik olarak tek cache girdisini paylaşır",
+        "Aynı prefix'e sahip N paralel request ilk cache yazımı tamamlanmadan gelir; her biri write premium öder ve sıfır indirim alır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cache'lenebilir prefix'lerde dinamik içerik anti-pattern'ı nedir?",
+      "options": [
+        "Tool şemalarını prefix'e koymak",
+        "Yanıtları her zaman streaming yapmak",
+        "Cache'lenebilir prefix'in içine her requestte değişen içerik (dakika hassasiyetinde mevcut zaman, request ID, rastgele örnek sırası) eklemek ve hit oranını öldürmek",
+        "Çok kısa bir system prompt kullanmak"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Batch + cached input maliyeti düşürmek için gece nasıl istiflenir?",
+      "options": [
+        "Batch yalnızca çıktı maliyetini tasarruf eder",
+        "Batch API'leri %50 indirim verir; cached input bir ~10x daha ekler; birleştirildiğinde gece pipeline'ları senkron-cache'siz maliyetin ~%10'una düşer",
+        "Batch caching ile uyumsuzdur",
+        "Caching batch uygunluğunu devre dışı bırakır"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders semantik cache \"%95 doğruluk\" iddiaları hakkında ne diyor?",
+      "options": [
+        "%95 OpenAI default cache hit oranıdır",
+        "%95 hit oranı değil, eşleşme doğruluğunu ifade eder; raporlanan üretim hit oranları ~%10 (açık sohbet) ile ~%70 (yapılandırılmış SSS) arasında değişir",
+        "%95 vendor-belgelenmiş bir hit-rate baseline'ıdır",
+        "%95 %95 cache hit beklemen gerektiği anlamına gelir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

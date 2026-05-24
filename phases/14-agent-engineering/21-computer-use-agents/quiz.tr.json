@@ -1,0 +1,90 @@
+{
+  "lesson": "21-computer-use-agents",
+  "title": "Computer Use: Claude, OpenAI CUA, Gemini",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Claude computer use hangi girdiyi alır ve neyi yayar?",
+      "options": [
+        "Accessibility tree girdi, klavye/fare komutları çıktı",
+        "Ekran görüntüleri girdi (vision-tabanlı), klavye/fare komutları çıktı",
+        "DOM XML girdi, JavaScript çıktı",
+        "JSON girdi, SQL çıktı"
+      ],
+      "correct": 1,
+      "explanation": "Claude pikselleri okur ve klavye/fare aksiyonları yayar; OS accessibility API'si kullanılmaz."
+    },
+    {
+      "stage": "pre",
+      "question": "Gemini 2.5 Computer Use'un ayırt edici safety özelliği nedir?",
+      "options": [
+        "Her aksiyonu yürütmeden önce değerlendiren ve güvensiz olanları reddeden adım-başına bir safety servisi",
+        "Sabit kodlanmış WAF kuralları",
+        "Zorunlu CAPTCHA'lar",
+        "Varsayılan olarak read-only mod"
+      ],
+      "correct": 0,
+      "explanation": "Gemini 2.5 Computer Use ayırt edici özellik olarak adım-başına bir safety classifier'ı sunar."
+    },
+    {
+      "stage": "check",
+      "question": "Ders üç modelde de neyi güvenilmez girdi olarak tanımlar?",
+      "options": [
+        "Yalnızca HTTPS yanıtları",
+        "Ekran görüntüleri, DOM metni, tool çıktıları, PDF içeriği, çekilen her şey",
+        "Yalnızca PDF içeriği",
+        "Hiçbir şey; her şey güvenilirdir"
+      ],
+      "correct": 1,
+      "explanation": "Yalnızca doğrudan kullanıcı talimatları izin sayılır; geri kalan her şey güvenilmezdir."
+    },
+    {
+      "stage": "check",
+      "question": "Ders OpenAI CUA için lansmandaki hangi OSWorld / WebArena sayılarını alıntılıyor?",
+      "options": [
+        "OSWorld %38.1, WebArena %58.1, WebVoyager %87",
+        "OSWorld %0, WebArena %0",
+        "OSWorld %99, WebArena %99",
+        "Sayılar rapor edilmedi"
+      ],
+      "correct": 0,
+      "explanation": "Bunlar alıntılanan lansman rakamlarıydı."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi savunma pattern'i 2026 yakınsama listesinde DEĞİLDİR?",
+      "options": [
+        "Adım-başına safety classifier",
+        "Navigasyon hedeflerinin allowlist/blocklist'i",
+        "Hassas aksiyonlar için human-in-the-loop",
+        "Zaman kazanmak için dialog'ları otomatik tıklamak"
+      ],
+      "correct": 3,
+      "explanation": "Dialog'ları otomatik tıklamak güvenliğin tersidir; ders açık onay öneriyor."
+    },
+    {
+      "stage": "post",
+      "question": "Ders computer-use agent'larına karşı vurguladığı ana saldırı nedir?",
+      "options": [
+        "Network kesintileri",
+        "Çekilen içeriğe gömülü talimatları kullanıcı niyeti olarak ele alan kötü niyetli bir sayfa veya PDF",
+        "Yavaş render",
+        "OS güncelleme gecikmesi"
+      ],
+      "correct": 1,
+      "explanation": "Ekran görüntülerini veya DOM metnini izin olarak ele almak kanonik dolaylı prompt-injection hatasıdır."
+    },
+    {
+      "stage": "post",
+      "question": "Human-in-the-loop onay ne zaman özellikle önerilir?",
+      "options": [
+        "Read-only navigasyonda",
+        "Login, satın alma, dosya silme gibi hassas aksiyonlarda",
+        "Yalnızca model sorduğunda",
+        "Asla"
+      ],
+      "correct": 1,
+      "explanation": "Hassas aksiyonlar (para, veri ifşası, yeni login'ler) açık insan onayı gerektirir."
+    }
+  ]
+}

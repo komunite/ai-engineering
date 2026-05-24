@@ -1,0 +1,78 @@
+{
+  "lesson": "16-model-routing",
+  "title": "Maliyet Azaltma Primitifi Olarak Model Routing",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Model cascading'in temel fikri nedir?",
+      "options": [
+        "İki modeli paralel çalıştır ve çıktıları ortalama al",
+        "Her zaman rastgele ağırlıkla route et",
+        "Her requesti önce en pahalı modelde çalıştır",
+        "Önce ucuz bir modeli çalıştır; yalnızca düşük güven ya da reddetme durumunda frontier modele eskalate et"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders routing kararları için hangi dört sinyali listeler?",
+      "options": [
+        "Görev sınıflandırması, prompt uzunluğu, bilinen-zor setine embedding benzerliği ve ilk-geçişten kendine-güven",
+        "Yalnızca token sayısı",
+        "Yalnızca kullanıcı tier'ı",
+        "GPU sıcaklığı, fan hızı, oda nemi, günün saati"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bir cascade router'ın beklenen latency profili nedir?",
+      "options": [
+        "Her zaman 10x daha yavaş",
+        "Frontier modelle aynı",
+        "Yaklaşık 1.2x medyan latency (ucuz çalıştırma artı doğrulama), eskalate edilmiş requestlerde (~trafiğin %10'u) yaklaşık 2x",
+        "Pre-route'tan her zaman daha hızlı"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hangi routing pattern'ı önden 5-10ms latency ekler ve genel olarak en hızlısıdır?",
+      "options": [
+        "Bir sınıflandırıcı ile pre-route",
+        "Ensemble route",
+        "Cascade",
+        "Rastgele round-robin"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Routing'de cheap-model drift nedir?",
+      "options": [
+        "Ucuz model daha pahalı hale gelir",
+        "Cascade %100 frontier'a düşer",
+        "Görev dağılımı değişir ama eğitilmiş router request'leri ucuz modele göndermeye devam eder ve kaliteyi sessizce düşürür",
+        "Ucuz modelde bir latency drift'i"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders routing drift'ini yakalamak için hangi guard'ı öneriyor?",
+      "options": [
+        "Yalnızca offline eval setleri",
+        "Üretimde routing'i devre dışı bırakmak",
+        "Yalnızca üç ayda bir mühendislik incelemesi",
+        "Online kalite metrikleri — route başına beğeni/karşı oy, tutulan örneklerde LLM-judge, eskalasyon oranı, reddetme oranı"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}

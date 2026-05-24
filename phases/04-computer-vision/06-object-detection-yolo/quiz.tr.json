@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Grid 13x13, hücre başına 3 anchor ve 20 sınıflı bir YOLO detector'ı, shape (N, 13, 13, 3, 25) olan bir head çıktısı üretir. Son boyut neden 25?",
+      "options": [
+        "4 box koordinatı + 1 bias + 20 sınıf",
+        "4 box koordinatı + 1 objectness + 20 sınıf = 5 + C",
+        "25, COCO'daki sınıf sayısıdır",
+        "Bir sonraki 2'nin kuvvetine padding'dir"
+      ],
+      "correct": 1,
+      "explanation": "Her anchor dört box regression target (tx, ty, tw, th), bir objectness skoru ve C sınıf logit'i çıkarır. YOLO-tarzı detector'lar için anchor başına boyut her zaman 5 + C'dir. 80 sınıflı COCO'da 85; 20 sınıflı PASCAL VOC'ta 25'tir."
+    },
+    {
+      "stage": "pre",
+      "question": "YOLO neden grid hücresine eklemeden önce tx, ty'yi bir sigmoid üzerinden tahmin eder?",
+      "options": [
+        "Onları [0, 1]'e normalize etmek için, böylece merkez hücre içinde kalır ve komşu hücrenin alanına kaçamaz",
+        "Sigmoid convolution tarafından gereklidir",
+        "Eğitim sırasında NaN'ı önlemek için",
+        "Box'ı daha büyük yapmak için"
+      ],
+      "correct": 0,
+      "explanation": "sigmoid(tx) [0, 1] aralığındadır, böylece (sigmoid(tx) + cell_x) * stride merkezi cell_x sütunundaki hücrenin içinde bir yere yerleştirir. Bu kısıtlama, her hücreyi yalnızca kendi alanı içinde merkezlenen nesnelerden sorumlu tutar; bu da grid tabanlı eğitimi stabil yapan varsayımdır."
+    },
+    {
+      "stage": "post",
+      "question": "Detector'ın head'den sonra tek bir nesne etrafında 15 box tahmin ediyor. iou_threshold=0.45 ile NMS uyguluyorsun ve 1 box geri alıyorsun. NMS ne yaptı?",
+      "options": [
+        "15 tahminin tümünün ortalamasını aldı",
+        "15 box'ı skora göre sıraladı, en yüksek skorluyu tuttu ve onunla IoU'su 0.45'i aşan her box'ı sildi; diğer 14'ü kazananla eşiğin üzerinde örtüşüyordu, bu yüzden biri kaldı",
+        "Rastgele bir hayatta kalan seçti",
+        "Box'ları geometrik olarak birleştirdi"
+      ],
+      "correct": 1,
+      "explanation": "NMS açgözlü bir deduplikasyondur: skora göre sırala, en üstteki tut, ona yakın olan her şeyi kaldır (IoU > eşik), tekrarla. Birleştirmez veya ortalama almaz. Bu yüzden tespit gecikme benchmark'ları NMS süresini içerir ve RT-DETR gibi modern modeller onu öğrenilmiş bir alternatifle değiştirir."
+    },
+    {
+      "stage": "post",
+      "question": "Modelin mAP@0.5 = 0.75 ama mAP@0.5:0.95 = 0.32. En doğru yorum nedir?",
+      "options": [
+        "Model bozuk; mAP@0.5 mAP@0.5:0.95'e eşit olmalı",
+        "Model doğru nesneleri buluyor ama box'ları sıkıca lokalize değil -- IoU 0.5'te iyi, 0.7+'da başarısız",
+        "Veri setinde çok fazla sınıf var",
+        "Çıkarım eşiği çok yüksek"
+      ],
+      "correct": 1,
+      "explanation": "mAP@0.5 lokalizasyon konusunda hoşgörülüdür; mAP@0.5:0.95 0.95'e kadar katı eşiklerin ortalamasını alır. İkisi arasındaki büyük fark, box'ların yaklaşık olarak doğru yerde olduğu ama sıkı olmadığı anlamına gelir. Tipik çözümler: CIoU/DIoU box loss, daha yüksek çözünürlüklü feature'lar, veri setine daha iyi tune edilmiş anchor setleri."
+    },
+    {
+      "stage": "post",
+      "question": "YOLO loss ağırlıkları lambda_coord=5.0 ve lambda_noobj=0.5 orijinal makaleyi kabaca yansıtır. Bu oranlar neyi encode eder?",
+      "options": [
+        "GPU bellek trade-off'ları",
+        "Çoğu hücrede nesne olmaması gerçeği, bu yüzden no-object hücrelerin downweight edilmesi gerekir yoksa toplam loss'u domine ederler; ve box regression'ın cross-entropy'den daha küçük ölçekli bir loss olduğu gerçeği, bu yüzden karşılaştırılabilir gradient üretmek için upweight gerekir",
+        "Yazarların asla haklı çıkarmadığı rastgele seçimler",
+        "Hücre başına anchor sayısı"
+      ],
+      "correct": 1,
+      "explanation": "13x13 grid'de 169 hücre vardır, genellikle bir ile beş arasında nesneyle. 160+ boş hücrenin hepsi objectness loss'una katkıda bulunur; küçük lambda_noobj olmadan pozitif sinyali ezerlerdi. Tersine, MSE box loss sayısal olarak cross-entropy'nin yanında küçüktür, bu yüzden lambda_coord > 1 gradient'lerini karşılaştırılabilir tutar. Her iki oran da bileşen başına gradient büyüklüklerini dengelemekle ilgilidir."
+    }
+  ]
+}

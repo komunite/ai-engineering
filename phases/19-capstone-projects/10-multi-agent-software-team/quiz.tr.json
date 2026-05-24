@@ -1,0 +1,90 @@
+{
+  "lesson": "10-multi-agent-software-team",
+  "title": "Capstone 10 — Multi-Agent Software Engineering Team",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tek-agent harness 200k token'lık context ile bile büyük görevlerde neden tavana çarpar?",
+      "options": [
+        "Tek agent'lar tool çağrısı yapamaz",
+        "Sandbox'lar birden fazla process'i barındırmayı reddeder",
+        "Context aynı anda mimari planı, dört paralel codebase parçasını, reviewer yorumlarını ve test çıktısını tutamaz",
+        "Modeller git desteğinden yoksundur"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Bu factory yapısında architect rolü neye sahip çıkar?",
+      "options": [
+        "Hallucination için merge edilmiş diff'i incelemek",
+        "Issue'yu okumak ve açık interface'leri olan subtask'larla bir plan üretmek",
+        "Test suite'ini temiz bir sandbox'ta çalıştırmak",
+        "Coder'lar anlaşmazlığa düştüğünde branch'leri force-merge etmek"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Her coder neden kendi git worktree'sinde ve Daytona sandbox'ında çalışır?",
+      "options": [
+        "Worktree'ler branch'lerden daha hızlı klonlanır",
+        "Daytona SSH'i destekleyen tek sandbox'tır",
+        "İzole çalışma ağaçları N coder'ın paylaşılan dosyalara basmadan subtask'ları paralel olarak uygulamasını sağlar",
+        "Architect worktree ID'leri gerektirir"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Reviewer'ı dürüst tutmak için üzerine hangi kısıtlama konulur?",
+      "options": [
+        "Yalnızca tester onay verdikten sonra çalışabilir",
+        "Yazdığı veya önerdiği diff'leri onaylayamaz",
+        "Okuduğu her diff'i onaylamak zorundadır",
+        "Architect ile aynı model olmak zorundadır"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Rubric neden tek-agent baseline'a karşı token verimliliğini tartar?",
+      "options": [
+        "Multi-agent her zaman daha ucuzdur",
+        "Rol sınırları özet ve handoff context'i ekler, bu yüzden asıl soru factory'nin dolar başına kazanıp kazanmadığıdır",
+        "Tek-agent'ın observability hikayesi yoktur",
+        "Token maliyeti performansla ilgisizdir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Post-mortem sırasında başarısız her issue'dan hangi artifact üretilir?",
+      "options": [
+        "Yeni bir architect plan şablonu",
+        "Güncellenmiş bir A2A protocol spec",
+        "Bir force-push log'u",
+        "Hangi rol sınırının kırıldığını (plan, merge, review, test) tanımlayan bir handoff-failure histogramı"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Capstone rolleri arasında pass@1 skoru için hangi değerlendirme setini kullanır?",
+      "options": [
+        "SWE-bench Pro 50-issue alt kümesi",
+        "HumanEval-Java",
+        "MT-Bench-v2",
+        "MigrationBench"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

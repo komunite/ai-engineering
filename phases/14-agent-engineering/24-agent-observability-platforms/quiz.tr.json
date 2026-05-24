@@ -1,0 +1,90 @@
+{
+  "lesson": "24-agent-observability-platforms",
+  "title": "Agent Observability: Langfuse, Phoenix, Opik",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Haziran 2025'te eskiden ticari modüllerin open-source'lanmasından sonra Langfuse hangi lisansla sunulur?",
+      "options": [
+        "GPLv3",
+        "MIT",
+        "Elastic License 2.0",
+        "Apache 2.0"
+      ],
+      "correct": 1,
+      "explanation": "Langfuse Haziran 2025'ten sonra LLM-as-a-judge, annotation kuyruğu, prompt experiments ve Playground dahil MIT'dir."
+    },
+    {
+      "stage": "pre",
+      "question": "Derse göre Arize Phoenix neyde en güçlüdür?",
+      "options": [
+        "Prompt versiyonlama",
+        "Derin agent-spesifik değerlendirme: trace clustering, anomaly detection, RAG retrieval relevancy, OpenInference auto-instrumentation",
+        "Otomatik optimizasyon döngüsü",
+        "Kodun statik analizi"
+      ],
+      "correct": 1,
+      "explanation": "Phoenix davranışsal drift ve RAG değerlendirmesine OpenInference auto-instrumentation ile odaklanır."
+    },
+    {
+      "stage": "check",
+      "question": "Hangi platform otomatik prompt optimizasyonunu guardrail'lerle (PII redaction, konu kısıtları) ve LLM-judge halüsinasyon tespitiyle eşleştirir?",
+      "options": [
+        "Langfuse",
+        "Phoenix",
+        "Opik",
+        "Jaeger"
+      ],
+      "correct": 2,
+      "explanation": "Opik optimizasyon + guardrail döngüsüne odaklanır."
+    },
+    {
+      "stage": "check",
+      "question": "Ders prompt yönetimiyle birlikte all-in-one için hangi platformu öneriyor?",
+      "options": [
+        "Langfuse",
+        "Phoenix",
+        "Opik",
+        "Datadog APM"
+      ],
+      "correct": 0,
+      "explanation": "Langfuse uçtan uca tracing + prompt yönetimi + eval'ler + session replay'i kapsar."
+    },
+    {
+      "stage": "check",
+      "question": "Ders satıcı tarafından yayınlanan platform benchmark'ları hakkında ne diyor?",
+      "options": [
+        "Kesindirler",
+        "Onları yönlendirici olarak al; kendi corpus'unu ölç",
+        "OpenTelemetry tarafından yasaklanmıştır",
+        "Yalnızca Opik'inkiler güvenilirdir"
+      ],
+      "correct": 1,
+      "explanation": "Opik ile Langfuse arasında alıntılanan 14x fark bile karar vermeden önce kendi verinde ölçülmelidir."
+    },
+    {
+      "stage": "post",
+      "question": "Değerlendirme olmadan tracing neden pahalı logging sayılır?",
+      "options": [
+        "Disk CPU'dan daha pahalıdır",
+        "Çalışmaları görürsün ama skorlamadığın için regresyonlar görünmezdir ve bisection imkânsızdır",
+        "Sağlayıcılar span başına ücretlendirir",
+        "Span'ler replay edilemez"
+      ],
+      "correct": 1,
+      "explanation": "Eval'ler trace'leri uygulanabilir kalite sinyallerine dönüştüren şeydir."
+    },
+    {
+      "stage": "post",
+      "question": "Dersin self-rolled LLM-judge'lar hakkındaki uyarısı nedir?",
+      "options": [
+        "Apache 2.0 tarafından yasaklanmıştır",
+        "CRITIC geçerlidir: judge'lar olgu doğrulaması için harici dayanak ister yoksa rubber-stamp yaparlar",
+        "Yalnızca TypeScript'te çalışır",
+        "GPU'da çalışmalıdır"
+      ],
+      "correct": 1,
+      "explanation": "Harici tool-temelli doğrulama olmadan, LLM-judge'lar rubber-stamping'e doğru kayar (CRITIC, Ders 5)."
+    }
+  ]
+}

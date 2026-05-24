@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "GPT pretraining sırasında hangi eğitim hedefini kullanır?",
+      "options": [
+        "Masked language modeling (maskelenmiş token'ları tahmin etme)",
+        "Next-token prediction: önceki token'lar verildiğinde sonrakini tahmin et",
+        "Cümle sınıflandırma",
+        "Görüntü-metin hizalama"
+      ],
+      "correct": 1,
+      "explanation": "GPT, next-token prediction ile eğitilen causal (autoregressive) bir dil modelidir. [t1, t2, ..., tn] token'ları verildiğinde tn+1'i tahmin etmeyi öğrenir. Loss, tahmin edilen ve gerçek sonraki token'lar arasındaki cross-entropy'dir."
+    },
+    {
+      "stage": "pre",
+      "question": "GPT-2 Small (124M) kaç transformer katmanı, attention head'i ve embedding boyutuna sahiptir?",
+      "options": [
+        "6 katman, 6 head, 512 boyut",
+        "12 katman, 12 head, 768 boyut",
+        "24 katman, 16 head, 1024 boyut",
+        "48 katman, 25 head, 1600 boyut"
+      ],
+      "correct": 1,
+      "explanation": "GPT-2 Small 12 transformer katmanına, katman başına 12 attention head'e ve 768 boyutlu embedding'lere sahiptir. Bu mimari 124 milyon parametreye sahiptir ve tek bir GPU'da birkaç saatte eğitilebilir."
+    },
+    {
+      "stage": "post",
+      "question": "GPT'de causal attention mask'in rolü nedir?",
+      "options": [
+        "Padding token'larına attention'ı önler",
+        "Her token'ın gelecekteki token'lara attend etmesini önler, modelin tahminler için yalnızca geçmiş context'i kullanabilmesini sağlar",
+        "Düşük güvenli attention skorlarını maskeler",
+        "Eğitim sırasında bellek kullanımını azaltır"
+      ],
+      "correct": 1,
+      "explanation": "Causal mask, softmax öncesi gelecekteki konumları -sonsuza ayarlayan üçgensel bir matristir. 5. konumdaki token 1-5 konumlarına attend edebilir, 6+ konumlara edemez. Bu, modelin token'ları soldan sağa üretmesini sağlar."
+    },
+    {
+      "stage": "post",
+      "question": "Metin üretimi sırasında 'temperature' neyi kontrol eder?",
+      "options": [
+        "Üretim hızını",
+        "Token seçiminin rastgeleliğini: düşük temperature çıktıları daha deterministik, yüksek temperature daha çeşitli yapar",
+        "Üretilen token sayısını",
+        "Modelin güven eşiğini"
+      ],
+      "correct": 1,
+      "explanation": "Temperature softmax öncesi logit'leri böler. Temperature=0.1 dağılımı çok sivri (neredeyse deterministik) yapar. Temperature=1.0 eğitim dağılımıdır. Temperature>1.0 dağılımı düzleştirir, rastgeleliği artırır."
+    },
+    {
+      "stage": "post",
+      "question": "Pretraining neden fine-tuning'den önemli ölçüde daha fazla hesaplama gerektirir?",
+      "options": [
+        "Pretraining daha büyük batch boyutları kullanır",
+        "Pretraining genel dil pattern'larını öğrenmek için sıfırdan trilyonlarca token işler, fine-tuning ise zaten yetenekli bir modeli binlerce örnekle ayarlar",
+        "Pretraining farklı bir mimari kullanır",
+        "Fine-tuning gradyan kullanmaz"
+      ],
+      "correct": 1,
+      "explanation": "Pretraining rastgele ağırlıklardan başlayarak trilyonlarca token üzerinde tüm dil bilgisini inşa eder. Fine-tuning bu öğrenilen ağırlıklardan başlar ve çok daha küçük bir veri setinde (binlerce-milyonlarca örnek) ayarlar."
+    }
+  ]
+}

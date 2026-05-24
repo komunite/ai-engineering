@@ -1,0 +1,90 @@
+{
+  "lesson": "03-realtime-voice-assistant",
+  "title": "Capstone 03 — Real-Time Voice Assistant (ASR to LLM to TTS)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bir voice agent neden üç blocking REST çağrısını birbirine ekleyerek inşa edilemez?",
+      "options": [
+        "REST endpoint'lerinde 30 saniyelik sert timeout vardır",
+        "REST, WebRTC ile uyumsuzdur",
+        "JSON serileştirme ses verisi için çok yavaştır",
+        "800ms altındaki uçtan uca latency, her aşamada pipeline'lı streaming gerektirir"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Turn-detector'ın VAD'in yanındaki rolü nedir?",
+      "options": [
+        "Agent için özel bir voice clone eğitir",
+        "Kısmi transkriptleri okur ve kullanıcının gerçekten cümlesini bitirip bitirmediğini skorlar",
+        "Çok katılımcılı çağrıda hangi konuşmacının konuştuğunu tespit eder",
+        "Çıkış stream'ine arka plan müziği karıştırır"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Agent yanıtının ortasındayken kullanıcı konuşmaya başlarsa, barge-in'in doğru hissedilmesi için ne olmalı?",
+      "options": [
+        "TTS yerini bırakmadan önce mevcut cümleyi bitirir",
+        "Pipeline TTS bitene kadar kullanıcı ses kaydını buffer'lar",
+        "TTS hemen iptal edilir, kalan LLM çıktısı düşürülür ve ASR yeniden hazır hale gelir",
+        "Agent öncelik göstermek için TTS sesini yükseltir"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bir tool yaklaşık 300ms'yi aştığında neden \"bir saniye, kontrol ediyorum\" gibi kısa bir filler söylenir?",
+      "options": [
+        "Yan kanaldaki tool çalışırken konuşmanın takılmaması için sessizlikten kaçınır",
+        "Yedek bir ASR modelini tetikler",
+        "WebRTC jitter buffer'ını sıfırlar",
+        "Sonraki söylem üzerinde WER'i iyileştirir"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "İlk ses parçası, ilk LLM token'ından yaklaşık ne kadar sonra sunucudan çıkmalı?",
+      "options": [
+        "20ms",
+        "800ms",
+        "2 saniye",
+        "200ms"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Hangi metrik, uygunsuz barge-in veya aşırı hevesli tur kapanışını doğrudan ölçer?",
+      "options": [
+        "WER",
+        "MOS",
+        "Acceptance rate",
+        "False-cutoff rate"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "%3 paket kaybı altında pipeline hangi iki adaptif davranışa güvenir?",
+      "options": [
+        "Daha büyük bir LLM'e geçmek ve TTS'i devre dışı bırakmak",
+        "PSTN ses codec'lerine geri dönmek",
+        "Kısmi transkriptleri tutmak ve VAD speech-gate eşiğini yükseltmek",
+        "LiveKit room'u yeniden başlatmak"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

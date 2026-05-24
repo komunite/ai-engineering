@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Vanilla self-attention dot product'ı neden 1/sqrt(d_k) ile ölçeklendirir?",
+      "options": [
+        "Çıktı değerlerini 0 ile 1 arasında yapmak için",
+        "Yüksek boyutlarda dot product'ların büyümesini önlemek için, ki bu softmax'i çok küçük gradyanlı bölgelere iter",
+        "Query ve key vektörlerini birim uzunluğa normalize etmek için",
+        "Matris çarpımının hesaplama maliyetini azaltmak için"
+      ],
+      "correct": 1,
+      "explanation": "d_k büyük olduğunda, rastgele vektörlerin dot product'ı sqrt(d_k) ile orantılı olarak büyür. Ölçekleme olmadan, softmax büyük girdiler alır ve gradyanların kaybolduğu yaklaşık one-hot çıktılar üretir."
+    },
+    {
+      "stage": "pre",
+      "question": "Self-attention'daki üç projeksiyon nedir?",
+      "options": [
+        "Girdi, gizli ve çıktı",
+        "Query, key ve value -- her biri aynı girdinin öğrenilmiş bir doğrusal projeksiyonu",
+        "Encoder, decoder ve cross-attention",
+        "Embedding, konum ve segment"
+      ],
+      "correct": 1,
+      "explanation": "Self-attention, girdiyi üç farklı ağırlık matrisi üzerinden projekte ederek query'leri (neyi arıyorum?), key'leri (ne içeriyorum?) ve value'ları (eşleşirsem ne çıktı veririm?) üretir."
+    },
+    {
+      "stage": "post",
+      "question": "8 head ve d_model=512 olan multi-head attention'da, her head'in boyutu nedir?",
+      "options": [
+        "512 -- her head tam boyutu görür",
+        "64 -- d_model head'ler arasında eşit bölünür (512/8=64)",
+        "8 -- head başına bir boyut",
+        "4096 -- her head temsili genişletir"
+      ],
+      "correct": 1,
+      "explanation": "Multi-head attention d_model'i h head'e böler, her biri d_k = d_model/h boyutunda çalışır. Head başına 512/8 = 64 boyut ile, toplam hesaplama maliyeti tam boyuttaki tek-head attention'a eşittir."
+    },
+    {
+      "stage": "post",
+      "question": "Autoregressive attention'daki causal mask neyi önler?",
+      "options": [
+        "Modelin padding token'larına attend etmesini önler",
+        "Her konumun gelecekteki konumlara attend etmesini önler, modelin bir sonraki token'ı tahmin ederken yalnızca geçmiş context'i kullanabilmesini sağlar",
+        "Attention ağırlıklarının çok büyük olmasını önler",
+        "Modelin kendi konumuna attend etmesini önler"
+      ],
+      "correct": 1,
+      "explanation": "Autoregressive üretimde, token t, t+1, t+2 vb. token'ları görmemelidir. Causal mask, softmax öncesi gelecekteki konumları -sonsuza ayarlar ve onların attention ağırlıklarını sıfırlar."
+    },
+    {
+      "stage": "post",
+      "question": "Self-attention neden sequence length n'de O(n^2) karmaşıklığına sahiptir?",
+      "options": [
+        "Çünkü model üst üste yığılmış n katmana sahiptir",
+        "Çünkü her token diğer her token ile attention skorları hesaplar ve n x n boyutunda bir attention matrisi üretir",
+        "Çünkü attention'dan sonraki feedforward katmanları kuadratiktir",
+        "Çünkü attention üzerinden backpropagation n^2 gradyan hesaplaması gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "QK^T matris çarpımı, (i,j) girdisi token i'den token j'ye attention olan bir n x n attention matrisi üretir. Hem hesaplama hem de bellek O(n^2) olarak ölçeklenir, bu nedenle uzun-context modelleri FlashAttention gibi teknikler gerektirir."
+    }
+  ]
+}

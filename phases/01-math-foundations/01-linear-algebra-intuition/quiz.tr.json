@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "İki vektörün dot product'ı neyi ölçer?",
+      "options": ["İki vektör arasındaki mesafeyi", "İki vektörün ne kadar benzer veya hizalı olduğunu", "Vektörler arasındaki açıyı derece cinsinden", "Vektörlerin paylaştığı boyut sayısını"],
+      "correct": 1,
+      "explanation": "Dot product hizalanmayı ölçer: pozitif aynı yönü (benzer), sıfır dik olmayı (ilişkisiz), negatif zıt yönü (benzemez) gösterir. Bu, yapay zekada benzerlik aramasının temelidir."
+    },
+    {
+      "stage": "pre",
+      "question": "Yapay zekada 'embedding' (gömme) ne anlama gelir?",
+      "options": ["Bir modeli başka bir modelin içine yerleştirmek", "Bir şeyin (kelime, görüntü, kullanıcı) anlamını yakalayan vektör temsili", "Model ağırlıklarını sıkıştırma tekniği", "Kodu makine talimatlarına dönüştürme süreci"],
+      "correct": 1,
+      "explanation": "Embedding, ayrık nesneleri (kelimeler, görüntüler, kullanıcılar) yüksek boyutlu uzayda benzer öğelerin yakın olduğu sürekli vektörlere eşler. Gerçek dünya kavramları ile matematiksel işlemler arasındaki köprüdür."
+    },
+    {
+      "stage": "post",
+      "question": "Üç vektör v1=[1,0,0], v2=[0,1,0], v3=[2,1,0] veriliyor. Bunlar doğrusal bağımsız mıdır?",
+      "options": ["Evet, çünkü 3B uzayda üç vektör var", "Hayır, çünkü v3 = 2*v1 + v2, yani v3 diğerlerinin doğrusal kombinasyonudur", "Evet, çünkü hiçbiri birbirinin aynısı değil", "Hayır, çünkü hepsinin bir sıfır bileşeni var"],
+      "correct": 1,
+      "explanation": "v3 = 2*v1 + v2 olduğundan küme doğrusal bağımlıdır. Üç vektör de xy düzleminde yatar ve [0,0,1]'e ulaşamaz. 3B uzayda 3 vektör olmasına rağmen yalnızca 2B bir alt uzayı germişlerdir."
+    },
+    {
+      "stage": "post",
+      "question": "Makine öğrenmesi bağlamında bir matrisin rank'ı ne anlatır?",
+      "options": ["Matrisin ne kadar hızlı çarpılabileceğini", "Doğrusal bağımsız sütun sayısını; yani matrisin kaç boyutlu yararlı bilgi içerdiğini", "Matristeki en büyük değeri", "Matristeki sıfır olmayan eleman sayısını"],
+      "correct": 1,
+      "explanation": "Rank, doğrusal bağımsız sütun sayısına eşittir. ML'de rank açığı olan bir öznitelik matrisi, gereksiz öznitelikler, sonsuz sayıda ağırlık çözümü ve regularization ihtiyacı anlamına gelir."
+    },
+    {
+      "stage": "post",
+      "question": "LoRA (Low-Rank Adaptation), büyük dil modellerini verimli şekilde ince-ayarlamak için doğrusal cebiri nasıl kullanır?",
+      "options": ["Ağırlık matrislerinden kullanılmayan satırları kaldırarak modeli küçültür", "Ağırlık güncellemelerini, tüm ağırlık matrisini güncellemek yerine iki küçük düşük-rank'lı matrise ayrıştırır", "Tüm ağırlıkları float32'den int8'e dönüştürür", "Embedding katmanını dondurup yalnızca çıkış başını eğitir"],
+      "correct": 1,
+      "explanation": "LoRA, 4096x4096 boyutundaki bir ağırlık güncellemesini 4096x16 ve 16x4096 boyutlarında iki matrise (rank-16) ayrıştırır. Güncellemelerin düşük boyutlu bir alt uzayda yaşadığını varsayarak eğitilebilir parametre sayısını 16M'den 131K'ya indirir."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Markov özelliği nedir?",
+      "options": [
+        "Süreç her zaman başlangıç durumuna döner",
+        "Sonraki durum yalnızca mevcut duruma bağlıdır, önceki durumların geçmişine değil",
+        "Tüm durumlar her adımda eşit derecede olasıdır",
+        "Sürecin sonlu sayıda durumu olmalıdır"
+      ],
+      "correct": 1,
+      "explanation": "Markov özelliği (bellek-süzlük) P(X_{t+1} = j | X_t = i, X_{t-1}, ...) = P(X_{t+1} = j | X_t = i) anlamına gelir. Gelecek yalnızca nerede olduğuna bağlıdır, oraya nasıl geldiğine değil. Bu, bir geçiş matrisi aracılığıyla kompakt temsili mümkün kılar."
+    },
+    {
+      "stage": "pre",
+      "question": "1B bir rastgele yürüyüşte (random walk), kökenden beklenen mesafe adım sayısı n ile nasıl ölçeklenir?",
+      "options": [
+        "Doğrusal olarak: n ile orantılı",
+        "Karekök olarak: sqrt(n) ile orantılı",
+        "Logaritmik olarak: log(n) ile orantılı",
+        "n'den bağımsız olarak sabit kalır"
+      ],
+      "correct": 1,
+      "explanation": "Her adım eşit olasılıkla +/-1'dir. n adım sonra varyans n'dir, dolayısıyla standart sapma (kökenden tipik mesafe) sqrt(n)'dir. 10.000 adım sonra beklenen mesafe yaklaşık 100'dür, 10.000 değil."
+    },
+    {
+      "stage": "post",
+      "question": "Bir Markov zincirinin durağan dağılımı nedir?",
+      "options": [
+        "Durumların başlangıç dağılımı",
+        "Geçiş matrisi altında değişmeyen dağılım: pi * P = pi",
+        "Tam olarak bir geçişten sonraki durumların dağılımı",
+        "Tüm durumlar üzerinde düzgün dağılım"
+      ],
+      "correct": 1,
+      "explanation": "Durağan dağılım pi, pi * P = pi'yi sağlar — geçiş matrisini uygulamak onu değişmeden bırakır. Her durumda geçirilen zamanın uzun vadeli oranını temsil eder. İndirgenemez, aperiyodik bir zincir için herhangi bir başlangıç dağılımı pi'ye yakınsar."
+    },
+    {
+      "stage": "post",
+      "question": "Langevin dinamiklerinde x_{t+1} = x_t - dt * grad(U) + sqrt(2*T*dt) * z, sıcaklık T sıfıra yaklaştığında ne olur?",
+      "options": [
+        "Süreç saf bir rastgele yürüyüşe dönüşür",
+        "Süreç saf gradient descent'e (deterministik optimizasyon) dönüşür",
+        "Süreç sonsuza ıraksar",
+        "Süreç başlangıç pozisyonunda donar"
+      ],
+      "correct": 1,
+      "explanation": "T = 0'da, sqrt(2*T*dt)*z gürültü terimi yok olur ve x_{t+1} = x_t - dt * grad(U) kalır; bu standart gradient descent'tir. Yüksek T'de gürültü baskın olur ve süreç neredeyse rastgele yürüyüş olur. Orta T keşif ile sömürü arasında denge kurar."
+    },
+    {
+      "stage": "post",
+      "question": "Bir diffusion modelinde ileri süreç (forward process) T adım boyunca bir veri örneğine ne yapar?",
+      "options": [
+        "Her adımda gürültüyü kaldırarak görüntüyü keskinleştirir",
+        "Bir Markov zincirini takip ederek örnek saf gürültü olana kadar kademeli olarak Gauss gürültüsü ekler",
+        "Görüntüyü daha düşük çözünürlüğe sıkıştırır",
+        "Yeni veri üretmek için öğrenilmiş dönüşümler uygular"
+      ],
+      "correct": 1,
+      "explanation": "İleri süreç bir Markov zinciridir: x_t = sqrt(alpha_t) * x_{t-1} + sqrt(1 - alpha_t) * gürültü. T adım sonra, x_T yaklaşık N(0, I)'dır — saf Gauss gürültüsü. Ters süreç (bir sinir ağı tarafından öğrenilen) yeni veri üretmek için adım adım gürültü giderir."
+    }
+  ]
+}

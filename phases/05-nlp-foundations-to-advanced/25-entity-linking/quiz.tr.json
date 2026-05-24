@@ -1,0 +1,102 @@
+{
+  "lesson": "25-entity-linking",
+  "title": "Entity Linking ve Disambiguation",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Entity linking NER'in üstüne ne ekler?",
+      "options": [
+        "Çevirileri",
+        "Duygu polaritesini",
+        "Söz türü tag'lerini",
+        "Tespit edilen her mention'ı bir knowledge base'deki (Wikidata, Wikipedia veya bir alan KB'si) tek bir girdiye eşler"
+      ],
+      "correct": 3,
+      "explanation": "EL bir mention'ı kanonik bir KB id'sine dönüştürür, aynı isimli entity'ler arasında disambiguate eder."
+    },
+    {
+      "stage": "pre",
+      "question": "Entity linking'deki iki ana alt görev nedir?",
+      "options": [
+        "Tokenization ve parsing",
+        "POS tagging ve lemmatization",
+        "Embedding ve clustering",
+        "Candidate generation (mantıklı KB girdilerinin shortlist'i) ve disambiguation (bağlam verildiğinde doğrusunu seç)"
+      ],
+      "correct": 3,
+      "explanation": "EL adayları önermek ve onları bağlamsal uyuma göre sıralamak olarak ayrıştırılır."
+    },
+    {
+      "stage": "check",
+      "question": "Mention recall'ı disambiguation accuracy'sinin yanında neden raporlanmalıdır?",
+      "options": [
+        "Mention recall GDPR'ye göre zorunludur",
+        "Recall precision'ın yerini alır",
+        "Disambiguation eksik adaylardan kurtulamaz; pipeline candidate-generation recall'ı ile sınırlandırılır",
+        "Recall spaCy tarafından zorunludur"
+      ],
+      "correct": 2,
+      "explanation": "Adaylar altın entity'yi kaçırırsa hiçbir disambiguator düzeltemez; recall pipeline kalitesinin tabanını belirler."
+    },
+    {
+      "stage": "check",
+      "question": "GENRE entity linking'i nasıl yapar?",
+      "options": [
+        "Geçerli KB id'lerinin trie'i üzerinde constrained decoding altında entity'nin kanonik adını token-token decode eder",
+        "BM25 ile",
+        "TF-IDF hesaplayarak",
+        "PageRank ile"
+      ],
+      "correct": 0,
+      "explanation": "GENRE geçerli bir id garanti etmek için constrained decoding ile kanonik KB adını üretir."
+    },
+    {
+      "stage": "check",
+      "question": "Entity linking'de NIL handling nedir?",
+      "options": [
+        "Hiçbir aday gerçek bir eşleşme olmadığında (gelişen entity'ler, bilinmeyen kişiler) bir 'KB'de yok' etiketi tahmin etmek",
+        "Tüm aday listesini döndürmek",
+        "Girdiyi küçük harfe çevirmek",
+        "Her mention'ı atlamak"
+      ],
+      "correct": 0,
+      "explanation": "NIL tahmini, KB'nin kapsamadığı entity'ler için yanlış KB id'leri tahmin etmeyi önler."
+    },
+    {
+      "stage": "post",
+      "question": "Popülerlik biası özelleşmiş alanlarda entity linking'e neden zarar verir?",
+      "options": [
+        "Web verisinde eğitilmiş modeller sık entity'leri aşırı tahmin eder (örn. ML araştırmacısı Michael I. Jordan yerine basketbolcu Jordan)",
+        "Yalnızca daha eski entity'lere doğru bias yapar",
+        "Popülerlik NIL'i kaldırır",
+        "Popülerlik recall'a yardımcı olur"
+      ],
+      "correct": 0,
+      "explanation": "Popülerlik öncelikleri tahminleri daha az yaygın, alan-spesifik isim çatışmalarından uzaklaştırır."
+    },
+    {
+      "stage": "post",
+      "question": "2026'da güvenli bir LLM-EL pattern'ı nedir?",
+      "options": [
+        "Bir aday listesi sağla ve LLM'in yalnızca geçerli KB id'lerinden seçebileceği constrained JSON output kullan",
+        "Yalnızca 'entity'yi bul' diye prompt et",
+        "Serbest formlu üretim",
+        "Candidate generation'ı atla"
+      ],
+      "correct": 0,
+      "explanation": "LLM'i geçerli bir aday listesine kısıtlamak uydurulmuş KB id'lerini önler ve çıktıyı sorgulanabilir tutar."
+    },
+    {
+      "stage": "post",
+      "question": "NER mention sınırları entity linking'in çalışması için neden tam olmalıdır?",
+      "options": [
+        "Sınır hataları yayılır: 'Bank of America' 'Bank' olarak kırpılırsa yanlış adaylar yüzeye çıkar ve EL recall'ı düşer",
+        "Sınır precision'ı yalnızca NER metriklerini etkiler, entity-linking aday kalitesini değil",
+        "Sınırlar tokenization'ı değiştirir",
+        "Sınırlar Wikipedia lookup'larını bozar"
+      ],
+      "correct": 0,
+      "explanation": "Yanlış sınırlandırılmış mention'lar yanlış alias setini geri çağırır ve hataları disambiguation'a yayar."
+    }
+  ]
+}

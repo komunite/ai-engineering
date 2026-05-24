@@ -1,0 +1,78 @@
+{
+  "lesson": "07-tensorrt-llm-blackwell",
+  "title": "Blackwell üzerinde FP8 ve NVFP4 ile TensorRT-LLM",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Karşılaştırılabilir bir 120B sınıfı iş yükünde Blackwell + TRT-LLM + Dynamo ile H100 + vLLM arasında ders tarafından bildirilen milyon-token başına maliyet farkı kabaca nedir?",
+      "options": [
+        "Yaklaşık 100x",
+        "Yaklaşık 7x",
+        "Yaklaşık 2x",
+        "Yaklaşık 1.1x"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ders Blackwell üzerinde KV cache'i NVFP4 yerine FP8'de tutmayı neden öneriyor?",
+      "options": [
+        "NVFP4 KV cache henüz hiçbir engine'de desteklenmiyor",
+        "FP8, NVLink 5'in desteklediği tek precision'dır",
+        "KV cache geniş dinamik aralık kapsar; FP4 quantization attention skorlarında felaket doğruluk kaybına yol açar",
+        "FP8 FP4'ten daha az bellek kullanır"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "TRT-LLM, modellerin post-training dönüşüm adımı olmadan yüklenebilmesi için hangi Blackwell özelliğini sömürür?",
+      "options": [
+        "Model sağlayıcıları tarafından gönderilen Day-0 FP4 ağırlıkları",
+        "bitsandbytes üzerinden INT2 ağırlıkları",
+        "FP64 attention",
+        "BF16 KV cache"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Derse göre TRT-LLM stack'ini seçmenin baskın trade-off'u nedir?",
+      "options": [
+        "MoE modellerini servis edemez",
+        "Tamamen otonom remediation gerektirir",
+        "Seni NVIDIA donanımına kilitler — AMD yok, Intel yok, ARM yok",
+        "Yalnızca küçük ölçekte çalışır"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders tipik Blackwell konfigürasyonu olarak hangi precision kombinasyonunu tanımlıyor?",
+      "options": [
+        "Ağırlıklar FP4, KV cache FP4, attention INT8'de",
+        "Her şey BF16'da",
+        "Ağırlıklar NVFP4, aktivasyonlar NVFP4, KV cache FP8, attention accumulator FP32",
+        "Ağırlıklar INT8, aktivasyonlar FP32, KV cache INT4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "NVFP4 ağırlık dönüşümünün MATH doğruluğunu birkaç puan düşürdüğü reasoning-ağırlıklı iş yükleri için ders ne öneriyor?",
+      "options": [
+        "AMD MI300X'e geç",
+        "Speculative decoding'i devre dışı bırak",
+        "Model başına eval setinde görev kalitesini doğrula; ekipler genelde FP8 ağırlıkları + FP4 aktivasyonları kullanır ya da H200'de baştan sona FP8'de kalır",
+        "Maliyet kazancı baskın olduğu için yine de NVFP4'ü ship et"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "lesson": "04-tree-of-thoughts-lats",
+  "title": "Tree of Thoughts ve LATS: Bilinçli Arama",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Chain-of-thought neden Game of 24'te zorlanır?",
+      "options": [
+        "Model tam sayıları çarpamaz",
+        "Lineer bir yürüyüş erken bir adım yanlış olduğunda geri dönemez, böylece sonraki adımlar hatayı katlayarak artırır",
+        "Prompt çok kısadır",
+        "CoT, GPT-4'te eksik olan bir hesap makinesi tool'u gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "Dallanma olmadan, yanlış bir erken alt ifade zincirin geri kalanını zehirler; paper CoT için sadece yüzde 4 ölçer."
+    },
+    {
+      "stage": "pre",
+      "question": "Tree of Thoughts aramasında bir node nedir?",
+      "options": [
+        "Modelin ürettiği bir token",
+        "Tutarlı bir ara adım veya düşünce, K olası alt genişleme ile",
+        "Fine-tuning sırasındaki bir ağırlık güncellemesi",
+        "Runtime'a kayıtlı bir tool"
+      ],
+      "correct": 1,
+      "explanation": "ToT, akıl yürütmeyi bir ağaç olarak ele alır; her node K alt node'a genişleyebilen bir ara düşüncedir."
+    },
+    {
+      "stage": "check",
+      "question": "Bu üçten hangisi LATS'in LLM rollerinden biri DEĞİLDİR?",
+      "options": [
+        "Sonraki aksiyonları öneren policy",
+        "Kısmi trajectory'leri skorlayan value function",
+        "Hatada yansıma yazan self-reflector",
+        "Rollout'lar arasında model ağırlıklarını güncelleyen optimizer"
+      ],
+      "correct": 3,
+      "explanation": "LATS gradient-free'dir; üç LLM rolü policy, value ve self-reflector'dur. Ağırlık güncellemesi yoktur."
+    },
+    {
+      "stage": "check",
+      "question": "Dersin listelediği dört MCTS fazını söyle.",
+      "options": [
+        "Sample, Score, Sort, Submit",
+        "Select, Expand, Simulate, Backpropagate",
+        "Plan, Execute, Reflect, Stop",
+        "Search, Synthesize, Synthesize-Again, Stop"
+      ],
+      "correct": 1,
+      "explanation": "MCTS iterasyon başına select, expand, simulate, backpropagate ile ilerler."
+    },
+    {
+      "stage": "check",
+      "question": "UCT'de exploration sabiti c'nin rolü nedir?",
+      "options": [
+        "Value tahmini Q'yu ölçeklendirir",
+        "exploration terimi sqrt(ln N / n)'i exploitation terimi Q'ya karşı ağırlıklandırır",
+        "Maksimum ağaç derinliğini ayarlar",
+        "Rollout sayısını kontrol eder"
+      ],
+      "correct": 1,
+      "explanation": "c, exploitation (Q) ile exploration terimi arasında denge kurar; göreve göre ayarla."
+    },
+    {
+      "stage": "post",
+      "question": "Tek bir trajectory'ye kıyasla arama ne zaman aktif olarak zararlıdır?",
+      "options": [
+        "Evaluator gürültülü olduğunda ve tek bir doğru cevap olduğunda; arama iyi skor alan yanlış bir cevapta yakınsar",
+        "Görev birden çok doğru cevap içerdiğinde",
+        "Token'lar ucuz olduğunda her zaman",
+        "Görev kod üretimi olduğunda"
+      ],
+      "correct": 0,
+      "explanation": "Gürültülü bir value function artı tek bir doğru cevap, aramanın gürültüye overfit olduğu durumdur."
+    },
+    {
+      "stage": "post",
+      "question": "Game of 24'te ToT için CoT'ye kıyasla kabaca ne kadar daha fazla token kullanımı bütçelemelisin?",
+      "options": [
+        "Yaklaşık 2x",
+        "Yaklaşık 10x",
+        "100x - 1000x",
+        "Pruning sayesinde CoT'den daha az"
+      ],
+      "correct": 2,
+      "explanation": "Ders, Game of 24'te ToT için CoT'ye karşı 100-1000x token maliyetinden bahseder."
+    }
+  ]
+}

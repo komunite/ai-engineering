@@ -1,0 +1,78 @@
+{
+  "lesson": "17-disaggregated-prefill-decode",
+  "title": "Disaggregated Prefill/Decode — NVIDIA Dynamo ve llm-d",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Prefill ve decode neden farklı optimal GPU konfigürasyonları ister?",
+      "options": [
+        "Prefill AMD'de, decode NVIDIA'da çalışmalıdır",
+        "Prefill matmul throughput'unda compute-bound'dur; decode HBM bandwidth'inde memory-bound'dur, bu yüzden onları aynı yere koymak bir kaynağı israf eder",
+        "Farklı model ağırlıkları kullanırlar",
+        "Decode daha fazla network bant genişliği gerektirir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "NVIDIA Dynamo prefill ve decode havuzları arasında KV cache'i taşımak için hangi transport'u kullanır?",
+      "options": [
+        "Düz HTTP",
+        "Yalnızca gRPC bidi",
+        "NFS üzerinde paylaşılan filesystem",
+        "NIXL (mevcutsa RDMA/InfiniBand, TCP fallback)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Derse göre disaggregation ne zaman karşılığını VERMEZ?",
+      "options": [
+        "Blackwell üzerinde MoE iş yükleri",
+        "Paylaşılan system prompt'lara sahip multi-tenant serving",
+        "8K+ prefix ile RAG",
+        "512 token altında prompt'lar ve 200 token altında çıktılar, KV transfer vergisinin kazancı baskıladığı yerlerde"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Dynamo ile llm-d arasındaki temel mimari fark nedir?",
+      "options": [
+        "Dynamo açık kaynak, llm-d kapalı",
+        "Dynamo CPU'da, llm-d GPU'da çalışır",
+        "Dynamo vLLM/SGLang/TRT-LLM üzerinde bir stack-üstü orkestratör; llm-d Kubernetes-native ve prefill/decode/router'ı bağımsız Service'ler olarak çalıştırır",
+        "Dynamo AMD gerektirir; llm-d NVIDIA gerektirir"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bir SLO için prefill:decode oranını otomatik olarak hangi Dynamo bileşenleri ayarlar?",
+      "options": [
+        "Sidecar proxy ve Envoy filtresi",
+        "Planner Profiler ve SLA Planner",
+        "Cluster Autoscaler",
+        "Marlin kernel'ları"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Disaggregation, Phase 17 · 11'deki cache-aware routing ile nasıl etkileşime girer?",
+      "options": [
+        "Disaggregation KV cache yeniden kullanımını tamamen devre dışı bırakır",
+        "Cache-aware router bir requesti zaten prefix'ini tutan decode havuzuna düşürebilir; miss durumunda prefill -> decode'a akar, böylece ikisi birleşir",
+        "Karşılıklı olarak münhasırdırlar",
+        "Cache-aware routing yalnızca colocated serving için geçerlidir"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}

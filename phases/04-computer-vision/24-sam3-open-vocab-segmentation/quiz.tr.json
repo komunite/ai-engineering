@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "SAM 3 tarafından tanıtılan Promptable Concept Segmentation (PCS) nedir?",
+      "options": [
+        "Tek bir forward pass'te kısa bir isim öbeği veya görsel exemplar ile tanımlanan bir konseptin tüm instance'larını segment etmek, mask'leri artı benzersiz instance ID'lerini döndürmek",
+        "Klasik SAM gibi görsel prompt (nokta/box) segmentasyonu",
+        "Bir detector ve ardından SAM'in çok adımlı zinciri",
+        "Yalnızca takip modu"
+      ],
+      "correct": 0,
+      "explanation": "PCS, SAM 3'ün imza yeteneğidir. 'sarı okul otobüsü' veya bir otobüsün görsel exemplar'ını verirsin; SAM 3 her eşleşen instance'ı kendi mask'i ve benzersiz ID'si ile artı bir varlık skoruyla döndürür. Klasik SAM instance başına bir prompt gerektiriyordu; PCS tüm eşleşmeleri end-to-end üretir."
+    },
+    {
+      "stage": "pre",
+      "question": "SAM 3 zaten metin-prompted segmentasyonu yaparken 2026'da neden ayrıştırılmış bir detector + SAM 2 pipeline'ı (Grounded SAM 2) tutarsın?",
+      "options": [
+        "Grounded SAM 2 her zaman daha doğrudur",
+        "Modülerlik -- farklı domain'ler, lisans kısıtlamaları veya eşik davranışı için farklı open-vocabulary detector'ları (DINO-X, Florence-2, Grounding DINO 1.5) takabilirsin; SAM 3'ün mimarisi monolitiktir",
+        "SAM 3 video desteklemiyor",
+        "SAM 3 yalnızca cloud'da mevcut"
+      ],
+      "correct": 1,
+      "explanation": "Grounded SAM 2, frozen ağırlıklarla bir detector ve SAM 2'nin kompozisyonudur. O modülerlik bazen tam olarak ihtiyacın olan şeydir -- medikal görüntüleme detector'ı, lisans dostu bir detector veya sıkı eşik kontrolü. SAM 3 yaygın kullanım için end-to-end daha doğrudur ama özelleştirmesi daha zordur. İkisinin de 2026'da production rolleri vardır."
+    },
+    {
+      "stage": "post",
+      "question": "SAM 3'ün presence head'i neyi üretir?",
+      "options": [
+        "Aday bounding box'lar listesi",
+        "Bir tracking memory bank",
+        "Sorgulanan konseptin görselde var olup olmadığını ifade eden, lokalizasyondan ayrıştırılmış skaler bir olasılık; modelin temiz şekilde 'mevcut değil' demesine izin verir ve eksik konseptlerde false positive'leri azaltır",
+        "Son mask"
+      ],
+      "correct": 2,
+      "explanation": "Presence head, 'bu burada mı?' kararını 'nerede?' kararından ayırır. Sorulduğunda her zaman box üretmesi gereken bir model, eksik konseptler için eşleşmeler halüsine etme eğilimindedir. Presence head ile SAM 3 sıfır tespit temiz şekilde döndürebilir. Bu ayrıca yakından ilgili prompt'lar arasında ayrımı iyileştirir (örn., 'beyazlı bir oyuncu' vs 'kırmızılı bir oyuncu')."
+    },
+    {
+      "stage": "post",
+      "question": "SAM 3.1 Object Multiplex (Mart 2026), tracking için paylaşılan-bellek mekanizmasını tanıttı. Neyi değiştirir?",
+      "options": [
+        "Tüm SAM 2'yi",
+        "Instance başına ayrı memory bank'ler; Multiplex bunları instance başına query'lerle tek paylaşılan belleğe çökertir, böylece N nesneyi takip etmek doğruluğu korurken önemli ölçüde daha hızlı çalışır",
+        "Tüm presence head'ini",
+        "ViT backbone'unu"
+      ],
+      "correct": 1,
+      "explanation": "Önceki SAM 2 / SAM 3 tracking'i, takip edilen instance başına bir memory bank tutuyordu, böylece maliyet nesne sayısıyla lineer büyüyordu. Object Multiplex, tek bir paylaşılan bellek artı instance-specific feature'lar getiren instance başına query'ler tanıtır. Çok-instance tracking artık verimlidir -- kalabalıklar ve yoğun çok-nesneli sahneler için gereklidir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir edge cihazında gerçek zamanlı open-vocabulary TESPİT'e (yalnızca box, mask yok) ihtiyacın var. Hangi 2026 model ailesi doğru seçimdir?",
+      "options": [
+        "SAM 3",
+        "Özel bir CLIP + detector zinciri",
+        "Grounded SAM 2",
+        "YOLO-World (ve ilgili gerçek zamanlı open-vocab detector'lar); SAM 3 mask üretir ve daha ağırdır, YOLO-World ise edge donanımında yüksek fps'de box'lar için özel olarak tasarlanmıştır"
+      ],
+      "correct": 3,
+      "explanation": "YOLO-World ve benzeri modeller (OV-DINO, LLMDet) gerçek zamanlı open-vocabulary detector'lardır. Mask üretmezler ama mütevazı GPU'larda 640x640'ta 30-60 fps'e çarparlar. SAM 3, mask ve tracking önemli olduğunda doğru seçimdir. Her zaman aracı göreve eşleştir: yalnızca tespit, mask overhead'i olmadan sorun değildir."
+    }
+  ]
+}

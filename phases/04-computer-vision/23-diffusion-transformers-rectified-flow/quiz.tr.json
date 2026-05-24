@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "2024+ SOTA text-to-image modelleri (SD3, FLUX, Z-Image) neden U-Net denoiser'ı bir Diffusion Transformer (DiT) ile değiştirdi?",
+      "options": [
+        "Transformer'ları yazmak daha kolay",
+        "DiT, U-Net'ten daha öngörülebilir şekilde ölçeklenir (LLM'lerle aynı scaling-law rejimi), prompt-doğru üretim için uzun menzilli spatial bağımlılıkları daha iyi işler ve cross veya joint attention yoluyla text encoder'larla doğal olarak eşleşir",
+        "U-Net artık GPU'larda desteklenmiyor",
+        "DiT daha az parametreye sahiptir"
+      ],
+      "correct": 1,
+      "explanation": "DiT, diffusion'ı sadece başka bir dizi modelleme görevi olarak ele alır. Dil modelleri gibi ölçeklenir, uzun menzilli yapıyı sıkıştırabilen convolution'ların sabit inductive bias'ından kaçınır ve transformer text encoder'larla temiz şekilde entegre olur. Her 2026 SOTA modeli -- SD3, FLUX.1, FLUX.2, SD4, Z-Image, Qwen-Image -- bir DiT'dir."
+    },
+    {
+      "stage": "pre",
+      "question": "Rectified flow, modeli veri ve gürültü arasında düz çizgi interpolasyonu boyunca `v = epsilon - x_0` hızını tahmin etmek için eğitir. Bu neden 1000 yerine 20 adımlı sampling'i sağlar?",
+      "options": [
+        "Sağlamaz; rectified flow da 1000 adıma ihtiyaç duyar",
+        "Öğrenilen ODE, DDPM'in eğri SDE'sinden düz bir çizgiye daha yakındır, böylece az adımlı Euler integrasyonu doğru örnekler üretir; distillation ile birlikte FLUX schnell gibi 1-4 adımlı varyantlar elde edersin",
+        "Euler kesinlikle DDIM'den daha iyidir",
+        "Daha büyük bir model gerektirir"
+      ],
+      "correct": 1,
+      "explanation": "DDPM'in ters süreci, birçok küçük adıma ihtiyaç duyan stokastik eğri bir yoldur. Rectified flow düz çizgi interpolasyonu tanımlar; öğrenilen hız trajektori boyunca yaklaşık olarak sabittir. Neredeyse düz bir ODE'yi integre etmek az adım alır. SD3 ve FLUX 20-30 adımda tam kalite örnekler; schnell/turbo/LCM bunu 1-4 adıma distile eder."
+    },
+    {
+      "stage": "post",
+      "question": "MMDiT (SD3), metin token'ları ve görsel token'ları için tek bir joint attention katmanını paylaşan iki ağırlık seti kullanır. Neden?",
+      "options": [
+        "Bellek tasarrufu için",
+        "Metin ve görsel embedding'leri kavramsal olarak farklı dağılımlardır; ayrı ağırlıklar her modalitenin kendi temsilini işlemesine izin verirken joint attention etkileşmelerine izin verir; sonuç tek paylaşılan stream'den daha iyi metin-görsel hizalama ve prompt takibidir",
+        "Legacy bir tasarımdır",
+        "Yalnızca görsel token'lar aslında attention'dan geçer"
+      ],
+      "correct": 1,
+      "explanation": "Stable Diffusion 3'ün MMDiT'si, metin ve görsel token'larının farklı istatistiklerini korumak için modalite başına ağırlık stream'leri tutarken bir joint self-attention katmanı kaynaşmalarına izin verir. Bu, concatenate-and-share'den (SD1/2'nin kullandığı) yapısal olarak daha expressive ve deneysel olarak prompt'a uyumu ve metin render'ını kaldırır. FLUX bunu verimlilik için alternating double-stream / single-stream block'lara genişletir."
+    },
+    {
+      "stage": "post",
+      "question": "Bir DiT block'ta AdaLN-Zero ne demektir ve neden yardım eder?",
+      "options": [
+        "Sıfır epsilon'lu bir layer norm",
+        "Modülasyon MLP'si sıfıra başlatılmış Adaptive LayerNorm, böylece block identity olarak başlar; eğitim sonra scale/shift/gate'i öğrenir, bu çok derin diffusion transformer'ları stabilize eder",
+        "Yalnızca zamanın %50'sinde uygulanan bir LayerNorm",
+        "Sıfır mean'li bir LayerNorm"
+      ],
+      "correct": 1,
+      "explanation": "AdaLN, conditioning vektöründen scale, shift ve gate tahmin eder. 'Zero', MLP'nin sıfıra başlatıldığı anlamına gelir, böylece gate 0'da başlar ve block identity olarak davranır. Gradient'ler modülasyonu yavaşça sıfırdan uzaklaştırır, bu da derin yığının eğitimin başında ıraksamasını önler. Bu ResNet'in residual zero-init'inin DiT eşdeğeridir ve her modern diffusion transformer'da kullanılır."
+    },
+    {
+      "stage": "post",
+      "question": "FLUX.1-schnell bir görseli 4 adımda üretebilir. Hangi teknik bunu sağlar?",
+      "options": [
+        "FLUX.1-dev'den farklı bir base mimari",
+        "Distillation -- schnell, yavaş çok adımlı bir teacher'dan adversarial / consistency-tarzı objective'lerle eğitilir, böylece 1-4 denoising adımı teacher'ın 20-30 adımlı çıktısıyla eşleşir",
+        "Daha düşük precision ağırlıklar",
+        "Daha küçük parametre sayısı"
+      ],
+      "correct": 1,
+      "explanation": "Schnell / Turbo / LCM varyantları step distillation kullanır. Küçük adımlı bir student, çok adımlı teacher'ın çıktısıyla eşleşmeyi öğrenir. Base mimari ve parametre sayısı sıklıkla aynıdır (FLUX.1-dev ve schnell ikisi de 12B). Distillation, sub-1-saniye çıkarımı pratik yapan şeydir. Bu SDXL Turbo, SD Turbo ve Latent Consistency Models ile aynı fikirdir."
+    }
+  ]
+}

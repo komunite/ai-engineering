@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "MMLU gibi benchmark'lar frontier modelleri karşılaştırmak için neden daha az kullanışlı hale geldi?",
+      "options": [
+        "Yanlış konuları test ediyorlar",
+        "Frontier modeller MMLU'yu doyurdu (%86-89 skor) ve farklılıkların istatistiksel gürültü olduğu bir aralığa leaderboard'u sıkıştırdı",
+        "MMLU daha küçük modeller için tasarlandı",
+        "Sorular çok kolay"
+      ],
+      "correct": 1,
+      "explanation": "GPT-4, Claude 3 ve Llama 3 MMLU'da %86-89 skor aldığında, 1 puanlık fark anlamlı değildir. Benchmark artık modelleri ayırt etmiyor, ama hala leaderboard kültürüne hakim."
+    },
+    {
+      "stage": "pre",
+      "question": "LLM değerlendirmesi bağlamında Goodhart Yasası nedir?",
+      "options": [
+        "Model ölçeklendirme hakkında bir yasa",
+        "Bir ölçü hedef haline geldiğinde, iyi bir ölçü olmaktan çıkar -- modeller ve ekipler gerçek yetenekler yerine benchmark'lar için optimize eder",
+        "Learning rate schedule'lar hakkında bir kural",
+        "Attention mekanizmaları hakkında bir teorem"
+      ],
+      "correct": 1,
+      "explanation": "Laboratuvarlar benchmark skorları için optimize eder (data contamination, benchmark'a özel prompt). Skor yükselir ama gerçek dünya yeteneği mutlaka artmaz. Kendi göreve özgü değerlendirmen tek güvenilir ölçüdür."
+    },
+    {
+      "stage": "post",
+      "question": "LLM-as-judge değerlendirme yaklaşımı nedir?",
+      "options": [
+        "Her yanıtı bir insan jürinin değerlendirmesi",
+        "Yanıtları rubrik'lere göre skorlamak için güçlü bir LLM (örn. GPT-4) kullanmak, pahalı insan değerlendirmesini ölçekte yerine geçirir",
+        "Değerlendirme için ayrı bir sınıflandırıcı eğitmek",
+        "Modelin kendini değerlendirmek için kullanılması"
+      ],
+      "correct": 1,
+      "explanation": "LLM-as-judge yanıtları tanımlı kriterlere göre skorlamak için yetenekli bir model kullanır. İnsan değerlendirmesinden daha ucuz ve hızlıdır, ancak kalibre edilmesi gereken önyargıları (örn. uzun yanıtları tercih etme) vardır."
+    },
+    {
+      "stage": "post",
+      "question": "Public benchmark'lara güvenmek yerine özel bir değerlendirme suite'i oluşturmak neden önemlidir?",
+      "options": [
+        "Public benchmark'lar her zaman yanlıştır",
+        "Public benchmark'lar genel yetenekleri test eder; uygulamanın yalnızca özel bir değerlendirmenin ölçebileceği spesifik gereksinimleri vardır",
+        "Özel değerlendirmeler oluşturmak daha kolaydır",
+        "Public benchmark'lar çok pahalıdır"
+      ],
+      "correct": 1,
+      "explanation": "MMLU'da %90 skor alan bir model senin özel görevinde başarısız olabilir (örn. hukuki dokümanlardan kendi formatında tarih çıkarmak). Yalnızca kendi verin, kendi edge case'lerin ve başarı kriterlerinle özel bir değerlendirme önemli olanı ölçer."
+    },
+    {
+      "stage": "post",
+      "question": "LLM benchmark'ları bağlamında data contamination nedir?",
+      "options": [
+        "Eğitim verisinin bozulması",
+        "Benchmark sorularının modelin pretraining verisinde görünmesi, gerçek yeteneği yansıtmadan skorları şişirmesi",
+        "Modelin yanlış veri üretmesi",
+        "Değerlendirme verisinin yanlış etiketlenmesi"
+      ],
+      "correct": 1,
+      "explanation": "MMLU soruları eğitim korpusunda göründüyse, model akıl yürütmek yerine cevapları ezberlemiştir. Bu skorları şişirir ve benchmark karşılaştırmalarını güvenilmez yapar. Eğitim korpusları büyüdükçe artan bir problem."
+    }
+  ]
+}

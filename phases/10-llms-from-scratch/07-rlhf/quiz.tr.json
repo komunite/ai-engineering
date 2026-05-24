@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "RLHF'deki reward model neyden öğrenir?",
+      "options": [
+        "Ham metin dokümanları",
+        "İnsan tercih çiftleri: iki yanıt verildiğinde insanların hangisini tercih ettiği",
+        "Benchmark skorları",
+        "Model loss eğrileri"
+      ],
+      "correct": 1,
+      "explanation": "Reward model tercih verisi üzerinde eğitilir: aynı prompt'a verilen, bir insanın hangisinin daha iyi olduğunu etiketlediği yanıt çiftleri. İnsan tercihleriyle eşleşen yanıtlara daha yüksek skor atamayı öğrenir."
+    },
+    {
+      "stage": "pre",
+      "question": "RLHF için PPO eğitiminde neden KL divergence cezası kullanılır?",
+      "options": [
+        "Eğitimi hızlandırmak için",
+        "Policy'nin SFT modelinden çok uzaklaşmasını önlemek için, ki bu reward hacking'e yol açar",
+        "Bellek kullanımını azaltmak için",
+        "Tokenization'ı iyileştirmek için"
+      ],
+      "correct": 1,
+      "explanation": "KL cezası olmadan model reward skorunu maksimize etmenin dejenere yollarını bulur (örn. reward model zayıflıklarını sömüren tekrarlayan metinler üretmek). KL, modeli iyi davranan SFT baseline'ına yakın tutar."
+    },
+    {
+      "stage": "post",
+      "question": "Tam bir RLHF pipeline'ı için kaç ayrı model gereklidir?",
+      "options": [
+        "Bir",
+        "İki",
+        "Üç: SFT modeli, reward modeli ve optimize edilen policy modeli",
+        "Dört"
+      ],
+      "correct": 2,
+      "explanation": "RLHF şunları gerektirir: (1) başlangıç noktası ve KL referansı olarak SFT modeli, (2) tercihler üzerinde eğitilmiş reward modeli, (3) PPO ile optimize edilen policy modeli. Bu karmaşıklık DPO'nun (ders 08) geliştirilmesinin sebebidir."
+    },
+    {
+      "stage": "post",
+      "question": "RLHF'de 'reward hacking' nedir?",
+      "options": [
+        "Reward model'in saldırganlar tarafından saldırıya uğraması",
+        "Policy'nin yanıt kalitesini gerçekten iyileştirmeden reward skorunu maksimize etmenin yollarını bulması",
+        "Eğitim verisinin bozulması",
+        "Learning rate'in çok yüksek olması"
+      ],
+      "correct": 1,
+      "explanation": "Reward model insan yargısı için kusurlu bir proxy'dir. Policy gerçekten daha yardımcı olmadan yüksek reward skoru alan pattern'ları (örn. uzun yanıtlar, aşırı çekince) keşfedebilir. KL cezası bunu sınırlar."
+    },
+    {
+      "stage": "post",
+      "question": "PPO'nun clipping mekanizması neyi önler?",
+      "options": [
+        "Gradient overflow",
+        "Eğitimi dengesizleştirebilecek aşırı büyük policy güncellemelerini",
+        "Memory overflow",
+        "Veri sızıntısı"
+      ],
+      "correct": 1,
+      "explanation": "PPO yeni ve eski policy arasındaki olasılık oranını [0.8, 1.2] gibi bir aralığa clip eder. Bu tek bir güncellemenin policy'yi çok şiddetli değiştirmesini önler ve eğitimi vanilla policy gradient'ten daha stabil yapar."
+    }
+  ]
+}

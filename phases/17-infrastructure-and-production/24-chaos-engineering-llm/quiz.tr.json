@@ -1,0 +1,78 @@
+{
+  "lesson": "24-chaos-engineering-llm",
+  "title": "LLM Üretimi için Chaos Engineering",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ders üretimde chaos çalıştırmadan önce hangi beş ön koşulu gerektiriyor?",
+      "options": [
+        "Slack kanalı, sticker paketi, maskot, hashtag, blog yazısı",
+        "SLI/SLO, observability, otomatik rollback, yapılandırılmış runbook'lar, on-call",
+        "Yalnızca vector database",
+        "Üç frontier model"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Chaos mimarisi hangi dört plane'e sahiptir, artı geri besleme döngüsü?",
+      "options": [
+        "Ingest, transform, store, serve",
+        "Train, eval, deploy, archive",
+        "Control, target, safety, observability — SLO ayarlarına geri besleme ile",
+        "Frontend, backend, mobile, web"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Chaos deneyleri sırasında burn-rate alarm guardrail'ı ne yapar?",
+      "options": [
+        "Observability'yi devre dışı bırakır",
+        "Deneyi otomatik olarak üretime promote eder",
+        "Deneyi hızlandırır",
+        "Günlük hata-bütçesi yanması beklenen miktarın kabaca 2x'ini aştığında deneyi duraklatır"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Derste listelenen LLM'e özgü bir chaos deneyi hangisidir?",
+      "options": [
+        "Tüm DNS'i düşür",
+        "Rastgele fan-hızı düşürme",
+        "vLLM block-bütçe doygunluğunu zorlayan KV eviction fırtınası",
+        "Tüm datacenter'ı reboot et"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ders chaos egzersizleri için hangi kadansı öneriyor?",
+      "options": [
+        "Haftalık küçük canary, aylık postmortem'li game day, üç ayda bir takımlar arası dayanıklılık denetimi",
+        "Günlük tam-prod kesintileri",
+        "Asla",
+        "Yalnızca yıllık"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bozuk-prompt deneyi hangi LLM'e özgü arıza modunu ortaya çıkarır?",
+      "options": [
+        "Derin yuvalanmış unicode ya da büyük UTF-8 code point'ler gibi girdilerde bir worker'ı kilitleyen tokenizer takılmaları",
+        "Disk I/O çekişmesi",
+        "GPU undervolt",
+        "Network paket kaybı"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}

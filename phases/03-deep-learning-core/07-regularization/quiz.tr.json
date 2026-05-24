@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sinir ağlarında overfitting nedir?",
+      "options": [
+        "Model veriyi öğrenecek kadar büyük değildir",
+        "Model genelleştirilebilir örüntüler öğrenmek yerine eğitim verisini ezberler; eğitim ve test doğruluğu arasında büyük bir fark görülür",
+        "Model çok yavaş eğitilir",
+        "Loss fonksiyonu yanlıştır"
+      ],
+      "correct": 1,
+      "explanation": "Overfitting, bir modelin yüksek eğitim doğruluğuna ama düşük test doğruluğuna ulaştığında ortaya çıkar. Altta yatan örüntüleri öğrenmek yerine eğitim verisinin gürültüsünü ezberlemiştir."
+    },
+    {
+      "stage": "pre",
+      "question": "Dropout bir sinir ağını nasıl regularize eder?",
+      "options": [
+        "En kötü performans gösteren nöronları kalıcı olarak kaldırır",
+        "Eğitim sırasında nöronları rastgele sıfırlar; ağı yedekli temsiller öğrenmeye zorlar",
+        "Learning rate'i azaltır",
+        "Eğitim verisinden aykırı değerleri kaldırır"
+      ],
+      "correct": 1,
+      "explanation": "Her forward pass sırasında dropout, nöron çıktılarını p olasılıkla rastgele sıfırlar. Bu, co-adaptation'ı (nöronların belirli diğerlerine bağımlı olması) önler ve 2^N alt ağdan oluşan bir topluluğu eğitmeye eşdeğerdir."
+    },
+    {
+      "stage": "post",
+      "question": "Transformer'lar neden BatchNorm yerine LayerNorm kullanır?",
+      "options": [
+        "LayerNorm'un hesaplanması daha hızlıdır",
+        "LayerNorm, örnek başına özellikler üzerinde normalize eder (batch'ten bağımsız); değişken sequence uzunluklarıyla ve küçük batch size'larla çalışır",
+        "BatchNorm gradient patlamasına neden olur",
+        "LayerNorm daha yakın zamanda icat edildi"
+      ],
+      "correct": 1,
+      "explanation": "BatchNorm batch istatistiklerine bağımlıdır; bu istatistikler küçük batch'lerde gürültülüdür ve batch size 1'de (generation sırasında yaygın) anlamsızdır. LayerNorm batch size'tan bağımsız olarak her örnek içindeki özellikler üzerinde normalize eder."
+    },
+    {
+      "stage": "post",
+      "question": "RMSNorm ile LayerNorm arasındaki temel fark nedir?",
+      "options": [
+        "RMSNorm batch istatistiklerini kullanır",
+        "RMSNorm ortalama çıkarmayı atlar; yalnızca root mean square'e böler ve eşdeğer doğrulukla ~%10 hızlanma sağlar",
+        "RMSNorm öğrenilebilir parametreler ekler",
+        "RMSNorm yalnızca CNN'lerde çalışır"
+      ],
+      "correct": 1,
+      "explanation": "RMSNorm, LayerNorm'dan ortalama çıkarma adımını kaldırır; bu adım doğruluğa az katkı sağlar ama hesaplama ekler. LLaMA, Mistral ve çoğu modern LLM bu verimlilik kazanımı için RMSNorm kullanır."
+    },
+    {
+      "stage": "post",
+      "question": "PyTorch'ta inference çalıştırmadan önce model.eval() çağırmak neden kritiktir?",
+      "options": [
+        "Hesaplamayı hızlandırır",
+        "Dropout'u devre dışı bırakır ve BatchNorm'u batch istatistikleri yerine running istatistiklerini kullanmaya geçirir; deterministik çıktılar verir",
+        "GPU belleğini boşaltır",
+        "Gradient hesaplamasını etkinleştirir"
+      ],
+      "correct": 1,
+      "explanation": "model.eval() olmadan, dropout inference sırasında nöronları rastgele sıfırlar (rastgele çıktı varyasyonuna neden olur) ve BatchNorm, eğitim sırasında biriktirilmiş kararlı running ortalamaları yerine mevcut batch istatistiklerini kullanır."
+    }
+  ]
+}

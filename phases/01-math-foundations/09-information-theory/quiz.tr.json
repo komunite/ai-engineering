@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bilgi teorisinde 'entropi' neyi ölçer?",
+      "options": ["Fiziksel bir sistemin enerjisini", "Bir olasılık dağılımındaki ortalama sürpriz veya belirsizliği", "Bir ikili mesajdaki bit sayısını", "Bir iletişim kanalının hata oranını"],
+      "correct": 1,
+      "explanation": "Entropi H(P) = -sum(p(x) * log(p(x))) tüm sonuçlardaki ortalama sürpriz miktarını ölçer. Yüksek entropi yüksek belirsizliği gösterir (düzgün dağılım). Düşük entropi sonucun öngörülebilir olduğu anlamına gelir."
+    },
+    {
+      "stage": "pre",
+      "question": "Sinir ağlarında cross-entropy loss yaygın olarak ne için kullanılır?",
+      "options": ["Sürekli çıkışlı regresyon görevleri", "Sınıflandırma görevleri; tahmin edilen olasılıkların gerçek etiketlerden ne kadar uzak olduğunu ölçer", "Yeni veri örnekleri üretmek", "Aşırı uyumu önlemek için model ağırlıklarını regularize etmek"],
+      "correct": 1,
+      "explanation": "Cross-entropy loss H(P,Q) = -sum(p(x)*log(q(x))) gerçek dağılım (etiketler) ile modelin tahmin ettiği dağılım arasındaki farkı ölçer. Sınıflandırma için STANDART loss'tur."
+    },
+    {
+      "stage": "post",
+      "question": "Eğitim sırasında cross-entropy'yi minimize etmek neden KL diverjansını minimize etmeye eşdeğerdir?",
+      "options": ["Çünkü KL diverjansı eğitim sırasında her zaman sıfırdır", "Çünkü cross-entropy = entropi + KL diverjansı ve gerçek etiketlerin entropisi sabittir, dolayısıyla cross-entropy'yi minimize etmek KL diverjansını minimize eder", "Çünkü cross-entropy ve KL diverjansı aynı formüldür", "Çünkü modelin entropisi yakınsamada sıfıra eşittir"],
+      "correct": 1,
+      "explanation": "H(P,Q) = H(P) + D_KL(P||Q). Gerçek dağılım P eğitim sırasında değişmediğinden H(P) sabittir. H(P,Q)'yu minimize etmek D_KL(P||Q)'yu minimize etmekle aynıdır -- modeli gerçek dağılıma doğru iter."
+    },
+    {
+      "stage": "post",
+      "question": "Bir dil modeli test setinde 50 perplexity puanı alıyor. Bu ne anlama gelir?",
+      "options": ["Model cümle başına 50 hata yapar", "Ortalama olarak, model her adımda 50 olası sonraki token arasından düzgün seçim yapıyormuşçasına belirsizdir", "Modelin 50 katmanı vardır", "Model 50 epoch boyunca eğitilmiştir"],
+      "correct": 1,
+      "explanation": "Perplexity = e^(cross-entropy). 50 perplexity, modelin her token'daki belirsizliğinin 50 eşit olası seçenek arasından rastgele seçim yapmaya eşdeğer olduğu anlamına gelir. Daha düşük perplexity daha iyi tahmin demektir."
+    },
+    {
+      "stage": "post",
+      "question": "Mutual information, öznitelik seçiminde Pearson korelasyonundan nasıl farklıdır?",
+      "options": ["Mutual information hesaplaması daha hızlıdır", "Mutual information herhangi bir istatistiksel bağımlılığı (doğrusal veya doğrusal olmayan) algılar; korelasyon yalnızca doğrusal ilişkileri algılar", "Pearson korelasyonu herhangi bir veri türünde çalışır, mutual information yalnızca sürekli veride çalışır", "Her zaman aynı öznitelik sıralamalarını verirler"],
+      "correct": 1,
+      "explanation": "Mutual information I(X;Y) değişkenler arasındaki tüm istatistiksel bağımlılıkları yakalar, doğrusal olmayan ve monotonik olmayanlar dahil. Pearson korelasyonu yalnızca doğrusal ilişkiyi ölçer ve birçok önemli ilişkiyi gözden kaçırır."
+    }
+  ]
+}

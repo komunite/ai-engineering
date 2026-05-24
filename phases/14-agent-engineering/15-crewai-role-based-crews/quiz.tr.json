@@ -1,0 +1,90 @@
+{
+  "lesson": "15-crewai-role-based-crews",
+  "title": "CrewAI: Rol-Bazlı Crew'lar ve Flow'lar",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "CrewAI'nın dört primitifi nedir?",
+      "options": [
+        "Agent, Task, Crew, Process",
+        "Node, Edge, Reducer, Checkpointer",
+        "Actor, Message, Inbox, Runtime",
+        "Tool, Prompt, Model, Memory"
+      ],
+      "correct": 0,
+      "explanation": "Agent, Task, Crew ve Process dört primitiftir."
+    },
+    {
+      "stage": "pre",
+      "question": "CrewAI dokümanlarına göre önerilen prodüksiyon başlangıç noktası nedir?",
+      "options": [
+        "Crew",
+        "Flow",
+        "Sequential process",
+        "Hierarchical process"
+      ],
+      "correct": 1,
+      "explanation": "Dokümanlar prodüksiyon uygulamalarına Flow'larla başlamayı söyler; otonomi maliyetini hak ettiğinde Crew'ları alt-adımlar olarak ekle."
+    },
+    {
+      "stage": "check",
+      "question": "Crew ile Flow arasındaki fark nedir?",
+      "options": [
+        "Crew ücretli, Flow ücretsizdir",
+        "Crew otonom ve LLM-güdümlüdür; Flow event-güdümlü, kod-sahipli, deterministik ve test edilebilirdir",
+        "Crew yalnızca GPU'da çalışır",
+        "Flow'da agent yoktur"
+      ],
+      "correct": 1,
+      "explanation": "Crew otonomi-önceliklidir; Flow determinizm-önceliklidir."
+    },
+    {
+      "stage": "check",
+      "question": "Bunlardan hangisi CrewAI'nın sunduğu dört bellek tipinden biri DEĞİLDİR?",
+      "options": [
+        "Short-term",
+        "Long-term",
+        "Entity",
+        "Quantized"
+      ],
+      "correct": 3,
+      "explanation": "Short-term, long-term, entity ve contextual dört tiptir. Quantized memory bir CrewAI kavramı değildir."
+    },
+    {
+      "stage": "check",
+      "question": "Backstory bloat nedir ve ders bunu nasıl ele almayı önerir?",
+      "options": [
+        "Çok fazla crew saklamak; eskileri arşivle",
+        "2000 kelimelik agent backstory'leri context bütçesini taşırır; sıkı tut",
+        "Çok fazla tool; bazılarını sil",
+        "Yavaş Bedrock çağrıları; bölgeleri değiştir"
+      ],
+      "correct": 1,
+      "explanation": "Backstory'ler ton ve yargıyı şekillendirir ama aşırı büyük olduklarında context yer."
+    },
+    {
+      "stage": "post",
+      "question": "Hierarchical process Sequential üzerine seçmeye ne zaman değer?",
+      "options": [
+        "Her zaman",
+        "Aralarında yönlendirme yapacak bir manager Agent'a ihtiyaç duyan 4+ uzman olduğunda",
+        "Tek bir görevin olduğunda",
+        "Tool'un olmadığında"
+      ],
+      "correct": 1,
+      "explanation": "Hierarchical bir manager Agent ekler; yalnızca birkaç uzmanın dinamik yönlendirmeye ihtiyacı olduğunda değer."
+    },
+    {
+      "stage": "post",
+      "question": "Ders prodüksiyonda serbest formatlı bir Crew kullanmaya neden karşı çıkıyor?",
+      "options": [
+        "Crew'lar desteksizdir",
+        "Çıktı değişkenliği yüksek ve bir Flow sarıcı olmadan hata ayıklama acı vericidir",
+        "Crew'lar Flow'lardan daha pahalıdır",
+        "Crew'larda bellek yoktur"
+      ],
+      "correct": 1,
+      "explanation": "Crew otonomisi prod replay ve denetimi acılı yapar; gönderirken Flow ile sar."
+    }
+  ]
+}

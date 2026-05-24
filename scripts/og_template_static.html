@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 1200px; height: 630px; }
+    html, body { width: 1280px; height: 640px; }
     body {
       background: #fafaf5;
       background-image:
@@ -17,14 +17,13 @@
       color: #1a1a1a;
       overflow: hidden;
       position: relative;
-      /* subtle vignette to add depth on light bg */
       box-shadow: inset 0 0 200px rgba(0,0,0,0.025);
     }
     .canvas {
       position: relative;
       width: 100%;
       height: 100%;
-      padding: 56px 72px 48px;
+      padding: 60px 80px 52px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -37,10 +36,10 @@
       height: 18px;
       border: 1.5px solid #1a1a1a;
     }
-    .corner.tl { top: 28px; left: 28px; border-right: none; border-bottom: none; }
-    .corner.tr { top: 28px; right: 28px; border-left: none; border-bottom: none; }
-    .corner.bl { bottom: 28px; left: 28px; border-right: none; border-top: none; }
-    .corner.br { bottom: 28px; right: 28px; border-left: none; border-top: none; }
+    .corner.tl { top: 30px; left: 30px; border-right: none; border-bottom: none; }
+    .corner.tr { top: 30px; right: 30px; border-left: none; border-bottom: none; }
+    .corner.bl { bottom: 30px; left: 30px; border-right: none; border-top: none; }
+    .corner.br { bottom: 30px; right: 30px; border-left: none; border-top: none; }
 
     /* Top mono meta row */
     .top-meta {
@@ -58,48 +57,41 @@
     .top-divider {
       height: 1px;
       background: rgba(0,0,0,0.10);
-      margin: 16px 0 44px;
+      margin: 16px 0 36px;
     }
 
     .eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #3553ff;
-      margin-bottom: 28px;
-    }
-    .eyebrow .sep { color: rgba(53,83,255,0.4); padding: 0 8px; }
-    .eyebrow .type {
-      display: inline-block;
-      margin-left: 12px;
-      padding: 3px 8px;
-      border: 1.2px solid rgba(53,83,255,0.5);
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      vertical-align: middle;
+      margin-bottom: 20px;
     }
 
+    /* Hero title — matches homepage H1 (.manual-title): VT323 blueprint uppercase */
     .title {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 84px;
-      line-height: 0.96;
-      letter-spacing: -0.02em;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 30px;
-      max-width: 980px;
-      word-break: break-word;
+      font-family: 'VT323', ui-monospace, 'JetBrains Mono', monospace;
+      font-size: 112px;
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      font-weight: 400;
+      color: #3553ff;
+      text-transform: uppercase;
+      white-space: pre-line;
+      margin-bottom: 24px;
+      max-width: 1140px;
+      word-break: keep-all;
     }
-    .title.long { font-size: 64px; }
-    .title.very-long { font-size: 54px; line-height: 1.02; }
+    .title.long { font-size: 92px; }
+    .title.very-long { font-size: 76px; line-height: 0.98; }
 
     .accent-line {
       width: 56px;
       height: 4px;
       background: #3553ff;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .tagline {
@@ -108,25 +100,13 @@
       font-size: 23px;
       line-height: 1.45;
       color: #4a4a48;
-      max-width: 880px;
+      max-width: 1000px;
       max-height: 130px;
       overflow: hidden;
     }
 
-    /* Bottom strip */
-    .bottom {
-      display: flex;
-      flex-direction: column;
-    }
-    .project-name {
-      font-family: 'VT323', ui-monospace, 'JetBrains Mono', monospace;
-      font-size: 38px;
-      letter-spacing: 0.08em;
-      color: #3553ff;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 14px;
-    }
+    /* Bottom strip — no title repeat; carry langs + domain only */
+    .bottom { display: flex; flex-direction: column; }
     .ascii-rule {
       height: 5px;
       background-image:
@@ -149,15 +129,8 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    .langs {
-      color: #1a1a1a;
-      font-weight: 500;
-    }
-    .langs .lang-sep {
-      color: #3553ff;
-      margin: 0 8px;
-      opacity: 0.6;
-    }
+    .langs { color: #1a1a1a; font-weight: 500; }
+    .langs .lang-sep { color: #3553ff; margin: 0 8px; opacity: 0.6; }
     .brand {
       color: #1a1a1a;
       font-weight: 500;
@@ -210,7 +183,6 @@
     </div>
 
     <div class="bottom">
-      <div class="project-name">Sıfırdan Yapay Zeka Mühendisliği</div>
       <div class="ascii-rule"></div>
       <div class="bottom-row">
         <div class="langs">{{FOOTER_LEFT}}</div>

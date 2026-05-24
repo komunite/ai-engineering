@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate per-lesson Open Graph images (1200x630 JPG).
+"""Generate per-lesson Open Graph images (1280x640 JPG).
 
 Reads the template at scripts/og_template.html, fills it with lesson
 metadata, runs headless Chrome to screenshot the result, and writes a
@@ -48,7 +48,7 @@ STATIC_PAGES = [
     {
         "slug": "home",
         "eyebrow": "ANA SAYFA",
-        "title": "Sıfırdan Yapay Zeka Mühendisliği",
+        "title": "Sıfırdan\nYapay Zeka\nMühendisliği",
         "tagline": "435 ders. 20 faz. Her algoritma; tek bir framework import edilmeden önce matematiğinden başlanarak kuruluyor.",
         "meta_left": "FIG_000 · MÜFREDAT V1.0 · 2026",
         "meta_right": "AÇIK KAYNAK · MIT",
@@ -145,11 +145,16 @@ def parse_lesson_doc(doc: Path) -> dict[str, str]:
 
 
 def title_class(title: str) -> str:
-    """Pick a CSS modifier so long titles still fit on the canvas."""
-    n = len(title)
-    if n > 28:
+    """Pick a CSS modifier so long titles still fit on the canvas.
+
+    Multi-line titles (using \\n) are sized by the longest single line so
+    a 3-line hero like "Sıfırdan / Yapay Zeka / Mühendisliği" still gets
+    the default large display size.
+    """
+    longest = max((len(line) for line in title.split("\n")), default=0)
+    if longest > 28:
         return "very-long"
-    if n > 18:
+    if longest > 18:
         return "long"
     return ""
 
@@ -182,7 +187,7 @@ def render_html(meta: dict[str, str]) -> str:
 
 
 def screenshot(chrome: str, html: str, dest_png: Path) -> None:
-    """Render the HTML in headless Chrome and write a 1200x630 PNG."""
+    """Render the HTML in headless Chrome and write a 1280x640 PNG."""
     with tempfile.TemporaryDirectory() as tmp:
         tmp_html = Path(tmp) / "card.html"
         tmp_html.write_text(html, encoding="utf-8")
@@ -193,7 +198,7 @@ def screenshot(chrome: str, html: str, dest_png: Path) -> None:
             "--disable-gpu",
             "--no-sandbox",
             "--force-device-scale-factor=1",
-            "--window-size=1200,630",
+            "--window-size=1280,640",
             f"--screenshot={dest_png}",
             f"file://{tmp_html}",
         ]
@@ -206,9 +211,9 @@ def screenshot(chrome: str, html: str, dest_png: Path) -> None:
 
 def png_to_jpg(src_png: Path, dest_jpg: Path, quality: int = 90) -> None:
     img = Image.open(src_png).convert("RGB")
-    # Hard-resize to exact 1200x630 in case Chrome added DPR scaling.
-    if img.size != (1200, 630):
-        img = img.resize((1200, 630), Image.LANCZOS)
+    # Hard-resize to exact 1280x640 in case Chrome added DPR scaling.
+    if img.size != (1280, 640):
+        img = img.resize((1280, 640), Image.LANCZOS)
     dest_jpg.parent.mkdir(parents=True, exist_ok=True)
     img.save(dest_jpg, "JPEG", quality=quality, optimize=True, progressive=True)
 

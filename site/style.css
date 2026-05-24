@@ -1407,21 +1407,19 @@ body[data-palette-open] {
 }
 .footer-komunite-logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
-  color: var(--ink);
-  text-transform: lowercase;
+  align-items: center;
+  border-bottom: none;
+  transition: opacity 0.15s ease;
 }
-.footer-komunite-logo .dots {
-  display: inline-block;
-  color: #ff6b35;
-  letter-spacing: 0;
-  font-size: 0.7em;
-  line-height: 1;
-  transform: translateY(-3px);
+.footer-komunite-logo:hover {
+  border-bottom: none;
+  opacity: 0.85;
+}
+.footer-komunite-logo img {
+  display: block;
+  width: 180px;
+  height: auto;
+  max-width: 100%;
 }
 .footer-komunite-tag {
   font-family: var(--font-mono);

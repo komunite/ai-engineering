@@ -757,34 +757,34 @@ Faz 14'ün her workbench dersi (31-42), agent tam ders dokümanlarını açmadan
 
 | # | Lesson | Type | Lang |
 |:---:|--------|:----:|------|
-| 01 | Yönetilen LLM Platformları — Bedrock, Azure OpenAI, Vertex AI | Learn | Python |
-| 02 | Çıkarım Platformu Ekonomisi — Fireworks, Together, Baseten, Modal | Learn | Python |
-| 03 | Kubernetes'te GPU Autoscaling — Karpenter, KAI Scheduler | Learn | Python |
-| 04 | vLLM Serving İçyapısı — PagedAttention, Continuous Batching, Chunked Prefill | Learn | Python |
-| 05 | Üretimde EAGLE-3 Speculative Decoding | Learn | Python |
-| 06 | Prefix-Ağırlıklı İş Yükleri için SGLang ve RadixAttention | Learn | Python |
-| 07 | Blackwell'de FP8 ve NVFP4 ile TensorRT-LLM | Learn | Python |
-| 08 | Çıkarım Metrikleri — TTFT, TPOT, ITL, Goodput, P99 | Learn | Python |
-| 09 | Üretimde Quantization — AWQ, GPTQ, GGUF, FP8, NVFP4 | Learn | Python |
-| 10 | Serverless LLM'lerde Cold Start Azaltma | Learn | Python |
-| 11 | Çoklu Bölgede LLM Serving ve KV Cache Yerelliği | Learn | Python |
-| 12 | Edge Çıkarım — ANE, Hexagon, WebGPU, Jetson | Learn | Python |
-| 13 | LLM Observability Yığını Seçimi | Learn | Python |
-| 14 | Prompt Caching ve Semantik Caching Ekonomisi | Learn | Python |
-| 15 | Batch API'leri — %50 İndirim Endüstri Standardı Olarak | Learn | Python |
-| 16 | Maliyet Düşürme İlkeli Olarak Model Routing | Learn | Python |
-| 17 | Ayrıştırılmış Prefill/Decode — NVIDIA Dynamo ve llm-d | Learn | Python |
-| 18 | LMCache KV Offloading ile vLLM Üretim Yığını | Learn | Python |
-| 19 | AI Gateway'leri — LiteLLM, Portkey, Kong, Bifrost | Learn | Python |
-| 20 | Shadow, Canary ve Aşamalı Deployment | Learn | Python |
-| 21 | LLM Feature'larında A/B Test — GrowthBook ve Statsig | Learn | Python |
-| 22 | LLM API'lerinde Yük Testi — k6, LLMPerf, GenAI-Perf | Build | Python |
-| 23 | Yapay Zeka için SRE — Çoklu-Agent Incident Response | Learn | Python |
-| 24 | LLM Üretiminde Chaos Engineering | Learn | Python |
-| 25 | Güvenlik — Secret'lar, PII Temizleme, Audit Log'ları | Learn | Python |
-| 26 | Uyumluluk — SOC 2, HIPAA, GDPR, EU AI Act, ISO 42001 | Learn | Python |
-| 27 | LLM'ler için FinOps — Birim Ekonomisi ve Multi-Tenant Atfetme | Learn | Python |
-| 28 | Self-Hosted Serving Seçimi — llama.cpp, Ollama, TGI, vLLM, SGLang | Learn | Python |
+| 01 | [Yönetilen LLM Platformları — Bedrock, Azure OpenAI, Vertex AI](phases/17-infrastructure-and-production/01-managed-llm-platforms/) | Learn | Python |
+| 02 | [Çıkarım Platformu Ekonomisi — Fireworks, Together, Baseten, Modal](phases/17-infrastructure-and-production/02-inference-platform-economics/) | Learn | Python |
+| 03 | [Kubernetes'te GPU Autoscaling — Karpenter, KAI Scheduler](phases/17-infrastructure-and-production/03-gpu-autoscaling-kubernetes/) | Learn | Python |
+| 04 | [vLLM Serving İçyapısı — PagedAttention, Continuous Batching, Chunked Prefill](phases/17-infrastructure-and-production/04-vllm-serving-internals/) | Learn | Python |
+| 05 | [Üretimde EAGLE-3 Speculative Decoding](phases/17-infrastructure-and-production/05-eagle3-speculative-decoding/) | Learn | Python |
+| 06 | [Prefix-Ağırlıklı İş Yükleri için SGLang ve RadixAttention](phases/17-infrastructure-and-production/06-sglang-radixattention/) | Learn | Python |
+| 07 | [Blackwell'de FP8 ve NVFP4 ile TensorRT-LLM](phases/17-infrastructure-and-production/07-tensorrt-llm-blackwell/) | Learn | Python |
+| 08 | [Çıkarım Metrikleri — TTFT, TPOT, ITL, Goodput, P99](phases/17-infrastructure-and-production/08-inference-metrics-goodput/) | Learn | Python |
+| 09 | [Üretimde Quantization — AWQ, GPTQ, GGUF, FP8, NVFP4](phases/17-infrastructure-and-production/09-production-quantization/) | Learn | Python |
+| 10 | [Serverless LLM'lerde Cold Start Azaltma](phases/17-infrastructure-and-production/10-cold-start-mitigation/) | Learn | Python |
+| 11 | [Çoklu Bölgede LLM Serving ve KV Cache Yerelliği](phases/17-infrastructure-and-production/11-multi-region-kv-locality/) | Learn | Python |
+| 12 | [Edge Çıkarım — ANE, Hexagon, WebGPU, Jetson](phases/17-infrastructure-and-production/12-edge-inference/) | Learn | Python |
+| 13 | [LLM Observability Yığını Seçimi](phases/17-infrastructure-and-production/13-llm-observability/) | Learn | Python |
+| 14 | [Prompt Caching ve Semantik Caching Ekonomisi](phases/17-infrastructure-and-production/14-prompt-semantic-caching/) | Learn | Python |
+| 15 | [Batch API'leri — %50 İndirim Endüstri Standardı Olarak](phases/17-infrastructure-and-production/15-batch-apis/) | Learn | Python |
+| 16 | [Maliyet Düşürme İlkeli Olarak Model Routing](phases/17-infrastructure-and-production/16-model-routing/) | Learn | Python |
+| 17 | [Ayrıştırılmış Prefill/Decode — NVIDIA Dynamo ve llm-d](phases/17-infrastructure-and-production/17-disaggregated-prefill-decode/) | Learn | Python |
+| 18 | [LMCache KV Offloading ile vLLM Üretim Yığını](phases/17-infrastructure-and-production/18-vllm-production-stack-lmcache/) | Learn | Python |
+| 19 | [AI Gateway'leri — LiteLLM, Portkey, Kong, Bifrost](phases/17-infrastructure-and-production/19-ai-gateways/) | Learn | Python |
+| 20 | [Shadow, Canary ve Aşamalı Deployment](phases/17-infrastructure-and-production/20-shadow-canary-progressive/) | Learn | Python |
+| 21 | [LLM Feature'larında A/B Test — GrowthBook ve Statsig](phases/17-infrastructure-and-production/21-ab-testing-llm-features/) | Learn | Python |
+| 22 | [LLM API'lerinde Yük Testi — k6, LLMPerf, GenAI-Perf](phases/17-infrastructure-and-production/22-load-testing-llm-apis/) | Build | Python |
+| 23 | [Yapay Zeka için SRE — Çoklu-Agent Incident Response](phases/17-infrastructure-and-production/23-sre-for-ai/) | Learn | Python |
+| 24 | [LLM Üretiminde Chaos Engineering](phases/17-infrastructure-and-production/24-chaos-engineering-llm/) | Learn | Python |
+| 25 | [Güvenlik — Secret'lar, PII Temizleme, Audit Log'ları](phases/17-infrastructure-and-production/25-security-secrets-audit/) | Learn | Python |
+| 26 | [Uyumluluk — SOC 2, HIPAA, GDPR, EU AI Act, ISO 42001](phases/17-infrastructure-and-production/26-compliance-frameworks/) | Learn | Python |
+| 27 | [LLM'ler için FinOps — Birim Ekonomisi ve Multi-Tenant Atfetme](phases/17-infrastructure-and-production/27-finops-llms/) | Learn | Python |
+| 28 | [Self-Hosted Serving Seçimi — llama.cpp, Ollama, TGI, vLLM, SGLang](phases/17-infrastructure-and-production/28-self-hosted-serving-selection/) | Learn | Python |
 
 </details>
 

@@ -452,34 +452,34 @@ Toplam tahmini süre: ~314 saat, kendi temponda.
 
 | # | Lesson | Status | Est. |
 |---|--------|--------|------|
-| 01 | Yönetilen LLM Platformları — Bedrock, Azure OpenAI, Vertex AI | ✅ | ~60 dk |
-| 02 | Çıkarım Platformu Ekonomisi — Fireworks, Together, Baseten, Modal | ✅ | ~60 dk |
-| 03 | Kubernetes'te GPU Autoscaling — Karpenter, KAI Scheduler | ✅ | ~75 dk |
-| 04 | vLLM Serving İçyapısı — PagedAttention, Continuous Batching, Chunked Prefill | ✅ | ~75 dk |
-| 05 | Üretimde EAGLE-3 Speculative Decoding | ✅ | ~60 dk |
-| 06 | Prefix-Ağırlıklı İş Yükleri için SGLang ve RadixAttention | ✅ | ~60 dk |
-| 07 | Blackwell'de FP8 ve NVFP4 ile TensorRT-LLM | ✅ | ~75 dk |
-| 08 | Çıkarım Metrikleri — TTFT, TPOT, ITL, Goodput, P99 | ✅ | ~60 dk |
-| 09 | Üretimde Quantization — AWQ, GPTQ, GGUF, FP8, NVFP4 | ✅ | ~75 dk |
-| 10 | Serverless LLM'lerde Cold Start Azaltma | ✅ | ~60 dk |
-| 11 | Çoklu Bölgede LLM Serving ve KV Cache Yerelliği | ✅ | ~60 dk |
-| 12 | Edge Çıkarım — ANE, Hexagon, WebGPU, Jetson | ✅ | ~60 dk |
-| 13 | LLM Observability Yığını Seçimi | ✅ | ~60 dk |
-| 14 | Prompt Caching ve Semantik Caching Ekonomisi | ✅ | ~60 dk |
-| 15 | Batch API'leri — %50 İndirim Endüstri Standardı Olarak | ✅ | ~45 dk |
-| 16 | Maliyet Düşürme İlkeli Olarak Model Routing | ✅ | ~60 dk |
-| 17 | Ayrıştırılmış Prefill/Decode — NVIDIA Dynamo ve llm-d | ✅ | ~75 dk |
-| 18 | LMCache KV Offloading ile vLLM Üretim Yığını | ✅ | ~60 dk |
-| 19 | AI Gateway'leri — LiteLLM, Portkey, Kong, Bifrost | ✅ | ~60 dk |
-| 20 | Shadow, Canary ve Aşamalı Deployment | ✅ | ~60 dk |
-| 21 | LLM Feature'larında A/B Test — GrowthBook ve Statsig | ✅ | ~60 dk |
-| 22 | LLM API'lerinde Yük Testi — k6, LLMPerf, GenAI-Perf | ✅ | ~75 dk |
-| 23 | Yapay Zeka için SRE — Çoklu-Agent Incident Response | ✅ | ~60 dk |
-| 24 | LLM Üretiminde Chaos Engineering | ✅ | ~60 dk |
-| 25 | Güvenlik — Secret'lar, PII Temizleme, Audit Log'ları | ✅ | ~60 dk |
-| 26 | Uyumluluk — SOC 2, HIPAA, GDPR, EU AI Act, ISO 42001 | ✅ | ~60 dk |
-| 27 | LLM'ler için FinOps — Birim Ekonomisi ve Multi-Tenant Atfetme | ✅ | ~60 dk |
-| 28 | Self-Hosted Serving Seçimi — llama.cpp, Ollama, TGI, vLLM, SGLang | ✅ | ~45 dk |
+| 01 | [Yönetilen LLM Platformları — Bedrock, Azure OpenAI, Vertex AI](phases/17-infrastructure-and-production/01-managed-llm-platforms/) | ✅ | ~60 dk |
+| 02 | [Çıkarım Platformu Ekonomisi — Fireworks, Together, Baseten, Modal](phases/17-infrastructure-and-production/02-inference-platform-economics/) | ✅ | ~60 dk |
+| 03 | [Kubernetes'te GPU Autoscaling — Karpenter, KAI Scheduler](phases/17-infrastructure-and-production/03-gpu-autoscaling-kubernetes/) | ✅ | ~75 dk |
+| 04 | [vLLM Serving İçyapısı — PagedAttention, Continuous Batching, Chunked Prefill](phases/17-infrastructure-and-production/04-vllm-serving-internals/) | ✅ | ~75 dk |
+| 05 | [Üretimde EAGLE-3 Speculative Decoding](phases/17-infrastructure-and-production/05-eagle3-speculative-decoding/) | ✅ | ~60 dk |
+| 06 | [Prefix-Ağırlıklı İş Yükleri için SGLang ve RadixAttention](phases/17-infrastructure-and-production/06-sglang-radixattention/) | ✅ | ~60 dk |
+| 07 | [Blackwell'de FP8 ve NVFP4 ile TensorRT-LLM](phases/17-infrastructure-and-production/07-tensorrt-llm-blackwell/) | ✅ | ~75 dk |
+| 08 | [Çıkarım Metrikleri — TTFT, TPOT, ITL, Goodput, P99](phases/17-infrastructure-and-production/08-inference-metrics-goodput/) | ✅ | ~60 dk |
+| 09 | [Üretimde Quantization — AWQ, GPTQ, GGUF, FP8, NVFP4](phases/17-infrastructure-and-production/09-production-quantization/) | ✅ | ~75 dk |
+| 10 | [Serverless LLM'lerde Cold Start Azaltma](phases/17-infrastructure-and-production/10-cold-start-mitigation/) | ✅ | ~60 dk |
+| 11 | [Çoklu Bölgede LLM Serving ve KV Cache Yerelliği](phases/17-infrastructure-and-production/11-multi-region-kv-locality/) | ✅ | ~60 dk |
+| 12 | [Edge Çıkarım — ANE, Hexagon, WebGPU, Jetson](phases/17-infrastructure-and-production/12-edge-inference/) | ✅ | ~60 dk |
+| 13 | [LLM Observability Yığını Seçimi](phases/17-infrastructure-and-production/13-llm-observability/) | ✅ | ~60 dk |
+| 14 | [Prompt Caching ve Semantik Caching Ekonomisi](phases/17-infrastructure-and-production/14-prompt-semantic-caching/) | ✅ | ~60 dk |
+| 15 | [Batch API'leri — %50 İndirim Endüstri Standardı Olarak](phases/17-infrastructure-and-production/15-batch-apis/) | ✅ | ~45 dk |
+| 16 | [Maliyet Düşürme İlkeli Olarak Model Routing](phases/17-infrastructure-and-production/16-model-routing/) | ✅ | ~60 dk |
+| 17 | [Ayrıştırılmış Prefill/Decode — NVIDIA Dynamo ve llm-d](phases/17-infrastructure-and-production/17-disaggregated-prefill-decode/) | ✅ | ~75 dk |
+| 18 | [LMCache KV Offloading ile vLLM Üretim Yığını](phases/17-infrastructure-and-production/18-vllm-production-stack-lmcache/) | ✅ | ~60 dk |
+| 19 | [AI Gateway'leri — LiteLLM, Portkey, Kong, Bifrost](phases/17-infrastructure-and-production/19-ai-gateways/) | ✅ | ~60 dk |
+| 20 | [Shadow, Canary ve Aşamalı Deployment](phases/17-infrastructure-and-production/20-shadow-canary-progressive/) | ✅ | ~60 dk |
+| 21 | [LLM Feature'larında A/B Test — GrowthBook ve Statsig](phases/17-infrastructure-and-production/21-ab-testing-llm-features/) | ✅ | ~60 dk |
+| 22 | [LLM API'lerinde Yük Testi — k6, LLMPerf, GenAI-Perf](phases/17-infrastructure-and-production/22-load-testing-llm-apis/) | ✅ | ~75 dk |
+| 23 | [Yapay Zeka için SRE — Çoklu-Agent Incident Response](phases/17-infrastructure-and-production/23-sre-for-ai/) | ✅ | ~60 dk |
+| 24 | [LLM Üretiminde Chaos Engineering](phases/17-infrastructure-and-production/24-chaos-engineering-llm/) | ✅ | ~60 dk |
+| 25 | [Güvenlik — Secret'lar, PII Temizleme, Audit Log'ları](phases/17-infrastructure-and-production/25-security-secrets-audit/) | ✅ | ~60 dk |
+| 26 | [Uyumluluk — SOC 2, HIPAA, GDPR, EU AI Act, ISO 42001](phases/17-infrastructure-and-production/26-compliance-frameworks/) | ✅ | ~60 dk |
+| 27 | [LLM'ler için FinOps — Birim Ekonomisi ve Multi-Tenant Atfetme](phases/17-infrastructure-and-production/27-finops-llms/) | ✅ | ~60 dk |
+| 28 | [Self-Hosted Serving Seçimi — llama.cpp, Ollama, TGI, vLLM, SGLang](phases/17-infrastructure-and-production/28-self-hosted-serving-selection/) | ✅ | ~45 dk |
 
 ## Phase 18: Etik, Güvenlik ve Alignment — ✅ (~31 saat)
 

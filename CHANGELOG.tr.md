@@ -62,6 +62,6 @@ Format gevşek biçimde [Keep a Changelog](https://keepachangelog.com/) standard
 - `https://ai-muhendisligi.komunite.com.tr/` adresinde Vercel deployment.
 - Hero altında atıf bandı — Rohit Ghumare ve Komünite kredisi, light/dark tema uyumlu.
 - Katalog sayfasında kullanıcı ilerlemesi yansıması (`AIFSProgress` API), her ders sayfasının sonunda "Tamamlandı" CTA'sı.
-- Türkçeleştirilmiş `.github/` template'leri (PR + 2 issue) ve TR sibling'leri (`CHANGELOG.tr.md`, `CODE_OF_CONDUCT.tr.md`, `CONTRIBUTING.tr.md`, `FORKING.tr.md`, `LESSON_TEMPLATE.tr.md`, `SPONSORS.tr.md`).
+- Türkçeleştirilmiş `.github/` template'leri (PR + 2 issue) ve TR sibling'leri (`CHANGELOG.tr.md`, `CODE_OF_CONDUCT.tr.md`, `CONTRIBUTING.tr.md`, `FORKING.tr.md`, `LESSON_TEMPLATE.tr.md`).
 
 [Yayımlanmamış]: https://github.com/komunite/ai-engineering/compare/HEAD...HEAD

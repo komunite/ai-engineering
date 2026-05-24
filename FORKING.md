@@ -29,7 +29,6 @@ Running a paid bootcamp? That's fine under MIT.
 1. Fork and structure for your cohort timeline
 2. Add video content, live sessions, mentorship
 3. The code and docs are yours to build on
-4. Consider sponsoring the project or contributing back
 
 ## For Other Languages
 

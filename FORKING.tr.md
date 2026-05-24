@@ -33,7 +33,6 @@ Ders materyali olarak kullanmak ister misin?
 1. Fork'la ve kohort takvimine göre yapılandır
 2. Video içeriği, canlı oturumlar, mentorluk ekle
 3. Kod ve dokümanlar üzerinde inşa etme hakkı sende
-4. Projeyi sponsor olmayı ya da geri katkı vermeyi düşün
 
 ## Diğer Diller için
 

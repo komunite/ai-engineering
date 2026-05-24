@@ -1026,7 +1026,6 @@ engelleyen domain'ler) geçersiz kılmak için `LINK_CHECK_SKIP=domain1,domain2`
 | Sözlük | [`glossary/terms.tr.md`](glossary/terms.tr.md) · [EN](glossary/terms.md) |
 | Davranış kuralları | [`CODE_OF_CONDUCT.tr.md`](CODE_OF_CONDUCT.tr.md) · [EN](CODE_OF_CONDUCT.md) |
 | Değişiklik günlüğü | [`CHANGELOG.tr.md`](CHANGELOG.tr.md) · [EN](CHANGELOG.md) |
-| Sponsorluk | [`SPONSORS.tr.md`](SPONSORS.tr.md) · [EN](SPONSORS.md) |
 | PR şablonu | [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) (TR) |
 | Issue şablonları | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) (TR) |
 | Çeviri konvansiyonları | [`CLAUDE.md`](CLAUDE.md) |
@@ -1045,28 +1044,6 @@ Herhangi bir kural fail ettiğinde exit kodu sıfırdan farklıdır. Kurallar (L
 dizin yapısını, `docs/en.md` varlığı + H1'i, `code/` boş olmamasını, `quiz.json`
 şemasını (issue #102'ye neden olan legacy `q/choices/answer` anahtarlarını reddeder)
 ve ders dokümanlarındaki göreli linkleri doğrular.
-
-```
-░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒
-```
-
-## Çalışmaya Sponsor Ol
-
-Ücretsiz, MIT lisanslı, 435 ders. Curriculum yalnızca sponsorlukla sürdürülür. Sadece nakit.
-
-**Erişim (2026-05-14 doğrulandı):** aylık 55.593 ziyaretçi · 90.709 sayfa görüntüleme ·
-7.5K star · Twitter/X 1 numaralı edinim kanalı.
-
-| Tier | $/ay | Ne kazanırsın |
-|------|------|---|
-| Backer | $25 | BACKERS.md'de ismin |
-| Bronze | $250 | README sponsor bloğunda metin satırı + lansman günü tweet'i |
-| Silver | $750 | README'de küçük logo + API derslerinde desteklenen sağlayıcı olarak listelenme |
-| Gold | $2,000 | README'de orta logo + sponsor sayfası + üç ayda bir X / LinkedIn ortak öne çıkarma |
-| Platinum | $5,000 | Üst kısımda hero logo + bir adet özel entegrasyon dersi, maks 1 partner |
-
-Tam fiyat kartı, kuralları, fiyatlama çıpaları ve erişim verisi: [SPONSORS.md](SPONSORS.tr.md).
-[GitHub Sponsors](https://github.com/sponsors/rohitg00) üzerinden kayıt ol.
 
 ```
 ░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒░░░▒▒▒

@@ -106,11 +106,6 @@ PATTERNS: tuple[CountPattern, ...] = (
         field="prompts",
         description="toolkit section prompt count",
     ),
-    CountPattern(
-        regex=re.compile(r"MIT-licensed, (\d+) lessons\."),
-        field="lessons",
-        description="sponsor section lesson count",
-    ),
 )
 
 

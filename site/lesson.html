@@ -1624,6 +1624,26 @@
       .lesson-main { margin-left: 0; padding: 56px 20px 80px; }
     }
 
+        /* Footer on the lesson page sits at the bottom of the document flow,
+       but the lesson-sidebar (left) and toc-sidebar (right) are
+       position:fixed and remain pinned to the viewport when the user
+       scrolls down. Mirror lesson-main's responsive margins/padding on
+       the footer so its content lives in the same safe central column
+       and never sits under the fixed sidebars. */
+    .site-footer--lesson {
+      margin-left: 240px;
+      padding-right: 32px;
+    }
+    @media (min-width: 1280px) {
+      .site-footer--lesson { padding-right: 240px; }
+    }
+    @media (min-width: 1440px) {
+      .site-footer--lesson { margin-left: 280px; padding-right: 280px; }
+    }
+    @media (max-width: 900px) {
+      .site-footer--lesson { margin-left: 0; padding-right: 0; }
+    }
+
     @media (max-width: 768px) {
       .lesson-main { padding: 56px 16px 60px; }
       .lesson-article { max-width: 100%; }
@@ -1736,7 +1756,7 @@
     <aside class="toc-sidebar" id="tocSidebar" aria-hidden="true"></aside>
   </div>
 
-  <footer class="site-footer">
+  <footer class="site-footer site-footer--lesson">
     <div class="container">
     <div class="footer-komunite">
       <div class="footer-komunite-brand">

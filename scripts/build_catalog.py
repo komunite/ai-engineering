@@ -153,12 +153,22 @@ def parse_artifact(path: Path) -> dict[str, object] | None:
     }
 
 
+_LOCALE_SUFFIX_RE = re.compile(r"\.[a-z]{2,3}$")
+
+
 def list_outputs(outputs_dir: Path) -> list[dict[str, object]]:
     if not outputs_dir.is_dir():
         return []
     artifacts: list[dict[str, object]] = []
     for path in sorted(outputs_dir.iterdir()):
         if path.suffix != ".md" or not path.is_file():
+            continue
+        # Skip locale-suffixed variants (e.g. prompt-foo.tr.md). The canonical
+        # English artifact (prompt-foo.md) is the one indexed in catalog.json;
+        # translations live next to it and are surfaced by site/build.js with
+        # LOCALE=<locale>, not here.
+        stem_suffix = Path(path.stem).suffix
+        if stem_suffix and _LOCALE_SUFFIX_RE.fullmatch(stem_suffix):
             continue
         record = parse_artifact(path)
         if record is not None:

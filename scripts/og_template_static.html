@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1200px; height: 630px; }
+    body {
+      background: #fafaf5;
+      background-image:
+        radial-gradient(circle at 3px 3px, rgba(53, 83, 255, 0.07) 1.1px, transparent 1.6px);
+      background-size: 18px 18px;
+      font-family: 'Source Serif 4', Georgia, serif;
+      color: #1a1a1a;
+      overflow: hidden;
+      position: relative;
+      /* subtle vignette to add depth on light bg */
+      box-shadow: inset 0 0 200px rgba(0,0,0,0.025);
+    }
+    .canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 56px 72px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Decorative corner marks (manual aesthetic) */
+    .corner {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid #1a1a1a;
+    }
+    .corner.tl { top: 28px; left: 28px; border-right: none; border-bottom: none; }
+    .corner.tr { top: 28px; right: 28px; border-left: none; border-bottom: none; }
+    .corner.bl { bottom: 28px; left: 28px; border-right: none; border-top: none; }
+    .corner.br { bottom: 28px; right: 28px; border-left: none; border-top: none; }
+
+    /* Top mono meta row */
+    .top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7a7878;
+    }
+    .top-meta .right { color: #3553ff; font-weight: 500; }
+
+    .top-divider {
+      height: 1px;
+      background: rgba(0,0,0,0.10);
+      margin: 16px 0 44px;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #3553ff;
+      margin-bottom: 28px;
+    }
+    .eyebrow .sep { color: rgba(53,83,255,0.4); padding: 0 8px; }
+    .eyebrow .type {
+      display: inline-block;
+      margin-left: 12px;
+      padding: 3px 8px;
+      border: 1.2px solid rgba(53,83,255,0.5);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      vertical-align: middle;
+    }
+
+    .title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 84px;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 30px;
+      max-width: 980px;
+      word-break: break-word;
+    }
+    .title.long { font-size: 64px; }
+    .title.very-long { font-size: 54px; line-height: 1.02; }
+
+    .accent-line {
+      width: 56px;
+      height: 4px;
+      background: #3553ff;
+      margin-bottom: 20px;
+    }
+
+    .tagline {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 23px;
+      line-height: 1.45;
+      color: #4a4a48;
+      max-width: 880px;
+      max-height: 130px;
+      overflow: hidden;
+    }
+
+    /* Bottom strip */
+    .bottom {
+      display: flex;
+      flex-direction: column;
+    }
+    .project-name {
+      font-family: 'VT323', ui-monospace, 'JetBrains Mono', monospace;
+      font-size: 38px;
+      letter-spacing: 0.08em;
+      color: #3553ff;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .ascii-rule {
+      height: 5px;
+      background-image:
+        repeating-linear-gradient(
+          to right,
+          #3553ff 0,
+          #3553ff 2px,
+          transparent 2px,
+          transparent 7px
+        );
+      margin-bottom: 18px;
+      opacity: 0.85;
+    }
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .langs {
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+    .langs .lang-sep {
+      color: #3553ff;
+      margin: 0 8px;
+      opacity: 0.6;
+    }
+    .brand {
+      color: #1a1a1a;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand .mark {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 1.5px solid #3553ff;
+      position: relative;
+      vertical-align: middle;
+    }
+    .brand .mark::after {
+      content: "AI";
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 9px;
+      font-weight: 700;
+      color: #3553ff;
+      letter-spacing: 0.04em;
+    }
+    .brand .domain {
+      color: #7a7878;
+      text-transform: lowercase;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <span class="corner tl"></span>
+  <span class="corner tr"></span>
+  <span class="corner bl"></span>
+  <span class="corner br"></span>
+
+  <div class="canvas">
+    <div>
+      <div class="top-meta">
+        <span>{{META_LEFT}}</span>
+        <span class="right">{{META_RIGHT}}</span>
+      </div>
+      <div class="top-divider"></div>
+      <div class="eyebrow">{{EYEBROW}}</div>
+      <h1 class="title {{TITLE_CLASS}}">{{TITLE}}</h1>
+      <div class="accent-line"></div>
+      <p class="tagline">{{TAGLINE}}</p>
+    </div>
+
+    <div class="bottom">
+      <div class="project-name">Sıfırdan Yapay Zeka Mühendisliği</div>
+      <div class="ascii-rule"></div>
+      <div class="bottom-row">
+        <div class="langs">{{FOOTER_LEFT}}</div>
+        <div class="brand">
+          <span class="mark"></span>
+          <span class="domain">ai-muhendisligi.komunite.com.tr</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

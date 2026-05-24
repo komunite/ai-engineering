@@ -119,4 +119,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-engineering-from-scratch.vercel.app/sitemap.xml
+Sitemap: https://ai-muhendisligi.komunite.com.tr/sitemap.xml

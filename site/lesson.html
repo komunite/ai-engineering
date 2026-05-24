@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="tr" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lesson - AI Engineering from Scratch</title>
+  <title>Ders — Sıfırdan Yapay Zeka Mühendisliği</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fafaf5'/><rect x='2' y='2' width='28' height='28' fill='none' stroke='%233553ff' stroke-width='1.2'/><text x='6' y='22' font-size='14' font-family='monospace' fill='%233553ff'>AI</text></svg>">
-  <meta name="description" content="A lesson from the AI Engineering from Scratch curriculum. 435 lessons across 20 phases, four languages, every algorithm built from raw math.">
-  <meta property="og:title" content="AI Engineering from Scratch · Lesson">
-  <meta property="og:description" content="435 lessons. 20 phases. Write the backprop, the tokenizer, the attention mechanism, and the agent loop by hand.">
-  <meta property="og:image" content="https://aiengineeringfromscratch.com/og-image.png?v=2">
+  <meta name="description" content="Sıfırdan Yapay Zeka Mühendisliği müfredatından bir ders. 20 fazda 435 ders, dört dil, her algoritma ham matematikten başlanarak inşa ediliyor.">
+  <meta property="og:title" content="Sıfırdan Yapay Zeka Mühendisliği · Ders">
+  <meta property="og:description" content="435 ders. 20 faz. Backprop'u, tokenleştiriciyi, attention'ı ve agent döngüsünü kendi elinle yaz.">
+  <meta property="og:image" content="https://ai-muhendisligi.komunite.com.tr/og/home.jpg">
   <!-- og:url omitted intentionally: lesson.html is a static template that loads the lesson body client-side via ?path=. Static hosting cannot template the URL, so we let crawlers fall back to the request URL (which is the lesson-specific share link). -->
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Engineering from Scratch">
-  <meta name="twitter:description" content="435 lessons. 20 phases. Build it from raw math, by hand.">
-  <meta name="twitter:image" content="https://aiengineeringfromscratch.com/og-image.png?v=2">
+  <meta name="twitter:title" content="Sıfırdan Yapay Zeka Mühendisliği">
+  <meta name="twitter:description" content="435 ders. 20 faz. Ham matematikten başlayarak, kendi ellerinle kur.">
+  <meta name="twitter:image" content="https://ai-muhendisligi.komunite.com.tr/og/home.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -935,12 +935,93 @@
       color: var(--ink);
     }
 
+    /* ─── Lesson completion CTA (above bottom nav) ────────────────── */
+    .lesson-completion {
+      margin-top: 56px;
+      padding: 24px 28px;
+      border: 1px solid var(--rule-soft);
+      background: var(--blueprint-tint);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .lesson-completion-copy {
+      flex: 1 1 240px;
+      min-width: 0;
+    }
+
+    .lesson-completion-title {
+      margin: 0 0 4px;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .lesson-completion-hint {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .lesson-complete-btn {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 22px;
+      border: 1.5px solid var(--blueprint);
+      background: transparent;
+      color: var(--blueprint);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .lesson-complete-btn:hover {
+      background: var(--blueprint);
+      color: var(--bg);
+    }
+
+    .lesson-complete-btn[data-state="complete"] {
+      border-color: #5ab88f;
+      color: #5ab88f;
+      background: rgba(90, 184, 143, 0.10);
+    }
+
+    .lesson-complete-btn[data-state="complete"]:hover {
+      background: rgba(90, 184, 143, 0.20);
+    }
+
+    .lesson-complete-btn .check {
+      display: inline-block;
+      margin-right: 6px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      .lesson-completion {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+      .lesson-complete-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
     .lesson-nav-bottom {
       display: flex;
       justify-content: space-between;
       align-items: stretch;
       gap: 16px;
-      margin-top: 64px;
+      margin-top: 32px;
       padding-top: 32px;
       border-top: 1px solid var(--rule-soft);
     }
@@ -1563,28 +1644,28 @@
 </head>
 <body>
 
-  <a href="#main" class="skip-link">Skip to content</a>
+  <a href="#main" class="skip-link">İçeriğe geç</a>
 
   <div class="scroll-progress" id="scrollProgress"></div>
 
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-        <span class="logo-icon" aria-hidden="true"></span> AI / FROM SCRATCH
+        <span class="logo-icon" aria-hidden="true"></span> AI / SIFIRDAN
       </a>
       <nav class="header-nav">
-        <a href="index.html#contents">Contents</a>
-        <a href="catalog.html">Catalog</a>
-        <a href="prereqs.html">Roadmap</a>
-        <a href="glossary.html">Glossary</a>
-        <a href="https://github.com/rohitg00/ai-engineering-from-scratch" target="_blank" rel="noopener" class="header-github">
+        <a href="index.html#contents">İçindekiler</a>
+        <a href="catalog.html">Katalog</a>
+        <a href="prereqs.html">Yol Haritası</a>
+        <a href="glossary.html">Sözlük</a>
+        <a href="https://github.com/komunite/ai-engineering" target="_blank" rel="noopener" class="header-github">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
           <svg class="star-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.896l-7.416 3.517 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-          <span class="star-count" data-loading="true" aria-label="GitHub stars">…</span>
+          <span class="star-count" data-loading="true" aria-label="GitHub yıldızı">…</span>
         </a>
       </nav>
       <button class="search-toggle" type="button" data-cmd-palette
-        aria-label="Search (⌘K)" title="Search (⌘K)">
+        aria-label="Ara (⌘K)" title="Ara (⌘K)">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2.5"
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1592,20 +1673,20 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+      <button class="theme-toggle" id="themeToggle" aria-label="Temayı değiştir" type="button">
         <span class="theme-icon" id="themeIcon">N</span>
       </button>
     </div>
   </header>
 
-  <button class="lesson-sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">&#9776;</button>
+  <button class="lesson-sidebar-toggle" id="sidebarToggle" aria-label="Kenar çubuğunu aç/kapat">&#9776;</button>
 
   <div class="mermaid-modal-overlay" id="mermaidModalOverlay" aria-hidden="true">
-    <div class="mermaid-modal" role="dialog" aria-modal="true" aria-label="Expanded diagram">
+    <div class="mermaid-modal" role="dialog" aria-modal="true" aria-label="Genişletilmiş diyagram">
       <div class="mermaid-modal-header">
-        <div class="mermaid-modal-title" id="mermaidModalTitle">Diagram</div>
+        <div class="mermaid-modal-title" id="mermaidModalTitle">Diyagram</div>
         <div class="mermaid-modal-actions">
-          <button class="mermaid-btn" type="button" id="mermaidModalClose">Close</button>
+          <button class="mermaid-btn" type="button" id="mermaidModalClose">Kapat</button>
         </div>
       </div>
       <div class="mermaid-modal-body" id="mermaidModalBody"><div class="mermaid-modal-center" id="mermaidModalCenter"></div></div>
@@ -1618,7 +1699,7 @@
       <div class="lesson-content" id="lessonContent">
         <div class="lesson-loading" id="lessonLoading">
           <div class="spinner"></div>
-          <div class="lesson-loading-text">Loading lesson...</div>
+          <div class="lesson-loading-text">Ders yükleniyor...</div>
         </div>
       </div>
     </main>
@@ -1771,20 +1852,20 @@
             var pp = PHASES[prevPhaseIdx];
             var ppSlug = extractPhaseSlug(pp, prevPhaseIdx);
             var ppFirstLesson = pp.lessons[0] ? extractLessonSlug(pp.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + ppSlug + '/' + ppFirstLesson + '">&larr; Phase ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(pp.name) + '</a>';
+            html += '<a href="lesson.html?path=phases/' + ppSlug + '/' + ppFirstLesson + '">&larr; Faz ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(pp.name) + '</a>';
           }
           if (nextPhaseIdx >= 0) {
             var np = PHASES[nextPhaseIdx];
             var npSlug = extractPhaseSlug(np, nextPhaseIdx);
             var npFirstLesson = np.lessons[0] ? extractLessonSlug(np.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + npSlug + '/' + npFirstLesson + '">Phase ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(np.name) + ' &rarr;</a>';
+            html += '<a href="lesson.html?path=phases/' + npSlug + '/' + npFirstLesson + '">Faz ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(np.name) + ' &rarr;</a>';
           }
           html += '</div>';
         }
 
         if (currentPhaseIndex >= 0) {
           var phase = PHASES[currentPhaseIndex];
-          html += '<div class="sidebar-phase-header">Phase ' + String(phase.id).padStart(2, '0') + ' · ' + escapeHtml(phase.name) + '</div>';
+          html += '<div class="sidebar-phase-header">Faz ' + String(phase.id).padStart(2, '0') + ' · ' + escapeHtml(phase.name) + '</div>';
           for (var k = 0; k < phase.lessons.length; k++) {
             var les = phase.lessons[k];
             var lesSlug = extractLessonSlug(les, k);
@@ -1835,39 +1916,81 @@
       }
 
       function fetchLesson(path) {
-        var rawUrl = 'https://raw.githubusercontent.com/rohitg00/ai-engineering-from-scratch/main/' + path + '/docs/en.md';
-        var quizUrl = 'https://raw.githubusercontent.com/rohitg00/ai-engineering-from-scratch/main/' + path + '/quiz.json';
+        // Locale: prefer the active locale (from data.js), fall back to en.
+        // For each locale, try a relative URL first (works when the site is
+        // served from a directory that exposes /phases/...), then upstream
+        // GitHub raw as a final fallback.
+        var locale = (typeof LOCALE === 'string' && LOCALE) ? LOCALE : 'en';
+        var fallbackLocale = 'en';
+        var ghBase = 'https://raw.githubusercontent.com/komunite/ai-engineering/main/';
 
-        fetch(rawUrl)
-          .then(function (res) {
-            if (!res.ok) throw new Error('fetch-failed');
-            return res.text();
-          })
-          .then(function (md) {
-            try {
-              renderLesson(md);
-            } catch (err) {
-              console.error('renderLesson failed', err);
-              showError('Render error', 'Loaded the lesson markdown but failed to render it. Details in the browser console.');
-              return;
-            }
-            fetch(quizUrl)
-              .then(function (res) { return res.ok ? res.json() : null; })
-              .catch(function () { return null; })
-              .then(function (data) {
-                if (!data) return;
-                try { renderQuiz(data); }
-                catch (err) { console.error('renderQuiz failed', err); }
-              });
-          })
-          .catch(function () {
-            showError('Lesson not found', 'Could not fetch the lesson at <code>' + escapeHtml(path) + '</code>. It may not have been written yet.');
+        var candidates = [];
+        if (locale !== fallbackLocale) {
+          candidates.push(path + '/docs/' + locale + '.md');           // local
+          candidates.push(ghBase + path + '/docs/' + locale + '.md');  // upstream
+        }
+        candidates.push(path + '/docs/' + fallbackLocale + '.md');     // local en
+        candidates.push(ghBase + path + '/docs/' + fallbackLocale + '.md'); // upstream en
+
+        // Quiz fetch: same locale-aware fallback chain. `quiz.tr.json` first,
+        // then `quiz.json`. Local before upstream in both cases.
+        var quizCandidates = [];
+        if (locale !== fallbackLocale) {
+          quizCandidates.push(path + '/quiz.' + locale + '.json');
+          quizCandidates.push(ghBase + path + '/quiz.' + locale + '.json');
+        }
+        quizCandidates.push(path + '/quiz.json');
+        quizCandidates.push(ghBase + path + '/quiz.json');
+
+        function fetchFirstOk(urls) {
+          return new Promise(function (resolve) {
+            (function tryOne(i) {
+              if (i >= urls.length) return resolve(null);
+              fetch(urls[i])
+                .then(function (res) { return res.ok ? res.json() : null; })
+                .then(function (data) { data ? resolve(data) : tryOne(i + 1); })
+                .catch(function () { tryOne(i + 1); });
+            })(0);
           });
+        }
+
+        function tryNext(i) {
+          if (i >= candidates.length) {
+            showError('Ders bulunamadı', '<code>' + escapeHtml(path) + '</code> yolundaki ders alınamadı. Henüz yazılmamış olabilir.');
+            return;
+          }
+          fetch(candidates[i])
+            .then(function (res) {
+              if (!res.ok) throw new Error('not-found');
+              return res.text();
+            })
+            .then(function (md) {
+              try {
+                renderLesson(md);
+              } catch (err) {
+                console.error('renderLesson failed', err);
+                showError('Render hatası', 'Ders markdown\'ı yüklendi ama render edilemedi. Tarayıcı konsolunda detaylar var.');
+                return;
+              }
+              fetchFirstOk(quizCandidates).then(function (data) {
+                if (!data) return;
+                try {
+                  renderQuiz(data);
+                  // Real quiz loaded — remove the hardcoded fallback panel so
+                  // we don't show duplicate (and URL-pattern-shared) questions.
+                  var fallback = document.querySelector('.ai-panel-quiz-fallback');
+                  if (fallback) fallback.remove();
+                } catch (err) { console.error('renderQuiz failed', err); }
+              });
+            })
+            .catch(function () { tryNext(i + 1); });
+        }
+        tryNext(0);
       }
 
       function showError(title, msg) {
         var el = document.getElementById('lessonContent');
-        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="index.html" class="btn btn-primary">Back to Home</a></div>';
+        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="index.html" class="btn btn-primary">Ana Sayfaya Dön</a></div>';
       }
 
       function renderLesson(md) {
@@ -1877,12 +2000,26 @@
         html = addBottomNav(html);
         el.innerHTML = '<article class="lesson-article">' + html + '</article>';
 
-        document.title = extractTitle(md) + ' - AI Engineering from Scratch';
+        document.title = extractTitle(md) + ' — Sıfırdan Yapay Zeka Mühendisliği';
 
         initCodeCopy();
         renderMermaidBlocks();
         renderAIPanels();
         buildTOC();
+        wireCompletionButton();
+
+        // Sync the completion block when the user toggles in another tab,
+        // resets progress, or the quiz auto-marks the lesson complete.
+        if (window.AIFSProgress && window.AIFSProgress.onChange) {
+          window.AIFSProgress.onChange(function () {
+            var current = document.getElementById('lessonCompletion');
+            if (!current) return;
+            var wrapper = document.createElement('div');
+            wrapper.innerHTML = buildCompletionBlock();
+            current.replaceWith(wrapper.firstElementChild);
+            wireCompletionButton();
+          });
+        }
 
         document.querySelectorAll('a[href^="#"]').forEach(function (link) {
           link.addEventListener('click', function (e) {
@@ -1942,8 +2079,8 @@
           return candidate;
         }
 
-        var html = '<div class="toc-header">On this page</div>';
-        html += '<nav aria-label="On this page"><ul class="toc-nav">';
+        var html = '<div class="toc-header">Bu sayfada</div>';
+        html += '<nav aria-label="Bu sayfada"><ul class="toc-nav">';
         for (var i = 0; i < headings.length; i++) {
           var heading = headings[i];
           var level = heading.tagName.toLowerCase();
@@ -2090,7 +2227,7 @@
 
       function extractTitle(md) {
         var m = md.match(/^# (.+)/m);
-        return m ? m[1] : 'Lesson';
+        return m ? m[1] : 'Ders';
       }
 
       function parseMd(md) {
@@ -2188,7 +2325,7 @@
                 out += '<div class="mermaid-container">';
                 out += '<div class="mermaid-block" data-mermaid-index="' + mermaidBlocks + '">';
                 out += '<div class="mermaid-toolbar">';
-                out += '<button type="button" class="mermaid-btn mermaid-expand" data-mermaid-index="' + mermaidBlocks + '">Expand</button>';
+                out += '<button type="button" class="mermaid-btn mermaid-expand" data-mermaid-index="' + mermaidBlocks + '">Genişlet</button>';
                 out += '</div>';
                 out += '<pre class="mermaid mermaid-source" id="mermaid-' + mermaidBlocks + '">' + escapeHtml(raw) + '</pre>';
                 out += '<div class="mermaid-render" id="mermaid-render-' + mermaidBlocks + '"></div>';
@@ -2383,7 +2520,7 @@
       function renderCodeBlock(code, lang) {
         var highlighted = highlightSyntax(escapeHtml(code), lang);
         var langLabel = lang ? '<span class="code-lang">' + escapeHtml(lang) + '</span>' : '';
-        return '<pre>' + langLabel + '<button class="code-copy" data-code="' + escapeAttr(code) + '">Copy</button><code>' + highlighted + '</code></pre>';
+        return '<pre>' + langLabel + '<button class="code-copy" data-code="' + escapeAttr(code) + '">Kopyala</button><code>' + highlighted + '</code></pre>';
       }
 
       function highlightSyntax(code, lang) {
@@ -2431,8 +2568,8 @@
           btn.addEventListener('click', function () {
             var code = btn.getAttribute('data-code');
             navigator.clipboard.writeText(code).then(function () {
-              btn.textContent = 'Copied!';
-              setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+              btn.textContent = 'Kopyalandı!';
+              setTimeout(function () { btn.textContent = 'Kopyala'; }, 1500);
             });
           });
         });
@@ -2577,7 +2714,7 @@
         lastMermaidTrigger = triggerEl || document.activeElement;
         openMermaidIndex = idx;
 
-        if (title) title.textContent = 'Diagram';
+        if (title) title.textContent = 'Diyagram';
 
         overlay.classList.add('open');
         overlay.setAttribute('aria-hidden', 'false');
@@ -2639,12 +2776,12 @@
         var buildH2 = article.querySelector('#build-it, #build');
         var keyTermsH2 = article.querySelector('#key-terms');
 
-        var preQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'pre'; }), 'pre', 'Pre-Lesson Check');
-        var checkQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'check'; }), 'check', 'Mid-Lesson Check');
-        var postQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'post'; }), 'post', 'Post-Lesson Quiz');
+        var preQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'pre'; }), 'pre', 'Ders Öncesi Kontrol');
+        var checkQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'check'; }), 'check', 'Ders Ortası Kontrol');
+        var postQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'post'; }), 'post', 'Ders Sonrası Quiz');
 
         if (!preQuizHtml && !checkQuizHtml && !postQuizHtml) {
-          var allHtml = buildQuizHtml(questions, 'all', 'Quiz');
+          var allHtml = buildQuizHtml(questions, 'all', 'Quiz');  // 'Quiz' kelimesi TR'de de yaygın, çevrilmedi
           if (allHtml && keyTermsH2) {
             keyTermsH2.insertAdjacentHTML('beforebegin', allHtml);
           } else if (allHtml) {
@@ -2762,7 +2899,7 @@
         }
         var scoreEl = section.querySelector('.quiz-score');
         if (scoreEl) {
-          scoreEl.textContent = correctCount + '/' + allQs.length + ' correct';
+          scoreEl.textContent = correctCount + '/' + allQs.length + ' doğru';
           scoreEl.style.display = 'block';
         }
       }
@@ -2792,8 +2929,56 @@
         }
       }
 
+      function buildCompletionBlock() {
+        if (!lessonPath) return '';
+        var isDone = window.AIFSProgress && window.AIFSProgress.isLessonComplete(lessonPath);
+        var title = isDone
+          ? 'Bu dersi tamamladın 🎉'
+          : 'Bu dersi tamamladın mı?';
+        var hint = isDone
+          ? 'İlerlemen bu tarayıcıda saklanıyor. İşareti kaldırmak istersen butona basabilirsin.'
+          : 'Tamamladığında işaretle — kataloğun "Durum" sütununa "Tamamlandı" olarak yansır ve ⌘K paletinde de görebilirsin.';
+        var btnLabel = isDone
+          ? '<span class="check">✓</span> Tamamlandı'
+          : '<span class="check">+</span> Tamamlandı olarak işaretle';
+        return (
+          '<section class="lesson-completion" id="lessonCompletion">' +
+            '<div class="lesson-completion-copy">' +
+              '<p class="lesson-completion-title" id="lessonCompletionTitle">' + title + '</p>' +
+              '<p class="lesson-completion-hint" id="lessonCompletionHint">' + hint + '</p>' +
+            '</div>' +
+            '<button type="button" class="lesson-complete-btn" id="lessonCompleteBtn" data-state="' +
+              (isDone ? 'complete' : 'incomplete') + '" data-path="' + lessonPath + '">' +
+              btnLabel +
+            '</button>' +
+          '</section>'
+        );
+      }
+
+      window.handleLessonCompleteToggle = function () {
+        if (!window.AIFSProgress || !lessonPath) return;
+        if (window.AIFSProgress.isLessonComplete(lessonPath)) {
+          window.AIFSProgress.unmarkLessonComplete(lessonPath);
+        } else {
+          window.AIFSProgress.markLessonComplete(lessonPath);
+        }
+        // Re-render the completion block to reflect new state.
+        var current = document.getElementById('lessonCompletion');
+        if (current) {
+          var wrapper = document.createElement('div');
+          wrapper.innerHTML = buildCompletionBlock();
+          current.replaceWith(wrapper.firstElementChild);
+          wireCompletionButton();
+        }
+      };
+
+      function wireCompletionButton() {
+        var btn = document.getElementById('lessonCompleteBtn');
+        if (btn) btn.addEventListener('click', window.handleLessonCompleteToggle);
+      }
+
       function addBottomNav(html) {
-        if (currentLessonIndex < 0) return html;
+        if (currentLessonIndex < 0) return html + buildCompletionBlock();
 
         var prev = null;
         for (var pi = currentLessonIndex - 1; pi >= 0; pi--) {
@@ -2804,10 +2989,11 @@
           if (flatLessons[ni].isReadable) { next = flatLessons[ni]; break; }
         }
 
-        var nav = '<div class="lesson-nav-bottom">';
+        var nav = buildCompletionBlock();
+        nav += '<div class="lesson-nav-bottom">';
         if (prev) {
           nav += '<a class="lesson-nav-btn prev" href="lesson.html?path=' + prev.path + '">';
-          nav += '<span class="nav-label">&larr; Previous</span>';
+          nav += '<span class="nav-label">&larr; Önceki</span>';
           nav += '<span class="nav-title">' + escapeHtml(prev.lessonName) + '</span>';
           nav += '</a>';
         } else {
@@ -2815,7 +3001,7 @@
         }
         if (next) {
           nav += '<a class="lesson-nav-btn next" href="lesson.html?path=' + next.path + '">';
-          nav += '<span class="nav-label">Next &rarr;</span>';
+          nav += '<span class="nav-label">Sonraki &rarr;</span>';
           nav += '<span class="nav-title">' + escapeHtml(next.lessonName) + '</span>';
           nav += '</a>';
         }
@@ -2829,7 +3015,13 @@
 
         renderOutputsPanel(container);
         renderCodePanel(container);
+        // Render the hardcoded quiz fallback panel inline so it sits between
+        // Code and Learning Path. fetchLesson removes it later if a real
+        // quiz.json successfully loaded — otherwise it stays as the fallback.
+        // Tag it with a known class so we can find and remove it.
         renderQuizPanel(container);
+        var lastPanel = container.lastElementChild;
+        if (lastPanel) lastPanel.classList.add('ai-panel-quiz-fallback');
         renderLearningPathPanel(container);
         renderContinuePanel(container);
       }
@@ -2841,7 +3033,7 @@
           cb(null, ghApiCache[apiPath]);
           return;
         }
-        fetch('https://api.github.com/repos/rohitg00/ai-engineering-from-scratch/contents/' + apiPath, {
+        fetch('https://api.github.com/repos/komunite/ai-engineering/contents/' + apiPath, {
           headers: { 'Accept': 'application/vnd.github.v3+json' }
         }).then(function (res) {
           if (!res.ok) throw new Error(res.status);
@@ -2893,13 +3085,13 @@
       function renderOutputsPanel(container) {
         var panel = document.createElement('div');
         panel.className = 'ai-panel';
-        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">O</div><div class="ai-panel-title">What This Lesson Ships</div></div><div class="ai-panel-subtitle">Prompts, skills, and artifacts you can use right now</div><div id="outputsContent" class="panel-loading">Loading outputs...</div>';
+        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">O</div><div class="ai-panel-title">Bu Dersin Çıktıları</div></div><div class="ai-panel-subtitle">Hemen kullanabileceğin prompt\'lar, skill\'ler ve artifact\'lar</div><div id="outputsContent" class="panel-loading">Çıktılar yükleniyor...</div>';
         container.appendChild(panel);
 
         ghApiFetch(lessonPath + '/outputs', function (err, data) {
           var el = document.getElementById('outputsContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/' + lessonPath + '" target="_blank" rel="noopener">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/komunite/ai-engineering/tree/main/' + lessonPath + '" target="_blank" rel="noopener">Dersi GitHub\'da Gör</a></div>';
             return;
           }
 
@@ -2907,11 +3099,11 @@
           data.forEach(function (file, idx) {
             var type = classifyOutput(file.name);
             var badgeClass = type;
-            var badgeText = type === 'prompt' ? 'Prompt' : type === 'skill' ? 'Skill' : 'Output';
+            var badgeText = type === 'prompt' ? 'Prompt' : type === 'skill' ? 'Skill' : 'Çıktı';
             var installId = 'install-hint-' + idx;
             var installHint = '';
             if (type === 'prompt') {
-              installHint = 'Paste into Claude, Cursor, Codex, OpenClaw, Hermes, or any agent that reads prompts';
+              installHint = 'Claude, Cursor, Codex, OpenClaw, Hermes ya da prompt okuyan herhangi bir agent\'a yapıştır';
             } else if (type === 'skill') {
               var skillName = file.name.replace(/\.md$/, '').replace(/^skill-/, '');
               installHint = 'npx skills add ' + skillName;
@@ -2920,11 +3112,11 @@
             html += '<div class="output-card">';
             html += '<div class="output-badge ' + badgeClass + '">' + badgeText + '</div>';
             html += '<div class="output-card-name">' + escapeHtml(file.name) + '</div>';
-            html += '<div class="output-desc" id="desc-' + idx + '">Loading description...</div>';
+            html += '<div class="output-desc" id="desc-' + idx + '">Açıklama yükleniyor...</div>';
             html += '<div class="output-actions">';
-            html += '<a class="output-btn" href="' + file.html_url + '" target="_blank" rel="noopener">View on GitHub</a>';
+            html += '<a class="output-btn" href="' + file.html_url + '" target="_blank" rel="noopener">GitHub\'da Gör</a>';
             if (installHint) {
-              html += '<button class="output-btn" onclick="var h=document.getElementById(\'' + installId + '\');h.classList.toggle(\'visible\')">Install</button>';
+              html += '<button class="output-btn" onclick="var h=document.getElementById(\'' + installId + '\');h.classList.toggle(\'visible\')">Kur</button>';
             }
             html += '</div>';
             if (installHint) {
@@ -2951,13 +3143,13 @@
       function renderCodePanel(container) {
         var panel = document.createElement('div');
         panel.className = 'ai-panel';
-        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">C</div><div class="ai-panel-title">Run the Code</div></div><div class="ai-panel-subtitle">Executable files from this lesson</div><div id="codeContent" class="panel-loading">Loading code files...</div>';
+        panel.innerHTML = '<div class="ai-panel-header"><div class="ai-panel-icon">C</div><div class="ai-panel-title">Kodu Çalıştır</div></div><div class="ai-panel-subtitle">Bu dersten çalıştırılabilir dosyalar</div><div id="codeContent" class="panel-loading">Kod dosyaları yükleniyor...</div>';
         container.appendChild(panel);
 
         ghApiFetch(lessonPath + '/code', function (err, data) {
           var el = document.getElementById('codeContent');
           if (err || !data || !Array.isArray(data) || data.length === 0) {
-            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/' + lessonPath + '" target="_blank" rel="noopener">View lesson on GitHub</a></div>';
+            el.innerHTML = '<div class="panel-fallback"><a href="https://github.com/komunite/ai-engineering/tree/main/' + lessonPath + '" target="_blank" rel="noopener">Dersi GitHub\'da Gör</a></div>';
             return;
           }
 
@@ -2971,8 +3163,8 @@
             html += '<div class="code-card-size">' + formatSize(file.size) + '</div>';
             html += '<div class="code-card-run">' + escapeHtml(runCmd) + '</div>';
             html += '<div class="code-card-actions">';
-            html += '<a class="code-card-btn" href="' + file.html_url + '" target="_blank" rel="noopener">View on GitHub</a>';
-            html += '<button class="code-card-btn code-card-copy" data-command="' + escapeAttr(runCmd) + '">Copy command</button>';
+            html += '<a class="code-card-btn" href="' + file.html_url + '" target="_blank" rel="noopener">GitHub\'da Gör</a>';
+            html += '<button class="code-card-btn code-card-copy" data-command="' + escapeAttr(runCmd) + '">Komutu kopyala</button>';
             html += '</div>';
             html += '</div>';
           });
@@ -2982,8 +3174,8 @@
             btn.addEventListener('click', function () {
               var command = btn.getAttribute('data-command');
               navigator.clipboard.writeText(command).then(function () {
-                btn.textContent = 'Copied!';
-                setTimeout(function () { btn.textContent = 'Copy command'; }, 1500);
+                btn.textContent = 'Kopyalandı!';
+                setTimeout(function () { btn.textContent = 'Komutu kopyala'; }, 1500);
               });
             });
           });
@@ -2995,66 +3187,76 @@
         var lessonName = '';
         if (currentLessonIndex >= 0) lessonName = flatLessons[currentLessonIndex].lessonName;
 
+        // Phase 0 — Setup & Tooling. Check this FIRST so 'setup-and-tooling'
+        // doesn't match the 'tool' branch below and return agent questions.
+        if (pathLower.indexOf('setup-and-tooling') >= 0) {
+          return [
+            { q: 'Bir yapay zeka mühendisliği ortamı kaç katmandan oluşur?', opts: ['İki: sistem ve kütüphaneler', 'Dört: sistem, paket yöneticileri, runtime\'lar, yapay zeka kütüphaneleri', 'Tek: kütüphaneler', 'Üç: işletim sistemi, Python, PyTorch'], answer: 1, explain: 'Yığın aşağıdan yukarı dört katmandır: sistem temeli, paket yöneticileri, dil runtime\'ları ve yapay zeka kütüphaneleri. Her katman altındakine bağlıdır.' },
+            { q: 'Neden bir sanal ortam (venv) kullanırız?', opts: ['Kodu daha hızlı çalıştırmak için', 'Proje bağımlılıklarını sistemden ve diğer projelerden izole etmek için', 'GPU\'ya erişmek için', 'Disk alanından tasarruf etmek için'], answer: 1, explain: 'Sanal ortam her projenin paketlerini kendi içinde tutar; sürüm çakışmalarını ve "sistem Python\'una bulaştım" türü sorunları engeller.' },
+            { q: 'Hangi durumda `sudo pip install` kullanmamalısınız?', opts: ['Hiçbir zaman', 'Sadece üretim sunucularında', 'Sadece root kullanıcı yoksa', 'Tüm durumlarda — sanal ortam veya kullanıcı kurulumu tercih edin'], answer: 3, explain: 'Sistem Python\'una sudo ile yazmak izin hataları, kırık bağımlılıklar ve dağıtım yöneticisiyle çakışma yaratır. Bunun yerine sanal ortam veya `uv` kullanın.' }
+          ];
+        }
+
         if (pathLower.indexOf('math') >= 0 || pathLower.indexOf('linear-algebra') >= 0 || pathLower.indexOf('calculus') >= 0) {
           return [
-            { q: 'What does a dot product measure between two vectors?', opts: ['Their sum', 'How aligned they are', 'Their cross product', 'The distance between them'], answer: 1, explain: 'The dot product measures the similarity or alignment between two vectors. When it is zero, the vectors are orthogonal.' },
-            { q: 'What does the gradient of a function point toward?', opts: ['The minimum', 'The steepest ascent', 'The nearest saddle point', 'A random direction'], answer: 1, explain: 'The gradient always points in the direction of steepest increase. Gradient descent moves opposite to the gradient to find minima.' },
-            { q: 'A matrix with shape (3, 5) multiplied by (5, 2) produces what shape?', opts: ['(3, 2)', '(5, 5)', '(3, 5)', '(2, 3)'], answer: 0, explain: 'Matrix multiplication: (m, n) x (n, p) = (m, p). So (3, 5) x (5, 2) = (3, 2).' }
+            { q: 'İki vektör arasındaki dot product (nokta çarpımı) neyi ölçer?', opts: ['Toplamlarını', 'Ne kadar hizalı olduklarını', 'Çapraz çarpımlarını', 'Aralarındaki uzaklığı'], answer: 1, explain: 'Dot product iki vektör arasındaki benzerliği ya da hizalanmayı ölçer. Sıfır olduğunda vektörler ortogonaldir.' },
+            { q: 'Bir fonksiyonun gradyanı hangi yöne işaret eder?', opts: ['Minimuma', 'En dik artışa', 'En yakın saddle point\'e', 'Rastgele bir yöne'], answer: 1, explain: 'Gradyan her zaman en dik artış yönüne işaret eder. Gradient descent minimumları bulmak için gradyanın tersine hareket eder.' },
+            { q: '(3, 5) shape\'inde bir matris (5, 2) ile çarpılırsa sonuç hangi shape\'tedir?', opts: ['(3, 2)', '(5, 5)', '(3, 5)', '(2, 3)'], answer: 0, explain: 'Matris çarpımı: (m, n) x (n, p) = (m, p). Yani (3, 5) x (5, 2) = (3, 2).' }
           ];
         }
 
         if (pathLower.indexOf('ml') >= 0 || pathLower.indexOf('regression') >= 0 || pathLower.indexOf('classification') >= 0 || pathLower.indexOf('supervised') >= 0) {
           return [
-            { q: 'What is the purpose of a loss function in machine learning?', opts: ['To generate data', 'To measure how wrong predictions are', 'To select features', 'To split data'], answer: 1, explain: 'A loss function quantifies the difference between predicted and actual values. The optimizer minimizes this value during training.' },
-            { q: 'Why do we split data into train and test sets?', opts: ['To save memory', 'To evaluate generalization on unseen data', 'To make training faster', 'To reduce the dataset size'], answer: 1, explain: 'The test set acts as unseen data, revealing whether the model memorized training data or learned generalizable patterns.' },
-            { q: 'What does overfitting mean?', opts: ['The model is too simple', 'The model memorizes training data but fails on new data', 'The model trains too slowly', 'The loss is too low'], answer: 1, explain: 'Overfitting occurs when a model performs well on training data but poorly on new data because it learned noise rather than signal.' }
+            { q: 'Makine öğrenmesinde loss fonksiyonunun amacı nedir?', opts: ['Veri üretmek', 'Tahminlerin ne kadar yanlış olduğunu ölçmek', 'Feature seçmek', 'Veriyi bölmek'], answer: 1, explain: 'Loss fonksiyonu tahmin edilen ile gerçek değer arasındaki farkı sayısallaştırır. Optimizer eğitim sırasında bu değeri minimize eder.' },
+            { q: 'Veriyi neden train ve test setlerine böleriz?', opts: ['Bellekten tasarruf için', 'Görmediği veride genelleme yapıp yapmadığını değerlendirmek için', 'Eğitimi hızlandırmak için', 'Veri seti boyutunu küçültmek için'], answer: 1, explain: 'Test seti görmediği veri rolünü oynar; modelin eğitim verisini ezberleyip ezberlemediğini ya da genellenebilir örüntü öğrenip öğrenmediğini ortaya çıkarır.' },
+            { q: 'Overfitting ne demektir?', opts: ['Model çok basit', 'Model eğitim verisini ezberliyor ama yeni veride başarısız', 'Model çok yavaş eğitiliyor', 'Loss çok düşük'], answer: 1, explain: 'Overfitting; modelin sinyal yerine gürültüyü öğrenmesi sonucu eğitim verisinde iyi, yeni veride kötü performans göstermesidir.' }
           ];
         }
 
         if (pathLower.indexOf('deep-learning') >= 0 || pathLower.indexOf('neural') >= 0 || pathLower.indexOf('backprop') >= 0 || pathLower.indexOf('activation') >= 0) {
           return [
-            { q: 'What does backpropagation compute?', opts: ['Forward predictions', 'The gradient of the loss with respect to each weight', 'The learning rate', 'New training data'], answer: 1, explain: 'Backpropagation uses the chain rule to compute how much each weight contributed to the error, then adjusts weights accordingly.' },
-            { q: 'Why do neural networks need non-linear activation functions?', opts: ['To speed up training', 'Without them, stacking layers is equivalent to a single linear layer', 'To reduce memory usage', 'To normalize outputs'], answer: 1, explain: 'Without non-linearities, any composition of linear layers collapses to a single linear transformation. Activations like ReLU let the network learn complex patterns.' },
-            { q: 'What does the learning rate control?', opts: ['How many epochs to train', 'The size of each weight update step', 'The number of layers', 'The batch size'], answer: 1, explain: 'The learning rate scales the gradient update. Too large causes divergence, too small causes slow or stuck training.' }
+            { q: 'Backpropagation neyi hesaplar?', opts: ['İleri yöndeki tahminleri', 'Her bir ağırlığa göre loss\'un gradyanını', 'Learning rate\'i', 'Yeni eğitim verisini'], answer: 1, explain: 'Backpropagation zincir kuralını kullanarak her ağırlığın hataya ne kadar katkıda bulunduğunu hesaplar; ardından ağırlıkları buna göre günceller.' },
+            { q: 'Sinir ağlarının neden doğrusal olmayan aktivasyon fonksiyonlarına ihtiyacı vardır?', opts: ['Eğitimi hızlandırmak için', 'Onlar olmadan, katmanları üst üste koymak tek bir doğrusal katmana eşittir', 'Bellek kullanımını azaltmak için', 'Çıktıları normalleştirmek için'], answer: 1, explain: 'Doğrusal olmayanlık olmadan, doğrusal katmanların herhangi bir bileşimi tek bir doğrusal dönüşüme indirgenir. ReLU gibi aktivasyonlar ağa karmaşık örüntüleri öğrenme kabiliyeti verir.' },
+            { q: 'Learning rate neyi kontrol eder?', opts: ['Kaç epoch eğitileceğini', 'Her bir ağırlık güncellemesinin adım büyüklüğünü', 'Katman sayısını', 'Batch size\'ı'], answer: 1, explain: 'Learning rate gradyan güncellemesinin ölçeğini belirler. Çok yüksek ıraksamaya, çok düşük yavaş ya da takılı eğitime yol açar.' }
           ];
         }
 
         if (pathLower.indexOf('llm') >= 0 || pathLower.indexOf('transformer') >= 0 || pathLower.indexOf('attention') >= 0 || pathLower.indexOf('tokeniz') >= 0 || pathLower.indexOf('fine-tun') >= 0) {
           return [
-            { q: 'What does self-attention allow a transformer to do?', opts: ['Process tokens in order', 'Weight the importance of every token relative to every other token', 'Reduce vocabulary size', 'Compress the model'], answer: 1, explain: 'Self-attention computes pairwise relevance scores across all positions, allowing the model to relate distant tokens without recurrence.' },
-            { q: 'Why do LLMs use tokenizers instead of raw characters?', opts: ['Characters are too large', 'Tokens compress frequent patterns into single units, reducing sequence length', 'Tokenizers are faster to train', 'Characters cannot be embedded'], answer: 1, explain: 'Subword tokenizers like BPE balance vocabulary size against sequence length, making common words single tokens while handling rare words as pieces.' },
-            { q: 'What is the key difference between pre-training and fine-tuning?', opts: ['Pre-training uses labeled data', 'Pre-training learns general language; fine-tuning adapts to a specific task', 'Fine-tuning uses more data', 'There is no difference'], answer: 1, explain: 'Pre-training learns language patterns from massive unlabeled text. Fine-tuning takes that foundation and specializes it on smaller, task-specific data.' }
+            { q: 'Self-attention bir transformer\'a ne yapma imkânı verir?', opts: ['Token\'ları sırayla işlemek', 'Her token\'ın her diğer token\'a göre önemini ağırlıklandırmak', 'Vocabulary boyutunu küçültmek', 'Modeli sıkıştırmak'], answer: 1, explain: 'Self-attention tüm pozisyonlar arasında ikili alaka skorlarını hesaplar; modelin recurrence olmadan uzak token\'ları ilişkilendirmesine imkân verir.' },
+            { q: 'LLM\'ler neden ham karakterler yerine tokenizer\'lar kullanır?', opts: ['Karakterler çok büyük olduğu için', 'Token\'lar sık örüntüleri tek birimlere sıkıştırarak dizi uzunluğunu azaltır', 'Tokenizer\'ların eğitimi daha hızlıdır', 'Karakterler embed edilemez'], answer: 1, explain: 'BPE gibi subword tokenizer\'lar vocabulary boyutu ile dizi uzunluğu arasında denge kurar; sık kelimeleri tek token, nadir kelimeleri parçalar halinde temsil eder.' },
+            { q: 'Pre-training ile fine-tuning arasındaki temel fark nedir?', opts: ['Pre-training etiketli veri kullanır', 'Pre-training genel dili öğrenir; fine-tuning belirli bir göreve uyarlar', 'Fine-tuning daha çok veri kullanır', 'Aralarında fark yoktur'], answer: 1, explain: 'Pre-training büyük etiketsiz metinden dil örüntülerini öğrenir. Fine-tuning bu temeli alır ve daha küçük, göreve özgü verinin üzerinde uzmanlaştırır.' }
           ];
         }
 
         if (pathLower.indexOf('rag') >= 0 || pathLower.indexOf('retrieval') >= 0 || pathLower.indexOf('embed') >= 0 || pathLower.indexOf('vector') >= 0) {
           return [
-            { q: 'What is the core idea behind RAG?', opts: ['Training a larger model', 'Retrieving relevant context before generating a response', 'Using more GPUs', 'Reducing model size'], answer: 1, explain: 'RAG (Retrieval-Augmented Generation) grounds LLM responses in retrieved documents, reducing hallucination and enabling knowledge updates without retraining.' },
-            { q: 'What do embedding models produce?', opts: ['Text summaries', 'Dense vector representations of text', 'Token counts', 'Grammar corrections'], answer: 1, explain: 'Embedding models map text into fixed-dimensional vectors where semantic similarity corresponds to geometric proximity.' },
-            { q: 'Why use cosine similarity for comparing embeddings?', opts: ['It is the only metric', 'It measures angular similarity regardless of vector magnitude', 'It is faster than dot product', 'It works with integers only'], answer: 1, explain: 'Cosine similarity normalizes for magnitude, focusing on direction. Two texts about the same topic will have high cosine similarity regardless of length.' }
+            { q: 'RAG\'in temel fikri nedir?', opts: ['Daha büyük bir model eğitmek', 'Yanıt üretmeden önce alakalı bağlamı çekmek', 'Daha çok GPU kullanmak', 'Model boyutunu küçültmek'], answer: 1, explain: 'RAG (Retrieval-Augmented Generation) LLM yanıtlarını çekilmiş belgelere dayandırır; halüsinasyonu azaltır ve yeniden eğitim olmadan bilgi güncellemesine olanak verir.' },
+            { q: 'Embedding modelleri ne üretir?', opts: ['Metin özetleri', 'Metnin yoğun vektör temsillerini', 'Token sayımlarını', 'Dilbilgisi düzeltmeleri'], answer: 1, explain: 'Embedding modelleri metni sabit boyutlu vektörlere eşler; bu vektörlerde semantik benzerlik geometrik yakınlığa karşılık gelir.' },
+            { q: 'Embedding\'leri karşılaştırırken neden cosine similarity kullanılır?', opts: ['Tek metrik olduğu için', 'Vektör büyüklüğünden bağımsız olarak açısal benzerliği ölçtüğü için', 'Dot product\'tan daha hızlı olduğu için', 'Sadece tamsayılarla çalıştığı için'], answer: 1, explain: 'Cosine similarity büyüklüğü normalleştirir, sadece yöne odaklanır. Aynı konudaki iki metin, uzunlukları farklı olsa bile yüksek cosine similarity verir.' }
           ];
         }
 
         if (pathLower.indexOf('agent') >= 0 || pathLower.indexOf('tool') >= 0 || pathLower.indexOf('mcp') >= 0) {
           return [
-            { q: 'What distinguishes an AI agent from a simple chatbot?', opts: ['Agents are faster', 'Agents can take actions and use tools autonomously', 'Agents use bigger models', 'There is no difference'], answer: 1, explain: 'Agents have a loop: observe, decide, act. They can call tools, read files, search the web, and chain multiple steps to complete complex tasks.' },
-            { q: 'What is MCP (Model Context Protocol)?', opts: ['A model training format', 'A standardized protocol for connecting AI models to tools and data sources', 'A compression algorithm', 'A testing framework'], answer: 1, explain: 'MCP provides a universal interface between AI assistants and external tools/data, replacing one-off integrations with a standard protocol.' },
-            { q: 'Why is tool-use important for LLMs?', opts: ['It reduces cost', 'It lets LLMs access real-time information and take actions beyond text generation', 'It makes responses shorter', 'It removes hallucinations entirely'], answer: 1, explain: 'Tools extend LLMs beyond their training data cutoff, enabling real-time lookups, calculations, code execution, and interaction with external systems.' }
+            { q: 'Bir yapay zeka agent\'ını basit bir chatbot\'tan ne ayırır?', opts: ['Agent\'lar daha hızlıdır', 'Agent\'lar otonom olarak eyleyebilir ve tool kullanabilir', 'Agent\'lar daha büyük modeller kullanır', 'Aralarında fark yoktur'], answer: 1, explain: 'Agent\'ların bir döngüsü vardır: gözle, karar ver, eyle. Tool çağırabilir, dosya okuyabilir, web\'i arayabilir ve karmaşık görevleri tamamlamak için birden çok adımı zincirleyebilirler.' },
+            { q: 'MCP (Model Context Protocol) nedir?', opts: ['Bir model eğitim formatı', 'Yapay zeka modellerini tool\'lara ve veri kaynaklarına bağlamak için standart bir protokol', 'Bir sıkıştırma algoritması', 'Bir test framework\'ü'], answer: 1, explain: 'MCP yapay zeka asistanları ile dış tool/veri arasında evrensel bir arayüz sunar; tek seferlik entegrasyonların yerine standart bir protokol koyar.' },
+            { q: 'LLM\'ler için tool kullanımı neden önemlidir?', opts: ['Maliyeti düşürdüğü için', 'LLM\'lere gerçek zamanlı bilgi erişimi ve metin üretiminin ötesinde eylem yapabilme imkânı verdiği için', 'Yanıtları kısalttığı için', 'Halüsinasyonları tamamen ortadan kaldırdığı için'], answer: 1, explain: 'Tool\'lar LLM\'leri eğitim verisinin son tarihinin ötesine taşır; gerçek zamanlı sorgular, hesaplamalar, kod yürütme ve dış sistemlerle etkileşim mümkün hale gelir.' }
           ];
         }
 
         if (pathLower.indexOf('eval') >= 0 || pathLower.indexOf('safety') >= 0 || pathLower.indexOf('alignment') >= 0 || pathLower.indexOf('deploy') >= 0) {
           return [
-            { q: 'Why are evals critical for production AI systems?', opts: ['To save money', 'To measure performance objectively before and after changes', 'To make the model bigger', 'Evals are optional'], answer: 1, explain: 'Evals are the tests of AI engineering. Without them, you cannot know if a change improved or regressed quality. They should run on every code change.' },
-            { q: 'What does "alignment" mean in AI safety?', opts: ['Aligning text on screen', 'Ensuring AI systems act according to human intentions and values', 'Making models faster', 'Using the same training data'], answer: 1, explain: 'Alignment ensures that as AI systems become more capable, they remain helpful, honest, and harmless, acting in accordance with human goals.' },
-            { q: 'What is a guardrail in the context of deployed LLMs?', opts: ['A physical barrier', 'A check that prevents harmful, off-topic, or policy-violating outputs', 'A backup model', 'A caching layer'], answer: 1, explain: 'Guardrails filter inputs and outputs at runtime, catching toxicity, prompt injection, PII leaks, and other risks before they reach the user.' }
+            { q: 'Production yapay zeka sistemleri için eval\'ler neden kritiktir?', opts: ['Para tasarrufu için', 'Değişikliklerden önce ve sonra performansı objektif olarak ölçmek için', 'Modeli büyütmek için', 'Eval\'ler opsiyoneldir'], answer: 1, explain: 'Eval\'ler yapay zeka mühendisliğinin test\'leridir. Onlar olmadan bir değişikliğin kaliteyi iyileştirip iyileştirmediğini ya da kötüleştirip kötüleştirmediğini bilemezsin. Her kod değişikliğinde çalışmalıdırlar.' },
+            { q: 'Yapay zeka güvenliği bağlamında "alignment" ne anlama gelir?', opts: ['Ekrandaki metni hizalamak', 'Yapay zeka sistemlerinin insan niyetlerine ve değerlerine uygun hareket etmesini sağlamak', 'Modelleri daha hızlı yapmak', 'Aynı eğitim verisini kullanmak'], answer: 1, explain: 'Alignment, yapay zeka sistemleri yetenek kazandıkça yardımcı, dürüst ve zararsız kalmalarını; insan hedeflerine uyumlu hareket etmelerini güvence altına alır.' },
+            { q: 'Deploy edilmiş LLM\'ler bağlamında guardrail nedir?', opts: ['Fiziksel bir bariyer', 'Zararlı, konu dışı ya da politikayı ihlal eden çıktıları engelleyen bir kontrol', 'Yedek bir model', 'Bir cache katmanı'], answer: 1, explain: 'Guardrail\'ler girdileri ve çıktıları çalışma zamanında filtreler; toksisiteyi, prompt injection\'ı, PII sızıntılarını ve diğer riskleri kullanıcıya ulaşmadan yakalar.' }
           ];
         }
 
         return [
-          { q: 'What does "from scratch" mean in this course?', opts: ['Using no computer', 'Building each concept by implementing it yourself, not just reading theory', 'Starting from assembly language', 'Only using pen and paper'], answer: 1, explain: 'This course follows a Build-Use-Ship methodology: first understand by building it, then apply it, then ship it as a real artifact.' },
-          { q: 'Why does this course combine math, ML, and engineering?', opts: ['To make it longer', 'Because real AI engineering requires all three to build production systems', 'Math is just for fun', 'Engineering is optional'], answer: 1, explain: 'Production AI systems require mathematical foundations (for understanding), ML knowledge (for modeling), and engineering skills (for deployment and reliability).' },
-          { q: 'What is the "Ship" step in the Build-Use-Ship framework?', opts: ['Mailing physical goods', 'Creating a reusable artifact like a prompt, skill, or tool from what you learned', 'Publishing a paper', 'Deleting your code'], answer: 2, explain: 'The Ship step turns your learning into something tangible: a prompt, skill file, MCP tool, or CLI utility that others (or future you) can use immediately.' }
+          { q: 'Bu kursta "sıfırdan" ne anlama gelir?', opts: ['Bilgisayar kullanmamak', 'Her kavramı sadece teori okuyarak değil, kendin uygulayarak öğrenmek', 'Assembly dilinden başlamak', 'Sadece kalem-kağıt kullanmak'], answer: 1, explain: 'Bu kurs Yap-Kullan-Yayınla yöntemini izler: önce inşa ederek anla, sonra uygula, ardından gerçek bir çıktı olarak yayınla.' },
+          { q: 'Bu kurs neden matematiği, ML\'yi ve mühendisliği birleştirir?', opts: ['Daha uzun olsun diye', 'Çünkü gerçek yapay zeka mühendisliği production sistemleri için üçüne de ihtiyaç duyar', 'Matematik sadece eğlence için', 'Mühendislik opsiyonel'], answer: 1, explain: 'Production yapay zeka sistemleri matematiksel temel (anlamak için), ML bilgisi (modellemek için) ve mühendislik becerisi (deploy ve güvenilirlik için) gerektirir.' },
+          { q: 'Yap-Kullan-Yayınla çerçevesindeki "Yayınla" adımı nedir?', opts: ['Fiziksel ürün göndermek', 'Öğrendiğinden bir prompt, skill ya da tool gibi tekrar kullanılabilir bir çıktı oluşturmak', 'Makale yayımlamak', 'Kodunu silmek'], answer: 1, explain: 'Yayınla adımı öğrendiklerini elle tutulur bir şeye dönüştürür: bir prompt, skill dosyası, MCP tool\'u ya da CLI aracı — başkalarının (ya da gelecekteki senin) hemen kullanabileceği bir şey.' }
         ];
       }
 
@@ -3069,14 +3271,14 @@
           phase = fl.phaseSlug || '';
         }
 
-        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">Q</div><div class="ai-panel-title">Test Your Understanding</div></div>';
-        html += '<div class="ai-panel-subtitle">Did you get it?</div>';
+        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">Q</div><div class="ai-panel-title">Anladığını Test Et</div></div>';
+        html += '<div class="ai-panel-subtitle">Yakaladın mı?</div>';
         html += '<div class="quiz-container" id="quizContainer">';
 
         var letters = ['A', 'B', 'C', 'D'];
         questions.forEach(function (q, qi) {
           html += '<div class="quiz-question" id="quiz-q-' + qi + '">';
-          html += '<div class="quiz-question-num">Question ' + (qi + 1) + ' of ' + questions.length + '</div>';
+          html += '<div class="quiz-question-num">Soru ' + (qi + 1) + ' / ' + questions.length + '</div>';
           html += '<div class="quiz-question-text">' + escapeHtml(q.q) + '</div>';
           html += '<div class="quiz-options">';
           q.opts.forEach(function (opt, oi) {
@@ -3090,8 +3292,8 @@
           html += '</div>';
         });
 
-        html += '<div class="quiz-score" id="quizScore"><div class="quiz-score-number" id="quizScoreNum">0/' + questions.length + '</div><div class="quiz-score-label">Complete all questions to see your score</div></div>';
-        html += '<div class="quiz-deeper">Want a deeper quiz? Run <code>/check-understanding ' + escapeHtml(phase) + '</code> in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed</div>';
+        html += '<div class="quiz-score" id="quizScore"><div class="quiz-score-number" id="quizScoreNum">0/' + questions.length + '</div><div class="quiz-score-label">Skorunu görmek için tüm soruları tamamla</div></div>';
+        html += '<div class="quiz-deeper">Daha derin bir test ister misin? Claude, Cursor, Codex, OpenClaw, Hermes ya da müfredat skill\'leri kurulu herhangi bir agent\'ta <code>/check-understanding ' + escapeHtml(phase) + '</code> komutunu çalıştır.</div>';
         html += '</div>';
 
         panel.innerHTML = html;
@@ -3135,8 +3337,8 @@
           if (scoreEl && scoreNum) {
             scoreNum.textContent = window._quizCorrect + '/' + questions.length;
             scoreEl.querySelector('.quiz-score-label').textContent =
-              window._quizCorrect === questions.length ? 'Perfect score!' :
-              window._quizCorrect >= 2 ? 'Great work!' : 'Keep studying!';
+              window._quizCorrect === questions.length ? 'Tam puan!' :
+              window._quizCorrect >= 2 ? 'İyi iş!' : 'Çalışmaya devam!';
             scoreEl.classList.add('visible');
           }
         }
@@ -3161,8 +3363,8 @@
           }
         }
 
-        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">P</div><div class="ai-panel-title">Learning Path</div></div>';
-        html += '<div class="ai-panel-subtitle">Phase ' + String(phase.id).padStart(2, '0') + ': ' + escapeHtml(phase.name) + '</div>';
+        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">P</div><div class="ai-panel-title">Öğrenme Yolu</div></div>';
+        html += '<div class="ai-panel-subtitle">Faz ' + String(phase.id).padStart(2, '0') + ': ' + escapeHtml(phase.name) + '</div>';
 
         // Window: 2 before current + current + 2 after, cap at 5 visible.
         var windowSize = 5;
@@ -3175,7 +3377,7 @@
 
         html += '<div class="learning-timeline">';
         if (hiddenBefore > 0) {
-          html += '<span class="timeline-ellipsis" title="' + hiddenBefore + ' earlier lessons">&laquo; ' + hiddenBefore + '</span>';
+          html += '<span class="timeline-ellipsis" title="Önceki ' + hiddenBefore + ' ders">&laquo; ' + hiddenBefore + '</span>';
           html += '<div class="timeline-line done"></div>';
         }
         visible.forEach(function (item, vIdx) {
@@ -3200,7 +3402,7 @@
         });
         if (hiddenAfter > 0) {
           html += '<div class="timeline-line"></div>';
-          html += '<span class="timeline-ellipsis" title="' + hiddenAfter + ' later lessons">' + hiddenAfter + ' &raquo;</span>';
+          html += '<span class="timeline-ellipsis" title="Sonraki ' + hiddenAfter + ' ders">' + hiddenAfter + ' &raquo;</span>';
         }
         html += '</div>';
 
@@ -3209,11 +3411,11 @@
         var pct = Math.round((completedCount / totalCount) * 100);
 
         html += '<div class="phase-progress-bar"><div class="phase-progress-fill" style="width:' + pct + '%"></div></div>';
-        html += '<div class="phase-progress-text">You\'ve completed ' + completedCount + ' of ' + totalCount + ' lessons in this phase</div>';
+        html += '<div class="phase-progress-text">Bu fazda ' + totalCount + ' dersten ' + completedCount + ' tanesini tamamladın</div>';
 
         if (completedCount >= totalCount && phaseIdx < PHASES.length - 1) {
           var nextPhase = PHASES[phaseIdx + 1];
-          html += '<div class="phase-complete-callout visible">Ready for Phase ' + String(nextPhase.id).padStart(2, '0') + ': ' + escapeHtml(nextPhase.name) + '</div>';
+          html += '<div class="phase-complete-callout visible">Faz ' + String(nextPhase.id).padStart(2, '0') + ': ' + escapeHtml(nextPhase.name) + ' için hazırsın</div>';
         }
 
         panel.innerHTML = html;
@@ -3234,22 +3436,22 @@
         var phaseIdx = current.phaseIndex;
         var phase = PHASES[phaseIdx];
 
-        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">N</div><div class="ai-panel-title">Continue Learning</div></div>';
+        var html = '<div class="ai-panel-header"><div class="ai-panel-icon">N</div><div class="ai-panel-title">\u00d6\u011frenmeye Devam</div></div>';
         html += '<div class="continue-panel">';
 
         if (!next || !next.path) {
-          html += '<div class="phase-finished">\u2705 You finished this phase!</div>';
+          html += '<div class="phase-finished">\u2705 Bu faz\u0131 bitirdin!</div>';
         }
 
         html += '<div class="continue-links">';
 
         var phaseSlug = extractPhaseSlug(phase, phaseIdx);
         var firstLesson = phase.lessons[0] ? extractLessonSlug(phase.lessons[0], 0) : '';
-        html += '<a class="continue-link" href="lesson.html?path=phases/' + phaseSlug + '/' + firstLesson + '">Browse all Phase ' + String(phase.id).padStart(2, '0') + ' lessons</a>';
-        html += '<a class="continue-link" href="catalog.html">Full course catalog</a>';
+        html += '<a class="continue-link" href="lesson.html?path=phases/' + phaseSlug + '/' + firstLesson + '">Faz ' + String(phase.id).padStart(2, '0') + ' derslerinin tamam\u0131na g\u00f6z at</a>';
+        html += '<a class="continue-link" href="catalog.html">T\u00fcm ders katalo\u011fu</a>';
         html += '</div>';
 
-        html += '<div class="continue-callout">Run <code>/find-your-level</code> in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed for a personalized learning path</div>';
+        html += '<div class="continue-callout">Ki\u015fiselle\u015ftirilmi\u015f \u00f6\u011frenme yolu i\u00e7in Claude, Cursor, Codex, OpenClaw, Hermes ya da m\u00fcfredat skill\'leri kurulu herhangi bir agent\'ta <code>/find-your-level</code> komutunu \u00e7al\u0131\u015ft\u0131r.</div>';
         html += '</div>';
 
         panel.innerHTML = html;

@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node site/build.js",
+  "buildCommand": "LOCALE=tr node site/build.js && python3 scripts/build_sitemap.py && rm -rf site/phases && cp -R phases site/phases && python3 scripts/build_lesson_pages.py",
   "outputDirectory": "site",
   "framework": null,
   "installCommand": "echo skip",

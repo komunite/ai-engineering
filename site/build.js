@@ -12,12 +12,36 @@ const fs = require('fs');
 const path = require('path');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
-const README_PATH = path.join(REPO_ROOT, 'README.md');
-const ROADMAP_PATH = path.join(REPO_ROOT, 'ROADMAP.md');
-const GLOSSARY_PATH = path.join(REPO_ROOT, 'glossary', 'terms.md');
 const OUTPUT_PATH = path.join(__dirname, 'data.js');
 
-const GITHUB_BASE = 'https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/';
+const GITHUB_BASE = 'https://github.com/komunite/ai-engineering/tree/main/';
+
+// Locale: default is Turkish (this is the Komünite TR uyarlaması).
+// `LOCALE=en node site/build.js` reads the English originals from en/.
+const LOCALE = (process.env.LOCALE || 'tr').toLowerCase();
+const CANONICAL_LOCALE = 'tr';   // root README/ROADMAP are TR
+const LESSON_FALLBACK = 'en';    // per-lesson docs/<locale>.md falls back to docs/en.md
+const FALLBACK_LOCALE = LESSON_FALLBACK; // back-compat alias for outputs/ artifact resolution
+
+// Root docs (README, ROADMAP, glossary/terms): after the 2026-05 restructure,
+// root is TR canonical and English originals live under en/. For other locales
+// (e.g. fr), try the sibling file (README.fr.md) first.
+function resolveRootDoc(baseDir, baseName, ext = '.md') {
+  if (LOCALE !== CANONICAL_LOCALE) {
+    // 1) Sibling file: <base>.<locale>.md
+    const sibling = path.join(baseDir, `${baseName}.${LOCALE}${ext}`);
+    if (fs.existsSync(sibling)) return { path: sibling, locale: LOCALE };
+    // 2) Locale subdirectory: <locale>/<base>.md (e.g. en/README.md)
+    const subdir = path.join(baseDir, LOCALE, `${baseName}${ext}`);
+    if (fs.existsSync(subdir)) return { path: subdir, locale: LOCALE };
+  }
+  // 3) Canonical at root (TR)
+  return { path: path.join(baseDir, `${baseName}${ext}`), locale: CANONICAL_LOCALE };
+}
+
+const README_FILE = resolveRootDoc(REPO_ROOT, 'README');
+const ROADMAP_FILE = resolveRootDoc(REPO_ROOT, 'ROADMAP');
+const GLOSSARY_FILE = resolveRootDoc(path.join(REPO_ROOT, 'glossary'), 'terms');
 
 // ─── Parse ROADMAP.md for lesson statuses ────────────────────────────
 function parseRoadmap(content) {
@@ -161,8 +185,10 @@ function parseReadme(content, roadmapStatuses) {
         let lessonName, url;
         if (linkMatch) {
           lessonName = linkMatch[1];
-          const relativePath = linkMatch[2];
-          url = GITHUB_BASE + relativePath.replace(/^\//, '');
+          // Strip leading "../" (used when README lives in en/ subdir) and any
+          // leading "/" — normalize so the path is always relative to repo root.
+          const relativePath = linkMatch[2].replace(/^(?:\.\.\/)+/, '').replace(/^\//, '');
+          url = GITHUB_BASE + relativePath;
         } else {
           lessonName = lessonCol;
           url = null;
@@ -237,7 +263,12 @@ function parseReadme(content, roadmapStatuses) {
  * matching content — expected for planned lessons with no docs yet.
  */
 function extractLessonMeta(relPath) {
-  const docPath = path.join(REPO_ROOT, relPath, 'docs', 'en.md');
+  const docsDir = path.join(REPO_ROOT, relPath, 'docs');
+  const localizedPath = path.join(docsDir, `${LOCALE}.md`);
+  const fallbackPath = path.join(docsDir, `${LESSON_FALLBACK}.md`);
+  const docPath = (LOCALE !== LESSON_FALLBACK && fs.existsSync(localizedPath))
+    ? localizedPath
+    : fallbackPath;
   const result = { summary: '', keywords: '' };
   try {
     const lines = fs.readFileSync(docPath, 'utf8').split(/\r?\n/);
@@ -346,10 +377,30 @@ function discoverArtifacts() {
       const lessonRel = `phases/${phaseDirName}/${lessonDirName}`;
       const outputsDir = path.join(phaseDir, lessonDirName, 'outputs');
       if (fs.existsSync(outputsDir)) {
+        // Group locale variants together: `prompt-foo.md` and `prompt-foo.tr.md`
+        // share base `prompt-foo`. Pick the file matching LOCALE if present,
+        // otherwise the canonical (no-locale) file.
+        const byBase = new Map();
         for (const file of fs.readdirSync(outputsDir).sort()) {
           if (!file.endsWith('.md')) continue;
           const stem = file.replace(/\.md$/, '');
-          const type = VALID_TYPES.find(t => stem.startsWith(`${t}-`));
+          // Detect a trailing .<2-3 letter locale> on the stem
+          const localeMatch = stem.match(/^(.+)\.([a-z]{2,3})$/);
+          let base, fileLocale;
+          if (localeMatch) {
+            base = localeMatch[1];
+            fileLocale = localeMatch[2];
+          } else {
+            base = stem;
+            fileLocale = FALLBACK_LOCALE;
+          }
+          if (!byBase.has(base)) byBase.set(base, {});
+          byBase.get(base)[fileLocale] = file;
+        }
+        for (const [base, variants] of byBase) {
+          const file = variants[LOCALE] || variants[FALLBACK_LOCALE];
+          if (!file) continue;
+          const type = VALID_TYPES.find(t => base.startsWith(`${t}-`));
           if (!type) continue;
           let meta = {};
           try {
@@ -357,7 +408,7 @@ function discoverArtifacts() {
           } catch (_) {}
           artifacts.push({
             kind: type,
-            name: (meta.name || stem).trim(),
+            name: (meta.name || base).trim(),
             description: (meta.description || '').trim(),
             tags: Array.isArray(meta.tags) ? meta.tags : [],
             phase: phaseId,
@@ -391,25 +442,28 @@ function discoverArtifacts() {
 
 // ─── Main build ──────────────────────────────────────────────────────
 function build() {
-  console.log('📖 Reading source files...');
+  console.log(`📖 Reading source files (locale: ${LOCALE})...`);
+  console.log(`   README   → ${path.relative(REPO_ROOT, README_FILE.path)} [${README_FILE.locale}]`);
+  console.log(`   ROADMAP  → ${path.relative(REPO_ROOT, ROADMAP_FILE.path)} [${ROADMAP_FILE.locale}]`);
+  console.log(`   glossary → ${path.relative(REPO_ROOT, GLOSSARY_FILE.path)} [${GLOSSARY_FILE.locale}]`);
 
-  const readme = fs.readFileSync(README_PATH, 'utf8');
-  const roadmap = fs.readFileSync(ROADMAP_PATH, 'utf8');
-  const glossary = fs.readFileSync(GLOSSARY_PATH, 'utf8');
+  const readme = fs.readFileSync(README_FILE.path, 'utf8');
+  const roadmap = fs.readFileSync(ROADMAP_FILE.path, 'utf8');
+  const glossary = fs.readFileSync(GLOSSARY_FILE.path, 'utf8');
 
-  console.log('🔍 Parsing ROADMAP.md...');
+  console.log(`🔍 Parsing ${path.basename(ROADMAP_FILE.path)}...`);
   const roadmapStatuses = parseRoadmap(roadmap);
 
-  console.log('🔍 Parsing README.md...');
+  console.log(`🔍 Parsing ${path.basename(README_FILE.path)}...`);
   const phases = parseReadme(readme, roadmapStatuses);
 
-  console.log('🔍 Parsing glossary/terms.md...');
+  console.log(`🔍 Parsing glossary/${path.basename(GLOSSARY_FILE.path)}...`);
   const glossaryTerms = parseGlossary(glossary);
 
   console.log('🔍 Discovering outputs + Phase 14 missions...');
   const artifacts = discoverArtifacts();
 
-  console.log('📚 Extracting lesson summaries + keywords from docs/en.md...');
+  console.log(`📚 Extracting lesson summaries + keywords from docs/${LOCALE}.md (fallback: ${FALLBACK_LOCALE})...`);
   let summarized = 0, withKeywords = 0;
   for (const phase of phases) {
     for (const lesson of phase.lessons) {
@@ -441,6 +495,9 @@ function build() {
   // Generate data.js
   const output = `// Auto-generated by build.js — do not edit manually.
 // Last built: ${new Date().toISOString()}
+// Locale: ${LOCALE}
+
+const LOCALE = ${JSON.stringify(LOCALE)};
 
 const PHASES = ${JSON.stringify(phases, null, 2)};
 

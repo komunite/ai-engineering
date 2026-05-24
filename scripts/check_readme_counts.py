@@ -35,7 +35,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = ROOT / "catalog.json"
-README_PATH = ROOT / "README.md"
+# Root README.md is Turkish (this is the Komünite TR adaptation). The
+# drift patterns below are anchored to the English upstream prose, so
+# they run against en/README.md, which mirrors upstream verbatim.
+README_PATH = ROOT / "en" / "README.md"
 
 
 @dataclass(frozen=True)

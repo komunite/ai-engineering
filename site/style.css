@@ -291,6 +291,17 @@ p.dropcap::first-letter {
   border-bottom: none;
 }
 
+/* Right-side controls group: GitHub star, search, theme toggle.
+   Lives as the last child of .header-inner so flex space-between
+   pushes the whole cluster to the right and the buttons stay together
+   instead of spreading across the header. */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
 .header-github {
   display: inline-flex;
   align-items: center;

@@ -1383,3 +1383,121 @@ body[data-palette-open] {
     display: none;
   }
 }
+
+
+/* === Komünite footer band ============================================
+   3-column band above the site footer's copyright row. Surfaces the
+   parent brand (community, events, Komünite Space) with two CTAs.
+   Manual aesthetic + blueprint accents; Komünite orange used only on
+   the small wordmark dot mark so the block stays on-palette with the
+   rest of the site. */
+.footer-komunite {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr) auto;
+  gap: 40px;
+  align-items: start;
+  padding: 36px 0 32px;
+  border-bottom: 1px solid var(--rule-soft);
+  margin-bottom: 28px;
+}
+.footer-komunite-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-komunite-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-transform: lowercase;
+}
+.footer-komunite-logo .dots {
+  display: inline-block;
+  color: #ff6b35;
+  letter-spacing: 0;
+  font-size: 0.7em;
+  line-height: 1;
+  transform: translateY(-3px);
+}
+.footer-komunite-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0;
+}
+.footer-komunite-body p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.footer-komunite-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.footer-komunite-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  white-space: nowrap;
+}
+.footer-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--blueprint);
+  color: #fafaf5;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  border: 1px solid var(--blueprint);
+  border-bottom: 1px solid var(--blueprint);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.footer-cta-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fafaf5;
+  transform: translateY(-1px);
+  border-bottom: 1px solid var(--accent-hover);
+}
+.footer-cta-primary .arrow {
+  font-size: 1em;
+  line-height: 1;
+}
+.footer-cta-secondary {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.10em;
+  text-transform: lowercase;
+  color: var(--ink-mute);
+  border-bottom: none;
+}
+.footer-cta-secondary:hover {
+  color: var(--blueprint);
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .footer-komunite {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 24px 0 20px;
+  }
+  .footer-komunite-cta {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}

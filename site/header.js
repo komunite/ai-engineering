@@ -71,3 +71,25 @@
     load();
   }
 })();
+
+/**
+ * Global CTA click tracker. Any link or button with `data-cta="..."`
+ * fires a GA4 custom event with the cta id, destination, and visible
+ * text. Lets us measure conversion per CTA placement without inlining
+ * gtag calls on every link.
+ */
+(function () {
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-cta]');
+    if (!el) return;
+    if (typeof window.gtag !== 'function') return;
+    var ctaId = el.getAttribute('data-cta') || '';
+    var ctaHref = el.getAttribute('href') || '';
+    var ctaText = (el.textContent || '').trim().slice(0, 60);
+    window.gtag('event', 'cta_click', {
+      cta_id: ctaId,
+      cta_destination: ctaHref,
+      cta_text: ctaText,
+    });
+  }, true);
+})();

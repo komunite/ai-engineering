@@ -1678,14 +1678,14 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <span class="logo-icon" aria-hidden="true"></span> AI / SIFIRDAN
       </a>
       <nav class="header-nav">
-        <a href="index.html#contents">İçindekiler</a>
-        <a href="catalog.html">Katalog</a>
-        <a href="prereqs.html">Yol Haritası</a>
-        <a href="glossary.html">Sözlük</a>
+        <a href="/#contents">İçindekiler</a>
+        <a href="/catalog.html">Katalog</a>
+        <a href="/prereqs.html">Yol Haritası</a>
+        <a href="/glossary.html">Sözlük</a>
       </nav>
       <div class="header-actions">
                 <a href="https://github.com/komunite/ai-engineering" target="_blank" rel="noopener" class="header-github">
@@ -1917,13 +1917,13 @@
             var pp = PHASES[prevPhaseIdx];
             var ppSlug = extractPhaseSlug(pp, prevPhaseIdx);
             var ppFirstLesson = pp.lessons[0] ? extractLessonSlug(pp.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + ppSlug + '/' + ppFirstLesson + '">&larr; Faz ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(pp.name) + '</a>';
+            html += '<a href="/lesson.html?path=phases/' + ppSlug + '/' + ppFirstLesson + '">&larr; Faz ' + String(pp.id).padStart(2, '0') + ': ' + escapeHtml(pp.name) + '</a>';
           }
           if (nextPhaseIdx >= 0) {
             var np = PHASES[nextPhaseIdx];
             var npSlug = extractPhaseSlug(np, nextPhaseIdx);
             var npFirstLesson = np.lessons[0] ? extractLessonSlug(np.lessons[0], 0) : '';
-            html += '<a href="lesson.html?path=phases/' + npSlug + '/' + npFirstLesson + '">Faz ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(np.name) + ' &rarr;</a>';
+            html += '<a href="/lesson.html?path=phases/' + npSlug + '/' + npFirstLesson + '">Faz ' + String(np.id).padStart(2, '0') + ': ' + escapeHtml(np.name) + ' &rarr;</a>';
           }
           html += '</div>';
         }
@@ -1938,7 +1938,7 @@
             var isActive = lesSlug === currentLessonSlug;
             var lesReadable = les.status === 'complete' || !!les.url;
             if (lesReadable) {
-              html += '<a class="sidebar-lesson-link' + (isActive ? ' active' : '') + '" href="lesson.html?path=phases/' + pSlugCurrent + '/' + lesSlug + '">';
+              html += '<a class="sidebar-lesson-link' + (isActive ? ' active' : '') + '" href="/lesson.html?path=phases/' + pSlugCurrent + '/' + lesSlug + '">';
             } else {
               html += '<span class="sidebar-lesson-link disabled">';
             }
@@ -2055,7 +2055,7 @@
 
       function showError(title, msg) {
         var el = document.getElementById('lessonContent');
-        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="index.html" class="btn btn-primary">Ana Sayfaya Dön</a></div>';
+        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="/" class="btn btn-primary">Ana Sayfaya Dön</a></div>';
       }
 
       function renderLesson(md) {
@@ -3057,7 +3057,7 @@
         var nav = buildCompletionBlock();
         nav += '<div class="lesson-nav-bottom">';
         if (prev) {
-          nav += '<a class="lesson-nav-btn prev" href="lesson.html?path=' + prev.path + '">';
+          nav += '<a class="lesson-nav-btn prev" href="/lesson.html?path=' + prev.path + '">';
           nav += '<span class="nav-label">&larr; Önceki</span>';
           nav += '<span class="nav-title">' + escapeHtml(prev.lessonName) + '</span>';
           nav += '</a>';
@@ -3065,7 +3065,7 @@
           nav += '<div></div>';
         }
         if (next) {
-          nav += '<a class="lesson-nav-btn next" href="lesson.html?path=' + next.path + '">';
+          nav += '<a class="lesson-nav-btn next" href="/lesson.html?path=' + next.path + '">';
           nav += '<span class="nav-label">Sonraki &rarr;</span>';
           nav += '<span class="nav-title">' + escapeHtml(next.lessonName) + '</span>';
           nav += '</a>';
@@ -3457,7 +3457,7 @@
           }
 
           if (item.flat.isReadable) {
-            html += '<a class="timeline-item ' + cls + '" href="lesson.html?path=' + item.flat.path + '" title="' + escapeAttr(item.flat.lessonName) + '">';
+            html += '<a class="timeline-item ' + cls + '" href="/lesson.html?path=' + item.flat.path + '" title="' + escapeAttr(item.flat.lessonName) + '">';
           } else {
             html += '<span class="timeline-item ' + cls + ' disabled" title="' + escapeAttr(item.flat.lessonName) + '">';
           }
@@ -3512,8 +3512,8 @@
 
         var phaseSlug = extractPhaseSlug(phase, phaseIdx);
         var firstLesson = phase.lessons[0] ? extractLessonSlug(phase.lessons[0], 0) : '';
-        html += '<a class="continue-link" href="lesson.html?path=phases/' + phaseSlug + '/' + firstLesson + '">Faz ' + String(phase.id).padStart(2, '0') + ' derslerinin tamam\u0131na g\u00f6z at</a>';
-        html += '<a class="continue-link" href="catalog.html">T\u00fcm ders katalo\u011fu</a>';
+        html += '<a class="continue-link" href="/lesson.html?path=phases/' + phaseSlug + '/' + firstLesson + '">Faz ' + String(phase.id).padStart(2, '0') + ' derslerinin tamam\u0131na g\u00f6z at</a>';
+        html += '<a class="continue-link" href="/catalog.html">T\u00fcm ders katalo\u011fu</a>';
         html += '</div>';
 
         html += '<div class="continue-callout">Ki\u015fiselle\u015ftirilmi\u015f \u00f6\u011frenme yolu i\u00e7in Claude, Cursor, Codex, OpenClaw, Hermes ya da m\u00fcfredat skill\'leri kurulu herhangi bir agent\'ta <code>/find-your-level</code> komutunu \u00e7al\u0131\u015ft\u0131r.</div>';

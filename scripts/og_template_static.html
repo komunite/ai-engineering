@@ -23,7 +23,7 @@
       position: relative;
       width: 100%;
       height: 100%;
-      padding: 60px 80px 52px;
+      padding: 56px 96px 50px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -55,16 +55,16 @@
     .top-divider {
       height: 1px;
       background: rgba(0,0,0,0.10);
-      margin: 16px 0 32px;
+      margin: 14px 0 28px;
     }
 
     /* Hero zone: split horizontally — title-block | specs panel */
     .hero {
       display: flex;
       align-items: flex-start;
-      gap: 48px;
+      gap: 56px;
     }
-    .hero-left  { flex: 0 0 720px; min-width: 0; }
+    .hero-left  { flex: 0 0 660px; min-width: 0; }
     .hero-right { flex: 1; min-width: 0; }
 
     .eyebrow {
@@ -80,33 +80,33 @@
     /* Hero title — matches homepage .manual-title: VT323 blueprint uppercase */
     .title {
       font-family: 'VT323', ui-monospace, 'JetBrains Mono', monospace;
-      font-size: 108px;
-      line-height: 0.92;
+      font-size: 88px;
+      line-height: 0.94;
       letter-spacing: 0.02em;
       font-weight: 400;
       color: #3553ff;
       text-transform: uppercase;
       white-space: pre-line;
-      margin-bottom: 22px;
+      margin-bottom: 36px;
       word-break: keep-all;
     }
-    .title.long { font-size: 88px; }
-    .title.very-long { font-size: 72px; line-height: 0.98; }
+    .title.long { font-size: 76px; }
+    .title.very-long { font-size: 64px; line-height: 1.0; }
 
     .accent-line {
       width: 56px;
       height: 4px;
       background: #3553ff;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .tagline {
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
-      font-size: 21px;
-      line-height: 1.42;
+      font-size: 20px;
+      line-height: 1.45;
       color: #4a4a48;
-      max-height: 120px;
+      max-height: 100px;
       overflow: hidden;
     }
 
@@ -160,7 +160,7 @@
     .spec-row.accent .val { color: #3553ff; }
 
     /* Bottom strip */
-    .bottom { display: flex; flex-direction: column; }
+    .bottom { display: flex; flex-direction: column; margin-top: 28px; }
     .ascii-rule {
       height: 5px;
       background-image:
@@ -171,7 +171,7 @@
           transparent 2px,
           transparent 7px
         );
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       opacity: 0.85;
     }
     .bottom-row {
@@ -179,7 +179,7 @@
       justify-content: space-between;
       align-items: center;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 14px;
+      font-size: 13px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }

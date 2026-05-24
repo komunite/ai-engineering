@@ -49,7 +49,7 @@ STATIC_PAGES = [
         "slug": "home",
         "eyebrow": "ANA SAYFA",
         "title": "Sıfırdan\nYapay Zeka\nMühendisliği",
-        "tagline": "Yapay zekayı sadece kullanan değil, inşa eden biri oluyorsun. Müfredatın sonunda, yapay zeka ürünleri tasarlayıp kurabilen bir mühendissin.",
+        "tagline": "Her ders bir çıktıyla biter: bir model, bir araç ya da bir sistem. Matematiksel temellerden üretim ortamına uzanan 20 faz, 435 ders.",
         "meta_left": "FIG_000 · MÜFREDAT V1.0 · 2026",
         "meta_right": "AÇIK KAYNAK · MIT",
         "footer_left": "PYTHON · TYPESCRIPT · RUST · JULIA",

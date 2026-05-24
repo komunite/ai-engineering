@@ -10,7 +10,8 @@
   <meta property="og:title" content="Sıfırdan Yapay Zeka Mühendisliği · Ders">
   <meta property="og:description" content="435 ders. 20 faz. Backprop'u, tokenleştiriciyi, attention'ı ve agent döngüsünü kendi elinle yaz.">
   <meta property="og:image" content="https://ai-muhendisligi.komunite.com.tr/og/home.jpg">
-  <!-- og:url omitted intentionally: lesson.html is a static template that loads the lesson body client-side via ?path=. Static hosting cannot template the URL, so we let crawlers fall back to the request URL (which is the lesson-specific share link). -->
+  <meta property="og:url" content="https://ai-muhendisligi.komunite.com.tr/lesson.html">
+  <!-- og:image / og:url / og:title / twitter:* / canonical / document.title and history URL are rewritten client-side once ?path is parsed, so social shares from inside the SPA point at the per-lesson static stub (which carries the right per-lesson OG for non-JS crawlers like Slack/Twitter cards). -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Sıfırdan Yapay Zeka Mühendisliği">
   <meta property="og:locale" content="tr_TR">
@@ -1828,6 +1829,41 @@
               currentLessonIndex = flatLessons.length - 1;
             }
           }
+        }
+      }
+
+      // Per-lesson SEO: once we know which lesson is loading, rewrite the
+      // shell's meta tags + history URL so this becomes the lesson's page
+      // in every meaningful sense. Pretty URL points at the static stub
+      // (which carries the proper per-lesson OG for non-JS crawlers); JS
+      // crawlers see the updated meta here.
+      if (currentPhaseSlug && currentLessonSlug) {
+        var origin = window.location.origin;
+        var prettyPath = '/phases/' + currentPhaseSlug + '/' + currentLessonSlug + '/';
+        var prettyUrl = origin + prettyPath;
+        var ogImageUrl = origin + '/og/' + currentPhaseSlug + '/' + currentLessonSlug + '.jpg';
+        var lessonInfo = currentLessonIndex >= 0 ? flatLessons[currentLessonIndex] : null;
+        var lessonName = lessonInfo ? lessonInfo.lessonName : '';
+        var fullTitle = lessonName
+          ? lessonName + ' — Sıfırdan Yapay Zeka Mühendisliği'
+          : 'Ders — Sıfırdan Yapay Zeka Mühendisliği';
+
+        function setMetaAttr(selector, attr, value) {
+          var el = document.querySelector(selector);
+          if (el) el.setAttribute(attr, value);
+        }
+        setMetaAttr('link[rel="canonical"]', 'href', prettyUrl);
+        setMetaAttr('meta[property="og:url"]', 'content', prettyUrl);
+        setMetaAttr('meta[property="og:title"]', 'content', fullTitle);
+        setMetaAttr('meta[property="og:image"]', 'content', ogImageUrl);
+        setMetaAttr('meta[name="twitter:title"]', 'content', fullTitle);
+        setMetaAttr('meta[name="twitter:image"]', 'content', ogImageUrl);
+        document.title = fullTitle;
+
+        // Rewrite address bar to the pretty URL so copy-link / cmd+L / share
+        // sheet all hand off the canonical lesson URL.
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', prettyPath);
         }
       }
 

@@ -29,7 +29,6 @@
       justify-content: space-between;
     }
 
-    /* Decorative corner marks (manual aesthetic) */
     .corner {
       position: absolute;
       width: 18px;
@@ -41,7 +40,6 @@
     .corner.bl { bottom: 30px; left: 30px; border-right: none; border-top: none; }
     .corner.br { bottom: 30px; right: 30px; border-left: none; border-top: none; }
 
-    /* Top mono meta row */
     .top-meta {
       display: flex;
       justify-content: space-between;
@@ -57,8 +55,17 @@
     .top-divider {
       height: 1px;
       background: rgba(0,0,0,0.10);
-      margin: 16px 0 36px;
+      margin: 16px 0 32px;
     }
+
+    /* Hero zone: split horizontally — title-block | specs panel */
+    .hero {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+    }
+    .hero-left  { flex: 0 0 720px; min-width: 0; }
+    .hero-right { flex: 1; min-width: 0; }
 
     .eyebrow {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -67,45 +74,92 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: #3553ff;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    /* Hero title — matches homepage H1 (.manual-title): VT323 blueprint uppercase */
+    /* Hero title — matches homepage .manual-title: VT323 blueprint uppercase */
     .title {
       font-family: 'VT323', ui-monospace, 'JetBrains Mono', monospace;
-      font-size: 112px;
+      font-size: 108px;
       line-height: 0.92;
       letter-spacing: 0.02em;
       font-weight: 400;
       color: #3553ff;
       text-transform: uppercase;
       white-space: pre-line;
-      margin-bottom: 24px;
-      max-width: 1140px;
+      margin-bottom: 22px;
       word-break: keep-all;
     }
-    .title.long { font-size: 92px; }
-    .title.very-long { font-size: 76px; line-height: 0.98; }
+    .title.long { font-size: 88px; }
+    .title.very-long { font-size: 72px; line-height: 0.98; }
 
     .accent-line {
       width: 56px;
       height: 4px;
       background: #3553ff;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .tagline {
       font-family: 'Source Serif 4', Georgia, serif;
       font-style: italic;
-      font-size: 23px;
-      line-height: 1.45;
+      font-size: 21px;
+      line-height: 1.42;
       color: #4a4a48;
-      max-width: 1000px;
-      max-height: 130px;
+      max-height: 120px;
       overflow: hidden;
     }
 
-    /* Bottom strip — no title repeat; carry langs + domain only */
+    /* Right-side specs panel — reference-manual spec sheet */
+    .specs {
+      border: 1.5px solid rgba(26, 26, 26, 0.20);
+      padding: 22px 26px 18px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: rgba(53, 83, 255, 0.025);
+      position: relative;
+    }
+    .specs::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 12px; height: 12px;
+      border-top: 2.5px solid #3553ff;
+      border-left: 2.5px solid #3553ff;
+    }
+    .specs::after {
+      content: "";
+      position: absolute;
+      bottom: -1px; right: -1px;
+      width: 12px; height: 12px;
+      border-bottom: 2.5px solid #3553ff;
+      border-right: 2.5px solid #3553ff;
+    }
+    .specs-header {
+      font-size: 11px;
+      letter-spacing: 0.20em;
+      color: #3553ff;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      font-weight: 500;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(53, 83, 255, 0.25);
+    }
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px dashed rgba(26, 26, 26, 0.10);
+      font-size: 15px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-row .lbl { color: #7a7878; }
+    .spec-row .val { color: #1a1a1a; font-weight: 700; }
+    .spec-row.accent .val { color: #3553ff; }
+
+    /* Bottom strip */
     .bottom { display: flex; flex-direction: column; }
     .ascii-rule {
       height: 5px;
@@ -176,10 +230,27 @@
         <span class="right">{{META_RIGHT}}</span>
       </div>
       <div class="top-divider"></div>
-      <div class="eyebrow">{{EYEBROW}}</div>
-      <h1 class="title {{TITLE_CLASS}}">{{TITLE}}</h1>
-      <div class="accent-line"></div>
-      <p class="tagline">{{TAGLINE}}</p>
+
+      <div class="hero">
+        <div class="hero-left">
+          <div class="eyebrow">{{EYEBROW}}</div>
+          <h1 class="title {{TITLE_CLASS}}">{{TITLE}}</h1>
+          <div class="accent-line"></div>
+          <p class="tagline">{{TAGLINE}}</p>
+        </div>
+
+        <aside class="hero-right">
+          <div class="specs">
+            <div class="specs-header">FIG_000.A · KÜNYE</div>
+            <div class="spec-row"><span class="lbl">Faz</span><span class="val">20</span></div>
+            <div class="spec-row"><span class="lbl">Ders</span><span class="val">435</span></div>
+            <div class="spec-row"><span class="lbl">Artifact</span><span class="val">489</span></div>
+            <div class="spec-row"><span class="lbl">Saat</span><span class="val">~320</span></div>
+            <div class="spec-row"><span class="lbl">Dil</span><span class="val">4</span></div>
+            <div class="spec-row accent"><span class="lbl">Lisans</span><span class="val">MIT</span></div>
+          </div>
+        </aside>
+      </div>
     </div>
 
     <div class="bottom">

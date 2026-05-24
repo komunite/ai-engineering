@@ -683,6 +683,80 @@
       line-height: 1.5;
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://komunite.com.tr/#organization",
+        "name": "Komünite",
+        "url": "https://komunite.com.tr/",
+        "sameAs": [
+          "https://github.com/komunite"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://ai-muhendisligi.komunite.com.tr/#website",
+        "url": "https://ai-muhendisligi.komunite.com.tr/",
+        "name": "Sıfırdan Yapay Zeka Mühendisliği",
+        "description": "Açık kaynak Türkçe yapay zeka mühendisliği müfredatı. 20 faz, 435 ders.",
+        "inLanguage": "tr-TR",
+        "publisher": {
+          "@id": "https://komunite.com.tr/#organization"
+        }
+      },
+      {
+        "@type": "Course",
+        "@id": "https://ai-muhendisligi.komunite.com.tr/#course",
+        "name": "Sıfırdan Yapay Zeka Mühendisliği",
+        "alternateName": "AI Engineering from Scratch (Türkçe)",
+        "description": "Yapay zekayı sadece kullanan değil, inşa eden bir geliştirici olmak için hazırlanmış 20 fazlı, 435 dersli açık kaynak müfredat. Matematiksel temellerden üretim altyapısına.",
+        "url": "https://ai-muhendisligi.komunite.com.tr/",
+        "image": "https://ai-muhendisligi.komunite.com.tr/og/home.jpg",
+        "inLanguage": "tr-TR",
+        "provider": {
+          "@id": "https://komunite.com.tr/#organization"
+        },
+        "isAccessibleForFree": true,
+        "learningResourceType": "Course",
+        "educationalLevel": "Beginner, Intermediate, Advanced",
+        "teaches": [
+          "Yapay zeka mühendisliği",
+          "Makine öğrenmesi",
+          "Derin öğrenme",
+          "Doğal dil işleme",
+          "Bilgisayar görüşü",
+          "Large language models",
+          "Transformer mimarileri",
+          "Generative AI",
+          "Reinforcement learning",
+          "Multimodal yapay zeka",
+          "Agent mühendisliği",
+          "Çoklu-agent sistemler",
+          "Yapay zeka üretim altyapısı",
+          "Yapay zeka etiği ve alignment"
+        ],
+        "timeRequired": "PT320H",
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "online",
+          "inLanguage": "tr-TR",
+          "courseWorkload": "PT320H"
+        },
+        "offers": {
+          "@type": "Offer",
+          "category": "Free",
+          "price": "0",
+          "priceCurrency": "TRY"
+        },
+        "license": "https://opensource.org/licenses/MIT"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 

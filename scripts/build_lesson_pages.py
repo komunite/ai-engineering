@@ -27,6 +27,7 @@ so the stubs land in the deploy output:
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import sys
@@ -76,8 +77,28 @@ def parse_lesson(doc: Path) -> tuple[str, str]:
     return (title, desc)
 
 
+PHASE_TITLE_CACHE: dict[str, str] = {}
+
+
+def parse_phase_title(phase_dir: Path) -> str:
+    """Return the phase H1 from README.tr.md (e.g. 'Faz 17: Altyapı ve Üretim').
+    Cached per phase so we don't re-read for every lesson in the phase."""
+    cached = PHASE_TITLE_CACHE.get(phase_dir.name)
+    if cached is not None:
+        return cached
+    readme = phase_dir / "README.tr.md"
+    if not readme.is_file():
+        readme = phase_dir / "README.md"
+    result = ""
+    if readme.is_file():
+        m = H1_RE.search(readme.read_text(encoding="utf-8"))
+        result = m.group(1).strip() if m else ""
+    PHASE_TITLE_CACHE[phase_dir.name] = result
+    return result
+
+
 def render_stub(phase_slug: str, lesson_slug: str, lesson_path: str,
-                title: str, desc: str) -> str:
+                title: str, desc: str, phase_title: str = "") -> str:
     full_title = f"{title} — Sıfırdan Yapay Zeka Mühendisliği" if title else "Ders — Sıfırdan Yapay Zeka Mühendisliği"
     canonical = f"{SITE_URL}/phases/{phase_slug}/{lesson_slug}/"
     og_image = f"{OG_BASE}/{phase_slug}/{lesson_slug}.jpg"
@@ -86,6 +107,41 @@ def render_stub(phase_slug: str, lesson_slug: str, lesson_path: str,
     # because lesson_path is a known slug (no quotes).
     t = escape(full_title, quote=True)
     d = escape(desc or full_title, quote=True)
+
+    # JSON-LD: LearningResource for the lesson itself, plus a BreadcrumbList
+    # so search engines can render breadcrumb navigation in rich results.
+    jsonld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "LearningResource",
+                "name": full_title,
+                "description": desc or full_title,
+                "url": canonical,
+                "image": og_image,
+                "inLanguage": "tr-TR",
+                "learningResourceType": "Lesson",
+                "isPartOf": {"@id": f"{SITE_URL}/#course"},
+                "provider": {
+                    "@type": "EducationalOrganization",
+                    "name": "Komünite",
+                    "url": "https://komunite.com.tr/",
+                },
+                "isAccessibleForFree": True,
+                "license": "https://opensource.org/licenses/MIT",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": f"{SITE_URL}/"},
+                    {"@type": "ListItem", "position": 2, "name": phase_title or phase_slug, "item": f"{SITE_URL}/catalog.html"},
+                    {"@type": "ListItem", "position": 3, "name": title or "Ders", "item": canonical},
+                ],
+            },
+        ],
+    }
+    jsonld_str = json.dumps(jsonld, ensure_ascii=False, indent=2)
+
     return f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -109,6 +165,10 @@ def render_stub(phase_slug: str, lesson_slug: str, lesson_path: str,
   <meta name="twitter:title" content="{t}">
   <meta name="twitter:description" content="{d}">
   <meta name="twitter:image" content="{og_image}">
+
+  <script type="application/ld+json">
+{jsonld_str}
+  </script>
 
   <meta http-equiv="refresh" content="0; url={spa_url}">
   <script>
@@ -163,8 +223,9 @@ def main() -> int:
         if not doc.exists():
             doc = lesson_dir / "docs" / "en.md"
         title, desc = parse_lesson(doc)
+        phase_title = parse_phase_title(phase_dir)
         lesson_path = f"phases/{phase_dir.name}/{lesson_dir.name}"
-        html = render_stub(phase_dir.name, lesson_dir.name, lesson_path, title, desc)
+        html = render_stub(phase_dir.name, lesson_dir.name, lesson_path, title, desc, phase_title)
         out_dir = target_base / phase_dir.name / lesson_dir.name
         out_dir.mkdir(parents=True, exist_ok=True)
         (out_dir / "index.html").write_text(html, encoding="utf-8")

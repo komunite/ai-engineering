@@ -166,3 +166,48 @@ git merge upstream/main   # canonical EN içeriğini günceller; .tr.md dosyalar
 ```
 
 Canonical EN dosyaları upstream'den geldiği için, TR çevirileri ayrı dosyalar olarak yaşar ve merge conflict'ı çıkmaz. Tek istisna: kök `README.md` ve `ROADMAP.md` — bunlar TR varyantlarıyla (`README.tr.md`, `ROADMAP.tr.md`) ayrı dosyalardır, merge sorunsuz.
+
+## Marka & Tasarım — DEĞİŞMEZ Kurallar
+
+Bu repo'da görsel üretirken (OG image, banner, README görseli, sosyal kart, vb.) **aşağıdaki tipografi kuralları değiştirilemez**. Bir görsel "homepage hero ile aynı görünmüyor"sa, sorunun ilk yeri burası.
+
+### Ana başlık (hero / H1) fontu — VT323
+
+Web sitesinin hero başlığı (`site/index.html` içindeki `.manual-title` H1) **VT323**'tür. Tüm yan görseller (OG images, banner.svg, social previews) ana başlık için **AYNEN bu fontu** kullanmalı:
+
+```css
+/* site/style.css içindeki tek doğru değer */
+--font-display: 'VT323', ui-monospace, 'JetBrains Mono', monospace;
+
+/* Tüm h1-h4: */
+font-family: var(--font-display);
+color: var(--blueprint);   /* #3553ff */
+text-transform: uppercase;
+font-weight: 400;
+letter-spacing: 0.02em;
+```
+
+**Yanlış kullanımlar (geçmişte yapıldı, tekrar yapma):**
+- ❌ `Source Serif 4` / serif font ile hero başlık → yan görsel artık siteyle eşleşmez
+- ❌ Renksiz / siyah hero başlık → blueprint mavi (`#3553ff`) zorunlu
+- ❌ Karışık casing → uppercase + letter-spacing 0.02em zorunlu
+
+### Headless Chrome ile OG render ederken — FOUT tuzağı
+
+`scripts/build_og.py` görselleri Chrome `--screenshot` ile alır. Google Fonts varsayılan `display=swap` ile gelir ve **Chrome, font yüklenmeden ekran görüntüsü alabilir** → VT323 fallback'e (system mono, smooth sans-serif) düşer ve hero başlık homepage'le eşleşmez.
+
+Bu yüzden OG template'lerinde (`og_template.html`, `og_template_static.html`) **zorunlu**:
+
+1. Google Fonts URL'sinde `&display=block` (swap değil) → tarayıcı font yüklenene kadar render'ı bloklar.
+2. Template head'inde `document.fonts.ready` script'i — fonts hazır olunca işaret koysun.
+3. `build_og.py` Chrome komutunda **`--virtual-time-budget=4000`** ve `--run-all-compositor-stages-before-draw` flag'leri → Chrome screenshot'tan önce font yüklemesine zaman verir.
+
+Bu üçü olmadan **görsel sessizce yanlış üretir**, fark etmek için göze bakmak gerekir.
+
+### Kontrol listesi (yeni görsel oluştururken)
+
+- [ ] Hero başlık VT323 mi? (pixelated/8-bit görünmesi gerek, smooth sans-serif değil)
+- [ ] Renk `#3553ff` (blueprint) mi?
+- [ ] Uppercase + `letter-spacing: 0.02em` uygulanmış mı?
+- [ ] OG template ise `display=block` + virtual-time-budget kullanıldı mı?
+- [ ] Lokalde render edip son görseli **gözle kontrol** ettin mi? (CSS doğru ama font yüklenmediği için yanlış görünebilir)

@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&family=VT323&display=block" rel="stylesheet">
+  <script>
+    // Block screenshot until web fonts (notably VT323) finish loading.
+    // Chrome --virtual-time-budget gives this ~4s of virtual time to resolve.
+    document.fonts.ready.then(() => { document.documentElement.dataset.fontsReady = "1"; });
+  </script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 1280px; height: 640px; }

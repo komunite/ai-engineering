@@ -199,6 +199,12 @@ def screenshot(chrome: str, html: str, dest_png: Path) -> None:
             "--no-sandbox",
             "--force-device-scale-factor=1",
             "--window-size=1280,640",
+            # Give async webfont loads (VT323 in particular) time to settle
+            # before Chrome snaps the screenshot. Without this Chrome captures
+            # the FOUT state and the title falls back to the system mono font,
+            # silently breaking the hero-H1 / homepage-H1 match.
+            "--virtual-time-budget=4000",
+            "--run-all-compositor-stages-before-draw",
             f"--screenshot={dest_png}",
             f"file://{tmp_html}",
         ]

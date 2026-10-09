@@ -35,10 +35,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = ROOT / "catalog.json"
-# Root README.md is Turkish (this is the Komünite TR adaptation). The
-# drift patterns below are anchored to the English upstream prose, so
-# they run against en/README.md, which mirrors upstream verbatim.
-README_PATH = ROOT / "en" / "README.md"
+# Root README.md is Turkish (this is the Komünite TR adaptation). Badge
+# patterns are shared with upstream; prose patterns are anchored to the
+# Turkish wording of the root README.
+README_PATH = ROOT / "README.md"
 
 
 @dataclass(frozen=True)
@@ -62,24 +62,24 @@ PATTERNS: tuple[CountPattern, ...] = (
         description="lesson-count badge alt text",
     ),
     CountPattern(
-        regex=re.compile(r"^> (\d+) lessons\. \d+ phases\.", re.MULTILINE),
+        regex=re.compile(r"^> (\d+) ders\. \d+ faz\.", re.MULTILINE),
         field="lessons",
         description="hero blockquote lesson count",
     ),
     CountPattern(
-        regex=re.compile(r"^> \d+ lessons\. (\d+) phases\.", re.MULTILINE),
+        regex=re.compile(r"^> \d+ ders\. (\d+) faz\.", re.MULTILINE),
         field="phases",
         description="hero blockquote phase count",
     ),
     CountPattern(
-        regex=re.compile(r"This curriculum is the spine\. (\d+) phases,"),
+        regex=re.compile(r"Bu curriculum o omurgadır\. (\d+) faz,"),
         field="phases",
-        description="'spine' prose phase count",
+        description="'omurga' prose phase count",
     ),
     CountPattern(
-        regex=re.compile(r"This curriculum is the spine\. \d+ phases, (\d+) lessons,"),
+        regex=re.compile(r"Bu curriculum o omurgadır\. \d+ faz, (\d+) ders,"),
         field="lessons",
-        description="'spine' prose lesson count",
+        description="'omurga' prose lesson count",
     ),
     CountPattern(
         regex=re.compile(r"phases-(\d+)-3553ff"),
@@ -92,17 +92,17 @@ PATTERNS: tuple[CountPattern, ...] = (
         description="phase-count badge alt text",
     ),
     CountPattern(
-        regex=re.compile(r"portfolio of (\d+) artifacts"),
+        regex=re.compile(r"(\d+) artifact'lik bir"),
         field="lessons",
-        description="'portfolio of N artifacts' (one artifact per lesson)",
+        description="'N artifact'lik portfolyo' (one artifact per lesson)",
     ),
     CountPattern(
-        regex=re.compile(r"The repo ships (\d+) skills"),
+        regex=re.compile(r"altında (\d+) skill ve \d+ prompt taşır"),
         field="skills",
         description="toolkit section skill count",
     ),
     CountPattern(
-        regex=re.compile(r"The repo ships \d+ skills and (\d+) prompts"),
+        regex=re.compile(r"altında \d+ skill ve (\d+) prompt taşır"),
         field="prompts",
         description="toolkit section prompt count",
     ),

@@ -242,13 +242,13 @@ Build komutu (repo bağlantısında tanımlı, output: `site`) yukarıdaki 6 ad�
 
 URL'ler SEO için Vercel'deki davranışla birebir korunuyor. Bunu sağlayan ayarlar:
 
-- `site/_redirects`: `/glossary`, `/catalog`, `/path`, `/roadmap` rewrite'ları (200).
+- `site/_redirects`: `/glossary`, `/catalog`, `/path`, `/roadmap` rewrite'ları (200) ve `ai-muhendisligi.space.fast` → custom domain 301'i (Vercel'de `*.vercel.app` adresleri girişe kapalıydı; tek public host custom domain).
 - `site/_headers`: Vercel'deki Cache-Control değerleri (HTML 5 dk, statik asset 1 gün) ve JS için `application/javascript`.
 - `scripts/build_spacefast_routing.py`: Spacefast `*.md` URL'lerini servis etmez ve Markdown'ı `<ad>/index.html` sayfalarına render eder. Script her `.md` için `.md.txt` kopyası + forced rewrite üretir, render edilen sayfaları 404'e çeker, slash'siz ders URL'lerini (Spacefast varsayılanı 308) 200'de tutar.
 - Space seviyesindeki config (`sf api PATCH /v1/spaces/<id>`, repoda değil): `cleanUrls: false` (`/prereqs`, `/lesson` 404 kalır), `listing: false`, `superpowers.disable_all_injection: true` (Spacefast'in HTML'e script enjekte etmesini kapatır). `sf.jsonc` v1 dosyasındaki `serve` ayarları sunucu tarafından uygulanmadığı için bu ayarlar space'te tutuluyor.
 - Space `--spa false` ile açıldı (bilinmeyen URL'ler 404, SPA fallback yok).
 
-Bilinen küçük farklar: `/catalog/`, `/glossary/`, `/path/`, `/roadmap/` Vercel'de 404'tü, Spacefast'te 200 döner (Spacefast kural eşleşmesinde sondaki `/`'ı yok sayar; sayfalardaki canonical `.html` adresini gösterir). `/catalog.html/` gibi `.html/` adresleri Vercel'de 200'dü, artık 404. `/favicon.ico` Spacefast'in platform ikonunu döner (sayfalar kendi SVG ikonunu tanımladığı için görünür etkisi yok).
+Bilinen küçük farklar: `/catalog/`, `/glossary/`, `/path/`, `/roadmap/` Vercel'de 404'tü, Spacefast'te 200 döner (Spacefast kural eşleşmesinde sondaki `/`'ı yok sayar; sayfalardaki canonical `.html` adresini gösterir). `/catalog.html/` gibi `.html/` adresleri Vercel'de 200'dü, artık 404. `/favicon.ico` Spacefast'in platform ikonunu döner (sayfalar kendi SVG ikonunu tanımladığı için görünür etkisi yok). HTTP→HTTPS yönlendirmesi Vercel'de 308, Spacefast'te 301 (ikisi de kalıcı).
 
 ## Yeni ders eklerken (workflow)
 

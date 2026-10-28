@@ -2,6 +2,10 @@
 # All 200 = rewrite (URL stays the same). Do not turn these into redirects:
 # the URLs below are indexed as-is.
 
+# Only the custom domain serves the site (on Vercel the *.vercel.app hosts were
+# behind login). Send the Spacefast-managed hostname there.
+https://ai-muhendisligi.space.fast/*  https://ai-muhendisligi.komunite.com.tr/:splat  301!
+
 /glossary  /glossary.html  200
 /catalog   /catalog.html   200
 /path      /prereqs.html   200

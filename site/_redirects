@@ -1,0 +1,11 @@
+# Spacefast routing — mirrors the rewrites that vercel.json had on Vercel.
+# All 200 = rewrite (URL stays the same). Do not turn these into redirects:
+# the URLs below are indexed as-is.
+
+/glossary  /glossary.html  200
+/catalog   /catalog.html   200
+/path      /prereqs.html   200
+/roadmap   /prereqs.html   200
+
+# Rules for raw Markdown, slash-less lesson URLs and Spacefast-rendered
+# Markdown pages are appended at build time by scripts/build_spacefast_routing.py.

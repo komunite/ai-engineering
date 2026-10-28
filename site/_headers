@@ -1,0 +1,60 @@
+# Spacefast response headers — mirrors the Cache-Control rules that
+# vercel.json had on Vercel (HTML: 5 min, static assets: 1 day), plus the
+# JavaScript Content-Type Vercel sent (Spacefast defaults to text/javascript).
+
+/*
+  Access-Control-Allow-Origin: *
+
+/
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/index.html
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/catalog.html
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/glossary.html
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/prereqs.html
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/lesson.html
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/catalog
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/glossary
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/path
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/roadmap
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/phases/:phase/:lesson/index.html
+  Cache-Control: public, max-age=300, s-maxage=86400, stale-while-revalidate=604800
+/phases/:phase/:lesson
+  Cache-Control: public, max-age=0, must-revalidate
+/phases/:phase/:lesson/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/app.js
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+  Content-Type: application/javascript; charset=utf-8
+/build.js
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+  Content-Type: application/javascript; charset=utf-8
+/cmdpalette.js
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+  Content-Type: application/javascript; charset=utf-8
+/data.js
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+  Content-Type: application/javascript; charset=utf-8
+/header.js
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+  Content-Type: application/javascript; charset=utf-8
+/progress.js
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+  Content-Type: application/javascript; charset=utf-8
+/style.css
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+/og/*
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+/assets/*
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000
+/phases/:phase/:lesson/assets/*
+  Cache-Control: public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000

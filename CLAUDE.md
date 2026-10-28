@@ -4,7 +4,7 @@ Bu dosya, Claude Code'un (claude.ai/code) bu repoda çalışırken referans alac
 
 ## Proje Bağlamı
 
-**Sıfırdan Yapay Zeka Mühendisliği** — [`rohitg00/ai-engineering-from-scratch`](https://github.com/rohitg00/ai-engineering-from-scratch) MIT lisanslı curriculum'un Türkçe uyarlamasıdır. 20 faz, 435 ders. Statik site Vercel'de `ai-muhendisligi.komunite.com.tr` üzerinde yayımlanır.
+**Sıfırdan Yapay Zeka Mühendisliği** — [`rohitg00/ai-engineering-from-scratch`](https://github.com/rohitg00/ai-engineering-from-scratch) MIT lisanslı curriculum'un Türkçe uyarlamasıdır. 20 faz, 435 ders. Statik site Spacefast'te (`komunite` takımı, `ai-muhendisligi` space'i) `ai-muhendisligi.komunite.com.tr` üzerinde yayımlanır.
 
 TR canonical bir uyarlama: kök `README.md` doğrudan Türkçe; ders gövdeleri `docs/en.md` (upstream'den) + `docs/tr.md` (çeviri) olarak çift bulunur; outputs/quiz dosyaları `<base>.md` + `<base>.tr.md` sibling yapısındadır.
 
@@ -17,12 +17,13 @@ node site/build.js
 # İngilizce build (en/ subdirectory'sini gerektirir — şu an mevcut değil, yalnızca TR canlı)
 LOCALE=en node site/build.js
 
-# Vercel build chain'inin tamamı (production ile birebir)
+# Production build chain'inin tamamı (Spacefast ile birebir)
 LOCALE=tr node site/build.js \
   && python3 scripts/build_sitemap.py \
   && python3 scripts/build_llms_txt.py \
   && rm -rf site/phases && cp -R phases site/phases \
-  && python3 scripts/build_lesson_pages.py
+  && python3 scripts/build_lesson_pages.py \
+  && python3 scripts/build_spacefast_routing.py
 
 # Yerel dev sunucusu (statik dosyalar)
 cd site && python3 -m http.server 3001 --bind 127.0.0.1
@@ -46,6 +47,7 @@ python3 scripts/check_readme_counts.py
 | `scripts/build_lesson_pages.py` | Her ders için crawler-friendly stub `index.html` (OG meta + JS redirect). Çıktılar `.gitignore`'da. |
 | `scripts/build_sitemap.py` | `site/sitemap.xml` |
 | `scripts/build_llms_txt.py` | `site/llms.txt` (llmstxt.org formatı) |
+| `scripts/build_spacefast_routing.py` | `site/_redirects` + `site/_headers`'a build-time kuralları ekler (ham `.md` servisi, slash'siz ders URL'leri, Spacefast'in render ettiği Markdown sayfalarına 404) |
 | `scripts/build_og.py` | OG görselleri (headless Chrome — aşağıdaki marka bölümü) |
 | `scripts/scaffold-lesson.sh` | Yeni ders iskeleti (`LESSON_TEMPLATE.md`'den `docs/en.md`) |
 | `scripts/install_skills.py` | `phases/**/outputs/{skill,prompt,agent}-*.md` artifact'larını harici target dizine kurar |
@@ -109,6 +111,7 @@ site/
 ├── *.html, *.js, style.css          Statik SPA (vanilla)
 ├── data.js                          build.js çıktısı (generated, manuel düzenlenmez)
 ├── sitemap.xml, llms.txt            build_sitemap.py / build_llms_txt.py çıktısı
+├── _redirects, _headers             Spacefast routing + header'ları (build_spacefast_routing.py ekleme yapar)
 ├── og/                              OG görselleri (build_og.py — faz + statik)
 ├── assets/figures/                  Ders şekilleri
 └── phases → ../phases               Yerel dev için symlink
@@ -116,7 +119,7 @@ scripts/                             Build/audit/install helper'ları (envanter 
 .github/workflows/curriculum.yml     audit + 2 drift check
 .claude/skills/                      Project skill'leri (check-understanding, find-your-level)
 catalog.json                         GENERATED (build_catalog.py); commit edilir, CI drift kontrol eder
-vercel.json                          Build chain + cache header'ları + rewrite'lar
+vercel.json                          Eski Vercel config'i (geri dönüş için duruyor; Spacefast kullanmaz)
 requirements.txt                     Ders kodları için Python deps (numpy, torch, transformers, anthropic…)
 README.md                            TR canonical (sibling .tr.md YOK)
 ROADMAP.md / ROADMAP.tr.md           Faz/ders ilerleme tablosu (build.js status emoji'lerini parse eder)
@@ -133,7 +136,7 @@ CODE_OF_CONDUCT.md / CODE_OF_CONDUCT.tr.md
 
 Yerel dev sunucusu sadece `site/` kökünü servis eder. `phases/` içeriğine browser'dan erişim sağlamak için `site/phases` → `../phases` symlink'i kullanılır. Bu sayede `lesson.html` `phases/<path>/docs/tr.md` adresinden TR markdown'ı doğrudan çekebilir.
 
-Vercel build'inde symlink **silinip yerine gerçek kopya** konur (`rm -rf site/phases && cp -R phases site/phases`), çünkü `build_lesson_pages.py` her ders için `site/phases/<phase>/<lesson>/index.html` stub'ı yazıyor — symlink üzerinden yazsaydık source `phases/`'i kirletirdi. Kopya yapıldıktan sonra `phases/` ağacı tamamen `site/`'nin altında durur; lesson.html için upstream GitHub raw fetch fallback'ı yine devreye girebilir.
+Production build'inde symlink **silinip yerine gerçek kopya** konur (`rm -rf site/phases && cp -R phases site/phases`), çünkü `build_lesson_pages.py` her ders için `site/phases/<phase>/<lesson>/index.html` stub'ı yazıyor — symlink üzerinden yazsaydık source `phases/`'i kirletirdi. Kopya yapıldıktan sonra `phases/` ağacı tamamen `site/`'nin altında durur; lesson.html için upstream GitHub raw fetch fallback'ı yine devreye girebilir.
 
 ### Per-lesson generated stubs
 
@@ -143,7 +146,7 @@ Vercel build'inde symlink **silinip yerine gerçek kopya** konur (`rm -rf site/p
 - `<noscript>` + meta refresh fallback
 - JS ile `/lesson.html?path=phases/<phase>/<lesson>`'a redirect
 
-Twitter/Slack/Facebook/Google crawler'ları redirect'i takip etmeden önce meta'ları okur → her paylaşım linki ders-özgü OG görseliyle gözükür. Stub'lar `.gitignore`'da; yalnızca Vercel build output'unda yaşar.
+Twitter/Slack/Facebook/Google crawler'ları redirect'i takip etmeden önce meta'ları okur → her paylaşım linki ders-özgü OG görseliyle gözükür. Stub'lar `.gitignore`'da; yalnızca build output'unda yaşar.
 
 ## Çeviri Konvansiyonları
 
@@ -226,12 +229,26 @@ attention, transformer, embedding, token, tokenizer, fine-tuning, prompt, agent,
 
 ## Deployment
 
+Site Spacefast'te yayında: `komunite` takımı, `ai-muhendisligi` space'i. `komunite/ai-engineering` reposu Spacefast GitHub App'i ile bağlı; `main`'e her push production build'i tetikler, diğer branch'ler ve PR'lar private preview üretir.
+
 ```bash
-# Vercel
-vercel deploy --prod    # vercel.json zaten yapılandırılmış (output: site)
+sf git ls --space ai-muhendisligi -o komunite                          # repo bağlantısı + build ayarları
+sf git build --space ai-muhendisligi -o komunite --ref main --target production --wait   # elle build
+sf versions ls --space ai-muhendisligi -o komunite                     # sürümler
+sf rollback --space ai-muhendisligi -o komunite                        # bir önceki sürüme dön
 ```
 
-`vercel.json` `buildCommand`'ı 5 adımlık zincir çalıştırır (yukarıdaki "Vercel build chain"e bak). `LOCALE=tr` build komutuna hardcoded — env var set etmeye gerek yok. Cache header'ları statik asset'ler için 1 gün, HTML için 5 dakika (CDN'de 1 gün) olarak vercel.json'da tanımlı. Rewrite'lar: `/glossary`, `/catalog`, `/path`, `/roadmap` clean URL'leri.
+Build komutu (repo bağlantısında tanımlı, output: `site`) yukarıdaki 6 adımlık "Production build chain"in aynısıdır. `LOCALE=tr` komuta hardcoded.
+
+URL'ler SEO için Vercel'deki davranışla birebir korunuyor. Bunu sağlayan ayarlar:
+
+- `site/_redirects`: `/glossary`, `/catalog`, `/path`, `/roadmap` rewrite'ları (200).
+- `site/_headers`: Vercel'deki Cache-Control değerleri (HTML 5 dk, statik asset 1 gün) ve JS için `application/javascript`.
+- `scripts/build_spacefast_routing.py`: Spacefast `*.md` URL'lerini servis etmez ve Markdown'ı `<ad>/index.html` sayfalarına render eder. Script her `.md` için `.md.txt` kopyası + forced rewrite üretir, render edilen sayfaları 404'e çeker, slash'siz ders URL'lerini (Spacefast varsayılanı 308) 200'de tutar.
+- Space seviyesindeki config (`sf api PATCH /v1/spaces/<id>`, repoda değil): `cleanUrls: false` (`/prereqs`, `/lesson` 404 kalır), `listing: false`, `superpowers.disable_all_injection: true` (Spacefast'in HTML'e script enjekte etmesini kapatır). `sf.jsonc` v1 dosyasındaki `serve` ayarları sunucu tarafından uygulanmadığı için bu ayarlar space'te tutuluyor.
+- Space `--spa false` ile açıldı (bilinmeyen URL'ler 404, SPA fallback yok).
+
+Bilinen küçük farklar: `/catalog/`, `/glossary/`, `/path/`, `/roadmap/` Vercel'de 404'tü, Spacefast'te 200 döner (Spacefast kural eşleşmesinde sondaki `/`'ı yok sayar; sayfalardaki canonical `.html` adresini gösterir). `/catalog.html/` gibi `.html/` adresleri Vercel'de 200'dü, artık 404. `/favicon.ico` Spacefast'in platform ikonunu döner (sayfalar kendi SVG ikonunu tanımladığı için görünür etkisi yok).
 
 ## Yeni ders eklerken (workflow)
 
@@ -270,7 +287,7 @@ Bunlara dokunurken artifact dosyalarının frontmatter şemasını bozma.
 - `data.js`, `catalog.json`, `site/sitemap.xml`, `site/llms.txt`, `site/phases/**/index.html` **hepsi build-generated**. Manuel düzenlenmez (catalog.json hariç — bu commit edilir ama scriptle üretilir).
 - Site'ye yeni dil eklemek için: (1) `docs/<locale>.md` dosyalarını oluştur, (2) outputs/quiz için `.<locale>.md`/`.<locale>.json` sibling'leri, (3) `LOCALE=<xx> node site/build.js`. `build.js` ve `lesson.html` her ISO 639-1 iki harfli locale'i destekler.
 - Quiz dosyalarında JSON yapısını bozma — `python3 -c "import json; json.load(open('FILE'))"` ile her zaman doğrula. `stage`, `correct`, `options` sırası asla değiştirilmez.
-- Symlink (`site/phases`) Git'te commit edilir; Vercel build sırasında silinip kopya ile değiştirilir (`build_lesson_pages.py` stub'larının source ağacı kirletmemesi için).
+- Symlink (`site/phases`) Git'te commit edilir; production build sırasında silinip kopya ile değiştirilir (`build_lesson_pages.py` stub'larının source ağacı kirletmemesi için).
 - Lesson slug regex: `^[0-9]{2}-[a-z0-9][a-z0-9-]*[a-z0-9]$`. `audit_lessons.py` ihlalde fail eder.
 - Ders kodları için Python deps `requirements.txt`'de (torch, transformers, anthropic, openai…). Build/script çalıştırmak için Python 3.10+ yeter (PEP 604 union types).
 
